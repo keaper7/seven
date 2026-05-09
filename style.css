@@ -1,0 +1,335 @@
+:root {
+    --orange: #FF7700;
+    --asphalt: #302F2C;
+    --paper: #EFEDE3;
+    --ff: 'Zalando Sans Expanded', sans-serif;
+    --pd: 'Playfair Display', 'sans-serif';
+}
+* {
+    margin: 0;
+    padding: 0;
+ }
+
+ body {
+    background-color: var(--paper);
+    min-height: 400vh;
+    font-family: var(--ff);
+    overflow-x: hidden;
+}
+
+/* ПЕРВЫЙ ЭКРАН НАЧАЛО */
+.page-1 {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--asphalt);
+}
+.header-1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 4vh 5vw;
+}
+.status-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.coordinates {
+    display: flex;
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 40%;
+}
+.sys-on, .nal-coord {
+    color: var(--paper);
+    font-weight: 400;
+    font-size: 12px;
+    opacity: 60%;
+    letter-spacing: 40%;
+}
+.point {
+    border-radius: 50%;
+    height: 6px;
+    width: 6px;
+    background-color: var(--orange);
+}
+.seven {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    font-weight: 500;
+    padding-top: 40vh;
+    color: var(--paper);
+    font-size: 23vw;
+}
+.v-wrapper {
+    position: relative;
+    color: var(--orange);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+.v-sharp {
+    position: absolute;
+    top: 81%;
+    width: 0.145em; 
+    height: 0.145em;
+    /* z-index: 1;  */
+}
+/* ПЕРВЫЙ ЭКРАН КОНЕЦ */
+
+
+
+/* ВТОРОЙ ЭКРАН НАЧАЛО */
+.page-2 {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background-color: var(--paper);
+}
+
+.center-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    position: relative;
+}
+.menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    letter-spacing: 30%;
+    top: -140%;
+    left: 0%;
+    
+}
+.menu a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1vh;
+    font-weight: 100;
+    color: var(--asphalt);
+}
+.precision {
+    position: relative;
+    /* text-align: center; */
+    font-size: 8.5vw;
+    font-weight: 400;
+    letter-spacing: 50%;
+    color: var(--asphalt);
+}
+.tochka {
+    color: var(--orange);
+    position: absolute;
+    left: 98.8%;
+}
+.tochnost {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 4vh;
+    font-weight: 100;
+    color: var(--asphalt);
+    opacity: 10%;
+    padding-left: 1.1vw;
+    /* padding-right: 1vw; */
+}
+
+/* ВТОРОЙ ЭКРАН КОНЕЦ */
+
+
+
+/* ТРЕТИЙ ЭКРАН НАЧАЛО */
+.page-3 {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* background-color: var(--asphalt); */
+    position: relative;
+
+}
+.num {
+    font-size: 100vh;
+    font-weight: 600;
+    color: var(--asphalt);
+    opacity: 5%;
+}
+.makeway {
+    position: absolute;
+    right: 3vw;
+    bottom: 14vh;
+    list-style-type: none;
+    font-weight: 300;
+}
+.main-info {
+    position: absolute;
+    left: 10vw;
+}
+.title-info {
+    max-width: 34vw;
+    font-family: var(--pd);
+    font-weight: 200;
+    letter-spacing: -2%;
+    font-size: 4vh;
+}
+.other-info {
+    max-width: 19vw;
+    font-weight: 300;
+    letter-spacing: 20%;
+    font-size: 1.6vh;
+}
+.leaner {
+    height: 27px;
+    /* background-color: white; */
+    width: 20vw;
+    border-bottom: 1px solid orange;
+    margin-bottom: 20px;
+    position: relative;
+}
+.leaner > div {
+    width: 4px;
+    height: 4px;
+    background-color: var(--orange);
+    position: absolute;
+    bottom: -10%;
+    left: -3%;
+}
+/* ТРЕТИЙ ЭКРАН КОНЕЦ */
+
+
+
+
+
+/* ЧЕТВЕРТЫЙ ЭКРАН НАЧАЛО */
+.page-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    /* background-color: var(--asphalt); */
+    background-color: #1C1D21;
+    position: relative
+}
+.lab {
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* object-fit: contain; */
+}
+.maze-container {
+    position: relative; /* База для всех вложенных слоев */
+    max-height: 85vh; 
+    max-width: 85vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1440 / 1024;
+}
+
+.maze-grid {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(22, 1fr);
+    grid-template-rows: repeat(13, 1fr);
+    
+    pointer-events: none;
+}
+
+/* Стили для текста в сетке */
+.maze-grid div {
+    pointer-events: auto; /* Возвращаем кликабельность тексту */
+    color: rgba(255, 255, 255, 0.6);
+    /* font-size: 10px; */
+    
+}
+.seven-center {
+    grid-column: 9 / 15; /* Центр по горизонтали */
+    grid-row: 6 / 9;    /* Центр по вертикали */
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    font-size: 4vh;
+    letter-spacing: 1vw;
+    opacity: 50%;
+    font-weight: 400;
+    padding-left: 1vw;
+    
+}
+
+.contact-tg {
+    grid-column: 2 / 9; 
+    grid-row: 9; 
+    margin-top: 7vh;
+    /* Выравниваем внутри этой ячейки (например, прижимаем к низу) */
+    align-self: end; 
+    justify-self: start;
+    
+    /* Дизайн */
+    pointer-events: auto;
+    text-decoration: none;
+    font-size: 0.7vw;
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 40%;
+    letter-spacing: 5%;
+}
+.contact-inst {
+    grid-column: 17 / 22;
+    grid-row: 3; 
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    margin-bottom: 1vh;
+
+
+    /* Дизайн */
+    pointer-events: auto;
+    text-decoration: none;
+    font-size: 0.7vw;
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 40%;
+    letter-spacing: 5%;
+}
+.architect {
+    grid-column: 4 / 8;
+    grid-row: 4;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    margin-bottom: 2.5vh;
+
+    /* Дизайн */
+    pointer-events: auto;
+    text-decoration: none;
+    font-size: 0.7vw;
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 40%;
+    letter-spacing: 20%;
+    font-weight: 400;
+    
+}
+.contact-email {
+    grid-column: 15 / 21;
+    grid-row: 11;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    margin-top: 1vh;
+
+    /* Дизайн */
+    pointer-events: auto;
+    text-decoration: none;
+    font-size: 0.7vw;
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 40%;
+    letter-spacing: 5%;
+    font-weight: 400;
+}
+/* ЧЕТВЕРТЫЙ ЭКРАН КОНЕЦ */
