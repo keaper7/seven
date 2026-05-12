@@ -361,3 +361,159 @@
     color: var(--orange);
 }
 /* ЧЕТВЕРТЫЙ ЭКРАН КОНЕЦ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* АДАПТИВ ПОД МИНИ ТЕЛЕФОНЫ НАЧАЛО */
+
+@media (max-width: 430px) {
+    html, body {
+        overflow-x: hidden;
+        position: relative;
+        width: 100%;
+    }
+    .page-1 {
+        display: block;
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    .page-1::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        
+        border: 1px solid rgba(255, 255, 255, 0.1); 
+        mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            black 20%,
+            transparent 50%,
+            black 80%,
+            transparent 100%
+        );
+        
+        pointer-events: none; 
+        z-index: 1;
+    }
+    .page-1::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        
+        /* Ссылка на картинку */
+        background-image: url('img/noise.png'); 
+        background-repeat: repeat;
+        background-size: 200px;
+        
+        pointer-events: none;    /* Чтобы можно было нажимать на кнопки под шумом */
+        z-index: 100;            /* Шум должен быть НАД всеми слоями */
+    }
+    .seven-wrapper {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+
+    }
+    .seven-outline {
+        position: absolute;
+        top: 45%; left: 50%; transform: translate(-50%, -50%);
+        font-size: 23vw;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--paper);
+        opacity: 0.1;
+        z-index: 1;
+        
+    }
+    .seven {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding-top: 0;
+        width: 100%;
+        font-size: 20vw;
+    }
+    .seven::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        height: 30vw;
+        width: 20vw;
+        background-color: var(--orange);
+        opacity: 70%;
+        border-radius: 50%;
+        filter: blur(50px);
+        z-index: -1;
+    }
+
+    .sys-on, .nal-coord {
+        font-size: 2vw;
+    }
+    .page-1 {
+        display: block; 
+        padding: 0;
+    }
+
+    .mobile-top-left, 
+    .mobile-bottom-right, 
+    .mobile-bottom-left {
+        position: absolute;
+        font-size: 8px;
+        font-weight: 200;
+        letter-spacing: 20%;
+        opacity: 60%;
+        z-index: 2;
+    }
+
+    .mobile-top-left {
+        top: 40px;
+        left: 40px;
+    }
+
+    .mobile-bottom-left {
+        bottom: 40px;
+        left: 40px;
+        letter-spacing: 40% !important;  
+        opacity: 40%;      
+    }
+
+    .mobile-bottom-right {
+        bottom: 40px;
+        right: 40px;
+        text-align: right;
+    }
+
+    .header-1 {
+        display: none;
+    }
+    
+
+}
+
+/* АДАПТИВ ПОД МИНИ ТЕЛЕФОНЫ КОНЕЦ */
