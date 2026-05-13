@@ -120,6 +120,18 @@
     letter-spacing: 50%;
     color: var(--asphalt);
 }
+.precision span {
+    display: inline; 
+}
+
+.orange-dot {
+    display: inline-block;
+    width: 0.15em;         /* Размер зависит от шрифта */
+    height: 0.15em;
+    background-color: var(--orange);
+    vertical-align: baseline;
+    margin-left: 0.1em;
+}
 .tochka {
     color: var(--orange);
     position: absolute;
@@ -381,19 +393,21 @@
 
 /* АДАПТИВ ПОД МИНИ ТЕЛЕФОНЫ НАЧАЛО */
 
-@media (max-width: 430px) {
+@media (min-width: 130px) {
     html, body {
         overflow-x: hidden;
         position: relative;
         width: 100%;
     }
+
+    /* ПЕРВЫЙ ЭКРАН НАЧАЛО */
     .page-1 {
         display: block;
         position: relative;
         min-height: 100vh;
         overflow: hidden;
+        width: 100%;
     }
-
     .page-1::before {
         content: "";
         position: absolute;
@@ -435,12 +449,14 @@
         position: relative;
         height: 100vh;
         width: 100%;
-
+        overflow: hidden;
+        pointer-events: none;
     }
     .seven-outline {
         position: absolute;
-        top: 45%; left: 50%; transform: translate(-50%, -50%);
-        font-size: 23vw;
+        top: 50%; left: 50%; transform: translate(-50%, -50%);
+        font-size: 23vw; /* Поменять вот тут когда буду делать анимацю со скроллом */
+        width: 100%; text-align: center;
         color: transparent;
         -webkit-text-stroke: 1px var(--paper);
         opacity: 0.1;
@@ -463,8 +479,8 @@
         left: 50%;
         transform: translate(-50%, -50%);
 
-        height: 30vw;
-        width: 20vw;
+        height: 150px;
+        width: 100px;
         background-color: var(--orange);
         opacity: 70%;
         border-radius: 50%;
@@ -512,8 +528,94 @@
     .header-1 {
         display: none;
     }
+    /* ПЕРВЫЙ ЭКРАН КОНЕЦ */
+
+
+
+
+
+    /* ВТОРОЙ ЭКРАН НАЧАЛО */
+    /* .precision {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 30vw;
+        line-height: 0.85; 
+        letter-spacing: 0;
+        position: relative;
+    }
+
+    .precision span {
+        display: block;
+    }
+    .orange-dot {
+        position: absolute;
+        right: 2.5%;
+        bottom: 5%;
+        width: 15px;
+        height: 15px;
+    } */
+    /* ВТОРОЙ ЭКРАН КОНЕЦ */
+
+
+
+
+
+    /* ТРЕТИЙ ЭКРАН НАЧАЛО */
+
+    /* ТРЕТИЙ ЭКРАН КОНЕЦ */
+
+
+
+
+
+    /* ЧЕТВЕРТЫЙ ЭКРАН НАЧАЛО */
+
+    /* ЧЕТВЕРТЫЙ ЭКРАН КОНЕЦ */
     
 
 }
 
 /* АДАПТИВ ПОД МИНИ ТЕЛЕФОНЫ КОНЕЦ */
+
+
+@media (min-width: 530px) and (max-width: 768px) {
+    .sys-on, .nal-coord {
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .sys-on, .nal-coord {
+        font-size: 11px !important;
+    }
+    .seven::before {
+        width: 180px;
+        height: 120px;
+
+        filter: blur(60px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .seven {
+        font-size: 23vw;
+    }
+    .seven::before {
+        width: 210px;
+        height: 140px;
+
+        filter: blur(70px);
+    }
+    .mobile-bottom-right {
+        top: 40px;
+        right: 40px;
+        text-align: right;
+    }
+    .mobile-bottom-left {
+        left: 50%; bottom: 20px;
+        transform: translateX(-50%);
+        text-align: center;
+        white-space: nowrap;
+    }
+}
