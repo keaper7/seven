@@ -145,8 +145,6 @@
     font-weight: 100;
     color: var(--asphalt);
     opacity: 10%;
-    /* padding-left: 1.1vw; */
-    /* padding-right: 1vw; */
 }
 
 /* ВТОРОЙ ЭКРАН КОНЕЦ */
@@ -164,10 +162,12 @@
 
 }
 .num {
-    font-size: 100vh;
+    font-size: 120vh;
     font-weight: 600;
     color: #e5e3da;
     opacity: 1;
+    position: absolute;
+    right: 5%;
 }
 .makeway {
     letter-spacing: 20%;
@@ -176,23 +176,24 @@
     bottom: 14vh;
     list-style-type: none;
     font-weight: 300;
+    font-size: 0.7vw;
 }
 .main-info {
     position: absolute;
     left: 10vw;
 }
 .title-info {
-    max-width: 34vw;
+    max-width: 70%;
     font-family: var(--pd);
     font-weight: 200;
     letter-spacing: -2%;
-    font-size: 4vh;
+    font-size: 4.4vw;
 }
 .other-info {
-    max-width: 19vw;
+    max-width: 50%;
     font-weight: 300;
     letter-spacing: 20%;
-    font-size: 1.6vh;
+    font-size: 1.25vw;
 }
 .leaner {
     height: 27px;
@@ -584,6 +585,9 @@
     .sys-on, .nal-coord {
         font-size: 10px;
     }
+    .tochnost {
+        opacity: 0.6 !important;
+    }
 }
 
 @media (min-width: 768px) {
@@ -627,7 +631,8 @@
     .center-info {
         /* padding-left: 10%; */
         position: relative;
-        height: 400px;
+        width: 100%;
+        height: 115vw;
     }
     .menu {
         right: 7%; left: 7%;
@@ -650,23 +655,36 @@
         left: 5%;   
     }
     .cis {
-        letter-spacing: 25% !important;
+        letter-spacing: 20% !important;
+        padding-left: 8px;
     }
     .tochka {
         left: 96% !important;
         /* right: 20%; */
+        color: #EFEDE3;
     }
     .tochnost {
         position: absolute;
-        letter-spacing: 100%;
-        font-size: 20px;
-        opacity: 0.5;
-        transform: rotate(90deg);
-        left: 37.8%;
-        top: 92.8%;
-
+        right: 10%; 
+        top: 40%; 
+        
+        /* НАСТОЯЩИЙ ВЕРТИКАЛЬНЫЙ ТЕКСТ: */
+        writing-mode: vertical-rl;
+        text-orientation: sideways; /* Кладет буквы на бок, как при rotate(90deg) */
+        
+        font-size: 4.5vw !important;
+        letter-spacing: 2.2em; 
+        opacity: 1 !important;
     }
 
+    .tochnost span {
+        opacity: 0.5;
+    }
+
+    .tochnost span.n {
+        color: var(--orange);
+        opacity: 1 !important;
+    }
     
     
     
@@ -679,24 +697,26 @@
 
 /* ТРЕТИЙ ЭКРАН НАЧАЛО */
 
-@media (max-width: 425px){
+@media (max-width: 768px){
     .num {
         font-size: 70vh;
         position: absolute;
         right: -20%;
         top: 3%;
         z-index: 2;
+        
     }
     .makeway {
-        font-size: 10px !important;
+        font-size: 2vw !important;
         top: 10vh;
         left: 11vw;
+        line-height: 12px;
     }
     .main-info {
         top: 30%;
     }
     .title-info {
-        max-width: 350px;
+        max-width: 100%;
         font-size: 8vw;
     }
     .above-7 {
@@ -710,16 +730,16 @@
     }
     .leaner {
         width: 64vw;
-        margin-bottom: 5px;
-        height: 8px;
+        margin-bottom: 20px;
+        height: 0px;
     }
     .leaner > div {
-        bottom: -9%;
+        top: 0%;
         left: -8%;
     }
     .other-info {
-        max-width: 300px;
-        font-size: 14px;
+        max-width: 100%;
+        font-size: 3vw;
         letter-spacing: 20%;
     }
     .oi-1 {
