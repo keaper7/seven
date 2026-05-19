@@ -166,10 +166,11 @@
 .num {
     font-size: 100vh;
     font-weight: 600;
-    color: var(--asphalt);
-    opacity: 5%;
+    color: #e5e3da;
+    opacity: 1;
 }
 .makeway {
+    letter-spacing: 20%;
     position: absolute;
     right: 3vw;
     bottom: 14vh;
@@ -620,6 +621,8 @@
     }
 }
 
+
+/* ВТОРОЙ ЭКРАН НАЧАЛО */
 @media (max-width: 425px) {
     .center-info {
         /* padding-left: 10%; */
@@ -668,3 +671,61 @@
     
     
 }
+/* ВТОРОЙ ЭКРАН КОНЕЦ */
+
+
+
+
+
+/* ТРЕТИЙ ЭКРАН НАЧАЛО */
+
+@media (max-width: 425px){
+    .num {
+        font-size: 70vh;
+        position: absolute;
+        right: -20%;
+        top: 3%;
+        z-index: 2;
+    }
+    .makeway {
+        font-size: 10px !important;
+        top: 10vh;
+        left: 11vw;
+    }
+    .main-info {
+        top: 30%;
+    }
+    .title-info {
+        max-width: 350px;
+        font-size: 8vw;
+    }
+    .above-7 {
+        position: relative;
+        z-index: 3;
+    }
+    .hidden-m {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+    }
+    .leaner {
+        width: 64vw;
+        margin-bottom: 5px;
+        height: 8px;
+    }
+    .leaner > div {
+        bottom: -9%;
+        left: -8%;
+    }
+    .other-info {
+        max-width: 300px;
+        font-size: 14px;
+        letter-spacing: 20%;
+    }
+    .oi-1 {
+        margin-top: 230px;
+    }
+    
+}
+/* ТРЕТИЙ ЭКРАН КОНЕЦ */
+
