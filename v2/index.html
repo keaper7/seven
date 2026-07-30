@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SEVEN — цифровое агентство в Нальчике</title>
+<meta name="description" content="SEVEN — агентство цифрового дизайна из Нальчика. UI/UX дизайн, веб-архитектура, бренд-айдентика. Регион 07, Кабардино-Балкария.">
+<meta name="theme-color" content="#302F2C">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SEVEN">
+<meta property="og:title" content="SEVEN — цифровое агентство в Нальчике">
+<meta property="og:description" content="Архитектура порядка. UI/UX дизайн, веб-архитектура, бренд-айдентика. Нальчик, регион 07.">
+<meta property="og:locale" content="ru_RU">
+
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+<!-- ══ ПРЕЛОАДЕР: счёт до кода региона ══ -->
+<div class="preloader" id="preloader">
+  <div class="preloader__inner">
+    <div class="preloader__count" id="preloaderCount">00</div>
+    <div class="preloader__label">Нальчик · Кабардино-Балкария</div>
+  </div>
+  <div class="preloader__bar"><i id="preloaderBar"></i></div>
+</div>
+
+<!-- ══ ЗЕРНО ПОВЕРХ ВСЕГО ══ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ══ КУРСОР-ПРИЦЕЛ ══ -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__ring"></span>
+  <span class="cursor__dot"></span>
+</div>
+
+<!-- ══ ИНДИКАТОР СКРОЛЛА 01…07 ══ -->
+<nav class="rail" id="rail" aria-label="Разделы страницы">
+  <a href="#s1" data-n="01"><span>пролог</span></a>
+  <a href="#s2" data-n="02"><span>точность</span></a>
+  <a href="#s3" data-n="03"><span>регион</span></a>
+  <a href="#s4" data-n="04"><span>направления</span></a>
+  <a href="#s5" data-n="05"><span>философия</span></a>
+  <a href="#s6" data-n="06"><span>процесс</span></a>
+  <a href="#s7" data-n="07"><span>контакты</span></a>
+</nav>
+
+<main>
+
+<!-- ═════════════ 01 · ПРОЛОГ ═════════════ -->
+<section class="sec sec--dark" id="s1" data-theme="dark" data-n="01">
+  <div class="frame" aria-hidden="true"></div>
+
+  <div class="hud hud--tl">
+    <span class="hud__dot"></span>
+    <span>SYSTEM: ONLINE</span>
+  </div>
+
+  <div class="hud hud--tr">
+    <span>43.4833<i>°</i> N, 43.6167<i>°</i> E</span>
+  </div>
+
+  <div class="hud hud--bl">
+    <span>НАЛЬЧИК<i>&nbsp;·&nbsp;</i><time id="clock">--:--:--</time></span>
+  </div>
+
+  <div class="hud hud--br">
+    <span>est. 2026</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero__ghost" aria-hidden="true">SEVEN</div>
+    <h1 class="hero__mark">
+      <span class="hero__l">S</span><span class="hero__l">E</span><span class="hero__v">V<svg class="hero__wedge" viewBox="0 0 100 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 L100 0 L50 120 Z" fill="currentColor"/></svg></span><span class="hero__l">E</span><span class="hero__l">N</span>
+    </h1>
+    <p class="hero__region"><b>07</b><span>регион</span></p>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true"><span>вниз</span><i></i></div>
+</section>
+
+
+<!-- ═════════════ 02 · ТОЧНОСТЬ ═════════════ -->
+<section class="sec sec--paper" id="s2" data-theme="paper" data-n="02">
+  <p class="sec__tag">02 — принцип</p>
+
+  <div class="precision">
+    <h2 class="precision__en" aria-label="PRECISION">
+      <span>P</span><span>R</span><span>E</span><span>C</span><span>I</span><span>S</span><span>I</span><span>O</span><span>N</span><i class="precision__dot">.</i>
+    </h2>
+    <p class="precision__ru" aria-label="Точность">
+      <span>Т</span><span>О</span><span>Ч</span><span class="is-accent">Н</span><span>О</span><span>С</span><span>Т</span><span>Ь</span>
+    </p>
+  </div>
+
+  <p class="precision__note">Один путь. Без лишних поворотов.</p>
+</section>
+
+
+<!-- ═════════════ 03 · КОД РЕГИОНА ═════════════ -->
+<section class="sec sec--dark" id="s3" data-theme="dark" data-n="03">
+  <p class="sec__tag">03 — координаты</p>
+
+  <div class="region">
+    <div class="region__map" id="elbrusMount" aria-hidden="true"></div>
+
+    <div class="region__code">
+      <span class="region__zero">0</span><span class="region__seven">7</span>
+    </div>
+
+    <div class="region__facts">
+      <p class="region__lead">
+        Мы отсюда. <em>Эльбрус</em> виден из окна —<br>
+        двуглавый, 5642 и 5621 над уровнем моря.
+      </p>
+      <dl class="facts">
+        <div><dt>массив</dt><dd>Эльбрус · двуглавый</dd></div>
+        <div><dt>высота</dt><dd>5642 <i>м</i></dd></div>
+        <div><dt>координаты</dt><dd>43.3499<i>°</i> N, 42.4453<i>°</i> E</dd></div>
+        <div><dt>регион</dt><dd>RU-KB · 07</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════════════ 04 · НАПРАВЛЕНИЯ ═════════════ -->
+<section class="sec sec--paper" id="s4" data-theme="paper" data-n="04">
+  <p class="sec__tag">04 — направления</p>
+
+  <ul class="dirs">
+    <li class="dir">
+      <span class="dir__n">01</span>
+      <h3 class="dir__title">UI/UX&nbsp;дизайн</h3>
+      <p class="dir__desc">Интерфейсы, в которых не нужно разбираться. Логика раньше украшений.</p>
+      <span class="dir__orn" aria-hidden="true"></span>
+    </li>
+    <li class="dir">
+      <span class="dir__n">02</span>
+      <h3 class="dir__title">Веб-архитектура</h3>
+      <p class="dir__desc">Структура, которая выдержит рост. Скорость, доступность, чистый код.</p>
+      <span class="dir__orn" aria-hidden="true"></span>
+    </li>
+    <li class="dir">
+      <span class="dir__n">03</span>
+      <h3 class="dir__title">Бренд-айдентика</h3>
+      <p class="dir__desc">Знак, типографика, система. Чтобы вас узнавали без подписи.</p>
+      <span class="dir__orn" aria-hidden="true"></span>
+    </li>
+  </ul>
+</section>
+
+
+<!-- ═════════════ 05 · ФИЛОСОФИЯ ═════════════ -->
+<section class="sec sec--paper" id="s5" data-theme="paper" data-n="05">
+  <div class="phil__num" aria-hidden="true">7</div>
+
+  <div class="phil">
+    <p class="sec__tag">05 — философия</p>
+    <h2 class="phil__title">
+      <span class="reveal">Там, где другие видят пустоту,</span>
+      <span class="reveal">мы видим пространство</span>
+      <span class="reveal">для <em>главного.</em></span>
+    </h2>
+    <div class="rule" aria-hidden="true"><i></i></div>
+    <p class="phil__sub">
+      Мы не делаем просто красиво.<br>
+      Мы проектируем решения.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═════════════ 06 · ПРОЦЕСС ═════════════ -->
+<section class="sec sec--dark sec--pin" id="s6" data-theme="dark" data-n="06">
+  <div class="proc">
+    <header class="proc__head">
+      <p class="sec__tag">06 — процесс</p>
+      <p class="proc__count"><b>07</b> шагов от разговора до запуска</p>
+    </header>
+
+    <div class="proc__track" id="procTrack">
+      <div class="proc__line" aria-hidden="true"><i id="procLine"></i></div>
+      <ol class="proc__steps">
+        <li class="step"><span class="step__n">01</span><h3>Бриф</h3><p>Слушаем. Что за бизнес, кто клиент, чего не хватает сейчас.</p></li>
+        <li class="step"><span class="step__n">02</span><h3>Исследование</h3><p>Рынок, конкуренты, аудитория. Решения из данных, а не из вкуса.</p></li>
+        <li class="step"><span class="step__n">03</span><h3>Архитектура</h3><p>Структура, сценарии, приоритеты экранов. Скелет до всякой красоты.</p></li>
+        <li class="step"><span class="step__n">04</span><h3>Концепция</h3><p>Визуальное направление. Одно, выбранное и обоснованное.</p></li>
+        <li class="step"><span class="step__n">05</span><h3>Дизайн</h3><p>Макеты всех состояний, включая пустые и ошибочные. Дизайн-система.</p></li>
+        <li class="step"><span class="step__n">06</span><h3>Разработка</h3><p>Чистый код, скорость, адаптив от 320 пикселей, доступность.</p></li>
+        <li class="step"><span class="step__n">07</span><h3>Запуск</h3><p>Домен, аналитика, передача. Дальше — сопровождение, если нужно.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════════════ 07 · ЛАБИРИНТ · КОНТАКТЫ ═════════════ -->
+<section class="sec sec--deep" id="s7" data-theme="deep" data-n="07">
+  <div class="lab">
+    <p class="lab__top">Твой следующий шаг</p>
+
+    <div class="lab__field">
+      <div class="lab__svg" id="labMount" aria-hidden="true"></div>
+
+      <div class="lab__grid">
+        <span class="lab__center">seven</span>
+        <h2 class="lab__claim">Архитектура порядка</h2>
+        <a class="lab__c lab__c--tg"    href="https://t.me/seven_sites" target="_blank" rel="noopener">Telegram // @SEVEN_SITES</a>
+        <a class="lab__c lab__c--inst"  href="https://instagram.com/seven_sites" target="_blank" rel="noopener">Instagram // @SEVEN_SITES</a>
+        <a class="lab__c lab__c--mail"  href="mailto:7devsites@gmail.com">7DEVSITES@GMAIL.COM</a>
+      </div>
+    </div>
+
+    <footer class="lab__bottom">
+      <span>© 2026 SEVEN</span>
+      <span>важнее пройденного пути</span>
+    </footer>
+  </div>
+</section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="js/nalchik.js"></script>
+<script src="js/preloader.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

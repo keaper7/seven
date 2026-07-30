@@ -1,0 +1,43 @@
+<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!--
+    Модуль орнамента SEVEN.
+    Оригинальная стилизация по принципам адыгского орнамента:
+    четырёхкратная зеркальная симметрия, парные рога барана (угловые спирали),
+    ромб и «древо жизни» по осям. Только линии, без заливок — как золотой галун.
+    Ортогональная геометрия намеренно рифмуется с лабиринтом секции 07.
+  -->
+  <defs>
+    <!-- рог барана: спираль, свёрнутая под прямыми углами -->
+    <path id="orn-horn" d="M0 0 L0 24 L24 24 L24 9 L10 9 L10 17 L18 17"/>
+    <!-- древо жизни: осевой стебель с перекладиной и побегами -->
+    <g id="orn-axis">
+      <path d="M60 38 L60 27"/>
+      <path d="M50 27 L70 27"/>
+      <path d="M50 27 L50 21"/>
+      <path d="M70 27 L70 21"/>
+    </g>
+  </defs>
+
+  <g stroke="currentColor" stroke-width="1.5"
+     stroke-linecap="square" stroke-linejoin="miter" vector-effect="non-scaling-stroke">
+
+    <!-- четыре рога по углам -->
+    <use href="#orn-horn" transform="translate(8 8)"/>
+    <use href="#orn-horn" transform="translate(112 8) scale(-1 1)"/>
+    <use href="#orn-horn" transform="translate(112 112) scale(-1 -1)"/>
+    <use href="#orn-horn" transform="translate(8 112) scale(1 -1)"/>
+
+    <!-- древо жизни по четырём осям -->
+    <use href="#orn-axis"/>
+    <use href="#orn-axis" transform="rotate(90 60 60)"/>
+    <use href="#orn-axis" transform="rotate(180 60 60)"/>
+    <use href="#orn-axis" transform="rotate(270 60 60)"/>
+
+    <!-- сердцевина: два ромба -->
+    <path d="M60 38 L82 60 L60 82 L38 60 Z"/>
+    <path d="M60 50 L70 60 L60 70 L50 60 Z"/>
+  </g>
+
+  <!-- солярная точка в центре -->
+  <rect x="58" y="58" width="4" height="4" fill="currentColor"/>
+</svg>

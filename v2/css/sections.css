@@ -1,0 +1,597 @@
+/* ══════════════════════════════════════════════════════
+   SEVEN v2 — семь секций
+   ══════════════════════════════════════════════════════ */
+
+/* ═══════════ 01 · ПРОЛОГ ═══════════ */
+
+.frame {
+  position: absolute;
+  inset: clamp(14px, 2vw, 26px);
+  border: 1px solid rgba(239, 237, 227, .12);
+  pointer-events: none;
+  z-index: 2;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, transparent 50%, #000 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, transparent 50%, #000 82%, transparent 100%);
+}
+
+.hud {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--micro);
+  font-weight: 300;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.hud i { color: var(--orange); font-style: normal; }
+.hud--tl { top: calc(var(--pad) + 8px); left: calc(var(--pad) + 8px); }
+.hud--tr { top: calc(var(--pad) + 8px); right: calc(var(--pad) + 8px); }
+.hud--bl { bottom: calc(var(--pad) + 8px); left: calc(var(--pad) + 8px); }
+.hud--br { bottom: calc(var(--pad) + 8px); right: calc(var(--pad) + 8px); }
+
+.hud__dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: pulse 2.4s var(--ease) infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1;  box-shadow: 0 0 0 0 rgba(255, 119, 0, .5); }
+  50%      { opacity: .4; box-shadow: 0 0 0 6px rgba(255, 119, 0, 0); }
+}
+
+#clock { font-variant-numeric: tabular-nums; }
+
+/* логотип */
+.hero {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(26px, 5vh, 64px);
+  z-index: 1;
+}
+
+.hero__ghost,
+.hero__mark {
+  font-size: clamp(64px, 16.6vw, 330px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* эхо логотипа: заметно крупнее, чтобы читалось как ореол, а не как промах приводки */
+.hero__ghost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.24);
+  color: transparent;
+  -webkit-text-stroke: 1px var(--paper);
+  opacity: .06;
+  pointer-events: none;
+}
+
+.hero__mark {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  color: var(--paper);
+}
+.hero__mark::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(110px, 16vw, 260px);
+  height: clamp(90px, 11vw, 170px);
+  background: var(--orange);
+  opacity: .55;
+  border-radius: 50%;
+  filter: blur(clamp(45px, 6vw, 85px));
+  z-index: -1;
+}
+
+.hero__v {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--orange);
+}
+.hero__wedge {
+  position: absolute;
+  top: 81%;
+  width: .145em;
+  height: .145em;
+  color: var(--orange);
+}
+
+.hero__region {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: var(--micro);
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.hero__region b {
+  font-size: calc(var(--micro) * 1.5);
+  font-weight: 500;
+  letter-spacing: .16em;
+  color: var(--orange);
+}
+
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--pad) + 6px);
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.scroll-hint i {
+  width: 1px; height: 30px;
+  background: linear-gradient(to bottom, var(--orange), transparent);
+  animation: drop 2.2s var(--ease) infinite;
+}
+@keyframes drop {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+
+/* ═══════════ 02 · ТОЧНОСТЬ ═══════════ */
+
+#s2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(28px, 5vh, 56px);
+}
+
+.precision { position: relative; }
+
+.precision__en {
+  display: flex;
+  justify-content: space-between;
+  font-size: clamp(38px, 11.6vw, 210px);
+  font-weight: 400;
+  line-height: .92;
+  color: var(--fg);
+}
+.precision__en span { display: inline-block; }
+.precision__dot {
+  font-style: normal;
+  color: var(--orange);
+  align-self: flex-end;
+}
+
+.precision__ru {
+  display: flex;
+  justify-content: space-between;
+  margin-top: clamp(10px, 1.6vh, 22px);
+  font-size: clamp(10px, 1.5vw, 22px);
+  font-weight: 200;
+  letter-spacing: 0;
+  color: var(--fg);
+}
+.precision__ru span { opacity: .18; }
+.precision__ru .is-accent { color: var(--orange); opacity: 1; }
+
+.precision__note {
+  align-self: flex-end;
+  max-width: 34ch;
+  text-align: right;
+  font-size: clamp(11px, 1.05vw, 15px);
+  line-height: 1.7;
+  letter-spacing: .1em;
+  color: var(--dim);
+}
+
+
+/* ═══════════ 03 · КОД РЕГИОНА ═══════════ */
+
+#s3 { display: flex; flex-direction: column; }
+
+.region {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(14px, 2.5vh, 30px);
+}
+
+/* карта уходит влево, код региона встаёт справа — иначе контуры
+   и обводка нуля читаются как одно и то же кольцо */
+.region__map {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-items: center;
+  justify-items: start;
+  pointer-events: none;
+}
+.region__map svg {
+  width: min(72%, 880px);
+  height: auto;
+  opacity: .9;
+  transform: translate(-6%, -7%);
+}
+.region__map .iso path {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.region__map .iso { opacity: .2; }
+.region__map .iso--summit { opacity: .95; }
+.region__map .iso--summit path { stroke: var(--orange); stroke-width: 1.4; }
+
+.region__code {
+  grid-row: 1;
+  place-self: center end;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  font-size: min(clamp(120px, 23vw, 380px), 44vh);
+  font-weight: 500;
+  line-height: .82;
+  letter-spacing: -.02em;
+}
+/* ноль обведён контуром, семёрка залита — код региона читается как знак */
+.region__zero {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(239, 237, 227, .38);
+}
+.region__seven { color: var(--paper); }
+
+.region__facts {
+  grid-row: 2;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vh, 24px);
+  max-width: 62ch;
+}
+
+.region__lead {
+  font-family: var(--ffd);
+  font-size: clamp(17px, 2vw, 30px);
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--fg);
+}
+.region__lead em { color: var(--orange); font-style: italic; }
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: clamp(14px, 2vw, 30px);
+  border-top: 1px solid var(--hair);
+  padding-top: 16px;
+}
+.facts dt {
+  font-size: var(--micro);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 6px;
+}
+.facts dd {
+  font-size: clamp(12px, 1.1vw, 16px);
+  letter-spacing: .08em;
+  color: var(--fg);
+}
+.facts dd i { color: var(--orange); font-style: normal; }
+
+
+/* ═══════════ 04 · НАПРАВЛЕНИЯ ═══════════ */
+
+#s4 { display: flex; flex-direction: column; justify-content: center; gap: clamp(24px, 4vh, 48px); }
+
+.dirs { border-top: 1px solid var(--hair); }
+
+.dir {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr minmax(0, 38ch);
+  align-items: center;
+  gap: clamp(16px, 3vw, 54px);
+  padding: clamp(20px, 3.4vh, 42px) 0;
+  border-bottom: 1px solid var(--hair);
+  transition: padding-left .5s var(--ease);
+}
+.dir:hover { padding-left: clamp(10px, 1.6vw, 26px); }
+
+.dir__n {
+  font-size: var(--micro);
+  letter-spacing: .28em;
+  color: var(--dim);
+  transition: color .4s var(--ease);
+}
+.dir:hover .dir__n { color: var(--orange); }
+
+.dir__title {
+  font-family: var(--ffd);
+  font-size: clamp(24px, 4.4vw, 68px);
+  font-weight: 300;
+  letter-spacing: -.01em;
+}
+
+.dir__desc {
+  font-size: clamp(11px, 1.05vw, 15px);
+  line-height: 1.75;
+  letter-spacing: .06em;
+  color: var(--dim);
+}
+
+/* орнаментальный модуль, прорастающий при наведении */
+.dir__orn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 46px; height: 46px;
+  transform: translateY(-50%) scale(.4) rotate(-45deg);
+  opacity: 0;
+  background: var(--orn-tile) center / contain no-repeat;
+  transition: opacity .5s var(--ease), transform .6s var(--ease);
+  pointer-events: none;
+}
+.dir:hover .dir__orn { opacity: .85; transform: translateY(-50%) scale(1) rotate(0deg); }
+
+
+/* ═══════════ 05 · ФИЛОСОФИЯ ═══════════ */
+
+#s5 { display: flex; align-items: center; }
+
+.phil__num {
+  position: absolute;
+  right: -4vw;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: min(118vh, 90vw);
+  font-weight: 600;
+  line-height: .74;
+  color: var(--asphalt);
+  opacity: .05;
+  pointer-events: none;
+  user-select: none;
+}
+
+.phil {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 3vh, 34px);
+  max-width: 62ch;
+}
+
+.phil__title {
+  font-family: var(--ffd);
+  font-size: clamp(26px, 4.4vw, 68px);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -.015em;
+}
+.phil__title span { display: block; }
+.phil__title em { font-style: italic; font-weight: 600; }
+
+.rule {
+  position: relative;
+  width: clamp(140px, 22vw, 300px);
+  border-bottom: 1px solid var(--orange);
+}
+.rule i {
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 4px; height: 4px;
+  background: var(--orange);
+}
+
+.phil__sub {
+  font-size: clamp(11px, 1.15vw, 16px);
+  line-height: 1.85;
+  letter-spacing: .18em;
+  color: var(--dim);
+}
+
+
+/* ═══════════ 06 · ПРОЦЕСС ═══════════ */
+
+.sec--pin { padding: 0; }
+
+.proc {
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(24px, 5vh, 58px);
+  overflow: hidden;
+}
+
+.proc__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 0 var(--pad-r) 0 var(--pad);
+}
+.proc__count {
+  font-size: var(--micro);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.proc__count b {
+  font-size: calc(var(--micro) * 1.6);
+  font-weight: 500;
+  color: var(--orange);
+  margin-right: 8px;
+}
+
+.proc__track { position: relative; }
+
+.proc__line {
+  position: absolute;
+  left: var(--pad);
+  right: 0;
+  top: 34px;
+  height: 2px;
+  background: var(--hair);
+}
+.proc__line i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--orange);
+}
+
+.proc__steps {
+  display: flex;
+  gap: clamp(24px, 4vw, 72px);
+  padding: 0 var(--pad);
+  width: max-content;
+}
+
+.step {
+  width: clamp(230px, 26vw, 360px);
+  flex: none;
+  padding-top: 68px;
+  position: relative;
+}
+.step::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 30px;
+  width: 9px; height: 9px;
+  border: 1px solid var(--orange);
+  background: var(--bg);
+  transform: rotate(45deg);
+}
+.step__n {
+  display: block;
+  font-size: var(--micro);
+  letter-spacing: .3em;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+.step h3 {
+  font-family: var(--ffd);
+  font-size: clamp(21px, 2.4vw, 36px);
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+.step p {
+  font-size: clamp(11px, 1vw, 14px);
+  line-height: 1.8;
+  letter-spacing: .05em;
+  color: var(--dim);
+}
+
+
+/* ═══════════ 07 · ЛАБИРИНТ · КОНТАКТЫ ═══════════ */
+
+/* до s6 (asphalt) секция была темнее без перехода — резкий шов на стыке.
+   Растягиваем asphalt поверх deep градиентом, чтобы граница исчезла. */
+#s7 {
+  display: flex;
+  background:
+    linear-gradient(to bottom, var(--asphalt), transparent clamp(160px, 22vh, 300px)),
+    var(--deep);
+}
+
+.lab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vh, 24px);
+  min-height: 0;
+}
+
+.lab__top,
+.lab__bottom {
+  font-size: var(--micro);
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.lab__top { text-align: right; }
+.lab__bottom { display: flex; justify-content: space-between; gap: 16px; }
+
+.lab__field {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  width: min(100%, calc((100svh - 190px) * 22 / 15));
+  aspect-ratio: 22 / 15;
+  margin: 0 auto;
+}
+
+.lab__svg { position: absolute; inset: 0; }
+.lab__svg svg { width: 100%; height: 100%; }
+.lab__svg .lab-walls { color: var(--paper); }
+/* начальное состояние линии пути ставит JS — без скрипта путь виден целиком */
+
+/* сетка 22×15 повторяет модуль лабиринта — контакты садятся в коридоры */
+.lab__grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(22, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  pointer-events: none;
+}
+.lab__grid > * { pointer-events: auto; }
+
+.lab__center {
+  grid-column: 7 / 17;
+  grid-row: 7 / 10;
+  place-self: center;
+  font-size: clamp(15px, 3.4vh, 34px);
+  font-weight: 400;
+  letter-spacing: clamp(6px, 1vw, 18px);
+  text-indent: clamp(6px, 1vw, 18px);
+  color: rgba(239, 237, 227, .55);
+}
+
+.lab__c,
+.lab__claim {
+  font-size: clamp(8px, 1.25vh, 12px);
+  font-weight: 300;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(239, 237, 227, .38);
+  transition: color .35s var(--ease);
+  white-space: nowrap;
+}
+.lab__c:hover { color: var(--orange); }
+
+/* нижняя пара зеркалит верхнюю по вертикали: claim(2 ряда от края) ↔ tg, inst(1 ряд от края) ↔ mail */
+.lab__claim  { grid-column: 4 / 12;  grid-row: 3;  place-self: center start; letter-spacing: .3em; }
+.lab__c--inst{ grid-column: 14 / 22; grid-row: 2;  place-self: center end; }
+.lab__c--tg  { grid-column: 4 / 12;  grid-row: 13; place-self: center start; }
+.lab__c--mail{ grid-column: 13 / 21; grid-row: 14; place-self: center end; }

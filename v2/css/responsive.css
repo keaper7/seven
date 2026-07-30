@@ -1,0 +1,166 @@
+/* ══════════════════════════════════════════════════════
+   SEVEN v2 — адаптив. Все брейкпоинты собраны здесь.
+   ══════════════════════════════════════════════════════ */
+
+/* ═══ ПЛАНШЕТ И НИЖЕ ═══ */
+@media (max-width: 1024px) {
+  .rail a span { display: none; }
+
+  .region__facts { max-width: 100%; }
+  .region__map svg { width: 150%; }
+
+  .dir {
+    grid-template-columns: auto 1fr;
+    row-gap: 10px;
+  }
+  .dir__desc { grid-column: 2; max-width: 46ch; }
+}
+
+
+/* ═══ ПРОЦЕСС: ВЕРТИКАЛЬНАЯ ЛЕНТА ═══ */
+@media (max-width: 860px) {
+  .sec--pin { padding: var(--pad) 0; }
+
+  .proc {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+    gap: clamp(24px, 4vh, 40px);
+  }
+
+  .proc__steps {
+    flex-direction: column;
+    width: auto;
+    gap: clamp(22px, 4vh, 40px);
+    padding-left: calc(var(--pad) + 26px);
+    padding-right: var(--pad);
+  }
+
+  .step {
+    width: auto;
+    padding-top: 0;
+  }
+  .step::before {
+    left: -26px;
+    top: 6px;
+  }
+
+  /* линия прогресса становится вертикальной */
+  .proc__line {
+    left: calc(var(--pad) + 4px);
+    right: auto;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    height: auto;
+    background: var(--hair);
+  }
+  .proc__line i {
+    width: 100%;
+    height: 0;
+  }
+}
+
+
+/* ═══ ТЕЛЕФОН ═══ */
+@media (max-width: 640px) {
+
+  /* индикатор мешает на узком экране */
+  .rail { display: none; }
+
+  /* ── 01 пролог ── */
+  .hud { letter-spacing: .22em; font-size: 9px; }
+  .hud--tr { top: auto; bottom: calc(var(--pad) + 30px); right: calc(var(--pad) + 8px); }
+  .hud--br { display: none; }
+  .hero__mark, .hero__ghost { font-size: 21vw; }
+  .scroll-hint { display: none; }
+
+  /* ── 02 точность ── */
+  #s2 { gap: 26px; }
+  .precision__en {
+    font-size: 10.6vw;
+    justify-content: flex-start;
+    letter-spacing: .02em;
+  }
+  .precision__ru {
+    justify-content: flex-start;
+    gap: .55em;
+    font-size: 11px;
+  }
+  .precision__note { align-self: flex-start; text-align: left; }
+
+  /* ── 03 регион ── */
+  .region { gap: 20px; }
+  .region__code { place-self: center; font-size: min(40vw, 30vh); }
+  .region__map { justify-items: center; }
+  .region__map svg { width: 165%; transform: translate(0, -10%); }
+  .facts { grid-template-columns: 1fr 1fr; }
+
+  /* ── 04 направления ── */
+  .dir { grid-template-columns: 1fr; row-gap: 8px; }
+  .dir__n { letter-spacing: .3em; }
+  .dir__desc { grid-column: 1; }
+  .dir__orn { display: none; }
+  .dir:hover { padding-left: 0; }
+
+  /* ── 05 философия ── */
+  .phil__num { right: -18vw; font-size: 74vh; }
+
+  /* ── 07 лабиринт ── */
+  /* поле перестаёт быть пропорциональной рамкой: лабиринт сверху, контакты под ним */
+  .lab__field {
+    width: 100%;
+    aspect-ratio: auto;
+    height: auto;
+    flex: none;
+  }
+  .lab__svg {
+    position: static;
+    width: 100%;
+    aspect-ratio: 22 / 15;
+  }
+  .lab__top { text-align: left; }
+  .lab__bottom { flex-direction: column; gap: 4px; }
+
+  /* сетка контактов не читается в масштабе телефона — простой столбец под полем */
+  .lab__grid {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 26px;
+  }
+  .lab__center {
+    font-size: 22px;
+    letter-spacing: 10px;
+    text-indent: 10px;
+    align-self: center;
+    color: rgba(239, 237, 227, .6);
+  }
+  .lab__c, .lab__claim {
+    font-size: 11px;
+    white-space: normal;
+  }
+  .lab__claim { letter-spacing: .24em; color: rgba(239, 237, 227, .5); }
+
+  #s7 { min-height: auto; }
+  .lab { gap: 16px; }
+}
+
+
+/* ═══ ОЧЕНЬ УЗКИЕ ЭКРАНЫ ═══ */
+@media (max-width: 380px) {
+  .precision__en { font-size: 10vw; }
+  .hud--tl span { letter-spacing: .16em; }
+  .facts { grid-template-columns: 1fr; }
+}
+
+
+/* ═══ НИЗКИЕ ЭКРАНЫ В ЛАНДШАФТЕ ═══ */
+@media (max-height: 520px) and (orientation: landscape) {
+  .hero__mark, .hero__ghost { font-size: 17vh; }
+  .scroll-hint { display: none; }
+  .region__code { font-size: 40vh; }
+  .phil__num { display: none; }
+}
