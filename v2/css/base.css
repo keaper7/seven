@@ -7,7 +7,6 @@
   --orange:  #FF7700;
   --asphalt: #302F2C;
   --paper:   #EFEDE3;
-  --deep:    #1E1D1B; /* тон финальной секции: та же тёплая база, что у asphalt, только темнее — было холодным и выбивалось */
 
   /* активная тема секции — переопределяется на .sec */
   --bg:   var(--paper);
@@ -36,7 +35,7 @@
 html { -webkit-text-size-adjust: 100%; }
 
 body {
-  background: var(--deep);
+  background: var(--asphalt);
   color: var(--fg);
   font-family: var(--ff);
   font-weight: 300;
@@ -61,7 +60,6 @@ html.lenis, html.lenis body { height: auto; }
 /* ══ ТЕМЫ СЕКЦИЙ ══ */
 .sec--paper { --bg: var(--paper);   --fg: var(--asphalt); --dim: rgba(48,47,44,.45);      --hair: rgba(48,47,44,.16); }
 .sec--dark  { --bg: var(--asphalt); --fg: var(--paper);   --dim: rgba(239,237,227,.42);   --hair: rgba(239,237,227,.14); }
-.sec--deep  { --bg: var(--deep);    --fg: var(--paper);   --dim: rgba(239,237,227,.34);   --hair: rgba(239,237,227,.12); }
 
 .sec {
   position: relative;
@@ -151,6 +149,9 @@ html.lenis, html.lenis body { height: auto; }
 .cursor { display: none; }
 
 @media (hover: hover) and (pointer: fine) {
+  /* родной курсор скрыт — на странице только кастомный прицел, иначе два курсора сразу */
+  body { cursor: none; }
+
   .cursor {
     display: block;
     position: fixed;
@@ -183,6 +184,9 @@ html.lenis, html.lenis body { height: auto; }
 
 
 /* ══ ИНДИКАТОР СКРОЛЛА 01…07 ══ */
+/* цвет пассивных пунктов зависит от темы секции под ними (задаёт scenes.js) —
+   раньше был mix-blend-mode:difference, но на светлой секции он превращал
+   оранжевый активного пункта в синий, никакого синего в палитре нет */
 .rail {
   position: fixed;
   right: clamp(14px, 2vw, 30px);
@@ -192,7 +196,6 @@ html.lenis, html.lenis body { height: auto; }
   display: flex;
   flex-direction: column;
   gap: 13px;
-  mix-blend-mode: difference;
 }
 .rail a {
   display: flex;
@@ -204,6 +207,7 @@ html.lenis, html.lenis body { height: auto; }
   color: rgba(239, 237, 227, .35);
   transition: color .35s var(--ease);
 }
+.rail.on-paper a { color: rgba(48, 47, 44, .35); }
 .rail a::after {
   content: attr(data-n);
   font-variant-numeric: tabular-nums;

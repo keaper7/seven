@@ -196,7 +196,6 @@
   color: var(--fg);
 }
 .precision__ru span { opacity: .18; }
-.precision__ru .is-accent { color: var(--orange); opacity: 1; }
 
 .precision__note {
   align-self: flex-end;
@@ -515,14 +514,7 @@
 
 /* ═══════════ 07 · ЛАБИРИНТ · КОНТАКТЫ ═══════════ */
 
-/* до s6 (asphalt) секция была темнее без перехода — резкий шов на стыке.
-   Растягиваем asphalt поверх deep градиентом, чтобы граница исчезла. */
-#s7 {
-  display: flex;
-  background:
-    linear-gradient(to bottom, var(--asphalt), transparent clamp(160px, 22vh, 300px)),
-    var(--deep);
-}
+#s7 { display: flex; }
 
 .lab {
   flex: 1;

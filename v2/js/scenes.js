@@ -29,6 +29,7 @@ SEVEN.scenes = function initScenes() {
   gsap.registerPlugin(ScrollTrigger);
 
   /* ─── индикатор 01…07 ─── */
+  const rail = document.getElementById('rail');
   document.querySelectorAll('.sec').forEach((sec) => {
     const link = document.querySelector(`.rail a[href="#${sec.id}"]`);
     if (!link) return;
@@ -36,7 +37,10 @@ SEVEN.scenes = function initScenes() {
       trigger: sec,
       start: 'top 50%',
       end: 'bottom 50%',
-      onToggle: (self) => link.classList.toggle('is-current', self.isActive),
+      onToggle: (self) => {
+        link.classList.toggle('is-current', self.isActive);
+        if (self.isActive) rail.classList.toggle('on-paper', sec.dataset.theme === 'paper');
+      },
     });
   });
 
