@@ -222,7 +222,6 @@ html.lenis, html.lenis body { height: auto; }
 }
 .rail a:hover span { opacity: .6; transform: none; }
 .rail a.is-current { color: var(--orange); }
-.rail a.is-current span { opacity: .75; transform: none; }
 
 
 /* ══ ДОСТУПНОСТЬ ══ */
