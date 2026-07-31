@@ -346,19 +346,20 @@
   color: var(--dim);
 }
 
-/* орнаментальный модуль, прорастающий при наведении */
+/* орнаментальный модуль, прорастающий из разделительной линии при наведении —
+   сидит на нижней границе строки, а не поверх текста описания */
 .dir__orn {
   position: absolute;
   right: 0;
-  top: 50%;
-  width: 46px; height: 46px;
-  transform: translateY(-50%) scale(.4) rotate(-45deg);
+  bottom: 0;
+  width: 40px; height: 40px;
+  transform: translateY(50%) scale(.4) rotate(-45deg);
   opacity: 0;
   background: var(--orn-tile) center / contain no-repeat;
   transition: opacity .5s var(--ease), transform .6s var(--ease);
   pointer-events: none;
 }
-.dir:hover .dir__orn { opacity: .85; transform: translateY(-50%) scale(1) rotate(0deg); }
+.dir:hover .dir__orn { opacity: .85; transform: translateY(50%) scale(1) rotate(0deg); }
 
 
 /* ═══════════ 05 · ФИЛОСОФИЯ ═══════════ */
