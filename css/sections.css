@@ -130,8 +130,7 @@
   align-items: center;
   gap: 8px;
   padding: 9px 16px;
-  border: 1px solid transparent;
-  border-bottom-color: rgba(239, 237, 227, .3);
+  border: 1px solid rgba(239, 237, 227, .3);
   font-size: var(--micro);
   letter-spacing: .26em;
   text-transform: uppercase;
