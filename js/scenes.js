@@ -28,22 +28,6 @@ SEVEN.scenes = function initScenes() {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ─── индикатор 01…07 ─── */
-  const rail = document.getElementById('rail');
-  document.querySelectorAll('.sec').forEach((sec) => {
-    const link = document.querySelector(`.rail a[href="#${sec.id}"]`);
-    if (!link) return;
-    ScrollTrigger.create({
-      trigger: sec,
-      start: 'top 50%',
-      end: 'bottom 50%',
-      onToggle: (self) => {
-        link.classList.toggle('is-current', self.isActive);
-        if (self.isActive) rail.classList.toggle('on-paper', sec.dataset.theme === 'paper');
-      },
-    });
-  });
-
   /* ─── 01 · пролог: логотип уходит вглубь ─── */
   gsap.to('.hero__mark', {
     yPercent: -14, scale: .94, ease: 'none',
@@ -160,5 +144,40 @@ SEVEN.scenes = function initScenes() {
     scrollTrigger: { trigger: '#s7', start: 'top 55%' },
   });
 
+  /* ─── индикатор 01…07 ─── создаём последним: конец диапазона каждой
+     секции берём из уже готового старта следующего триггера, а не из
+     пиннинга секции 06 напрямую, иначе индикатор 07 гас раньше конца страницы */
+  const rail = document.getElementById('rail');
+  const sections = [...document.querySelectorAll('.sec')];
+  const railTriggers = [];
+  sections.forEach((sec, i) => {
+    const link = document.querySelector(`.rail a[href="#${sec.id}"]`);
+    if (!link) { railTriggers.push(null); return; }
+    // конец диапазона секции = начало следующей (уже посчитанное её же триггером) —
+    // не пересчитываем позицию соседа заново через getBoundingClientRect: во время
+    // пиннинга секции 06 сырое измерение мимо своего триггера ловит промежуточное
+    // состояние спейсера и даёт заниженное число, из-за чего индикатор 07 гас рано
+    railTriggers.push(ScrollTrigger.create({
+      trigger: sec,
+      start: 'top 50%',
+      end: () => {
+        const nextTrigger = railTriggers[i + 1];
+        return nextTrigger ? nextTrigger.start : ScrollTrigger.maxScroll(window);
+      },
+      onToggle: (self) => {
+        link.classList.toggle('is-current', self.isActive);
+        if (self.isActive) rail.classList.toggle('on-paper', sec.dataset.theme === 'paper');
+      },
+    }));
+  });
+
   ScrollTrigger.refresh();
+
+  // шрифты догружаются асинхронно (display=swap) и после подмены могут
+  // на пиксель сдвинуть высоту секций — пересчитываем позиции триггеров,
+  // когда шрифты точно готовы, иначе индикатор 01…07 расходится с реальным
+  // концом страницы (последняя секция не загоралась)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
+  }
 };
