@@ -116,21 +116,31 @@
   color: var(--orange);
 }
 
-.hero__region {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
+/* единственная настоящая кнопка на сайте — остальные ссылки остаются
+   текстом с подчёркиванием, эта одна прямо приглашает написать */
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 30px;
+  border: 1px solid rgba(239, 237, 227, .3);
   font-size: var(--micro);
-  letter-spacing: .42em;
+  letter-spacing: .32em;
   text-transform: uppercase;
-  color: var(--dim);
+  color: var(--paper);
+  transition: border-color .4s var(--ease), background .4s var(--ease), color .4s var(--ease);
 }
-.hero__region b {
-  font-size: calc(var(--micro) * 1.5);
-  font-weight: 500;
-  letter-spacing: .16em;
+.hero__cta i {
+  font-style: normal;
   color: var(--orange);
+  transition: transform .4s var(--ease), color .4s var(--ease);
 }
+.hero__cta:hover {
+  border-color: var(--orange);
+  background: var(--orange);
+  color: var(--asphalt);
+}
+.hero__cta:hover i { color: var(--asphalt); transform: translateX(4px); }
 
 .scroll-hint {
   position: absolute;

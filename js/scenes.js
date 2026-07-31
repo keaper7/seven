@@ -37,7 +37,7 @@ SEVEN.scenes = function initScenes() {
     yPercent: -26, ease: 'none',
     scrollTrigger: { trigger: '#s1', start: 'top top', end: 'bottom top', scrub: .6 },
   });
-  gsap.to(['.hud', '.scroll-hint', '.hero__region'], {
+  gsap.to(['.hud', '.scroll-hint', '.hero__cta'], {
     opacity: 0, ease: 'none',
     scrollTrigger: { trigger: '#s1', start: 'top top', end: '45% top', scrub: .4 },
   });
