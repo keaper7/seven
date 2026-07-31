@@ -8,6 +8,15 @@
 <meta name="description" content="SEVEN — агентство цифрового дизайна из Нальчика. UI/UX дизайн, веб-архитектура, бренд-айдентика. Регион 07, Кабардино-Балкария.">
 <meta name="theme-color" content="#302F2C">
 
+<script>
+  /* Старт всегда сверху: страница каждый раз начинается с прелоадера 00 → 07,
+     возврат браузера на прежнее место показал бы середину сайта под шторкой.
+     Стоит здесь, а не в main.js, намеренно: ScrollTrigger запоминает значение
+     флага при своей загрузке и возвращает его на событии load — поэтому «manual»
+     надо выставить раньше, чем подключится GSAP. */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+</script>
+
 <link rel="canonical" href="https://sevensites.ru/">
 
 <meta property="og:type" content="website">

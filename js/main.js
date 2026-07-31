@@ -1,12 +1,21 @@
 /* Точка входа: плавный скролл, затем прелоадер и сцены. */
 
 (function boot() {
+  /* ── старт всегда сверху ──
+     сам флаг scrollRestoration выставлен инлайном в <head> — раньше GSAP,
+     иначе ScrollTrigger вернёт исходное значение на событии load.
+     здесь досбрасываем саму позицию: флаг отключает восстановление,
+     но не перематывает страницу, если та уже успела уехать */
+  window.scrollTo(0, 0);
+  window.addEventListener('load', () => window.scrollTo(0, 0), { once: true });
+
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ── Lenis: плавный скролл + связка со ScrollTrigger ── */
   if (window.Lenis && !reduced) {
     const lenis = new Lenis({ duration: 1.05, smoothWheel: true });
     window.lenis = lenis;
+    lenis.scrollTo(0, { immediate: true, force: true });   // своя позиция, мимо window.scrollTo
 
     if (window.ScrollTrigger) {
       lenis.on('scroll', ScrollTrigger.update);
