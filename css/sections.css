@@ -531,24 +531,23 @@
   min-height: 0;
 }
 
-.lab__top,
 .lab__bottom {
   font-size: var(--micro);
   letter-spacing: .34em;
   text-transform: uppercase;
   color: var(--dim);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
 }
-.lab__top {
-  padding-bottom: clamp(12px, 2vh, 24px);
-  border-bottom: 1px solid var(--hair);
-}
-.lab__bottom {
-  padding-top: clamp(12px, 2vh, 24px);
-  border-top: 1px solid var(--hair);
+
+.lab__top { display: flex; flex-direction: column; gap: 10px; }
+
+/* единый слоган секции — вместо двух обрывков по разным углам */
+.lab__slogan {
+  font-family: var(--ffd);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(15px, 2vw, 22px);
+  letter-spacing: 0;
+  color: var(--fg);
 }
 
 .lab__field {
@@ -587,8 +586,7 @@
   color: rgba(239, 237, 227, .55);
 }
 
-.lab__c,
-.lab__claim {
+.lab__c {
   font-size: clamp(8px, 1.25vh, 12px);
   font-weight: 300;
   letter-spacing: .16em;
@@ -599,8 +597,6 @@
 }
 .lab__c:hover { color: var(--orange); }
 
-/* нижняя пара зеркалит верхнюю по вертикали: claim(2 ряда от края) ↔ tg, inst(1 ряд от края) ↔ mail */
-.lab__claim  { grid-column: 4 / 12;  grid-row: 3;  place-self: center start; letter-spacing: .3em; }
 .lab__c--inst{ grid-column: 14 / 22; grid-row: 2;  place-self: center end; }
 .lab__c--tg  { grid-column: 4 / 12;  grid-row: 13; place-self: center start; }
 .lab__c--mail{ grid-column: 13 / 21; grid-row: 14; place-self: center end; }

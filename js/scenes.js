@@ -139,7 +139,7 @@ SEVEN.scenes = function initScenes() {
       scrollTrigger: { trigger: '#s7', start: 'top 80%', end: 'bottom bottom', scrub: .7 },
     });
   }
-  gsap.from(['.lab__claim', '.lab__c', '.lab__center'], {
+  gsap.from(['.lab__slogan', '.lab__c', '.lab__center'], {
     opacity: 0, duration: .9, ease: 'power2.out', stagger: .1,
     scrollTrigger: { trigger: '#s7', start: 'top 55%' },
   });
