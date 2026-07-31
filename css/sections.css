@@ -665,11 +665,16 @@
   letter-spacing: .16em;
   text-transform: uppercase;
   color: rgba(239, 237, 227, .38);
+  /* подчёркивание — border-bottom:currentColor, а не отдельный цвет:
+     подхватывает ту же transition, что и текст, само собой синхронно с hover */
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 3px;
   transition: color .35s var(--ease);
   white-space: nowrap;
 }
 .lab__c:hover { color: var(--orange); }
 
-.lab__c--inst{ grid-column: 14 / 22; grid-row: 2;  place-self: center end; }
-.lab__c--tg  { grid-column: 4 / 12;  grid-row: 13; place-self: center start; }
-.lab__c--mail{ grid-column: 13 / 21; grid-row: 14; place-self: center end; }
+/* отступ от края поля — иначе текст ложится прямо на линию лабиринта */
+.lab__c--inst{ grid-column: 14 / 22; grid-row: 2;  place-self: center end;   padding-right: clamp(10px, 1.6vw, 22px); }
+.lab__c--tg  { grid-column: 4 / 12;  grid-row: 13; place-self: center start; padding-left:  clamp(10px, 1.6vw, 22px); }
+.lab__c--mail{ grid-column: 13 / 21; grid-row: 14; place-self: center end;   padding-right: clamp(10px, 1.6vw, 22px); }
