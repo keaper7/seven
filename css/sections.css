@@ -124,13 +124,16 @@
   position: absolute;
   left: 50%;
   bottom: calc(var(--pad) + 74px);
+  /* z-index обязателен: .hero — слой inset:0 с z-index:1 на весь экран,
+     без него он ложится поверх кнопки и перехватывает клики */
+  z-index: 2;
   overflow: hidden;
   isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 9px 16px;
-  border: 1px solid rgba(239, 237, 227, .3);
+  border: 1px solid transparent;
   font-size: var(--micro);
   letter-spacing: .26em;
   text-transform: uppercase;
@@ -165,8 +168,7 @@
   translate: -50% -2px;
 }
 .hero__cta:hover span,
-.hero__cta:hover i { color: var(--asphalt); }
-.hero__cta:hover i { transform: translateX(4px); }
+.hero__cta:hover i { color: var(--asphalt); transform: translate(3px, -3px); }
 
 .scroll-hint {
   position: absolute;
