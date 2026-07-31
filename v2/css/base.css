@@ -1,0 +1,241 @@
+/* ══════════════════════════════════════════════════════
+   SEVEN v2 — база: токены, типографика, сквозные слои
+   ══════════════════════════════════════════════════════ */
+
+:root {
+  /* цвета бренда */
+  --orange:  #FF7700;
+  --asphalt: #302F2C;
+  --paper:   #EFEDE3;
+
+  /* активная тема секции — переопределяется на .sec */
+  --bg:   var(--paper);
+  --fg:   var(--asphalt);
+  --dim:  rgba(48, 47, 44, .45);
+  --hair: rgba(48, 47, 44, .16);
+
+  /* шрифты */
+  --ff:  'Zalando Sans Expanded', ui-sans-serif, system-ui, sans-serif;
+  --ffd: 'Playfair Display', Georgia, serif;
+
+  /* размеры */
+  --pad: clamp(20px, 4vw, 64px);
+  --pad-r: var(--pad);          /* справа шире: там висит индикатор 01…07 */
+  --micro: clamp(9px, .72vw, 11px);
+
+  /* модуль орнамента как фон (цвет зашит: background-image не наследует currentColor) */
+  --orn-tile: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg' aria-hidden='true'%3E %3Cdefs%3E %3Cpath id='orn-horn' d='M0 0 L0 24 L24 24 L24 9 L10 9 L10 17 L18 17'/%3E %3Cg id='orn-axis'%3E %3Cpath d='M60 38 L60 27'/%3E %3Cpath d='M50 27 L70 27'/%3E %3Cpath d='M50 27 L50 21'/%3E %3Cpath d='M70 27 L70 21'/%3E %3C/g%3E %3C/defs%3E %3Cg stroke='%23FF7700' stroke-width='1.5' stroke-linecap='square' stroke-linejoin='miter' vector-effect='non-scaling-stroke'%3E %3Cuse href='%23orn-horn' transform='translate(8 8)'/%3E %3Cuse href='%23orn-horn' transform='translate(112 8) scale(-1 1)'/%3E %3Cuse href='%23orn-horn' transform='translate(112 112) scale(-1 -1)'/%3E %3Cuse href='%23orn-horn' transform='translate(8 112) scale(1 -1)'/%3E %3Cuse href='%23orn-axis'/%3E %3Cuse href='%23orn-axis' transform='rotate(90 60 60)'/%3E %3Cuse href='%23orn-axis' transform='rotate(180 60 60)'/%3E %3Cuse href='%23orn-axis' transform='rotate(270 60 60)'/%3E %3Cpath d='M60 38 L82 60 L60 82 L38 60 Z'/%3E %3Cpath d='M60 50 L70 60 L60 70 L50 60 Z'/%3E %3C/g%3E %3Crect x='58' y='58' width='4' height='4' fill='%23FF7700'/%3E %3C/svg%3E");
+
+  /* тайминги */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--asphalt);
+  color: var(--fg);
+  font-family: var(--ff);
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg { display: block; max-width: 100%; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font-weight: 400; line-height: 1; }
+
+::selection { background: var(--orange); color: var(--paper); }
+
+/* ── Lenis: плавный скролл ────────────────────────── */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+
+/* ══ ТЕМЫ СЕКЦИЙ ══ */
+.sec--paper { --bg: var(--paper);   --fg: var(--asphalt); --dim: rgba(48,47,44,.45);      --hair: rgba(48,47,44,.16); }
+.sec--dark  { --bg: var(--asphalt); --fg: var(--paper);   --dim: rgba(239,237,227,.42);   --hair: rgba(239,237,227,.14); }
+
+.sec {
+  position: relative;
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100svh;
+  padding: var(--pad) var(--pad-r) var(--pad) var(--pad);
+  overflow: hidden;
+}
+
+/* индикатор виден только на широких экранах — там и резервируем под него поле */
+@media (min-width: 641px) {
+  :root { --pad-r: calc(var(--pad) + 32px); }
+}
+
+/* подпись-ярлык секции */
+.sec__tag {
+  font-size: var(--micro);
+  font-weight: 300;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+
+/* ══ ЗЕРНО ══ */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: .3;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+
+/* ══ ПРЕЛОАДЕР: 00 → 07 ══ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--asphalt);
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  transition: transform .9s var(--ease);
+}
+.preloader.is-done { transform: translateY(-101%); }
+
+.preloader__inner { text-align: center; }
+
+.preloader__count {
+  font-size: clamp(84px, 22vw, 260px);
+  font-weight: 500;
+  line-height: .9;
+  font-variant-numeric: tabular-nums;
+  color: var(--paper);
+}
+.preloader__count.is-final { color: var(--orange); }
+
+.preloader__label {
+  margin-top: 18px;
+  font-size: var(--micro);
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: rgba(239, 237, 227, .4);
+}
+
+.preloader__bar {
+  position: absolute;
+  left: var(--pad);
+  right: var(--pad);
+  bottom: var(--pad);
+  height: 1px;
+  background: rgba(239, 237, 227, .14);
+}
+.preloader__bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--orange);
+}
+
+
+/* ══ КУРСОР-ПРИЦЕЛ ══ */
+.cursor { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  /* родной курсор скрыт — на странице только кастомный прицел, иначе два курсора сразу */
+  body { cursor: none; }
+
+  .cursor {
+    display: block;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 150;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    will-change: transform;
+  }
+  .cursor__ring,
+  .cursor__dot {
+    position: absolute;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .cursor__ring {
+    width: 30px; height: 30px;
+    border: 1px solid rgba(239, 237, 227, .55);
+    transition: width .3s var(--ease), height .3s var(--ease), border-color .3s;
+  }
+  .cursor__dot {
+    width: 3px; height: 3px;
+    background: var(--orange);
+  }
+  .cursor.is-active .cursor__ring {
+    width: 58px; height: 58px;
+    border-color: var(--orange);
+  }
+}
+
+
+/* ══ ИНДИКАТОР СКРОЛЛА 01…07 ══ */
+/* цвет пассивных пунктов зависит от темы секции под ними (задаёт scenes.js) —
+   раньше был mix-blend-mode:difference, но на светлой секции он превращал
+   оранжевый активного пункта в синий, никакого синего в палитре нет */
+.rail {
+  position: fixed;
+  right: clamp(14px, 2vw, 30px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.rail a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: rgba(239, 237, 227, .35);
+  transition: color .35s var(--ease);
+}
+.rail.on-paper a { color: rgba(48, 47, 44, .35); }
+.rail a::after {
+  content: attr(data-n);
+  font-variant-numeric: tabular-nums;
+}
+.rail a span {
+  font-size: 9px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+.rail a:hover span { opacity: .6; transform: none; }
+.rail a.is-current { color: var(--orange); }
+.rail a.is-current span { opacity: .75; transform: none; }
+
+
+/* ══ ДОСТУПНОСТЬ ══ */
+:where(a, button):focus-visible {
+  outline: 1px solid var(--orange);
+  outline-offset: 5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * , *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .cursor { display: none; }
+}
