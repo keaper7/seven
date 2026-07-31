@@ -54,7 +54,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(26px, 5vh, 64px);
+  gap: clamp(40px, 8vh, 96px);
   z-index: 1;
 }
 
@@ -116,32 +116,21 @@
   color: var(--orange);
 }
 
-/* единственная настоящая кнопка на сайте — остальные ссылки остаются
-   текстом с подчёркиванием, эта одна прямо приглашает написать.
-   уголки-скобки — тот же приём, что у HUD-показаний в углах секции */
+/* в покое — почти невесомая надпись, не спорит с сиянием за V;
+   рамка и заливка появляются только на наведении, тогда это и читается
+   как кнопка. единственный элемент на сайте с заливкой при hover */
 .hero__cta {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 16px 26px;
-  border: 1px solid rgba(239, 237, 227, .26);
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid transparent;
   font-size: var(--micro);
-  letter-spacing: .28em;
+  letter-spacing: .26em;
   text-transform: uppercase;
-  color: var(--paper);
-  transition: border-color .4s var(--ease), background .4s var(--ease), color .4s var(--ease);
+  color: rgba(239, 237, 227, .55);
+  transition: color .4s var(--ease), border-color .4s var(--ease), background .4s var(--ease);
 }
-.hero__cta::before,
-.hero__cta::after {
-  content: "";
-  position: absolute;
-  width: 9px; height: 9px;
-  border: 1px solid var(--orange);
-  transition: opacity .4s var(--ease);
-}
-.hero__cta::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
-.hero__cta::after   { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 .hero__cta i {
   font-style: normal;
   letter-spacing: 0;
@@ -153,8 +142,6 @@
   background: var(--orange);
   color: var(--asphalt);
 }
-.hero__cta:hover::before,
-.hero__cta:hover::after { opacity: 0; }
 .hero__cta:hover i { color: var(--asphalt); transform: translateX(4px); }
 
 .scroll-hint {
