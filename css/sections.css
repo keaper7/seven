@@ -325,6 +325,7 @@
 .dir:hover { padding-left: clamp(10px, 1.6vw, 26px); }
 
 .dir__n {
+  grid-row: 1;
   grid-column: 1;
   font-size: var(--micro);
   letter-spacing: .28em;
@@ -334,6 +335,7 @@
 .dir:hover .dir__n { color: var(--orange); }
 
 .dir__title {
+  grid-row: 1;
   grid-column: 2;
   font-family: var(--ffd);
   font-size: clamp(24px, 4.4vw, 68px);
@@ -342,6 +344,7 @@
 }
 
 .dir__desc {
+  grid-row: 1;
   grid-column: 4;
   font-size: clamp(11px, 1.05vw, 15px);
   line-height: 1.75;
@@ -352,6 +355,7 @@
 /* орнаментальный модуль в собственной колонке грида — растёт при наведении
    между заголовком и описанием, поэтому никогда не наезжает на текст */
 .dir__orn {
+  grid-row: 1;
   grid-column: 3;
   justify-self: center;
   width: 40px; height: 40px;
