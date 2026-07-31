@@ -129,7 +129,6 @@
     aspect-ratio: 22 / 15;
   }
   .lab__top { text-align: left; }
-  .lab__bottom { flex-direction: column; gap: 4px; }
 
   /* сетка контактов не читается в масштабе телефона — простой столбец под полем */
   .lab__grid {
@@ -147,11 +146,10 @@
     align-self: center;
     color: rgba(239, 237, 227, .6);
   }
-  .lab__c, .lab__claim {
+  .lab__c {
     font-size: 11px;
     white-space: normal;
   }
-  .lab__claim { letter-spacing: .24em; color: rgba(239, 237, 227, .5); }
 
   #s7 { min-height: auto; }
   .lab { gap: 16px; }
