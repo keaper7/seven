@@ -537,9 +537,19 @@
   letter-spacing: .34em;
   text-transform: uppercase;
   color: var(--dim);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
 }
-.lab__top { text-align: right; }
-.lab__bottom { display: flex; justify-content: space-between; gap: 16px; }
+.lab__top {
+  padding-bottom: clamp(12px, 2vh, 24px);
+  border-bottom: 1px solid var(--hair);
+}
+.lab__bottom {
+  padding-top: clamp(12px, 2vh, 24px);
+  border-top: 1px solid var(--hair);
+}
 
 .lab__field {
   position: relative;
