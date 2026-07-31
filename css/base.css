@@ -158,7 +158,6 @@ html.lenis, html.lenis body { height: auto; }
     top: 0; left: 0;
     z-index: 150;
     pointer-events: none;
-    mix-blend-mode: difference;
     will-change: transform;
   }
   .cursor__ring,
@@ -169,7 +168,7 @@ html.lenis, html.lenis body { height: auto; }
   }
   .cursor__ring {
     width: 30px; height: 30px;
-    border: 1px solid rgba(239, 237, 227, .55);
+    border: 1px solid rgba(255, 119, 0, .45);
     transition: width .3s var(--ease), height .3s var(--ease), border-color .3s;
   }
   .cursor__dot {
