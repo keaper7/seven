@@ -145,6 +145,43 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 
+/* ══ КУРСОР-ПРИЦЕЛ ══ */
+.cursor { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  /* родной курсор скрыт — на странице только кастомный прицел, иначе два курсора сразу */
+  body { cursor: none; }
+
+  .cursor {
+    display: block;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 150;
+    pointer-events: none;
+    will-change: transform;
+  }
+  .cursor__ring,
+  .cursor__dot {
+    position: absolute;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .cursor__ring {
+    width: 30px; height: 30px;
+    border: 1px solid rgba(255, 119, 0, .45);
+    transition: width .3s var(--ease), height .3s var(--ease), border-color .3s;
+  }
+  .cursor__dot {
+    width: 3px; height: 3px;
+    background: var(--orange);
+  }
+  .cursor.is-active .cursor__ring {
+    width: 58px; height: 58px;
+    border-color: var(--orange);
+  }
+}
+
+
 /* ══ ИНДИКАТОР СКРОЛЛА 01…07 ══ */
 /* цвет пассивных пунктов зависит от темы секции под ними (задаёт scenes.js) —
    раньше был mix-blend-mode:difference, но на светлой секции он превращал
@@ -198,4 +235,5 @@ html.lenis, html.lenis body { height: auto; }
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+  .cursor { display: none; }
 }
