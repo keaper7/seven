@@ -470,10 +470,23 @@
   background: var(--hair);
 }
 .proc__line i {
+  position: relative;
   display: block;
   height: 100%;
   width: 0;
   background: var(--orange);
+}
+/* маркер-ромб едет на кончике заливки — единая точка вместо семи
+   независимых ромбов на карточках, которые расходились с линией на
+   старте и в конце пиннинга */
+.proc__line i::after {
+  content: "";
+  position: absolute;
+  right: -5px; top: 50%;
+  width: 9px; height: 9px;
+  border: 1px solid var(--orange);
+  background: var(--bg);
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .proc__steps {
@@ -488,15 +501,6 @@
   flex: none;
   padding-top: 68px;
   position: relative;
-}
-.step::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 30px;
-  width: 9px; height: 9px;
-  border: 1px solid var(--orange);
-  background: var(--bg);
-  transform: rotate(45deg);
 }
 .step__n {
   display: block;

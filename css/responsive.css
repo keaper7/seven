@@ -41,9 +41,16 @@
     width: auto;
     padding-top: 0;
   }
+  /* на мобилке карточки не едут по горизонтали — у каждого пункта
+     свой статичный ромб-маркер рядом с текстом, бегущий маркер линии не нужен */
   .step::before {
-    left: -26px;
-    top: 6px;
+    content: "";
+    position: absolute;
+    left: -26px; top: 6px;
+    width: 9px; height: 9px;
+    border: 1px solid var(--orange);
+    background: var(--bg);
+    transform: rotate(45deg);
   }
 
   /* линия прогресса становится вертикальной */
@@ -60,6 +67,7 @@
     width: 100%;
     height: 0;
   }
+  .proc__line i::after { display: none; }
 }
 
 
