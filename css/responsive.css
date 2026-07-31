@@ -112,8 +112,11 @@
   .dir__orn { display: none; }
   .dir:hover { padding-left: 0; }
 
-  /* ── 05 философия ── */
-  .phil__num { right: -18vw; font-size: 74vh; }
+  /* ── 05 работа ── */
+  .work__num { right: -18vw; font-size: 74vh; }
+  /* кейс в одну колонку: скриншот сверху, описание под ним.
+     minmax(0,…) обязателен — иначе картинка 1280px распирает колонку наружу */
+  .work__case { grid-template-columns: minmax(0, 1fr); gap: clamp(18px, 3vh, 28px); }
 
   /* ── 07 лабиринт ── */
   /* поле перестаёт быть пропорциональной рамкой: лабиринт сверху, контакты под ним */
@@ -169,5 +172,5 @@
   .hero__mark, .hero__ghost { font-size: 17vh; }
   .scroll-hint { display: none; }
   .region__code { font-size: 40vh; }
-  .phil__num { display: none; }
+  .work__num { display: none; }
 }

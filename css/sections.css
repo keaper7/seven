@@ -368,11 +368,11 @@
 .dir:hover .dir__orn { opacity: .85; transform: scale(1) rotate(0deg); }
 
 
-/* ═══════════ 05 · ФИЛОСОФИЯ ═══════════ */
+/* ═══════════ 05 · РАБОТА ═══════════ */
 
 #s5 { display: flex; align-items: center; }
 
-.phil__num {
+.work__num {
   position: absolute;
   right: -4vw;
   top: 50%;
@@ -386,28 +386,81 @@
   user-select: none;
 }
 
-.phil {
+.work {
   position: relative;
   z-index: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(18px, 3vh, 34px);
-  max-width: 62ch;
+  gap: clamp(18px, 3.4vh, 40px);
 }
 
-.phil__title {
+/* бывший манифест: теперь подводка к доказательству, а не отдельный экран */
+.work__lead {
   font-family: var(--ffd);
-  font-size: clamp(26px, 4.4vw, 68px);
+  font-size: clamp(21px, 2.9vw, 44px);
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: -.015em;
+  max-width: 26ch;
 }
-.phil__title span { display: block; }
-.phil__title em { font-style: italic; font-weight: 600; }
+.work__lead span { display: block; }
+.work__lead em { font-style: italic; font-weight: 600; }
+
+.work__case {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 68px);
+}
+
+/* скриншот приглушён, чтобы не спорить со стерильной графикой сайта,
+   и доводится до полного цвета только при наведении */
+.work__shot {
+  display: block;
+  position: relative;
+  border: 1px solid var(--hair);
+  overflow: hidden;
+  background: var(--bg);
+}
+.work__shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: saturate(.55) contrast(.96);
+  opacity: .82;
+  transition: filter .5s var(--ease), opacity .5s var(--ease), transform .8s var(--ease);
+}
+.work__case:hover .work__shot img {
+  filter: none;
+  opacity: 1;
+  transform: scale(1.015);
+}
+
+.work__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(10px, 1.6vh, 18px);
+}
+
+.work__name {
+  font-family: var(--ffd);
+  font-size: clamp(24px, 3.2vw, 48px);
+  font-weight: 300;
+  letter-spacing: -.01em;
+  line-height: 1;
+}
+.work__kind {
+  font-size: var(--micro);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
 
 .rule {
   position: relative;
-  width: clamp(140px, 22vw, 300px);
+  width: clamp(120px, 16vw, 220px);
   border-bottom: 1px solid var(--orange);
 }
 .rule i {
@@ -417,12 +470,28 @@
   background: var(--orange);
 }
 
-.phil__sub {
-  font-size: clamp(11px, 1.15vw, 16px);
-  line-height: 1.85;
-  letter-spacing: .18em;
+.work__desc {
+  font-size: clamp(11px, 1.05vw, 15px);
+  line-height: 1.8;
+  letter-spacing: .05em;
   color: var(--dim);
+  max-width: 42ch;
 }
+
+.work__link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: clamp(11px, 1.05vw, 15px);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--fg);
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 3px;
+  transition: color .35s var(--ease), border-color .35s var(--ease);
+}
+.work__link i { font-style: normal; color: var(--orange); }
+.work__link:hover { color: var(--orange); border-color: var(--orange); }
 
 
 /* ═══════════ 06 · ПРОЦЕСС ═══════════ */

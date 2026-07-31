@@ -79,14 +79,22 @@ SEVEN.scenes = function initScenes() {
     scrollTrigger: { trigger: '.dirs', start: 'top 76%' },
   });
 
-  /* ─── 05 · философия: построчно ─── */
-  gsap.from('.phil__title .reveal', {
+  /* ─── 05 · работа: подводка построчно, следом кейс ─── */
+  gsap.from('.work__lead .reveal', {
     yPercent: 100, opacity: 0, duration: .95, ease: 'power3.out', stagger: .13,
     scrollTrigger: { trigger: '#s5', start: 'top 62%' },
   });
   gsap.from('.rule', {
     scaleX: 0, transformOrigin: 'left center', duration: 1, ease: 'power3.out',
     scrollTrigger: { trigger: '#s5', start: 'top 55%' },
+  });
+  gsap.from('.work__shot', {
+    y: 36, opacity: 0, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.work__case', start: 'top 82%' },
+  });
+  gsap.from(['.work__name', '.work__kind', '.work__desc', '.work__link'], {
+    y: 18, opacity: 0, duration: .8, ease: 'power2.out', stagger: .09,
+    scrollTrigger: { trigger: '.work__case', start: 'top 78%' },
   });
 
   /* ─── 06 · процесс: горизонтальная лента с пиннингом ─── */
