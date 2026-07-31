@@ -117,21 +117,34 @@
 }
 
 /* единственная настоящая кнопка на сайте — остальные ссылки остаются
-   текстом с подчёркиванием, эта одна прямо приглашает написать */
+   текстом с подчёркиванием, эта одна прямо приглашает написать.
+   уголки-скобки — тот же приём, что у HUD-показаний в углах секции */
 .hero__cta {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  padding: 15px 30px;
-  border: 1px solid rgba(239, 237, 227, .3);
+  gap: 9px;
+  padding: 16px 26px;
+  border: 1px solid rgba(239, 237, 227, .26);
   font-size: var(--micro);
-  letter-spacing: .32em;
+  letter-spacing: .28em;
   text-transform: uppercase;
   color: var(--paper);
   transition: border-color .4s var(--ease), background .4s var(--ease), color .4s var(--ease);
 }
+.hero__cta::before,
+.hero__cta::after {
+  content: "";
+  position: absolute;
+  width: 9px; height: 9px;
+  border: 1px solid var(--orange);
+  transition: opacity .4s var(--ease);
+}
+.hero__cta::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+.hero__cta::after   { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 .hero__cta i {
   font-style: normal;
+  letter-spacing: 0;
   color: var(--orange);
   transition: transform .4s var(--ease), color .4s var(--ease);
 }
@@ -140,6 +153,8 @@
   background: var(--orange);
   color: var(--asphalt);
 }
+.hero__cta:hover::before,
+.hero__cta:hover::after { opacity: 0; }
 .hero__cta:hover i { color: var(--asphalt); transform: translateX(4px); }
 
 .scroll-hint {
