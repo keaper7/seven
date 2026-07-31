@@ -124,8 +124,8 @@
   position: absolute;
   left: 50%;
   bottom: calc(var(--pad) + 74px);
-  transform: translateX(-50%);
-  z-index: 2;
+  overflow: hidden;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -135,20 +135,38 @@
   letter-spacing: .26em;
   text-transform: uppercase;
   color: rgba(239, 237, 227, .55);
-  transition: color .4s var(--ease), border-color .4s var(--ease), background .4s var(--ease);
+  transition: translate .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+  translate: -50% 0;
+  box-shadow: 0 0 0 rgba(255, 119, 0, 0);
 }
+/* заливка идёт наискось, эхом клина в самой букве V логотипа —
+   не мгновенная смена цвета, а видимое движение */
+.hero__cta::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: var(--orange);
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition: clip-path .5s var(--ease);
+  z-index: -1;
+}
+.hero__cta:hover::before {
+  clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
+}
+.hero__cta span,
 .hero__cta i {
-  font-style: normal;
-  letter-spacing: 0;
-  color: var(--orange);
-  transition: transform .4s var(--ease), color .4s var(--ease);
+  position: relative;
+  transition: color .35s var(--ease) .08s, transform .4s var(--ease);
 }
+.hero__cta i { font-style: normal; letter-spacing: 0; color: var(--orange); }
 .hero__cta:hover {
   border-color: var(--orange);
-  background: var(--orange);
-  color: var(--asphalt);
+  box-shadow: 0 10px 28px rgba(255, 119, 0, .22);
+  translate: -50% -2px;
 }
-.hero__cta:hover i { color: var(--asphalt); transform: translateX(4px); }
+.hero__cta:hover span,
+.hero__cta:hover i { color: var(--asphalt); }
+.hero__cta:hover i { transform: translateX(4px); }
 
 .scroll-hint {
   position: absolute;
