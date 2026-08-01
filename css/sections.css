@@ -653,6 +653,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: clamp(12px, 2vh, 24px);
   min-height: 0;
 }
@@ -679,9 +680,15 @@
 /* приглашение живёт только на узких экранах — раскладку задаёт responsive.css */
 .lab__invite { display: none; }
 
+/* flex:1 (=flex-basis:0%) ломает aspect-ratio в колоночном flex-контейнере —
+   на широких экранах формула ширины и так даёт нужную высоту, а на портретных
+   планшетах, где по вертикали свободного места много, flex-grow растягивал
+   поле намного выше пропорции. SVG (preserveAspectRatio) сжимался и оставался
+   маленьким по центру раздутой коробки, а CSS-сетка с контактами растягивалась
+   на всю коробку — подписи отрывались от стен и «плавали» отдельно от рисунка */
 .lab__field {
   position: relative;
-  flex: 1;
+  flex: 0 1 auto;
   min-height: 0;
   width: min(100%, calc((100svh - 190px) * 22 / 15));
   aspect-ratio: 22 / 15;
