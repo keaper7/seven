@@ -179,13 +179,23 @@
   }
 
   /* ── 03 регион ── */
-  .region { gap: 20px; }
-  /* центрировать оба слоя нельзя: ноль садится ровно на контурное кольцо
-     и «07» перестаёт читаться. Держим тот же разнос, что на десктопе —
-     контуры уходят за левый край, код региона стоит справа */
-  .region__code { place-self: center end; font-size: min(46vw, 30vh); }
-  .region__map { justify-items: start; align-items: center; }
-  .region__map svg { width: 120%; transform: translate(-8%, 16%); }
+  /* код региона и контуры Эльбруса разведены по отдельным зонам: 07 сверху
+     по центру, гора под ним — иначе ноль ложится на контурное кольцо и
+     сливается с ним (там же и разнос вправо на десктопе не работает:
+     ширины не хватает, чтобы развести по горизонтали) */
+  .region { grid-template-rows: auto minmax(0, 1fr) auto; gap: 14px; }
+  .region__code {
+    grid-row: 1;
+    place-self: start center;
+    margin-top: 2vh;
+    font-size: min(40vw, 24vh);
+  }
+  /* только второй ряд, под кодом — не через оба сразу: иначе на верхнем
+     выравнивании гора наезжает на «0», на центральном виснет посреди
+     пустого ряда с зазором и сверху, и снизу перед текстом */
+  .region__map { grid-row: 2 / 3; justify-items: center; align-items: start; }
+  .region__map svg { width: 150%; transform: translate(0, -6%); }
+  .region__facts { grid-row: 3; }
   .facts { grid-template-columns: 1fr 1fr; }
 
   /* ── 04 направления ── */
