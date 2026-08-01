@@ -55,39 +55,31 @@ SEVEN.scenes = function initScenes() {
     });
   }
 
-  /* ─── 02 · прицел (только узкие экраны): наводка на резкость по скроллу ───
+  /* ─── 02 · уровень (только узкие экраны): пузырёк выравнивается к центру ───
      элемент скрыт на десктопе, поэтому и сцена ставится только под мобильную
      ширину — иначе GSAP считал бы геометрию у display:none */
   const mmAim = gsap.matchMedia();
   mmAim.add('(max-width: 640px)', () => {
-    const aim = document.querySelector('.precision__aim');
-    if (!aim) return;
+    const bubble = document.querySelector('.level__bubble');
+    const label = document.querySelector('.level__label');
+    if (!bubble) return;
 
-    const rings = gsap.utils.toArray('.precision__aim .aim__rings circle');
-    const cross = gsap.utils.toArray('.precision__aim .aim__cross path');
-
-    // штрих задаём из длины самого пути: линии перекрестья разной длины,
-    // одна общая dasharray дала бы разную скорость прорисовки
-    cross.forEach((p) => {
-      const len = p.getTotalLength();
-      gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
-    });
+    // старт сбит вниз и в сторону, будто прибор ещё не выровнен —
+    // к концу скролла пузырёк находит центр между рисками
+    const state = { y: 34, tilt: -3.2 };
+    gsap.set(bubble, { y: state.y, x: state.tilt * 4 });
 
     const tl = gsap.timeline({
-      scrollTrigger: { trigger: '#s2', start: 'top 80%', end: 'center 58%', scrub: .6 },
+      scrollTrigger: { trigger: '#s2', start: 'top 78%', end: 'center 55%', scrub: .6 },
+      onUpdate: () => { if (label) label.textContent = `± ${Math.abs(state.tilt).toFixed(1)}°`; },
     });
 
-    // кольца сходятся снаружи внутрь — прицел наводится, а не проявляется
-    tl.from(rings, {
-      scale: 1.8, opacity: 0, svgOrigin: '100 100',
-      ease: 'none', stagger: .12,
-    }, 0)
-      .to(cross, { strokeDashoffset: 0, ease: 'none', duration: .8 }, .15)
-      .from('.precision__aim .aim__dot', { scale: 0, svgOrigin: '100 100', ease: 'none' }, .7);
+    tl.to(state, {
+      y: 0, tilt: 0, ease: 'none',
+      onUpdate: () => gsap.set(bubble, { y: state.y, x: state.tilt * 4 }),
+    });
 
-    return () => {
-      gsap.set(cross, { clearProps: 'strokeDasharray,strokeDashoffset' });
-    };
+    return () => { gsap.set(bubble, { clearProps: 'transform' }); };
   });
 
   /* ─── 03 · регион: изолинии Эльбруса прорисовываются ─── */

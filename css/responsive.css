@@ -131,16 +131,52 @@
   .precision__note { align-self: flex-start; text-align: left; max-width: 26ch; }
 
   .precision__aim {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
     flex: 1;
-    place-items: center;
     color: var(--fg);
   }
-  .precision__aim svg { width: min(100%, 260px); }
-  .precision__aim .aim__rings { opacity: .16; }
-  .precision__aim .aim__cross { opacity: .12; }
-  .precision__aim .aim__ticks { opacity: .3; }
-  .precision__aim .aim__dot { color: var(--orange); opacity: .9; }
+  .level__tube {
+    position: relative;
+    width: 34px;
+    flex: 1;
+    border: 1px solid currentColor;
+    border-radius: 17px;
+    opacity: .9;
+  }
+  .level__ticks {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 14px 0;
+  }
+  .level__ticks span { display: block; height: 1px; background: currentColor; opacity: .3; margin: 0 8px; }
+  .level__ticks span.mid { opacity: .6; margin: 0 5px; }
+  /* положение и штрих задаёт JS по скроллу — стартовая точка на -50%,
+     где пузырёк сидит на нижней риске, до наводки на центр */
+  .level__bubble {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--orange);
+    opacity: .85;
+    box-shadow: 0 0 0 5px rgba(255, 119, 0, .12);
+  }
+  .level__label {
+    font-size: 11px;
+    letter-spacing: .1em;
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+  }
 
   /* ── 03 регион ── */
   .region { gap: 20px; }

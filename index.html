@@ -165,26 +165,17 @@
       <span>Т</span><span>О</span><span>Ч</span><span>Н</span><span>О</span><span>С</span><span>Т</span><span>Ь</span>
     </p>
 
-    <!-- прицел: только для узких экранов, где надпись встаёт вертикально
-         и справа освобождается поле. На десктопе скрыт — там его место занято -->
+    <!-- строительный уровень: только для узких экранов, где надпись встаёт
+         вертикально и справа освобождается поле. На десктопе скрыт —
+         там это место уже занято подводкой -->
     <div class="precision__aim" aria-hidden="true">
-      <svg viewBox="0 0 200 200" fill="none">
-        <g class="aim__rings" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke">
-          <circle cx="100" cy="100" r="92"/>
-          <circle cx="100" cy="100" r="64"/>
-          <circle cx="100" cy="100" r="36"/>
-          <circle cx="100" cy="100" r="14"/>
-        </g>
-        <g class="aim__cross" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke">
-          <path d="M100 0 L100 76"/><path d="M100 124 L100 200"/>
-          <path d="M0 100 L76 100"/><path d="M124 100 L200 100"/>
-        </g>
-        <g class="aim__ticks" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke">
-          <path d="M100 8 L100 20"/><path d="M100 180 L100 192"/>
-          <path d="M8 100 L20 100"/><path d="M180 100 L192 100"/>
-        </g>
-        <circle class="aim__dot" cx="100" cy="100" r="3" fill="currentColor"/>
-      </svg>
+      <div class="level__tube">
+        <div class="level__ticks">
+          <span></span><span></span><span></span><span class="mid"></span><span></span><span></span><span></span>
+        </div>
+        <div class="level__bubble"></div>
+      </div>
+      <span class="level__label">± 0.0°</span>
     </div>
   </div>
 
