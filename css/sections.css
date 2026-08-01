@@ -288,6 +288,18 @@
 .region__map .iso--summit { opacity: .95; }
 .region__map .iso--summit path { stroke: var(--orange); stroke-width: 1.4; }
 
+/* высоты вершин прямо на карте — без подписи два оранжевых кольца читаются
+   как абстрактный узор, а не как две вершины Эльбруса */
+.region__map .peak-label {
+  fill: var(--orange);
+  font-family: var(--ff);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: .04em;
+  text-anchor: middle;
+  opacity: .85;
+}
+
 .region__code {
   grid-row: 1;
   place-self: center end;

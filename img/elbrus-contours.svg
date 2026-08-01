@@ -34,4 +34,11 @@
   <g class="iso iso--summit" data-level="5620" data-index="9">
     <path d="M 462 317 L 458 326 L 463 334 L 474 335 L 480 330 L 481 322 L 478 317 L 470 314 L 462 317 Z" pathLength="1000"/>
   </g>
+
+  <!-- высоты вершин — привязаны к оранжевым кольцам, а не только к тексту
+       под картинкой, иначе кольца читаются как абстрактный узор -->
+  <g class="peak-labels">
+    <text class="peak-label" x="470" y="222">5642</text>
+    <text class="peak-label" x="704" y="248">5621</text>
+  </g>
 </svg>
