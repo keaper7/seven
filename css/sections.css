@@ -235,6 +235,9 @@
 }
 .precision__ru span { opacity: .18; }
 
+/* прицел живёт только на узких экранах — раскладку задаёт responsive.css */
+.precision__aim { display: none; }
+
 .precision__note {
   align-self: flex-end;
   max-width: 34ch;

@@ -9,11 +9,15 @@
   .region__facts { max-width: 100%; }
   .region__map svg { width: 150%; }
 
+  /* колонка описания уходит под заголовок — но grid-row задан в sections.css
+     жёстко единицей на всех троих, поэтому ряд нужно переназначить явно,
+     иначе описание ложится поверх заголовка в той же ячейке */
   .dir {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
     row-gap: 10px;
   }
-  .dir__desc { grid-column: 2; max-width: 46ch; }
+  .dir__title { grid-row: 1; grid-column: 2; }
+  .dir__desc  { grid-row: 2; grid-column: 2; max-width: 46ch; }
   .dir__orn { display: none; }
 }
 
@@ -81,34 +85,75 @@
   .hud { letter-spacing: .22em; font-size: 9px; }
   .hud--tr { top: auto; bottom: calc(var(--pad) + 30px); right: calc(var(--pad) + 8px); }
   .hud--br { display: none; }
-  .hero__mark, .hero__ghost { font-size: 21vw; }
+  /* 21vw впритык доходил до рамки .frame — логотипу нужен воздух по бокам */
+  .hero__mark, .hero__ghost { font-size: 19vw; }
   .scroll-hint { display: none; }
 
   /* ── 02 точность ── */
-  #s2 { gap: 26px; }
+  /* десктопная раскладка распирает PRECISION по ширине; на телефоне ширины нет,
+     зато есть высота — слово встаёт вертикально и идёт одним путём сверху вниз,
+     справа освободившееся поле занимает прицел */
+  #s2 { justify-content: flex-start; gap: 0; }
+
+  .precision {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: stretch;
+    gap: 22px;
+    padding: 14px 0;
+  }
   .precision__en {
-    font-size: 10.6vw;
-    justify-content: flex-start;
-    letter-spacing: .02em;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 1.15em;
+    /* кегль ограничен и высотой: девять букв в столбик на низком экране
+       иначе не умещаются, а space-between вытолкнул бы их за края */
+    font-size: min(14.5vw, 8vh);
+    line-height: 1;
+    letter-spacing: 0;
   }
+  .precision__dot { align-self: center; }
   .precision__ru {
-    justify-content: flex-start;
-    gap: .55em;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    padding: .5em 0;
     font-size: 11px;
+    letter-spacing: 0;
   }
-  .precision__note { align-self: flex-start; text-align: left; }
+  .precision__note { align-self: flex-start; text-align: left; max-width: 26ch; }
+
+  .precision__aim {
+    display: grid;
+    flex: 1;
+    place-items: center;
+    color: var(--fg);
+  }
+  .precision__aim svg { width: min(100%, 260px); }
+  .precision__aim .aim__rings { opacity: .16; }
+  .precision__aim .aim__cross { opacity: .12; }
+  .precision__aim .aim__ticks { opacity: .3; }
+  .precision__aim .aim__dot { color: var(--orange); opacity: .9; }
 
   /* ── 03 регион ── */
   .region { gap: 20px; }
-  .region__code { place-self: center; font-size: min(40vw, 30vh); }
-  .region__map { justify-items: center; }
-  .region__map svg { width: 165%; transform: translate(0, -10%); }
+  /* центрировать оба слоя нельзя: ноль садится ровно на контурное кольцо
+     и «07» перестаёт читаться. Держим тот же разнос, что на десктопе —
+     контуры уходят за левый край, код региона стоит справа */
+  .region__code { place-self: center end; font-size: min(46vw, 30vh); }
+  .region__map { justify-items: start; align-items: center; }
+  .region__map svg { width: 120%; transform: translate(-8%, 16%); }
   .facts { grid-template-columns: 1fr 1fr; }
 
   /* ── 04 направления ── */
-  .dir { grid-template-columns: 1fr; row-gap: 8px; }
-  .dir__n { letter-spacing: .3em; }
-  .dir__desc { grid-column: 1; }
+  /* в одну колонку: номер, под ним заголовок, под ним описание */
+  .dir { grid-template-columns: minmax(0, 1fr); row-gap: 8px; }
+  .dir__n     { grid-row: 1; grid-column: 1; letter-spacing: .3em; }
+  .dir__title { grid-row: 2; grid-column: 1; }
+  .dir__desc  { grid-row: 3; grid-column: 1; max-width: none; }
   .dir__orn { display: none; }
   .dir:hover { padding-left: 0; }
 
@@ -146,22 +191,30 @@
     font-size: 22px;
     letter-spacing: 10px;
     text-indent: 10px;
-    align-self: center;
+    align-self: flex-start;
     color: rgba(239, 237, 227, .6);
   }
+  /* place-self:center end из сеточной раскладки протекает в этот flex как
+     align-self:center — контакты вставали по центру вразнобой; сбрасываем.
+     Отступы от стен лабиринта здесь тоже не нужны — поля под ним нет */
   .lab__c {
     font-size: 11px;
     white-space: normal;
+    align-self: flex-start;
+    padding: 0;
   }
 
-  #s7 { min-height: auto; }
+  /* последний экран держим во всю высоту, иначе после шести полноэкранных
+     секций финал выглядит обрубком; копирайт прижимаем к низу */
   .lab { gap: 16px; }
+  .lab__bottom { margin-top: auto; }
 }
 
 
 /* ═══ ОЧЕНЬ УЗКИЕ ЭКРАНЫ ═══ */
 @media (max-width: 380px) {
-  .precision__en { font-size: 10vw; }
+  /* кегль PRECISION здесь не режем: надпись вертикальная, её держит
+     min(14.5vw, 8vh) выше — узость экрана ей уже не мешает */
   .hud--tl span { letter-spacing: .16em; }
   .facts { grid-template-columns: 1fr; }
 }

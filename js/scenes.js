@@ -55,6 +55,41 @@ SEVEN.scenes = function initScenes() {
     });
   }
 
+  /* ─── 02 · прицел (только узкие экраны): наводка на резкость по скроллу ───
+     элемент скрыт на десктопе, поэтому и сцена ставится только под мобильную
+     ширину — иначе GSAP считал бы геометрию у display:none */
+  const mmAim = gsap.matchMedia();
+  mmAim.add('(max-width: 640px)', () => {
+    const aim = document.querySelector('.precision__aim');
+    if (!aim) return;
+
+    const rings = gsap.utils.toArray('.precision__aim .aim__rings circle');
+    const cross = gsap.utils.toArray('.precision__aim .aim__cross path');
+
+    // штрих задаём из длины самого пути: линии перекрестья разной длины,
+    // одна общая dasharray дала бы разную скорость прорисовки
+    cross.forEach((p) => {
+      const len = p.getTotalLength();
+      gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: '#s2', start: 'top 80%', end: 'center 58%', scrub: .6 },
+    });
+
+    // кольца сходятся снаружи внутрь — прицел наводится, а не проявляется
+    tl.from(rings, {
+      scale: 1.8, opacity: 0, svgOrigin: '100 100',
+      ease: 'none', stagger: .12,
+    }, 0)
+      .to(cross, { strokeDashoffset: 0, ease: 'none', duration: .8 }, .15)
+      .from('.precision__aim .aim__dot', { scale: 0, svgOrigin: '100 100', ease: 'none' }, .7);
+
+    return () => {
+      gsap.set(cross, { clearProps: 'strokeDasharray,strokeDashoffset' });
+    };
+  });
+
   /* ─── 03 · регион: изолинии Эльбруса прорисовываются ─── */
   const isoPaths = gsap.utils.toArray('.region__map path');
   if (isoPaths.length) {
