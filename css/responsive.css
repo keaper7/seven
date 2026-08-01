@@ -226,83 +226,107 @@
   .work__shot img { height: auto; max-height: 280px; object-fit: cover; }
 
   /* ── 07 лабиринт ── */
-  /* поле перестаёт быть пропорциональной рамкой: лабиринт сверху, контакты под ним */
+  /* лабиринт на телефоне не читается ни как схема, ни как узнаваемая печать
+     (пробовали оба) — прячем совсем и строим экран заново вокруг одного
+     решительного CTA, а не вокруг картинки. Прячем только сам SVG, не весь
+     .lab__field — .lab__grid (приглашение и кнопки) физически вложен в него,
+     display:none на контейнере унёс бы их вместе с картинкой */
   .lab__field {
-    width: 100%;
-    aspect-ratio: auto;
+    display: block;
+    position: static;
+    width: auto;
     height: auto;
+    aspect-ratio: auto;
     flex: none;
   }
-  /* во всю ширину лабиринт занимал полэкрана пустой рамкой: на десктопе в его
-     коридорах стоят контакты, а тут они вынесены вниз и рамка остаётся ни с чем.
-     Ужимаем до компактной печати — знак, а не половина экрана */
-  .lab__svg {
-    position: static;
-    width: min(100%, 300px);
-    margin: 0 auto;
-    aspect-ratio: 22 / 15;
+  .lab__svg { display: none; }
+
+  .lab {
+    position: relative;
+    gap: 0;
+    justify-content: center;
   }
   .lab__top { text-align: left; }
 
-  /* сетка контактов не читается в масштабе телефона — столбец кнопок под полем */
-  .lab__grid {
-    position: static;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    margin-top: 22px;
-  }
-  /* «seven» — подпись центра лабиринта; в вынесенном столбце это просто
-     лишнее слово между приглашением и кнопками */
-  .lab__center { display: none; }
-
+  /* сан-сериф вместо курсива слогана — приглашение не должно спорить
+     с ним по стилю, это разные по весу реплики */
   .lab__invite {
     display: block;
-    font-size: 13px;
-    line-height: 1.65;
-    letter-spacing: .03em;
+    margin: 30px 0 24px;
+    font-family: var(--ff);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: .02em;
     color: var(--dim);
-    margin-bottom: 6px;
+    max-width: 30ch;
   }
 
-  /* контакты становятся кнопками: 11px текст без отступов давал зону нажатия
-     в треть от минимально комфортной, и все три выглядели одинаково блёкло —
-     непонятно, куда жать. Telegram делаем основным действием, остальное вторым
-     планом. place-self:center end из сеточной раскладки здесь сбрасываем */
+  /* десктопная .lab__grid — position:absolute;inset:0 (контакты садятся в
+     коридоры лабиринта); без явного сброса это утекало и сюда, укладывая
+     блок абсолютным слоем поверх заголовка и цифры */
+  .lab__grid { position: static; inset: auto; display: block; }
+  /* «seven» — подпись центра лабиринта, без самого лабиринта не нужна */
+  .lab__center { display: none; }
+
   .lab__c {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    align-self: auto;
-    min-height: 54px;
-    padding: 15px 18px;
-    border: 1px solid var(--hair);
+    min-height: 44px;
+    padding: 0;
+    border: 0;
     font-size: 12px;
-    letter-spacing: .14em;
+    letter-spacing: .1em;
     white-space: normal;
-    color: rgba(239, 237, 227, .72);
-    transition: color .35s var(--ease), border-color .35s var(--ease),
-                background-color .35s var(--ease);
+    color: rgba(239, 237, 227, .55);
   }
   .lab__c i { transition: transform .35s var(--ease); }
+  .lab__c:active i { transform: translate(2px, -2px); }
 
+  /* тонкая лента вместо тяжёлого блока: узкая высота, мелкий срез угла,
+     разрядка капслока — точнее и собраннее, чем сплошная плашка на
+     всю высоту пальца */
   .lab__c--tg {
+    position: relative;
+    overflow: hidden;
+    padding: 17px 22px;
     background: var(--orange);
-    border-color: var(--orange);
     color: var(--asphalt);
+    font-size: 13px;
     font-weight: 400;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%);
   }
-  .lab__c--tg i { color: var(--asphalt); }
+  .lab__c--tg i { font-size: 17px; margin-left: 16px; }
 
-  /* последний экран держим во всю высоту, иначе после шести полноэкранных
-     секций финал выглядит обрубком. Раньше копирайт был прибит к низу
-     margin-top:auto, а верхний блок (заголовок+лабиринт+контакты) оставался
-     компактным сверху — на обычных телефонах разница не бросалась в глаза,
-     но на высоком экране между контактами и копирайтом открывалась
-     гигантская пустота. Центрируем всю группу как одно целое */
-  .lab { gap: 16px; justify-content: center; }
+  .lab__c--inst, .lab__c--mail {
+    display: inline-flex;
+    margin-top: 20px;
+  }
+
+  /* гигантская «07» — тот же приём, что «7» на экране 05: заполняет
+     пространство под кнопками и возвращает связь «07 = SEVEN», вместо
+     пустоты, которая раньше оставалась после короткого списка контактов.
+     Часть обычного потока, а не приколота к низу секции — на очень высоких
+     экранах абсолютный bottom отрывался от контента огромным зазором */
+  .lab__num {
+    display: block;
+    margin: 40px -12vw 0 0;
+    text-align: right;
+    font-size: 46vw;
+    font-weight: 600;
+    line-height: .74;
+    letter-spacing: -.03em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 119, 0, .32);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .lab__bottom { margin-top: 30px; }
 }
 
 
@@ -313,11 +337,8 @@
   .hud--tl span { letter-spacing: .16em; }
   .facts { grid-template-columns: 1fr; }
 
-  /* «TELEGRAM // @SEVEN_SITES» разрядкой .14em не влезал в строку и переносился,
-     а весь столбец переставал помещаться в 568px по высоте — копирайт срезало */
-  .lab__svg { width: min(100%, 210px); }
-  .lab__invite { font-size: 12px; }
-  .lab__c { font-size: 10px; letter-spacing: .07em; padding: 14px; min-height: 48px; }
+  .lab__invite { font-size: 13px; }
+  .lab__c--tg { font-size: 11px; letter-spacing: .08em; padding: 15px 18px; }
 }
 
 
