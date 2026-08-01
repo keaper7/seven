@@ -225,7 +225,20 @@
      нужно (на широких), а на узких показывает картинку целиком */
   .work__shot img { height: auto; max-height: 280px; object-fit: cover; }
 
-  /* ── 07 лабиринт ── */
+  /* ── 07 контакты: оранжевая плита ── */
+  /* весь экран инвертируется в фирменный оранжевый, текст — асфальтовый.
+     Шесть предыдущих экранов чередуют бумагу и асфальт, поэтому седьмой
+     оранжевой плитой читается как физическая точка прибытия, а не как ещё
+     один тёмный экран со списком ссылок. Тема секции задаётся переменными,
+     так что достаточно переопределить их — цвета подхватят и ярлык, и
+     слоган, и контакты. Селектор по id: у .sec--dark те же переменные */
+  #s7 {
+    --bg: var(--orange);
+    --fg: var(--asphalt);
+    --dim: rgba(48, 47, 44, .62);
+    --hair: rgba(48, 47, 44, .22);
+  }
+
   /* лабиринт на телефоне не читается ни как схема, ни как узнаваемая печать
      (пробовали оба) — прячем совсем и строим экран заново вокруг одного
      решительного CTA, а не вокруг картинки. Прячем только сам SVG, не весь
@@ -234,6 +247,10 @@
   .lab__field {
     display: block;
     position: static;
+    /* margin:0 auto нужен десктопу, чтобы центрировать поле лабиринта по его
+       пропорции; здесь же auto-поля у flex-элемента отменяют растяжение и
+       ужимали ленту контактов по содержимому, отрывая её от края экрана */
+    margin: 0;
     width: auto;
     height: auto;
     aspect-ratio: auto;
@@ -246,7 +263,15 @@
     gap: 0;
     justify-content: center;
   }
-  .lab__top { text-align: left; }
+  .lab__top { text-align: left; gap: 18px; }
+
+  /* на плите слоган — главный текст экрана, а не подпись к лабиринту:
+     десктопные 15px здесь читались бы служебной строкой */
+  .lab__slogan {
+    font-size: clamp(27px, 8.4vw, 38px);
+    line-height: 1.12;
+    letter-spacing: -.01em;
+  }
 
   /* сан-сериф вместо курсива слогана — приглашение не должно спорить
      с ним по стилю, это разные по весу реплики */
@@ -269,64 +294,72 @@
   /* «seven» — подпись центра лабиринта, без самого лабиринта не нужна */
   .lab__center { display: none; }
 
+  /* контакты — сплошные строки во всю ширину, а не короткие подписи:
+     разделённые волосяной линией, они читаются единой лентой действий */
   .lab__c {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     min-height: 44px;
-    padding: 0;
+    padding: 17px 0;
+    /* десктоп сажает контакты в ячейки лабиринта через place-self; Chrome
+       применяет justify-self и в блочном потоке, так что без сброса строки
+       съезжали вправо и ужимались по содержимому вместо ширины ленты */
+    place-self: auto;
     border: 0;
+    border-top: 1px solid var(--hair);
     font-size: 12px;
-    letter-spacing: .1em;
+    letter-spacing: .14em;
     white-space: normal;
-    color: rgba(239, 237, 227, .55);
+    color: var(--fg);
   }
-  .lab__c i { transition: transform .35s var(--ease); }
+  /* стрелка на десктопе оранжевая — на оранжевой плите она бы исчезла */
+  .lab__c i { color: inherit; transition: transform .35s var(--ease); }
   .lab__c:active i { transform: translate(2px, -2px); }
 
-  /* тонкая лента вместо тяжёлого блока: узкая высота, мелкий срез угла,
-     разрядка капслока — точнее и собраннее, чем сплошная плашка на
-     всю высоту пальца */
+  /* Telegram — главное действие: та же строка списка, но вывернутая в
+     асфальт и уходящая за правый край экрана. Ритм списка не ломает, но
+     мимо неё не проскочишь. Срез угла — язык кнопки с первого экрана */
   .lab__c--tg {
-    position: relative;
-    overflow: hidden;
-    padding: 17px 22px;
-    background: var(--orange);
-    color: var(--asphalt);
+    margin: 0 calc(-1 * var(--pad-r)) 0 0;
+    padding: 21px var(--pad-r) 21px 22px;
+    border-top: 0;
+    background: var(--asphalt);
+    color: var(--orange);
     font-size: 13px;
     font-weight: 400;
-    letter-spacing: .12em;
     text-transform: uppercase;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 18px 100%);
   }
-  .lab__c--tg i { font-size: 17px; margin-left: 16px; }
+  .lab__c--tg i { font-size: 16px; }
 
-  .lab__c--inst, .lab__c--mail {
-    display: inline-flex;
-    margin-top: 20px;
-  }
+  /* десктоп отодвигает эти две от края поля, чтобы текст не лёг на линию
+     лабиринта; лабиринта тут нет, а отступ сдвигал строки внутрь ленты */
+  .lab__c--inst, .lab__c--mail { padding-left: 0; padding-right: 0; }
+  .lab__c--mail { border-bottom: 1px solid var(--hair); }
 
-  /* гигантская «07» — тот же приём, что «7» на экране 05: заполняет
-     пространство под кнопками и возвращает связь «07 = SEVEN», вместо
-     пустоты, которая раньше оставалась после короткого списка контактов.
-     Часть обычного потока, а не приколота к низу секции — на очень высоких
-     экранах абсолютный bottom отрывался от контента огромным зазором */
+  /* гигантская «07» — тот же приём, что «7» на экране 05: заполняет низ
+     экрана и возвращает связь «07 = SEVEN» вместо пустоты, которая раньше
+     оставалась после короткого списка контактов. Контуром, а не заливкой:
+     единственная сплошная масса на экране — строка Telegram, и спорить с
+     ней за внимание цифра не должна. Часть обычного потока, а не приколота
+     к низу: на очень высоких экранах абсолютный bottom отрывался зазором */
   .lab__num {
     display: block;
-    margin: 40px -12vw 0 0;
-    text-align: right;
-    font-size: 46vw;
+    margin: clamp(20px, 4vh, 48px) calc(-1 * var(--pad-r)) 0 -4vw;
+    text-align: center;
+    font-size: 44vw;
     font-weight: 600;
-    line-height: .74;
-    letter-spacing: -.03em;
+    line-height: .72;
+    letter-spacing: -.04em;
     color: transparent;
-    -webkit-text-stroke: 1.5px rgba(255, 119, 0, .32);
+    -webkit-text-stroke: 1.5px rgba(48, 47, 44, .38);
     pointer-events: none;
     user-select: none;
   }
 
-  .lab__bottom { margin-top: 30px; }
+  .lab__bottom { margin-top: clamp(16px, 3vh, 34px); }
 }
 
 
@@ -338,7 +371,10 @@
   .facts { grid-template-columns: 1fr; }
 
   .lab__invite { font-size: 13px; }
-  .lab__c--tg { font-size: 11px; letter-spacing: .08em; padding: 15px 18px; }
+  /* @SEVEN_SITES с разрядкой .14em не влезал в 320 и рвался на две строки —
+     строка ленты должна оставаться одной строкой */
+  .lab__c { font-size: 11px; letter-spacing: .08em; }
+  .lab__c--tg { font-size: 12px; padding: 19px var(--pad-r) 19px 18px; }
 }
 
 
