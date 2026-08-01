@@ -86,7 +86,9 @@
   /* та же нижняя линия, что у hud--bl (нальчик) — scroll-hint на мобилке
      скрыт, поднимать координаты над ним больше не нужно */
   .hud--tr { top: auto; bottom: calc(var(--pad) + 8px); right: calc(var(--pad) + 8px); }
-  .hud--br { display: none; }
+  /* верх-справа освободился, когда координаты уехали вниз — est. 2026 встаёт туда,
+     а не пропадает */
+  .hud--br { top: calc(var(--pad) + 8px); bottom: auto; right: calc(var(--pad) + 8px); }
   /* 21vw впритык доходил до рамки .frame — логотипу нужен воздух по бокам */
   .hero__mark, .hero__ghost { font-size: 19vw; }
   .scroll-hint { display: none; }
