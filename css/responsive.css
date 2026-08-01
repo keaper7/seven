@@ -190,10 +190,11 @@
     margin-top: 2vh;
     font-size: min(40vw, 24vh);
   }
-  /* только второй ряд, под кодом — не через оба сразу: иначе на верхнем
-     выравнивании гора наезжает на «0», на центральном виснет посреди
-     пустого ряда с зазором и сверху, и снизу перед текстом */
-  .region__map { grid-row: 2 / 3; justify-items: center; align-items: start; }
+  /* только второй ряд, под кодом — не через оба сразу, иначе гора наезжает
+     на «0». Внутри своего ряда центрируем: на высоком экране гибкий ряд
+     растягивается на весь остаток высоты, и align-items:start оставлял всю
+     лишнюю высоту пустым куском под горой вместо того, чтобы заполнить центр */
+  .region__map { grid-row: 2 / 3; justify-items: center; align-items: center; }
   .region__map svg { width: 150%; transform: translate(0, -6%); }
   .region__facts { grid-row: 3; }
   .facts { grid-template-columns: 1fr 1fr; }
