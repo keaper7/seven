@@ -676,6 +676,9 @@
   color: var(--fg);
 }
 
+/* приглашение живёт только на узких экранах — раскладку задаёт responsive.css */
+.lab__invite { display: none; }
+
 .lab__field {
   position: relative;
   flex: 1;
