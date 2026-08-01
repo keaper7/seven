@@ -698,21 +698,29 @@
 }
 
 .lab__c {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
   font-size: clamp(8px, 1.25vh, 12px);
   font-weight: 300;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: rgba(239, 237, 227, .38);
-  /* подчёркивание — border-bottom:currentColor, а не отдельный цвет:
-     подхватывает ту же transition, что и текст, само собой синхронно с hover */
-  border-bottom: 1px solid currentColor;
-  padding-bottom: 3px;
   transition: color .35s var(--ease);
   white-space: nowrap;
 }
-.lab__c:hover { color: var(--orange); }
+/* диагональная стрелка вместо подчёркивания — тот же язык, что у hero__cta
+   и work__link, не спорит с линиями лабиринта */
+.lab__c i {
+  font-style: normal;
+  color: var(--orange);
+  transition: transform .35s var(--ease);
+  display: inline-block;
+}
+.lab__c:hover { color: rgba(239, 237, 227, .85); }
+.lab__c:hover i { transform: translate(2px, -2px); }
 
 /* отступ от края поля — иначе текст ложится прямо на линию лабиринта */
-.lab__c--inst{ grid-column: 14 / 22; grid-row: 2;  place-self: center end;   padding-right: clamp(10px, 1.6vw, 22px); }
+.lab__c--inst{ grid-column: 14 / 21; grid-row: 2;  place-self: center end;   padding-right: clamp(10px, 1.6vw, 22px); }
 .lab__c--tg  { grid-column: 4 / 12;  grid-row: 13; place-self: center start; padding-left:  clamp(10px, 1.6vw, 22px); }
 .lab__c--mail{ grid-column: 13 / 21; grid-row: 14; place-self: center end;   padding-right: clamp(10px, 1.6vw, 22px); }
