@@ -83,12 +83,17 @@ SEVEN.scenes = function initScenes() {
   });
 
   /* ─── 03 · регион: изолинии Эльбруса прорисовываются ─── */
+  /* диапазон был растянут почти на всю высоту секции (start/end через
+     top…bottom) — гора дорисовывалась только когда пролистываешь экран
+     почти целиком. Укладываем прорисовку в первую половину входа в секцию,
+     до появления кода региона (у него start: top 60%), чтобы гора уже
+     стояла на месте, когда приходит номер, а не дорисовывалась под ним */
   const isoPaths = gsap.utils.toArray('.region__map path');
   if (isoPaths.length) {
     gsap.set(isoPaths, { strokeDasharray: 1000, strokeDashoffset: 1000 });
     gsap.to(isoPaths, {
       strokeDashoffset: 0, ease: 'none', stagger: { each: .05, from: 'end' },
-      scrollTrigger: { trigger: '#s3', start: 'top 78%', end: 'bottom 60%', scrub: .8 },
+      scrollTrigger: { trigger: '#s3', start: 'top 85%', end: 'top 45%', scrub: .6 },
     });
   }
   gsap.from('.region__code', {
