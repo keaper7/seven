@@ -7,6 +7,7 @@
   .rail a span { display: none; }
 
   .region__facts { max-width: 100%; }
+  .region__map svg { width: 150%; }
 
   /* колонка описания уходит под заголовок — но grid-row задан в sections.css
      жёстко единицей на всех троих, поэтому ряд нужно переназначить явно,
@@ -18,27 +19,6 @@
   .dir__title { grid-row: 1; grid-column: 2; }
   .dir__desc  { grid-row: 2; grid-column: 2; max-width: 46ch; }
   .dir__orn { display: none; }
-}
-
-
-/* ═══ 03 РЕГИОН НА УЗКОМ ПЛАНШЕТЕ ═══
-   на десктопе код региона стоит справа от горы — при ширине планшета
-   (portrait iPad и уже) горизонтали не хватает развести их, и «07» ложится
-   прямо на контуры Эльбруса. Ниже 640px это уже чинит отдельный блок
-   (код сверху, гора под ним), но у него нет тут работать некому до 1024 —
-   переносим тот же приём (стопка вместо горизонтали) на весь планшетный
-   диапазон, только с более крупными пропорциями под лишнюю ширину и высоту */
-@media (max-width: 1024px) and (min-width: 641px) {
-  .region { grid-template-rows: auto minmax(0, 1fr) auto; gap: clamp(14px, 2.5vh, 28px); }
-  .region__code {
-    grid-row: 1;
-    place-self: start center;
-    margin-top: 2vh;
-    font-size: min(30vw, 24vh);
-  }
-  .region__map { grid-row: 2 / 3; justify-items: center; align-items: center; }
-  .region__map svg { width: 96%; transform: translate(0, -4%); }
-  .region__facts { grid-row: 3; }
 }
 
 
