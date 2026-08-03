@@ -5,23 +5,40 @@ window.SEVEN = window.SEVEN || {};
 SEVEN.cursor = function initCursor() {
   const el = document.getElementById('cursor');
   if (!el) return;
+  const ring = el.querySelector('.cursor__ring');
+  const dot = el.querySelector('.cursor__dot');
 
   const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!fine || reduced) return;
 
-  let mx = innerWidth / 2, my = innerHeight / 2;   // цель
-  let cx = mx, cy = my;                             // текущее положение
+  let mx = innerWidth / 2, my = innerHeight / 2;   // цель — реальная позиция мыши
+  let rx = mx, ry = my;                             // текущее положение кольца (с задержкой)
 
-  addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
+  const place = (node, x, y) => {
+    node.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+  };
+  place(dot, mx, my);
+  place(ring, rx, ry);
+
+  // точка идёт вместе с курсором без задержки, кольцо летит следом отдельным rAF-циклом
+  addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    place(dot, mx, my);
+  }, { passive: true });
 
   const loop = () => {
-    cx += (mx - cx) * 0.18;
-    cy += (my - cy) * 0.18;
-    el.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    place(ring, rx, ry);
     requestAnimationFrame(loop);
   };
   loop();
+
+  // курсор ушёл за пределы окна — прячем оба узла, иначе они повисают
+  // на последней известной точке у края экрана
+  document.addEventListener('mouseleave', () => el.classList.add('is-hidden'));
+  document.addEventListener('mouseenter', () => el.classList.remove('is-hidden'));
 
   // расширение кольца над интерактивным
   const targets = document.querySelectorAll('a, button, .dir');
