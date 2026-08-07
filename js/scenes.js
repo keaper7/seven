@@ -42,44 +42,22 @@ SEVEN.scenes = function initScenes() {
     scrollTrigger: { trigger: '#s1', start: 'top top', end: '45% top', scrub: .4 },
   });
 
-  /* ─── 02 · точность: буквы собираются, разрядка раскрывается ─── */
-  const enLetters = gsap.utils.toArray('.precision__en span');
-  if (enLetters.length) {
-    gsap.from(enLetters, {
-      yPercent: 105, opacity: 0, duration: .9, ease: 'power3.out', stagger: .045,
-      scrollTrigger: { trigger: '#s2', start: 'top 62%' },
-    });
-    gsap.from('.precision__ru', {
-      opacity: 0, duration: 1, ease: 'power2.out', delay: .3,
-      scrollTrigger: { trigger: '#s2', start: 'top 62%' },
-    });
-  }
-
-  /* ─── 02 · уровень (только узкие экраны): пузырёк выравнивается к центру ───
-     элемент скрыт на десктопе, поэтому и сцена ставится только под мобильную
-     ширину — иначе GSAP считал бы геометрию у display:none */
-  const mmAim = gsap.matchMedia();
-  mmAim.add('(max-width: 640px)', () => {
-    const bubble = document.querySelector('.level__bubble');
-    const label = document.querySelector('.level__label');
-    if (!bubble) return;
-
-    // старт сбит вниз и в сторону, будто прибор ещё не выровнен —
-    // к концу скролла пузырёк находит центр между рисками
-    const state = { y: 34, tilt: -3.2 };
-    gsap.set(bubble, { y: state.y, x: state.tilt * 4 });
-
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: '#s2', start: 'top 78%', end: 'center 55%', scrub: .6 },
-      onUpdate: () => { if (label) label.textContent = `± ${Math.abs(state.tilt).toFixed(1)}°`; },
-    });
-
-    tl.to(state, {
-      y: 0, tilt: 0, ease: 'none',
-      onUpdate: () => gsap.set(bubble, { y: state.y, x: state.tilt * 4 }),
-    });
-
-    return () => { gsap.set(bubble, { clearProps: 'transform' }); };
+  /* ─── 02 · условия: цена и текст проявляются на входе ─── */
+  gsap.from('.offer__price', {
+    yPercent: 20, opacity: 0, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: '#s2', start: 'top 62%' },
+  });
+  gsap.from('.offer__terms', {
+    opacity: 0, duration: .8, ease: 'power2.out', delay: .15,
+    scrollTrigger: { trigger: '#s2', start: 'top 62%' },
+  });
+  gsap.from('.offer__lead', {
+    y: 18, opacity: 0, duration: .9, ease: 'power2.out',
+    scrollTrigger: { trigger: '#s2', start: 'top 58%' },
+  });
+  gsap.from('#s2 .facts > div', {
+    y: 18, opacity: 0, duration: .7, ease: 'power2.out', stagger: .09,
+    scrollTrigger: { trigger: '#s2 .facts', start: 'top 88%' },
   });
 
   /* ─── 03 · регион: изолинии Эльбруса прорисовываются ─── */
@@ -100,9 +78,12 @@ SEVEN.scenes = function initScenes() {
     yPercent: 8, opacity: 0, duration: 1.1, ease: 'power3.out',
     scrollTrigger: { trigger: '#s3', start: 'top 60%' },
   });
-  gsap.from('.facts > div', {
+  /* скоуп через #s3 обязателен: с появлением своего .facts на 02 общий
+     селектор '.facts' брал бы первый по DOM (уже не секции 03) и триггерил
+     факты обеих секций одним и тем же скроллом */
+  gsap.from('#s3 .facts > div', {
     y: 18, opacity: 0, duration: .7, ease: 'power2.out', stagger: .09,
-    scrollTrigger: { trigger: '.facts', start: 'top 88%' },
+    scrollTrigger: { trigger: '#s3 .facts', start: 'top 88%' },
   });
 
   /* ─── 04 · направления ─── */

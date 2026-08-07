@@ -112,90 +112,21 @@
   .hero__mark, .hero__ghost { font-size: 19vw; }
   .scroll-hint { display: none; }
 
-  /* ── 02 точность ── */
-  /* десктопная раскладка распирает PRECISION по ширине; на телефоне ширины нет,
-     зато есть высота — слово встаёт вертикально и идёт одним путём сверху вниз,
-     справа освободившееся поле занимает прицел */
-  #s2 { justify-content: flex-start; gap: 0; }
+  /* ── 02 условия ── */
+  /* на телефоне колонки цены и текста не помещаются рядом — цена встаёт
+     сверху, условия и факты идут под ней сплошным столбцом */
+  #s2 { justify-content: flex-start; padding-top: calc(var(--pad) + 2vh); }
 
-  .precision {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    align-items: stretch;
-    gap: 22px;
-    padding: 14px 0;
-  }
-  .precision__en {
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 1.15em;
-    /* кегль ограничен и высотой: девять букв в столбик на низком экране
-       иначе не умещаются, а space-between вытолкнул бы их за края */
-    font-size: min(14.5vw, 8vh);
-    line-height: 1;
-    letter-spacing: 0;
-  }
-  .precision__dot { align-self: center; }
-  .precision__ru {
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0;
-    padding: .5em 0;
-    font-size: 11px;
-    letter-spacing: 0;
-  }
-  .precision__note { align-self: flex-start; text-align: left; max-width: 26ch; }
-
-  .precision__aim {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    flex: 1;
-    color: var(--fg);
-  }
-  .level__tube {
-    position: relative;
-    width: 34px;
-    flex: 1;
-    border: 1px solid currentColor;
-    border-radius: 17px;
-    opacity: .9;
-  }
-  .level__ticks {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 14px 0;
-  }
-  .level__ticks span { display: block; height: 1px; background: currentColor; opacity: .3; margin: 0 8px; }
-  .level__ticks span.mid { opacity: .6; margin: 0 5px; }
-  /* положение и штрих задаёт JS по скроллу — стартовая точка на -50%,
-     где пузырёк сидит на нижней риске, до наводки на центр */
-  .level__bubble {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--orange);
-    opacity: .85;
-    box-shadow: 0 0 0 5px rgba(255, 119, 0, .12);
-  }
-  .level__label {
-    font-size: 11px;
-    letter-spacing: .1em;
-    color: var(--dim);
-    font-variant-numeric: tabular-nums;
-  }
+  .offer { grid-template-columns: 1fr; gap: clamp(24px, 4vh, 40px); }
+  /* 19vw мерили под цифру в одиночку — тут в той же строке ещё «от» и «₽»,
+     на 320px вместе они шире контента и знак валюты уезжает за край */
+  .offer__sum { font-size: min(15vw, 13vh); }
+  .offer__body { gap: clamp(20px, 3vh, 32px); }
+  .offer__lead { max-width: none; }
+  /* компаунд-селектор — иначе .facts{grid-template-columns:1fr 1fr} ниже
+     в этом же блоке (правило для фактов Эльбруса на 03) выигрывает по
+     порядку каскада при равной специфичности одного класса */
+  .facts.offer__facts { grid-template-columns: 1fr; }
 
   /* ── 03 регион ── */
   /* код региона и контуры Эльбруса разведены по отдельным зонам: 07 сверху

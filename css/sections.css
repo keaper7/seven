@@ -198,55 +198,85 @@
 }
 
 
-/* ═══════════ 02 · ТОЧНОСТЬ ═══════════ */
+/* ═══════════ 02 · УСЛОВИЯ ═══════════ */
 
 #s2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: clamp(28px, 5vh, 56px);
 }
 
-.precision { position: relative; }
+/* колонка цены — auto, а не фиксированная минмакс: сумма прописи в
+   crupном кегле шире 360px уже на среднем десктопе, а с auto колонка
+   растёт под контент вместо того чтобы обрезаться о соседнюю колонку.
+   .offer__stat — единая обёртка над ценой и сроком: раньше это были два
+   прямых потомка .offer, и auto-раскладка grid клала «срок» во вторую
+   колонку рядом с ценой вместо места под ней, а тело съезжало в третий ряд */
+.offer {
+  display: grid;
+  grid-template-columns: auto minmax(320px, 1fr);
+  gap: clamp(40px, 6vw, 110px);
+  align-items: start;
+}
 
-.precision__en {
+.offer__stat { min-width: 0; }
+
+.offer__price {
   display: flex;
-  justify-content: space-between;
-  font-size: clamp(38px, 11.6vw, 210px);
-  font-weight: 400;
+  align-items: baseline;
+  gap: .12em;
+  font-weight: 500;
   line-height: .92;
+  letter-spacing: -.02em;
   color: var(--fg);
 }
-.precision__en span { display: inline-block; }
-.precision__dot {
-  font-style: normal;
-  color: var(--orange);
-  align-self: flex-end;
-}
-
-.precision__ru {
-  display: flex;
-  justify-content: space-between;
-  margin-top: clamp(10px, 1.6vh, 22px);
-  font-size: clamp(10px, 1.5vw, 22px);
-  font-weight: 200;
-  letter-spacing: 0;
-  color: var(--fg);
-}
-.precision__ru span { opacity: .18; }
-
-/* прицел живёт только на узких экранах — раскладку задаёт responsive.css */
-.precision__aim { display: none; }
-
-.precision__note {
-  align-self: flex-end;
-  max-width: 34ch;
-  text-align: right;
-  font-size: clamp(11px, 1.05vw, 15px);
-  line-height: 1.7;
-  letter-spacing: .1em;
+.offer__from {
+  font-size: clamp(14px, 1.4vw, 20px);
+  font-weight: 300;
   color: var(--dim);
 }
+.offer__sum { font-size: clamp(52px, 7vw, 108px); }
+.offer__cur {
+  font-size: clamp(24px, 3vw, 46px);
+  color: var(--orange);
+}
+
+.offer__terms {
+  margin-top: clamp(10px, 1.6vh, 18px);
+  font-size: clamp(11px, 1.05vw, 14px);
+  letter-spacing: .08em;
+  color: var(--dim);
+}
+.offer__terms sup { color: var(--orange); }
+
+.offer__body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(26px, 3.4vh, 44px);
+  /* лид не должен казаться подписью к цифре, а отдельным блоком —
+     чуть смещаем вниз, чтобы верх колонки не совпадал с верхом цены */
+  padding-top: clamp(4px, .6vh, 10px);
+}
+
+/* сан-сериф, не курсив Playfair — тон здесь деловой, а не как у
+   поэтичных слоганов на других экранах (тот же приём, что у lab__invite) */
+.offer__lead {
+  font-family: var(--ff);
+  font-weight: 300;
+  font-size: clamp(17px, 1.9vw, 26px);
+  line-height: 1.5;
+  color: var(--fg);
+  max-width: 48ch;
+}
+
+.offer__facts { max-width: 62ch; }
+
+.offer__note {
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--dim);
+}
+.offer__note sup { color: var(--orange); margin-right: .15em; }
 
 
 /* ═══════════ 03 · КОД РЕГИОНА ═══════════ */
