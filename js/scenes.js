@@ -60,6 +60,18 @@ SEVEN.scenes = function initScenes() {
     scrollTrigger: { trigger: '#s2 .facts', start: 'top 88%' },
   });
 
+  /* фоновые ленты 02 — едут в разные стороны на разной скорости на
+     протяжении всей секции, а не только на входе: разница хода и создаёт
+     ощущение глубины между текстом и фоном */
+  gsap.to('.offer__ticker--a', {
+    xPercent: -14, ease: 'none',
+    scrollTrigger: { trigger: '#s2', start: 'top bottom', end: 'bottom top', scrub: .6 },
+  });
+  gsap.to('.offer__ticker--b', {
+    xPercent: 9, ease: 'none',
+    scrollTrigger: { trigger: '#s2', start: 'top bottom', end: 'bottom top', scrub: .6 },
+  });
+
   /* ─── 03 · регион: изолинии Эльбруса прорисовываются ─── */
   /* сузили было диапазон до top 85%→top 45% (дорисовка почти сразу на
      входе) — оказалось наоборот, слишком быстро: сам эффект прорисовки на

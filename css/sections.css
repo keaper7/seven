@@ -281,20 +281,30 @@
 }
 .offer__note sup { color: var(--orange); margin-right: .15em; }
 
-/* фоновая «02» — тот же приём, что «7» на 05 и «07» на 07: заполняет
-   пустое поле справа структурным акцентом вместо декоративной пустоты */
-.offer__num {
+/* фоновые ленты вместо гигантской цифры: заполняют пустое поле снизу тем
+   же составом и цифрами, что уже перечислены в .facts/.offer__price,
+   а не абстрактным украшением. Разъезжаются в разные стороны при скролле
+   (scenes.js) — эффект глубины, а не плоская подпись */
+.offer__ticker {
   position: absolute;
-  right: -2vw;
-  bottom: -8vh;
-  font-size: min(70vh, 42vw);
-  font-weight: 600;
-  line-height: .74;
-  color: var(--asphalt);
-  opacity: .05;
+  left: 0;
+  width: 100%;
+  padding: 14px 0;
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  white-space: nowrap;
+  font-size: clamp(13px, 1.6vw, 19px);
+  font-weight: 300;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: .55;
   pointer-events: none;
   user-select: none;
+  will-change: transform;
 }
+.offer__ticker--a { bottom: 21vh; }
+.offer__ticker--b { bottom: 9vh; color: var(--orange); opacity: .4; }
 
 
 /* ═══════════ 03 · КОД РЕГИОНА ═══════════ */
