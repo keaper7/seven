@@ -63,11 +63,11 @@ SEVEN.scenes = function initScenes() {
   /* фоновые ленты 02 — едут в разные стороны на разной скорости на
      протяжении всей секции, а не только на входе: разница хода и создаёт
      ощущение глубины между текстом и фоном */
-  gsap.to('.offer__ticker--a', {
+  gsap.to('.offer__ticker--a .offer__ticker__track', {
     xPercent: -14, ease: 'none',
     scrollTrigger: { trigger: '#s2', start: 'top bottom', end: 'bottom top', scrub: .6 },
   });
-  gsap.to('.offer__ticker--b', {
+  gsap.to('.offer__ticker--b .offer__ticker__track', {
     xPercent: 9, ease: 'none',
     scrollTrigger: { trigger: '#s2', start: 'top bottom', end: 'bottom top', scrub: .6 },
   });
