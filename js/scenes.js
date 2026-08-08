@@ -43,12 +43,8 @@ SEVEN.scenes = function initScenes() {
   });
 
   /* ─── 02 · условия: цена и текст проявляются на входе ─── */
-  gsap.from('.offer__price', {
-    yPercent: 20, opacity: 0, duration: 1, ease: 'power3.out',
-    scrollTrigger: { trigger: '#s2', start: 'top 62%' },
-  });
-  gsap.from('.offer__terms', {
-    opacity: 0, duration: .8, ease: 'power2.out', delay: .15,
+  gsap.from('.offer__tier', {
+    yPercent: 20, opacity: 0, duration: 1, ease: 'power3.out', stagger: .12,
     scrollTrigger: { trigger: '#s2', start: 'top 62%' },
   });
   gsap.from('.offer__lead', {

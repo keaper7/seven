@@ -219,7 +219,21 @@
   align-items: start;
 }
 
-.offer__stat { min-width: 0; }
+.offer__stat { min-width: 0; display: flex; flex-direction: column; }
+
+/* второй тариф — не отдельная карточка, а более тихая строка под первым:
+   общая рамка .offer держит ритм страницы, а не превращается в прайс-лист */
+.offer__tier + .offer__tier {
+  margin-top: clamp(20px, 3vh, 32px);
+  padding-top: clamp(18px, 2.6vh, 26px);
+  border-top: 1px solid var(--hair);
+}
+
+.offer__price--sm {
+  gap: .1em;
+}
+.offer__price--sm .offer__sum { font-size: clamp(30px, 3.6vw, 52px); }
+.offer__price--sm .offer__cur { font-size: clamp(16px, 1.8vw, 26px); }
 
 .offer__price {
   display: flex;
