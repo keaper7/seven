@@ -42,33 +42,33 @@ SEVEN.scenes = function initScenes() {
     scrollTrigger: { trigger: '#s1', start: 'top top', end: '45% top', scrub: .4 },
   });
 
-  /* ─── 02 · условия: цена и текст проявляются на входе ─── */
+  /* ─── 06 · условия: цена и текст проявляются на входе ─── */
   gsap.from('.offer__tier', {
     yPercent: 20, opacity: 0, duration: 1, ease: 'power3.out', stagger: .12,
-    scrollTrigger: { trigger: '#s2', start: 'top 62%' },
+    scrollTrigger: { trigger: '#s6', start: 'top 62%' },
   });
   gsap.from('.offer__lead', {
     y: 18, opacity: 0, duration: .9, ease: 'power2.out',
-    scrollTrigger: { trigger: '#s2', start: 'top 58%' },
+    scrollTrigger: { trigger: '#s6', start: 'top 58%' },
   });
-  gsap.from('#s2 .facts > div', {
+  gsap.from('#s6 .facts > div', {
     y: 18, opacity: 0, duration: .7, ease: 'power2.out', stagger: .09,
-    scrollTrigger: { trigger: '#s2 .facts', start: 'top 88%' },
+    scrollTrigger: { trigger: '#s6 .facts', start: 'top 88%' },
   });
 
-  /* фоновые ленты 02 — едут в разные стороны на разной скорости на
+  /* фоновые ленты — едут в разные стороны на разной скорости на
      протяжении всей секции, а не только на входе: разница хода и создаёт
      ощущение глубины между текстом и фоном */
   gsap.to('.offer__ticker--a .offer__ticker__track', {
     xPercent: -14, ease: 'none',
-    scrollTrigger: { trigger: '#s2', start: 'top bottom', end: 'bottom top', scrub: .6 },
+    scrollTrigger: { trigger: '#s6', start: 'top bottom', end: 'bottom top', scrub: .6 },
   });
   gsap.to('.offer__ticker--b .offer__ticker__track', {
     xPercent: 9, ease: 'none',
-    scrollTrigger: { trigger: '#s2', start: 'top bottom', end: 'bottom top', scrub: .6 },
+    scrollTrigger: { trigger: '#s6', start: 'top bottom', end: 'bottom top', scrub: .6 },
   });
 
-  /* ─── 03 · регион: изолинии Эльбруса прорисовываются ─── */
+  /* ─── 02 · регион: изолинии Эльбруса прорисовываются ─── */
   /* сузили было диапазон до top 85%→top 45% (дорисовка почти сразу на
      входе) — оказалось наоборот, слишком быстро: сам эффект прорисовки на
      скролле должен ощущаться, а не мелькать. Возвращаем растяжку на
@@ -79,35 +79,35 @@ SEVEN.scenes = function initScenes() {
     gsap.set(isoPaths, { strokeDasharray: 1000, strokeDashoffset: 1000 });
     gsap.to(isoPaths, {
       strokeDashoffset: 0, ease: 'none', stagger: { each: .05, from: 'end' },
-      scrollTrigger: { trigger: '#s3', start: 'top 78%', end: 'bottom 60%', scrub: .8 },
+      scrollTrigger: { trigger: '#s2', start: 'top 78%', end: 'bottom 60%', scrub: .8 },
     });
   }
   gsap.from('.region__code', {
     yPercent: 8, opacity: 0, duration: 1.1, ease: 'power3.out',
-    scrollTrigger: { trigger: '#s3', start: 'top 60%' },
+    scrollTrigger: { trigger: '#s2', start: 'top 60%' },
   });
-  /* скоуп через #s3 обязателен: с появлением своего .facts на 02 общий
-     селектор '.facts' брал бы первый по DOM (уже не секции 03) и триггерил
-     факты обеих секций одним и тем же скроллом */
-  gsap.from('#s3 .facts > div', {
+  /* скоуп через #s2 обязателен: с тех пор как у секции условий (#s6)
+     появился свой .facts, общий селектор '.facts' брал бы первый по DOM
+     и триггерил факты обеих секций одним и тем же скроллом */
+  gsap.from('#s2 .facts > div', {
     y: 18, opacity: 0, duration: .7, ease: 'power2.out', stagger: .09,
-    scrollTrigger: { trigger: '#s3 .facts', start: 'top 88%' },
+    scrollTrigger: { trigger: '#s2 .facts', start: 'top 88%' },
   });
 
-  /* ─── 04 · направления ─── */
+  /* ─── 03 · направления ─── */
   gsap.from('.dir', {
     y: 34, opacity: 0, duration: .85, ease: 'power3.out', stagger: .12,
     scrollTrigger: { trigger: '.dirs', start: 'top 76%' },
   });
 
-  /* ─── 05 · работа: подводка построчно, следом кейс ─── */
+  /* ─── 04 · работа: подводка построчно, следом кейс ─── */
   gsap.from('.work__lead .reveal', {
     yPercent: 100, opacity: 0, duration: .95, ease: 'power3.out', stagger: .13,
-    scrollTrigger: { trigger: '#s5', start: 'top 62%' },
+    scrollTrigger: { trigger: '#s4', start: 'top 62%' },
   });
   gsap.from('.rule', {
     scaleX: 0, transformOrigin: 'left center', duration: 1, ease: 'power3.out',
-    scrollTrigger: { trigger: '#s5', start: 'top 55%' },
+    scrollTrigger: { trigger: '#s4', start: 'top 55%' },
   });
   gsap.from('.work__shot', {
     y: 36, opacity: 0, duration: 1, ease: 'power3.out',
@@ -118,7 +118,7 @@ SEVEN.scenes = function initScenes() {
     scrollTrigger: { trigger: '.work__case', start: 'top 78%' },
   });
 
-  /* ─── 06 · процесс: горизонтальная лента с пиннингом ─── */
+  /* ─── 05 · процесс: горизонтальная лента с пиннингом ─── */
   const mm = gsap.matchMedia();
 
   mm.add('(min-width: 861px)', () => {
@@ -130,12 +130,21 @@ SEVEN.scenes = function initScenes() {
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: '#s6',
+        trigger: '#s5',
         start: 'top top',
         end: () => '+=' + (shift() + window.innerHeight * .5),
         pin: true,
         scrub: .8,
         invalidateOnRefresh: true,
+        /* секция условий (#s6) теперь идёт СРАЗУ ПОСЛЕ пиннинга — её
+           реальное положение на странице зависит от финальной высоты
+           спейсера пина. Без refreshPriority GSAP на refresh() меряет
+           триггеры в порядке создания и считает позицию #s6 до того, как
+           спейсер досчитан (то есть по старой, короткой высоте) — из-за
+           этого лента застревала в самом начале своего диапазона и
+           выглядела статичной. Более высокий приоритет заставляет этот
+           пин пересчитаться первым */
+        refreshPriority: 1,
       },
     });
 
@@ -175,7 +184,7 @@ SEVEN.scenes = function initScenes() {
 
   /* ─── индикатор 01…07 ─── создаём последним: конец диапазона каждой
      секции берём из уже готового старта следующего триггера, а не из
-     пиннинга секции 06 напрямую, иначе индикатор 07 гас раньше конца страницы */
+     пиннинга секции 05 напрямую, иначе индикатор 07 гас раньше конца страницы */
   const rail = document.getElementById('rail');
   const sections = [...document.querySelectorAll('.sec')];
   const railTriggers = [];
@@ -184,7 +193,7 @@ SEVEN.scenes = function initScenes() {
     if (!link) { railTriggers.push(null); return; }
     // конец диапазона секции = начало следующей (уже посчитанное её же триггером) —
     // не пересчитываем позицию соседа заново через getBoundingClientRect: во время
-    // пиннинга секции 06 сырое измерение мимо своего триггера ловит промежуточное
+    // пиннинга секции 05 сырое измерение мимо своего триггера ловит промежуточное
     // состояние спейсера и даёт заниженное число, из-за чего индикатор 07 гас рано
     railTriggers.push(ScrollTrigger.create({
       trigger: sec,

@@ -107,11 +107,11 @@
 <!-- ══ ИНДИКАТОР СКРОЛЛА 01…07 ══ -->
 <nav class="rail" id="rail" aria-label="Разделы страницы">
   <a href="#s1" data-n="01"><span>пролог</span></a>
-  <a href="#s2" data-n="02"><span>условия</span></a>
-  <a href="#s3" data-n="03"><span>регион</span></a>
-  <a href="#s4" data-n="04"><span>направления</span></a>
-  <a href="#s5" data-n="05"><span>работа</span></a>
-  <a href="#s6" data-n="06"><span>процесс</span></a>
+  <a href="#s2" data-n="02"><span>регион</span></a>
+  <a href="#s3" data-n="03"><span>направления</span></a>
+  <a href="#s4" data-n="04"><span>работа</span></a>
+  <a href="#s5" data-n="05"><span>процесс</span></a>
+  <a href="#s6" data-n="06"><span>условия</span></a>
   <a href="#s7" data-n="07"><span>контакты</span></a>
 </nav>
 
@@ -153,76 +153,9 @@
 </section>
 
 
-<!-- ═════════════ 02 · УСЛОВИЯ ═════════════ -->
+<!-- ═════════════ 02 · КОД РЕГИОНА ═════════════ -->
 <section class="sec sec--paper" id="s2" data-theme="paper" data-n="02">
-  <p class="sec__tag">02 — условия</p>
-
-  <!-- фоновые ленты вместо гигантской цифры: не повтор .facts выше, а то,
-       чего на этом экране ещё не звучало — личная подача (в пандан к
-       переходу всего сайта на «я») и региональная привязка, которая есть
-       на 01/03/07, а на 02 до этого не звучала вовсе. Разъезжаются при
-       скролле в разные стороны (scenes.js); рамка неподвижна — двигается
-       только .offer__ticker__track внутри, иначе граница едет вместе
-       с текстом и открывает пустой край на той стороне, куда лента уходит.
-       Текст продублирован трижды, чтобы на максимальном сдвиге не
-       показался пустой хвост -->
-  <div class="offer__ticker offer__ticker--a" aria-hidden="true">
-    <p class="offer__ticker__track">
-      <span>ЛИЧНО ОТ БРИФА ДО ЗАПУСКА · БЕЗ ПОСРЕДНИКОВ · ПРЯМАЯ СВЯЗЬ СО МНОЙ · </span><span>ЛИЧНО ОТ БРИФА ДО ЗАПУСКА · БЕЗ ПОСРЕДНИКОВ · ПРЯМАЯ СВЯЗЬ СО МНОЙ · </span><span>ЛИЧНО ОТ БРИФА ДО ЗАПУСКА · БЕЗ ПОСРЕДНИКОВ · ПРЯМАЯ СВЯЗЬ СО МНОЙ · </span>
-    </p>
-  </div>
-  <div class="offer__ticker offer__ticker--b" aria-hidden="true">
-    <p class="offer__ticker__track">
-      <span>НАЛЬЧИК · КАБАРДИНО-БАЛКАРИЯ · РЕГИОН 07 · </span><span>НАЛЬЧИК · КАБАРДИНО-БАЛКАРИЯ · РЕГИОН 07 · </span><span>НАЛЬЧИК · КАБАРДИНО-БАЛКАРИЯ · РЕГИОН 07 · </span>
-    </p>
-  </div>
-
-  <div class="offer">
-    <div class="offer__stat">
-      <div class="offer__tier">
-        <div class="offer__price">
-          <span class="offer__from">от</span>
-          <span class="offer__sum">20&nbsp;000</span>
-          <span class="offer__cur">₽</span>
-        </div>
-        <p class="offer__terms">Сайт-визитка · 7–10 дней от заявки до запуска<sup>*</sup></p>
-      </div>
-
-      <div class="offer__tier offer__tier--alt">
-        <div class="offer__price offer__price--sm">
-          <span class="offer__from">от</span>
-          <span class="offer__sum">40&nbsp;000</span>
-          <span class="offer__cur">₽</span>
-        </div>
-        <p class="offer__terms">С каталогом товаров или услуг · 14–18 дней<sup>*</sup></p>
-      </div>
-    </div>
-
-    <div class="offer__body">
-      <p class="offer__lead">
-        «У меня и так есть клиенты, зачем сайт?» — потому что часть новых
-        клиентов ищет вас в Картах и поиске, а не по сарафану. Нет сайта —
-        вас там просто нет.
-      </p>
-
-      <dl class="facts offer__facts">
-        <div><dt>дизайн</dt><dd>под ваш бизнес, не шаблон</dd></div>
-        <div><dt>вёрстка</dt><dd>адаптив под телефон и десктоп</dd></div>
-        <div><dt>домен и хостинг</dt><dd>первый год включён</dd></div>
-      </dl>
-
-      <div class="offer__notes">
-        <p class="offer__note">Правки по согласованной структуре — без ограничений; новое сверх ТЗ обсуждаем отдельно.</p>
-        <p class="offer__note"><sup>*</sup>срок актуален на август 2026 — при высокой загрузке скажу об этом сразу</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═════════════ 03 · КОД РЕГИОНА ═════════════ -->
-<section class="sec sec--dark" id="s3" data-theme="dark" data-n="03">
-  <p class="sec__tag">03 — координаты</p>
+  <p class="sec__tag">02 — координаты</p>
 
   <div class="region">
     <div class="region__map" id="elbrusMount" aria-hidden="true"></div>
@@ -247,39 +180,54 @@
 </section>
 
 
-<!-- ═════════════ 04 · НАПРАВЛЕНИЯ ═════════════ -->
-<section class="sec sec--paper" id="s4" data-theme="paper" data-n="04">
-  <p class="sec__tag">04 — направления</p>
+<!-- ═════════════ 03 · НАПРАВЛЕНИЯ ═════════════ -->
+<section class="sec sec--dark" id="s3" data-theme="dark" data-n="03">
+  <p class="sec__tag">03 — направления</p>
 
+  <!-- направления как высота: три уровня одной горы вместо трёх дисциплин
+       агентства. Числа не случайные — высоты вершин Эльбруса с соседней
+       секции координат, тот же приём, что и «07» через весь сайт: одна
+       деталь тянется через разные экраны и держит их вместе. Чёрточки
+       слева читаются как шкала уровня сигнала без подписи — на пике
+       («впечатление») все три горят оранжевым, это верхняя точка -->
   <ul class="dirs">
     <li class="dir">
-      <span class="dir__n">01</span>
-      <h3 class="dir__title">UI/UX&nbsp;дизайн</h3>
-      <p class="dir__desc">Интерфейсы, в которых не нужно разбираться. Логика раньше украшений.</p>
+      <span class="dir__n">
+        <span class="dir__bars" aria-hidden="true"><i class="on"></i><i></i><i></i></span>
+        0&nbsp;М
+      </span>
+      <h3 class="dir__title">Фундамент</h3>
+      <p class="dir__desc">Код и архитектура. Работает быстро, не глючит, не просит нянек.</p>
       <span class="dir__orn" aria-hidden="true"></span>
     </li>
     <li class="dir">
-      <span class="dir__n">02</span>
-      <h3 class="dir__title">Веб-архитектура</h3>
-      <p class="dir__desc">Структура, которая выдержит рост. Скорость, доступность, чистый код.</p>
+      <span class="dir__n">
+        <span class="dir__bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>
+        2500&nbsp;М
+      </span>
+      <h3 class="dir__title">Интерфейс</h3>
+      <p class="dir__desc">Понятно без инструкции. Логика раньше украшений.</p>
       <span class="dir__orn" aria-hidden="true"></span>
     </li>
-    <li class="dir">
-      <span class="dir__n">03</span>
-      <h3 class="dir__title">Бренд-айдентика</h3>
-      <p class="dir__desc">Знак, типографика, система. Чтобы вас узнавали без подписи.</p>
+    <li class="dir dir--peak">
+      <span class="dir__n">
+        <span class="dir__bars" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+        5642&nbsp;М
+      </span>
+      <h3 class="dir__title">Впечатление</h3>
+      <p class="dir__desc">Что остаётся в голове, когда закрыли вкладку.</p>
       <span class="dir__orn" aria-hidden="true"></span>
     </li>
   </ul>
 </section>
 
 
-<!-- ═════════════ 05 · РАБОТА ═════════════ -->
-<section class="sec sec--paper" id="s5" data-theme="paper" data-n="05">
+<!-- ═════════════ 04 · РАБОТА ═════════════ -->
+<section class="sec sec--paper" id="s4" data-theme="paper" data-n="04">
   <div class="work__num" aria-hidden="true">7</div>
 
   <div class="work">
-    <p class="sec__tag">05 — работа</p>
+    <p class="sec__tag">04 — работа</p>
 
     <h2 class="work__lead">
       <span class="reveal">Там, где другие видят пустоту,</span>
@@ -308,11 +256,11 @@
 </section>
 
 
-<!-- ═════════════ 06 · ПРОЦЕСС ═════════════ -->
-<section class="sec sec--dark sec--pin" id="s6" data-theme="dark" data-n="06">
+<!-- ═════════════ 05 · ПРОЦЕСС ═════════════ -->
+<section class="sec sec--dark sec--pin" id="s5" data-theme="dark" data-n="05">
   <div class="proc">
     <header class="proc__head">
-      <p class="sec__tag">06 — процесс</p>
+      <p class="sec__tag">05 — процесс</p>
       <p class="proc__count"><b>7</b> шагов от разговора до запуска</p>
     </header>
 
@@ -327,6 +275,73 @@
         <li class="step"><span class="step__n">06</span><h3>Разработка</h3><p>Чистый код, скорость, адаптив для устройств и доступность.</p></li>
         <li class="step"><span class="step__n">07</span><h3>Запуск</h3><p>Домен, аналитика, передача. Дальше — сопровождение, если нужно.</p></li>
       </ol>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════════════ 06 · УСЛОВИЯ ═════════════ -->
+<section class="sec sec--paper" id="s6" data-theme="paper" data-n="06">
+  <p class="sec__tag">06 — условия</p>
+
+  <!-- фоновые ленты вместо гигантской цифры: не повтор .facts выше, а то,
+       чего на этом экране ещё не звучало — личная подача (в пандан к
+       переходу всего сайта на «я») и региональная привязка, которая есть
+       на 01/02/07, а тут до этого не звучала вовсе. Разъезжаются при
+       скролле в разные стороны (scenes.js); рамка неподвижна — двигается
+       только .offer__ticker__track внутри, иначе граница едет вместе
+       с текстом и открывает пустой край на той стороне, куда лента уходит.
+       Текст продублирован трижды, чтобы на максимальном сдвиге не
+       показался пустой хвост -->
+  <div class="offer__ticker offer__ticker--a" aria-hidden="true">
+    <p class="offer__ticker__track">
+      <span>ЛИЧНО ОТ БРИФА ДО ЗАПУСКА · БЕЗ ПОСРЕДНИКОВ · ПРЯМАЯ СВЯЗЬ СО МНОЙ · </span><span>ЛИЧНО ОТ БРИФА ДО ЗАПУСКА · БЕЗ ПОСРЕДНИКОВ · ПРЯМАЯ СВЯЗЬ СО МНОЙ · </span><span>ЛИЧНО ОТ БРИФА ДО ЗАПУСКА · БЕЗ ПОСРЕДНИКОВ · ПРЯМАЯ СВЯЗЬ СО МНОЙ · </span>
+    </p>
+  </div>
+  <div class="offer__ticker offer__ticker--b" aria-hidden="true">
+    <p class="offer__ticker__track">
+      <span>НАЛЬЧИК · КАБАРДИНО-БАЛКАРИЯ · РЕГИОН 07 · </span><span>НАЛЬЧИК · КАБАРДИНО-БАЛКАРИЯ · РЕГИОН 07 · </span><span>НАЛЬЧИК · КАБАРДИНО-БАЛКАРИЯ · РЕГИОН 07 · </span>
+    </p>
+  </div>
+
+  <div class="offer">
+    <div class="offer__stat">
+      <!-- пробуем без цены: крупная цифра — срок, а не сумма. Формат тот же
+           (число + акцентная единица измерения), просто смещаем то, чем
+           открываем разговор — сначала «как быстро», а не «сколько» -->
+      <div class="offer__tier">
+        <div class="offer__price">
+          <span class="offer__sum">7–10</span>
+          <span class="offer__cur">дней<sup>*</sup></span>
+        </div>
+        <p class="offer__terms">Сайт-визитка · от заявки до запуска</p>
+      </div>
+
+      <div class="offer__tier offer__tier--alt">
+        <div class="offer__price offer__price--sm">
+          <span class="offer__sum">14–18</span>
+          <span class="offer__cur">дней<sup>*</sup></span>
+        </div>
+        <p class="offer__terms">С каталогом товаров или услуг</p>
+      </div>
+    </div>
+
+    <div class="offer__body">
+      <p class="offer__lead">
+        «У меня и так есть клиенты, зачем сайт?» — потому что часть новых
+        клиентов ищет вас в Картах и поиске, а не по сарафану. Нет сайта —
+        вас там просто нет.
+      </p>
+
+      <dl class="facts offer__facts">
+        <div><dt>дизайн</dt><dd>под ваш бизнес, не шаблон</dd></div>
+        <div><dt>вёрстка</dt><dd>адаптив под телефон и десктоп</dd></div>
+        <div><dt>домен и хостинг</dt><dd>первый год включён</dd></div>
+      </dl>
+
+      <div class="offer__notes">
+        <p class="offer__note"><sup>*</sup>срок актуален на август 2026 — при высокой загрузке скажу об этом сразу</p>
+      </div>
     </div>
   </div>
 </section>

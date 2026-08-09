@@ -198,9 +198,9 @@
 }
 
 
-/* ═══════════ 02 · УСЛОВИЯ ═══════════ */
+/* ═══════════ 06 · УСЛОВИЯ ═══════════ */
 
-#s2 {
+#s6 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -253,6 +253,9 @@
 .offer__cur {
   font-size: clamp(24px, 3vw, 46px);
   color: var(--orange);
+  /* .12em общего gap хватало для «₽» — один узкий глиф. «дней» четыре
+     буквы, тот же зазор читается как слипшееся «10дней» */
+  margin-left: .12em;
 }
 
 .offer__terms {
@@ -329,9 +332,9 @@
 .offer__ticker--b .offer__ticker__track { color: var(--orange); opacity: .4; }
 
 
-/* ═══════════ 03 · КОД РЕГИОНА ═══════════ */
+/* ═══════════ 02 · КОД РЕГИОНА ═══════════ */
 
-#s3 { display: flex; flex-direction: column; }
+#s2 { display: flex; flex-direction: column; }
 
 .region {
   position: relative;
@@ -360,11 +363,14 @@
 }
 .region__map .iso path {
   fill: none;
-  stroke: var(--paper);
+  stroke: var(--fg);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
-.region__map .iso { opacity: .2; }
+/* .2 держали, пока штрих был почти-белым на асфальте — бледный, но
+   заметный за счёт контраста с тёмным фоном. На бумаге тот же .2 у
+   штриха цвета асфальта даёт слишком светлый серый и почти пропадает */
+.region__map .iso { opacity: .5; }
 .region__map .iso--summit { opacity: .95; }
 .region__map .iso--summit path { stroke: var(--orange); stroke-width: 1.4; }
 
@@ -391,12 +397,19 @@
   line-height: .82;
   letter-spacing: -.02em;
 }
-/* ноль обведён контуром, семёрка залита — код региона читается как знак */
+/* ноль обведён контуром, семёрка залита — код региона читается как знак.
+   Раньше оба были захардкожены под тёмный фон (rgba(239,237,227,...) —
+   var(--paper) в лоб); секция теперь бывает и светлой, --fg/--dim сами
+   переключаются между темами вместо ручного пересчёта цвета */
 .region__zero {
   color: transparent;
-  -webkit-text-stroke: 1px rgba(239, 237, 227, .38);
+  -webkit-text-stroke: 1px var(--dim);
 }
-.region__seven { color: var(--paper); }
+/* сплошная заливка асфальтом (#302F2C, это уже не чистый чёрный) на
+   бумаге всё равно читается как «слишком чёрная» — большая литая форма
+   визуально тяжелее, чем тот же цвет в тонких линиях текста рядом.
+   Чуть приспускаем непрозрачность, не трогая сам цвет */
+.region__seven { color: var(--fg); opacity: .86; }
 
 .region__facts {
   grid-row: 2;
@@ -439,16 +452,21 @@
 .facts dd i { color: var(--orange); font-style: normal; }
 
 
-/* ═══════════ 04 · НАПРАВЛЕНИЯ ═══════════ */
+/* ═══════════ 03 · НАПРАВЛЕНИЯ ═══════════ */
 
-#s4 { display: flex; flex-direction: column; justify-content: center; gap: clamp(24px, 4vh, 48px); }
+#s3 { display: flex; flex-direction: column; justify-content: center; gap: clamp(24px, 4vh, 48px); }
 
 .dirs { border-top: 1px solid var(--hair); }
 
+/* каждый <li> — свой отдельный грид (общего грида на всём .dirs нет),
+   поэтому колонка автоширины считается для каждой строки заново. Пока
+   в ней были «01/02/03» одинаковой длины, это совпадало случайно; «0 М» /
+   «2500 М» / «5642 М» — разной длины, и заголовок съезжал влево вслед за
+   более короткой меткой. Фиксируем минимальную ширину под самую длинную */
 .dir {
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr 40px minmax(0, 38ch);
+  grid-template-columns: minmax(96px, auto) 1fr 40px minmax(0, 38ch);
   align-items: center;
   gap: clamp(16px, 3vw, 54px);
   padding: clamp(20px, 3.4vh, 42px) 0;
@@ -460,12 +478,32 @@
 .dir__n {
   grid-row: 1;
   grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: var(--micro);
   letter-spacing: .28em;
   color: var(--dim);
   transition: color .4s var(--ease);
 }
 .dir:hover .dir__n { color: var(--orange); }
+
+/* шкала уровня — три чёрточки читаются как индикатор сигнала без
+   подписи: закрашенные горят, пустые остаются на dim. На верхнем пункте
+   («впечатление») все три оранжевые — это вершина, а не просто hover-акцент */
+.dir__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.dir__bars i {
+  width: 14px;
+  height: 2px;
+  background: var(--dim);
+  opacity: .5;
+}
+.dir__bars i.on { background: var(--fg); opacity: 1; }
+.dir--peak .dir__bars i.on { background: var(--orange); }
 
 .dir__title {
   grid-row: 1;
@@ -501,9 +539,9 @@
 .dir:hover .dir__orn { opacity: .85; transform: scale(1) rotate(0deg); }
 
 
-/* ═══════════ 05 · РАБОТА ═══════════ */
+/* ═══════════ 04 · РАБОТА ═══════════ */
 
-#s5 { display: flex; align-items: center; }
+#s4 { display: flex; align-items: center; }
 
 .work__num {
   position: absolute;
@@ -627,7 +665,7 @@
 .work__link:hover { color: var(--orange); border-color: var(--orange); }
 
 
-/* ═══════════ 06 · ПРОЦЕСС ═══════════ */
+/* ═══════════ 05 · ПРОЦЕСС ═══════════ */
 
 .sec--pin { padding: 0; }
 
