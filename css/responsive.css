@@ -6,7 +6,8 @@
 @media (max-width: 1024px) {
   .rail a span { display: none; }
 
-  .region__facts { max-width: 100%; }
+  .region__lead { max-width: 100%; }
+  .region__sub { max-width: 100%; }
 
   /* колонка описания уходит под заголовок — но grid-row задан в sections.css
      жёстко единицей на всех троих, поэтому ряд нужно переназначить явно,
@@ -21,23 +22,18 @@
 }
 
 
-/* ═══ 02 РЕГИОН НА УЗКОМ ПЛАНШЕТЕ ═══
-   на десктопе код региона стоит справа от горы — при ширине планшета
-   (portrait iPad и уже) горизонтали не хватает развести их, и «07» ложится
-   прямо на контуры Эльбруса. Ниже 640px это уже чинит отдельный блок
-   (код сверху, гора под ним); переносим тот же приём на весь планшетный
-   диапазон 641–1024px, с пропорциями под лишнюю ширину и высоту */
-@media (max-width: 1024px) and (min-width: 641px) {
-  .region { grid-template-rows: auto minmax(0, 1fr) auto; gap: clamp(14px, 2.5vh, 28px); }
-  .region__code {
-    grid-row: 1;
-    place-self: start center;
-    margin-top: 2vh;
-    font-size: min(30vw, 24vh);
+/* ═══ 02 РЕГИОН НА ПЛАНШЕТЕ И ТЕЛЕФОНЕ ═══
+   на широком десктопном кадре (1672×941) cover под узкий/высокий вьюпорт
+   обрезает по бокам так сильно, что видна только одна вершина — не вопрос
+   background-position, серия «где именно 22vh/30%/68%» это подтвердила.
+   Меняем сам файл на кроп 700×941, снятый с тех же исходных пикселей, но
+   по ширине впритык к обеим вершинам — тогда cover обрезает запас вокруг
+   них, а не сами вершины */
+@media (max-width: 1024px) {
+  .region__photo {
+    background-image: url('../img/elbrus-duotone-tall.jpg');
+    background-position: center center;
   }
-  .region__map { grid-row: 2 / 3; justify-items: center; align-items: center; }
-  .region__map svg { width: 96%; transform: translate(0, -4%); }
-  .region__facts { grid-row: 3; }
 }
 
 
@@ -150,24 +146,12 @@
   .offer__ticker--a { margin-top: clamp(28px, 5vh, 48px); }
 
   /* ── 02 регион ── */
-  /* код региона и контуры Эльбруса разведены по отдельным зонам: 07 сверху
-     по центру, гора под ним — иначе ноль ложится на контурное кольцо и
-     сливается с ним (там же и разнос вправо на десктопе не работает:
-     ширины не хватает, чтобы развести по горизонтали) */
-  .region { grid-template-rows: auto minmax(0, 1fr) auto; gap: 14px; }
-  .region__code {
-    grid-row: 1;
-    place-self: start center;
-    margin-top: 2vh;
-    font-size: min(40vw, 24vh);
-  }
-  /* только второй ряд, под кодом — не через оба сразу, иначе гора наезжает
-     на «0». Внутри своего ряда центрируем: на высоком экране гибкий ряд
-     растягивается на весь остаток высоты, и align-items:start оставлял всю
-     лишнюю высоту пустым куском под горой вместо того, чтобы заполнить центр */
-  .region__map { grid-row: 2 / 3; justify-items: center; align-items: center; }
-  .region__map svg { width: 150%; transform: translate(0, -6%); }
-  .region__facts { grid-row: 3; }
+  .region { grid-template-rows: minmax(0, 1fr) auto; gap: 14px; }
+  /* портретный кроп (см. брейкпоинт 1024px выше) уже держит обе вершины
+     в кадре при простом center center — здесь только усиливаем скрим:
+     узкий текст в 3-4 строки перекрывает больше кадра по высоте */
+  .region__scrim { background: linear-gradient(180deg, rgba(48,47,44,0) 0%, rgba(48,47,44,.15) 40%, rgba(48,47,44,.72) 100%); }
+  .region__lead { font-size: clamp(21px, 6.4vw, 30px); }
   .facts { grid-template-columns: 1fr 1fr; }
 
   /* ── 03 направления ── */
@@ -363,6 +347,5 @@
 @media (max-height: 520px) and (orientation: landscape) {
   .hero__mark, .hero__ghost { font-size: 17vh; }
   .scroll-hint { display: none; }
-  .region__code { font-size: 40vh; }
   .work__num { display: none; }
 }

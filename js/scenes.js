@@ -6,8 +6,7 @@ window.SEVEN = window.SEVEN || {};
 /* ── подгрузка инлайновых SVG (нужен доступ к путям для анимации) ── */
 SEVEN.loadSVG = async function loadSVG() {
   const jobs = [
-    ['elbrusMount', 'img/elbrus-contours.svg'],
-    ['labMount',    'img/labyrinth-07.svg'],
+    ['labMount', 'img/labyrinth-07.svg'],
   ];
   await Promise.all(jobs.map(async ([id, url]) => {
     const host = document.getElementById(id);
@@ -68,23 +67,18 @@ SEVEN.scenes = function initScenes() {
     scrollTrigger: { trigger: '#s6', start: 'top bottom', end: 'bottom top', scrub: .6 },
   });
 
-  /* ─── 02 · регион: изолинии Эльбруса прорисовываются ─── */
-  /* сузили было диапазон до top 85%→top 45% (дорисовка почти сразу на
-     входе) — оказалось наоборот, слишком быстро: сам эффект прорисовки на
-     скролле должен ощущаться, а не мелькать. Возвращаем растяжку на
-     length всей секции — гора дорисовывается плавно, по мере того как её
-     пролистываешь, и завершается ближе к концу секции, а не в первый момент */
-  const isoPaths = gsap.utils.toArray('.region__map path');
-  if (isoPaths.length) {
-    gsap.set(isoPaths, { strokeDasharray: 1000, strokeDashoffset: 1000 });
-    gsap.to(isoPaths, {
-      strokeDashoffset: 0, ease: 'none', stagger: { each: .05, from: 'end' },
-      scrollTrigger: { trigger: '#s2', start: 'top 78%', end: 'bottom 60%', scrub: .8 },
-    });
-  }
-  gsap.from('.region__code', {
-    yPercent: 8, opacity: 0, duration: 1.1, ease: 'power3.out',
+  /* ─── 02 · регион: текст проявляется, фото идёт параллаксом ─── */
+  gsap.from(['.region__lead', '.region__sub'], {
+    y: 22, opacity: 0, duration: 1, ease: 'power3.out', stagger: .12,
     scrollTrigger: { trigger: '#s2', start: 'top 60%' },
+  });
+  /* фото движется медленнее текста поверх него — разница хода читается как
+     глубина, тот же приём, что у .hero__ghost в прологе. 8% запаса в CSS
+     (top/bottom: -8%) — ровно под этот сдвиг, без него снизу открывался бы
+     край без изображения */
+  gsap.to('.region__photo', {
+    yPercent: 6, ease: 'none',
+    scrollTrigger: { trigger: '#s2', start: 'top bottom', end: 'bottom top', scrub: .6 },
   });
   /* скоуп через #s2 обязателен: с тех пор как у секции условий (#s6)
      появился свой .facts, общий селектор '.facts' брал бы первый по DOM
@@ -109,13 +103,18 @@ SEVEN.scenes = function initScenes() {
     scaleX: 0, transformOrigin: 'left center', duration: 1, ease: 'power3.out',
     scrollTrigger: { trigger: '#s4', start: 'top 55%' },
   });
-  gsap.from('.work__shot', {
-    y: 36, opacity: 0, duration: 1, ease: 'power3.out',
-    scrollTrigger: { trigger: '.work__case', start: 'top 82%' },
-  });
-  gsap.from(['.work__name', '.work__kind', '.work__desc', '.work__link'], {
-    y: 18, opacity: 0, duration: .8, ease: 'power2.out', stagger: .09,
-    scrollTrigger: { trigger: '.work__case', start: 'top 78%' },
+  /* два кейса теперь стоят друг под другом — триггер по классу берёт
+     только первый элемент, поэтому проигрываем реveal на каждый .work__case
+     отдельно, иначе второй кейс появляется без анимации */
+  gsap.utils.toArray('.work__case').forEach((el) => {
+    gsap.from(el.querySelector('.work__shot'), {
+      y: 36, opacity: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 82%' },
+    });
+    gsap.from(el.querySelectorAll('.work__idx, .work__name, .work__kind, .work__desc, .work__link'), {
+      y: 18, opacity: 0, duration: .8, ease: 'power2.out', stagger: .09,
+      scrollTrigger: { trigger: el, start: 'top 78%' },
+    });
   });
 
   /* ─── 05 · процесс: горизонтальная лента с пиннингом ─── */
@@ -172,10 +171,23 @@ SEVEN.scenes = function initScenes() {
   const labPath = document.querySelector('.lab-path');
   if (labPath) {
     gsap.set(labPath, { strokeDasharray: 1000, strokeDashoffset: 1000 });
-    gsap.to(labPath, {
-      strokeDashoffset: 0, ease: 'none',
-      scrollTrigger: { trigger: '#s7', start: 'top 80%', end: 'bottom bottom', scrub: .7 },
-    });
+    /* одинаковый scrollTrigger-диапазон для линии и для подсветки надписи —
+       если завести их раздельными триггерами, при любом будущем расхождении
+       стартов/концов свет включится раньше или позже конца линии и разрушит
+       саму метафору «линия доходит — надпись загорается». Объект конфига не
+       шарим между двумя вызовами: GSAP пишет служебные поля прямо в него */
+    const labRange = () => ({ trigger: '#s7', start: 'top 80%', end: 'bottom bottom', scrub: .7 });
+    gsap.to(labPath, { strokeDashoffset: 0, ease: 'none', scrollTrigger: labRange() });
+
+    const labCenter = document.querySelector('.lab__center');
+    if (labCenter) {
+      gsap.to(labCenter, {
+        color: '#FF7700',
+        textShadow: '0 0 26px rgba(255, 119, 0, .6)',
+        ease: 'none',
+        scrollTrigger: labRange(),
+      });
+    }
   }
   gsap.from(['.lab__slogan', '.lab__c', '.lab__center'], {
     opacity: 0, duration: .9, ease: 'power2.out', stagger: .1,

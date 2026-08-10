@@ -335,6 +335,9 @@
 /* ═══════════ 02 · КОД РЕГИОНА ═══════════ */
 
 #s2 { display: flex; flex-direction: column; }
+/* ярлык секции — единственный текст здесь не внутри .region, поэтому z-index
+   на слой фото/скрима ему не наследуется автоматически */
+#s2 > .sec__tag { position: relative; z-index: 2; }
 
 .region {
   position: relative;
@@ -345,90 +348,77 @@
   gap: clamp(14px, 2.5vh, 30px);
 }
 
-/* карта уходит влево, код региона встаёт справа — иначе контуры
-   и обводка нуля читаются как одно и то же кольцо */
-.region__map {
+/* настоящее фото Эльбруса, дуотон под палитру сайта — заменяет и изолинии,
+   и число-фон. cover + object-position подобраны так, чтобы вершины не
+   срезались краем на узких экранах (см. адаптив) */
+/* верх/низ на 8% шире секции — запас хода для параллакса в scenes.js, без
+   него translateY при скролле открывал бы пустую полосу снизу */
+.region__photo {
+  position: absolute;
+  top: -8%;
+  bottom: -8%;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  background-image: url('../img/elbrus-duotone.jpg');
+  background-size: cover;
+  background-position: center 68%;
+}
+/* ровное затемнение по всему кадру плюс более сильный градиент снизу:
+   заголовок в три строки перекрывает и тёмное небо, и светлый снег вершины —
+   ровного тона недостаточно только под .facts, светлый текст на снегу без
+   общей подложки почти терялся */
+.region__scrim {
   position: absolute;
   inset: 0;
-  display: grid;
-  align-items: center;
-  justify-items: start;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(48,47,44,.22) 0%, rgba(48,47,44,.3) 45%, rgba(48,47,44,.68) 100%);
   pointer-events: none;
 }
-.region__map svg {
-  width: min(72%, 880px);
-  height: auto;
-  opacity: .9;
-  transform: translate(-6%, -7%);
-}
-.region__map .iso path {
-  fill: none;
-  stroke: var(--fg);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-/* .2 держали, пока штрих был почти-белым на асфальте — бледный, но
-   заметный за счёт контраста с тёмным фоном. На бумаге тот же .2 у
-   штриха цвета асфальта даёт слишком светлый серый и почти пропадает */
-.region__map .iso { opacity: .5; }
-.region__map .iso--summit { opacity: .95; }
-.region__map .iso--summit path { stroke: var(--orange); stroke-width: 1.4; }
 
-/* высоты вершин прямо на карте — без подписи два оранжевых кольца читаются
-   как абстрактный узор, а не как две вершины Эльбруса */
-.region__map .peak-label {
-  fill: var(--orange);
-  font-family: var(--ff);
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: .04em;
-  text-anchor: middle;
-  opacity: .85;
-}
-
-.region__code {
+/* текст поверх числа — на всю ширину колонки, а не узким столбиком:
+   узкая мера читалась как цитата поверх обоев, широкая — как сама секция */
+.region__copy {
   grid-row: 1;
-  place-self: center end;
-  position: relative;
-  z-index: 2;
-  display: flex;
-  font-size: min(clamp(120px, 23vw, 380px), 44vh);
-  font-weight: 500;
-  line-height: .82;
-  letter-spacing: -.02em;
-}
-/* ноль обведён контуром, семёрка залита — код региона читается как знак.
-   Раньше оба были захардкожены под тёмный фон (rgba(239,237,227,...) —
-   var(--paper) в лоб); секция теперь бывает и светлой, --fg/--dim сами
-   переключаются между темами вместо ручного пересчёта цвета */
-.region__zero {
-  color: transparent;
-  -webkit-text-stroke: 1px var(--dim);
-}
-/* сплошная заливка асфальтом (#302F2C, это уже не чистый чёрный) на
-   бумаге всё равно читается как «слишком чёрная» — большая литая форма
-   визуально тяжелее, чем тот же цвет в тонких линиях текста рядом.
-   Чуть приспускаем непрозрачность, не трогая сам цвет */
-.region__seven { color: var(--fg); opacity: .86; }
-
-.region__facts {
-  grid-row: 2;
+  align-self: center;
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: clamp(12px, 2vh, 24px);
-  max-width: 62ch;
+  gap: clamp(14px, 2.2vh, 26px);
 }
 
 .region__lead {
   font-family: var(--ffd);
-  font-size: clamp(17px, 2vw, 30px);
+  font-size: clamp(22px, 3.4vw, 54px);
   font-weight: 300;
-  line-height: 1.45;
+  line-height: 1.28;
+  letter-spacing: -.015em;
   color: var(--fg);
+  max-width: 31ch;
 }
-.region__lead em { color: var(--orange); font-style: italic; }
+/* .region__lead em { color: var(--orange); font-style: italic; } */
+.region__lead em { color: var(--asphalt); font-style: italic; }
+/* .region__lead em { color: black; font-style: italic; } */
+
+/* не var(--dim), как у остального мелкого текста: эта строка лежит прямо на
+   штрихах числа, и на .45 альфы буквы об них спотыкались — держим полный
+   цвет и гасим только непрозрачностью */
+.region__sub {
+  font-size: clamp(13px, 1.15vw, 17px);
+  line-height: 1.75;
+  letter-spacing: .04em;
+  color: var(--fg);
+  opacity: .72;
+  max-width: 52ch;
+}
+
+#s2 .facts {
+  grid-row: 2;
+  position: relative;
+  z-index: 2;
+}
 
 .facts {
   display: grid;
@@ -578,12 +568,30 @@
 .work__lead span { display: block; }
 .work__lead em { font-style: italic; font-weight: 600; }
 
+.work__list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 6vh, 84px);
+}
+
 .work__case {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(24px, 4vw, 68px);
 }
+/* делитель только между кейсами, не перед первым */
+.work__list .work__case + .work__case {
+  padding-top: clamp(32px, 5vh, 64px);
+  border-top: 1px solid var(--hair);
+}
+
+.work__idx {
+  font-size: var(--micro);
+  letter-spacing: .28em;
+  color: var(--dim);
+}
+.work__idx span { opacity: .5; margin-left: .2em; }
 
 /* скриншот приглушён, чтобы не спорить со стерильной графикой сайта,
    и доводится до полного цвета только при наведении */
@@ -840,6 +848,9 @@
   letter-spacing: clamp(6px, 1vw, 18px);
   text-indent: clamp(6px, 1vw, 18px);
   color: rgba(239, 237, 227, .55);
+  /* нулевой blur/альфа того же формата, что и целевое свечение в scenes.js —
+     GSAP интерполирует text-shadow только между значениями одинаковой формы */
+  text-shadow: 0 0 0 rgba(255, 119, 0, 0);
 }
 
 .lab__c {

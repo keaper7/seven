@@ -154,35 +154,47 @@
 
 
 <!-- ═════════════ 02 · КОД РЕГИОНА ═════════════ -->
-<section class="sec sec--paper" id="s2" data-theme="paper" data-n="02">
-  <p class="sec__tag">02 — координаты</p>
+<section class="sec sec--dark" id="s2" data-theme="dark" data-n="02">
+  <!-- топографические изолинии Эльбруса и число-фон убраны: ни то, ни другое
+       не читалось как гора (проверено на живых людях и на самом заказчике).
+       Настоящее фото решает вопрос узнаваемости раз и навсегда — дуотон под
+       палитру сайта (асфальт/бумага, без промежуточных серых), а не сырой
+       кадр, чтобы не выбиваться из плоской графики остального сайта.
+       Секция вынужденно светлеет тоном не как «paper» (фото само по себе
+       достаточно тёмное для светлого текста) — тема переключена на dark,
+       это ломает строгое чередование тёмный/бумага по всем 7 экранам, но
+       заставлять текст спорить с реальной фотографией ради формальной
+       рифмы было бы хуже -->
+  <div class="region__photo" aria-hidden="true"></div>
+  <div class="region__scrim" aria-hidden="true"></div>
+
+  <p class="sec__tag">координаты</p>
 
   <div class="region">
-    <div class="region__map" id="elbrusMount" aria-hidden="true"></div>
-
-    <div class="region__code">
-      <span class="region__zero">0</span><span class="region__seven">7</span>
-    </div>
-
-    <div class="region__facts">
+    <div class="region__copy">
       <p class="region__lead">
-        Я отсюда. <em>Эльбрус</em> — вершина Европы,<br>
-        5642 и 5621 над уровнем моря.
+        Здесь высоту меряют метрами. В вашем деле мерка другая:
+        <em>находят вас люди или проходят мимо.</em>
       </p>
-      <dl class="facts">
-        <div><dt>массив</dt><dd>Эльбрус · двуглавый</dd></div>
-        <div><dt>высота</dt><dd>5642 <i>м</i></dd></div>
-        <div><dt>координаты</dt><dd>43.3499<i>°</i>&nbsp;N, 42.4453<i>°</i>&nbsp;E</dd></div>
-        <div><dt>регион</dt><dd>RU-KB · 07</dd></div>
-      </dl>
+      <p class="region__sub">
+        Разбираться в доменах, хостинге и вёрстке — не ваша работа. Ваша —
+        делать своё дело. Остальное беру на себя.
+      </p>
     </div>
+
+    <dl class="facts">
+      <div><dt>массив</dt><dd style="">ЭЛЬБРУС</dd></div>
+      <div><dt>высота</dt><dd>5642 <i>м</i></dd></div>
+      <div><dt>координаты</dt><dd>43.3499<i>°</i>&nbsp;N, 42.4453<i>°</i>&nbsp;E</dd></div>
+      <div><dt>регион</dt><dd>RU-KB · 07</dd></div>
+    </dl>
   </div>
 </section>
 
 
 <!-- ═════════════ 03 · НАПРАВЛЕНИЯ ═════════════ -->
 <section class="sec sec--dark" id="s3" data-theme="dark" data-n="03">
-  <p class="sec__tag">03 — направления</p>
+  <p class="sec__tag">направления</p>
 
   <!-- направления как высота: три уровня одной горы вместо трёх дисциплин
        агентства. Числа не случайные — высоты вершин Эльбруса с соседней
@@ -227,29 +239,52 @@
   <div class="work__num" aria-hidden="true">7</div>
 
   <div class="work">
-    <p class="sec__tag">04 — работа</p>
+    <p class="sec__tag">работы</p>
 
     <h2 class="work__lead">
       <span class="reveal">Там, где другие видят пустоту,</span>
       <span class="reveal">я вижу пространство для <em>главного.</em></span>
     </h2>
 
-    <div class="work__case">
-      <a class="work__shot" href="https://shanicosmo.ru" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-        <img src="img/case-shanicosmo.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async">
-      </a>
-
-      <div class="work__meta">
-        <h3 class="work__name">Shanicosmo</h3>
-        <p class="work__kind">Косметология · Москва · Нальчик</p>
-        <div class="rule" aria-hidden="true"><i></i></div>
-        <p class="work__desc">
-          Шесть направлений, отзывы, опыт — и всё это ведёт к одному действию: записаться.
-          Структура выстроена от вопроса пациента, а не от прайса.
-        </p>
-        <a class="work__link" href="https://shanicosmo.ru" target="_blank" rel="noopener">
-          shanicosmo.ru<i aria-hidden="true">↗</i>
+    <div class="work__list">
+      <div class="work__case">
+        <a class="work__shot" href="https://shanicosmo.ru" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <img src="img/case-shanicosmo.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async">
         </a>
+
+        <div class="work__meta">
+          <p class="work__idx">01<span>/02</span></p>
+          <h3 class="work__name">Shanicosmo</h3>
+          <p class="work__kind">Косметология · Москва · Нальчик</p>
+          <div class="rule" aria-hidden="true"><i></i></div>
+          <p class="work__desc">
+            Шесть направлений, отзывы, опыт — и всё это ведёт к одному действию: записаться.
+            Структура выстроена от вопроса пациента, а не от прайса.
+          </p>
+          <a class="work__link" href="https://shanicosmo.ru" target="_blank" rel="noopener">
+            shanicosmo.ru<i aria-hidden="true">↗</i>
+          </a>
+        </div>
+      </div>
+
+      <div class="work__case">
+        <a class="work__shot" href="https://lianashanibova.ru" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <img src="img/case-liana.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async">
+        </a>
+
+        <div class="work__meta">
+          <p class="work__idx">02<span>/02</span></p>
+          <h3 class="work__name">Косметология с 0</h3>
+          <p class="work__kind">Онлайн-курс · Обучение косметологии</p>
+          <div class="rule" aria-hidden="true"><i></i></div>
+          <p class="work__desc">
+            Лендинг курса для медсестёр и студентов-медиков: три сценария «кто вы» вместо
+            одной общей подводки, каждый закрывает свои возражения и ведёт к брони места.
+          </p>
+          <a class="work__link" href="https://lianashanibova.ru" target="_blank" rel="noopener">
+            lianashanibova.ru<i aria-hidden="true">↗</i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -260,7 +295,7 @@
 <section class="sec sec--dark sec--pin" id="s5" data-theme="dark" data-n="05">
   <div class="proc">
     <header class="proc__head">
-      <p class="sec__tag">05 — процесс</p>
+      <p class="sec__tag">процесс</p>
       <p class="proc__count"><b>7</b> шагов от разговора до запуска</p>
     </header>
 
@@ -282,7 +317,7 @@
 
 <!-- ═════════════ 06 · УСЛОВИЯ ═════════════ -->
 <section class="sec sec--paper" id="s6" data-theme="paper" data-n="06">
-  <p class="sec__tag">06 — условия</p>
+  <p class="sec__tag">условия</p>
 
   <!-- фоновые ленты вместо гигантской цифры: не повтор .facts выше, а то,
        чего на этом экране ещё не звучало — личная подача (в пандан к
@@ -351,7 +386,7 @@
 <section class="sec sec--dark" id="s7" data-theme="dark" data-n="07">
   <div class="lab">
     <div class="lab__top">
-      <p class="sec__tag">07 — контакты</p>
+      <p class="sec__tag">контакты</p>
       <p class="lab__slogan">Твой следующий шаг важнее пройденного пути.</p>
     </div>
 
