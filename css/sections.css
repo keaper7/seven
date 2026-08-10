@@ -789,6 +789,7 @@
   letter-spacing: .34em;
   text-transform: uppercase;
   color: var(--dim);
+  text-align: right;
 }
 
 .lab__top { display: flex; flex-direction: column; gap: 10px; }
