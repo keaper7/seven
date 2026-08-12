@@ -62,10 +62,17 @@ SEVEN.scenes = function initScenes() {
     xPercent: -14, ease: 'none',
     scrollTrigger: { trigger: '#s6', start: 'top bottom', end: 'bottom top', scrub: .6 },
   });
-  gsap.to('.offer__ticker--b .offer__ticker__track', {
-    xPercent: 9, ease: 'none',
-    scrollTrigger: { trigger: '#s6', start: 'top bottom', end: 'bottom top', scrub: .6 },
-  });
+  /* эта лента идёт вправо, и стартовать ей надо не с нуля: на нуле левый край
+     трека совпадает с левым краем рамки, и любой сдвиг вправо открывает за
+     собой пустоту — текст-то весь справа от точки отсчёта. Поэтому начинаем
+     смещёнными влево и приезжаем к нулю: направление хода то же (вправо,
+     навстречу верхней ленте), но окно рамки закрыто текстом на всём пути */
+  gsap.fromTo('.offer__ticker--b .offer__ticker__track',
+    { xPercent: -9 },
+    {
+      xPercent: 0, ease: 'none',
+      scrollTrigger: { trigger: '#s6', start: 'top bottom', end: 'bottom top', scrub: .6 },
+    });
 
   /* ─── 02 · регион: текст проявляется, фото идёт параллаксом ─── */
   gsap.from(['.region__lead', '.region__sub'], {
@@ -99,23 +106,29 @@ SEVEN.scenes = function initScenes() {
     yPercent: 100, opacity: 0, duration: .95, ease: 'power3.out', stagger: .13,
     scrollTrigger: { trigger: '#s4', start: 'top 62%' },
   });
-  gsap.from('.rule', {
+  /* только у первого кейса: остальные два стоят за краем ленты, и их черта
+     прочертилась бы вхолостую — а при неудачном порядке refresh осталась бы
+     схлопнутой в ноль до конца жизни страницы */
+  gsap.from('.work__case:first-child .rule', {
     scaleX: 0, transformOrigin: 'left center', duration: 1, ease: 'power3.out',
     scrollTrigger: { trigger: '#s4', start: 'top 55%' },
   });
-  /* два кейса теперь стоят друг под другом — триггер по классу берёт
-     только первый элемент, поэтому проигрываем реveal на каждый .work__case
-     отдельно, иначе второй кейс появляется без анимации */
-  gsap.utils.toArray('.work__case').forEach((el) => {
-    gsap.from(el.querySelector('.work__shot'), {
+  /* кейсы теперь стоят в ряд, а не друг под другом: по вертикали они входят
+     в кадр одновременно, поэтому отдельный триггер на каждый смысла не имеет
+     (все три сработали бы в один момент, две карточки — за краем ленты).
+     Анимируем въезд только первого, остальные человек открывает сам,
+     листая ленту вбок — там их проявляет уже сам горизонтальный скролл */
+  const firstCase = document.querySelector('.work__case');
+  if (firstCase) {
+    gsap.from(firstCase.querySelector('.work__shot'), {
       y: 36, opacity: 0, duration: 1, ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 82%' },
+      scrollTrigger: { trigger: '#s4', start: 'top 62%' },
     });
-    gsap.from(el.querySelectorAll('.work__idx, .work__name, .work__kind, .work__desc, .work__link'), {
+    gsap.from(firstCase.querySelectorAll('.work__idx, .work__name, .work__kind, .work__desc, .work__link'), {
       y: 18, opacity: 0, duration: .8, ease: 'power2.out', stagger: .09,
-      scrollTrigger: { trigger: el, start: 'top 78%' },
+      scrollTrigger: { trigger: '#s4', start: 'top 58%' },
     });
-  });
+  }
 
   /* ─── 05 · процесс: горизонтальная лента с пиннингом ─── */
   const mm = gsap.matchMedia();

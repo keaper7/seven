@@ -38,6 +38,7 @@
 
   SEVEN.clock();
   SEVEN.cursor();
+  SEVEN.work();   // навигация, а не анимация — ставим до прелоадера и мимо reduced-motion
 
   // сцены собираем после того, как SVG вставлены в DOM
   SEVEN.loadSVG().then(() => {

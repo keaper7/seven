@@ -241,51 +241,84 @@
   <div class="work">
     <p class="sec__tag">работы</p>
 
-    <h2 class="work__lead">
-      <span class="reveal">Там, где другие видят пустоту,</span>
-      <span class="reveal">я вижу пространство для <em>главного.</em></span>
-    </h2>
+    <div class="work__head">
+      <h2 class="work__lead">
+        <span class="reveal">Там, где другие видят пустоту,</span>
+        <span class="reveal">я вижу пространство для <em>главного.</em></span>
+      </h2>
 
-    <div class="work__list">
-      <div class="work__case">
+      <!-- список кейсов растёт, а вертикальный стек растягивал бы страницу
+           с каждым новым проектом — карусель вместо этого держит высоту
+           секции постоянной, добавить четвёртый кейс не сдвинет ни один
+           экран ниже. Свайп и трекпад лента понимает нативно, мыши — стрелки
+           и перетаскивание, клавиатуре — ←/→ (всё в js/work.js). Вертикальное
+           колесо намеренно не перехватываем: оно должно листать страницу
+           дальше, а не запирать человека в секции -->
+      <div class="work__nav">
+        <button class="work__arrow work__arrow--prev" type="button" aria-label="Предыдущая работа">←</button>
+        <span class="work__count"><b id="workCur">01</b><i>/03</i></span>
+        <button class="work__arrow work__arrow--next" type="button" aria-label="Следующая работа">→</button>
+      </div>
+    </div>
+
+    <div class="work__carousel" id="workCarousel" tabindex="0" role="group"
+         aria-roledescription="карусель" aria-label="Работы">
+      <article class="work__case">
         <a class="work__shot" href="https://shanicosmo.ru" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
           <img src="img/case-shanicosmo.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async">
         </a>
 
         <div class="work__meta">
-          <p class="work__idx">01<span>/02</span></p>
+          <p class="work__idx">01<span>/03</span></p>
           <h3 class="work__name">Shanicosmo</h3>
           <p class="work__kind">Косметология · Москва · Нальчик</p>
           <div class="rule" aria-hidden="true"><i></i></div>
           <p class="work__desc">
-            Шесть направлений, отзывы, опыт — и всё это ведёт к одному действию: записаться.
-            Структура выстроена от вопроса пациента, а не от прайса.
+            Визитная карточка врача-косметолога с акцентом на экспертность и удобную подачу услуг.
           </p>
           <a class="work__link" href="https://shanicosmo.ru" target="_blank" rel="noopener">
             shanicosmo.ru<i aria-hidden="true">↗</i>
           </a>
         </div>
-      </div>
+      </article>
 
-      <div class="work__case">
+      <article class="work__case">
         <a class="work__shot" href="https://lianashanibova.ru" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
           <img src="img/case-liana.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async">
         </a>
 
         <div class="work__meta">
-          <p class="work__idx">02<span>/02</span></p>
+          <p class="work__idx">02<span>/03</span></p>
           <h3 class="work__name">Косметология с 0</h3>
           <p class="work__kind">Онлайн-курс · Обучение косметологии</p>
           <div class="rule" aria-hidden="true"><i></i></div>
           <p class="work__desc">
-            Лендинг курса для медсестёр и студентов-медиков: три сценария «кто вы» вместо
-            одной общей подводки, каждый закрывает свои возражения и ведёт к брони места.
+            Лендинг курсов для начинающих косметологов.
           </p>
           <a class="work__link" href="https://lianashanibova.ru" target="_blank" rel="noopener">
             lianashanibova.ru<i aria-hidden="true">↗</i>
           </a>
         </div>
-      </div>
+      </article>
+
+      <article class="work__case">
+        <a class="work__shot" href="https://keaper7.github.io/publico/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <img src="img/case-publico.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async">
+        </a>
+
+        <div class="work__meta">
+          <p class="work__idx">03<span>/03</span></p>
+          <h3 class="work__name">Publico</h3>
+          <p class="work__kind">Концепт · Кофейня · Нальчик</p>
+          <div class="rule" aria-hidden="true"><i></i></div>
+          <p class="work__desc">
+            Кофе, завтраки и десерты. Место, где можно провести время в удовольствие.
+          </p>
+          <a class="work__link" href="https://keaper7.github.io/publico/" target="_blank" rel="noopener">
+            смотреть демо<i aria-hidden="true">↗</i>
+          </a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -424,6 +457,7 @@
 <script src="js/nalchik.js"></script>
 <script src="js/preloader.js"></script>
 <script src="js/cursor.js"></script>
+<script src="js/work.js"></script>
 <script src="js/scenes.js"></script>
 <script src="js/main.js"></script>
 

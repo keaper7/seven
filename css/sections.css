@@ -568,23 +568,82 @@
 .work__lead span { display: block; }
 .work__lead em { font-style: italic; font-weight: 600; }
 
-.work__list {
+/* строка над каруселью: подводка слева, счётчик и стрелки справа —
+   тот же ряд, что нёс бы просто .work__lead в одну колонку */
+.work__head {
   display: flex;
-  flex-direction: column;
-  gap: clamp(40px, 6vh, 84px);
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(20px, 4vw, 60px);
 }
 
+.work__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.6vw, 20px);
+  flex-shrink: 0;
+  padding-bottom: 4px;
+}
+.work__count {
+  font-size: var(--micro);
+  letter-spacing: .2em;
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+.work__count b { color: var(--fg); font-weight: 500; }
+.work__count i { font-style: normal; opacity: .6; }
+
+.work__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--hair);
+  border-radius: 50%;
+  color: var(--fg);
+  font-size: 15px;
+  line-height: 1;
+  transition: border-color .3s var(--ease), color .3s var(--ease), opacity .3s var(--ease);
+}
+.work__arrow:hover { border-color: var(--orange); color: var(--orange); }
+.work__arrow:disabled { opacity: .3; pointer-events: none; }
+
+/* карусель вместо вертикального стека: список кейсов растёт, а с ним не
+   должна расти высота секции — новый кейс добавляется вбок, а не сдвигает
+   все экраны ниже вниз по странице. overflow-x нативно понимает touch-свайп;
+   колёсико мыши без shift по умолчанию его не крутит — это чинит JS (scenes.js) */
+.work__carousel {
+  display: flex;
+  gap: clamp(28px, 4vw, 56px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 1px;
+  scrollbar-width: none;
+}
+.work__carousel::-webkit-scrollbar { display: none; }
+/* лента ловит фокус с клавиатуры (стрелки ←/→ листают кейсы) — но своей
+   рамки не рисует: её и так очерчивает фокус на ссылке внутри карточки */
+.work__carousel:focus { outline: none; }
+.work__carousel:focus-visible { outline: 1px solid var(--orange); outline-offset: 6px; }
+.work__carousel.is-dragging { cursor: grabbing; scroll-behavior: auto; }
+/* пока тащим ленту мышью, картинка не должна перехватывать жест своим
+   нативным драгом изображения */
+.work__carousel.is-dragging img { pointer-events: none; }
+
 .work__case {
+  flex: 0 0 min(920px, 86vw);
+  scroll-snap-align: start;
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(24px, 4vw, 68px);
+  /* соседний кейс виден краем как обещание «дальше есть ещё», но приглушён:
+     иначе два кейса в кадре спорят за внимание и ни один не читается главным */
+  opacity: .32;
+  transition: opacity .55s var(--ease);
 }
-/* делитель только между кейсами, не перед первым */
-.work__list .work__case + .work__case {
-  padding-top: clamp(32px, 5vh, 64px);
-  border-top: 1px solid var(--hair);
-}
+.work__case.is-active { opacity: 1; }
 
 .work__idx {
   font-size: var(--micro);
@@ -610,7 +669,7 @@
   opacity: .82;
   transition: filter .5s var(--ease), opacity .5s var(--ease), transform .8s var(--ease);
 }
-.work__case:hover .work__shot img {
+.work__case.is-active:hover .work__shot img {
   filter: none;
   opacity: 1;
   transform: scale(1.015);
