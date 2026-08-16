@@ -178,7 +178,7 @@
   /* портретный кроп (см. брейкпоинт 1024px выше) уже держит обе вершины
      в кадре при простом center center — здесь только усиливаем скрим:
      узкий текст в 3-4 строки перекрывает больше кадра по высоте */
-  .region__scrim { background: linear-gradient(180deg, rgba(48,47,44,0) 0%, rgba(48,47,44,.15) 40%, rgba(48,47,44,.72) 100%); }
+  .region__scrim { background: linear-gradient(180deg, rgba(28,26,23,0) 0%, rgba(28,26,23,.15) 40%, rgba(28,26,23,.72) 100%); }
   .region__lead { font-size: clamp(21px, 6.4vw, 30px); }
   .facts { grid-template-columns: 1fr 1fr; }
 

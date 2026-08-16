@@ -5,14 +5,17 @@
 :root {
   /* цвета бренда */
   --orange:  #FF7700;
-  --asphalt: #302F2C;
+  /* глубже прежнего #302F2C: тот при 18% яркости читался тёплым серым, а не
+     асфальтом, и приглушал оранжевый. Тёплый сдвиг (R>G>B) сохранён намеренно —
+     нейтральный #1A1A1A рвал родство с бумажным #EFEDE3 */
+  --asphalt: #1C1A17;
   --paper:   #EFEDE3;
 
   /* активная тема секции — переопределяется на .sec */
   --bg:   var(--paper);
   --fg:   var(--asphalt);
-  --dim:  rgba(48, 47, 44, .45);
-  --hair: rgba(48, 47, 44, .16);
+  --dim:  rgba(28, 26, 23, .45);
+  --hair: rgba(28, 26, 23, .16);
 
   /* шрифты */
   --ff:  'Zalando Sans Expanded', ui-sans-serif, system-ui, sans-serif;
@@ -58,7 +61,7 @@ html.lenis, html.lenis body { height: auto; }
 
 
 /* ══ ТЕМЫ СЕКЦИЙ ══ */
-.sec--paper { --bg: var(--paper);   --fg: var(--asphalt); --dim: rgba(48,47,44,.45);      --hair: rgba(48,47,44,.16); }
+.sec--paper { --bg: var(--paper);   --fg: var(--asphalt); --dim: rgba(28,26,23,.45);      --hair: rgba(28,26,23,.16); }
 .sec--dark  { --bg: var(--asphalt); --fg: var(--paper);   --dim: rgba(239,237,227,.42);   --hair: rgba(239,237,227,.14); }
 
 .sec {
@@ -215,7 +218,7 @@ html.lenis, html.lenis body { height: auto; }
   color: rgba(239, 237, 227, .35);
   transition: color .35s var(--ease);
 }
-.rail.on-paper a { color: rgba(48, 47, 44, .35); }
+.rail.on-paper a { color: rgba(28, 26, 23, .35); }
 .rail a::after {
   content: attr(data-n);
   font-variant-numeric: tabular-nums;
