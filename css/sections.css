@@ -542,9 +542,8 @@
   right: -4vw;
   top: 50%;
   transform: translateY(-50%);
-  font-size: min(118vh, 90vw);
-  font-weight: 600;
-  line-height: .74;
+  width: min(112vh, 86vw);
+  height: auto;
   color: var(--asphalt);
   opacity: .05;
   pointer-events: none;

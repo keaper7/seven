@@ -195,7 +195,7 @@
   /* на десктопной позиции (по центру высоты, right:-4vw) цифра обрезалась
      кадром и читалась как случайный светлый прямоугольник, а не как «7» —
      переносим ниже и внутрь, чтобы влезала целиком */
-  .work__num { right: 6vw; top: auto; bottom: 6vh; transform: none; font-size: 38vh; opacity: .07; }
+  .work__num { right: 6vw; top: auto; bottom: 6vh; transform: none; width: 32vh; height: auto; opacity: .07; }
   /* кейс в одну колонку: скриншот сверху, описание под ним.
      minmax(0,…) обязателен — иначе картинка 1280px распирает колонку наружу */
   .work__case { grid-template-columns: minmax(0, 1fr); gap: clamp(18px, 3vh, 28px); }

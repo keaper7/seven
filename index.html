@@ -36,6 +36,11 @@
 <meta name="twitter:image" content="https://sevensites.ru/img/og-cover.png">
 
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="img/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="icon" href="img/favicon-64.png" sizes="64x64" type="image/png">
+<link rel="icon" href="img/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -226,7 +231,14 @@
 
 <!-- ═════════════ 04 · РАБОТА ═════════════ -->
 <section class="sec sec--paper" id="s4" data-theme="paper" data-n="04">
-  <div class="work__num" aria-hidden="true">7</div>
+  <!-- фирменный знак сменился на новую геометрическую семёрку (см.
+       img/favicon.svg) — здесь берём только её силуэт (polygon), без
+       оранжевого круга-подложки: это фоновый водяной знак в цвете секции
+       (var(--asphalt), 5% непрозрачности), а не отдельная иконка, поэтому
+       свои цвета сохраняет — меняется только форма самой цифры -->
+  <svg class="work__num" aria-hidden="true" viewBox="0 0 100 100">
+    <polygon points="24,26 78,26 54,82 36,82 58,40 24,40" fill="currentColor"/>
+  </svg>
 
   <div class="work">
     <p class="sec__tag">работы</p>
