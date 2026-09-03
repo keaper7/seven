@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>404 — страница не найдена · SEVEN</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1C1A17">
+
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+<!-- пути абсолютные, а не относительные: GitHub Pages отдаёт эту страницу
+     по ЛЮБОМУ несуществующему адресу, включая вложенные (/foo/bar/) —
+     с относительными путями стили и скрипты искались бы внутри
+     несуществующей папки и страница приехала бы голым текстом -->
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/sections.css">
+<link rel="stylesheet" href="/css/error.css">
+</head>
+
+<body>
+
+<div class="err-page" id="errPage">
+
+  <div class="frame" aria-hidden="true"></div>
+
+  <div class="hud hud--tl">
+    <span>SYSTEM: SIGNAL LOST</span>
+    <span class="hud__dot"></span>
+  </div>
+
+  <div class="hud hud--tr">
+    <span>ERROR&nbsp;<i>404</i></span>
+  </div>
+
+  <div class="hud hud--bl">
+    <span>UTC+3<i>&nbsp;·&nbsp;</i><time id="clock">--:--:--</time></span>
+  </div>
+
+  <div class="hud hud--br">
+    <span>est. 2026</span>
+  </div>
+
+  <!-- поле служебного текста под «лучом». Разметка статическая, не из JS:
+       если скрипт не выполнится, слой всё равно есть — просто светит
+       из центра, а не за курсором -->
+  <div class="err__scan" aria-hidden="true">
+    <p>404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · </p>
+    <p>СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · </p>
+    <p>SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · </p>
+    <p>ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · </p>
+    <p>404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · </p>
+    <p>ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · </p>
+    <p>SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · </p>
+    <p>ПОВТОРНЫЙ ПОИСК · ПОВТОРНЫЙ ПОИСК · ПОВТОРНЫЙ ПОИСК · ПОВТОРНЫЙ ПОИСК · ПОВТОРНЫЙ ПОИСК · ПОВТОРНЫЙ ПОИСК · ПОВТОРНЫЙ ПОИСК · ПОВТОРНЫЙ ПОИСК · ПОВТОРНЫЙ ПОИСК · </p>
+    <p>404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · </p>
+    <p>СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · СИГНАЛ ПОТЕРЯН · </p>
+    <p>SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · SEVEN · КОД 07 · </p>
+    <p>ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · ЗДЕСЬ НИЧЕГО НЕТ · </p>
+    <p>404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · 404 · СТРАНИЦА НЕ НАЙДЕНА · </p>
+    <p>ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · ПРОВЕРЬТЕ АДРЕС · </p>
+  </div>
+
+  <div class="err">
+    <h1 class="err__code" id="errCode">
+      <!-- эхо лежит внутри самого кода, а не рядом: снаружи оно
+           позиционировалось от центра всей колонки (код + текст + кнопка)
+           и уезжало вниз, читаясь отдельной надписью, а не ореолом -->
+      <span class="err__ghost" id="errGhost" aria-hidden="true">404</span>
+      <span>4</span>
+      <!-- нуля здесь нет намеренно: его место занимает фирменный знак.
+           Контур, а не заливка — на асфальтовом фоне тёмный круг знака
+           слился бы с фоном; заодно перекличка с контурной «07»
+           на экране контактов -->
+      <svg class="err__mark" viewBox="0 0 120 120" role="img" aria-label="0">
+        <circle class="err__mark-pulse" cx="60" cy="60" r="49"/>
+        <circle class="err__mark-pulse err__mark-pulse--b" cx="60" cy="60" r="49"/>
+        <circle class="err__mark-ring" cx="60" cy="60" r="49"/>
+        <polygon class="err__mark-seven" points="34,36 78,36 58,82 43,82 62,48 34,48"/>
+      </svg>
+      <span>4</span>
+    </h1>
+
+    <p class="err__lead">Такой страницы <em>нет.</em></p>
+    <p class="err__sub">
+      Либо в адресе опечатка, либо страница переехала. На главной —
+      семь экранов, которые точно на месте.
+    </p>
+
+    <a class="hero__cta err__cta" href="/" data-magnet>
+      <span>На главную</span><i aria-hidden="true">↗</i>
+    </a>
+  </div>
+
+</div>
+
+<!-- ══ ЗЕРНО ПОВЕРХ ВСЕГО ══ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ══ КУРСОР-ПРИЦЕЛ ══ -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__ring"></span>
+  <span class="cursor__dot"></span>
+</div>
+
+<script src="/js/nalchik.js"></script>
+<script src="/js/cursor.js"></script>
+<script>
+(function errorPage() {
+  const page = document.getElementById('errPage');
+  const code = document.getElementById('errCode');
+  const ghost = document.getElementById('errGhost');
+
+  SEVEN.clock();
+  SEVEN.cursor();
+
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* мыши нет (телефон, планшет) или движение выключено системно — луч
+     ведёт себя сам, ключевыми кадрами из error.css */
+  if (!fine || reduced) { page.classList.add('is-auto'); return; }
+
+  let tx = innerWidth / 2, ty = innerHeight / 2;   // куда луч едет
+  let cx = tx, cy = ty;                             // где он сейчас
+  let queued = false;
+
+  addEventListener('mousemove', (e) => {
+    tx = e.clientX; ty = e.clientY;
+    if (!queued) { queued = true; requestAnimationFrame(frame); }
+  }, { passive: true });
+
+  /* один rAF на кадр вместо записи стилей прямо в mousemove: событий мыши
+     приходит больше, чем кадров, и каждая запись в CSS-переменную маски
+     заставляет слой перерисовываться заново */
+  function frame() {
+    queued = false;
+    cx += (tx - cx) * .16;
+    cy += (ty - cy) * .16;
+    page.style.setProperty('--mx', cx + 'px');
+    page.style.setProperty('--my', cy + 'px');
+
+    /* код ошибки и его контурное эхо смещаются на разную величину —
+       та же разница хода, что даёт глубину логотипу в прологе */
+    const dx = (cx / innerWidth - .5) * 2;
+    const dy = (cy / innerHeight - .5) * 2;
+    code.style.transform  = `translate(${dx * 10}px, ${dy * 8}px)`;
+    ghost.style.transform = `translate(calc(-50% + ${dx * 26}px), calc(-50% + ${dy * 20}px)) scale(1.3)`;
+
+    if (Math.abs(tx - cx) > .4 || Math.abs(ty - cy) > .4) {
+      queued = true;
+      requestAnimationFrame(frame);
+    }
+  }
+  frame();
+})();
+</script>
+
+</body>
+</html>

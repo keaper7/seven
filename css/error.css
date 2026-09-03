@@ -1,0 +1,213 @@
+/* ══════════════════════════════════════════════════════
+   SEVEN — 404. Своя страница, но чужого языка не выдумывает:
+   рамка, HUD, зерно и курсор берутся из base.css/sections.css,
+   здесь только то, чего на главной нет.
+   ══════════════════════════════════════════════════════ */
+
+.err-page {
+  position: relative;
+  min-height: 100svh;
+  background: var(--asphalt);
+  color: var(--paper);
+  --bg: var(--asphalt);
+  --fg: var(--paper);
+  --dim: rgba(239, 237, 227, .42);
+  --hair: rgba(239, 237, 227, .14);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--pad) + 40px) var(--pad);
+}
+
+/* ── СКАНИРУЮЩИЙ СЛОЙ ──
+   Поле служебного текста, которого в обычном состоянии не видно: его
+   проявляет только «луч» — маска-радиус, привязанная к курсору. Метафора
+   прямая: система потеряла страницу и подсвечивает пустоту, куда светишь.
+   Маска именно mask-position (а не «at» внутри градиента) — так позицию
+   можно и гнать из JS переменной, и анимировать ключевыми кадрами там,
+   где мыши нет вовсе */
+.err__scan {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  color: var(--paper);
+  opacity: .2;
+  /* дефолт в единицах длины, а не в процентах: позиция маски ниже
+     считается как «центр минус половина размера», а с процентом такой
+     calc означал бы совсем другое — проценты в mask-position не смещают,
+     а выравнивают, и центр экрана из них не получить */
+  --mx: 50vw;
+  --my: 50vh;
+  font-size: clamp(10px, 1.1vw, 13px);
+  font-weight: 300;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  line-height: 2.6;
+  white-space: nowrap;
+  -webkit-mask-image: radial-gradient(circle, #000 0%, #000 20%, transparent 60%);
+          mask-image: radial-gradient(circle, #000 0%, #000 20%, transparent 60%);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 62vmax 62vmax;
+          mask-size: 62vmax 62vmax;
+  /* mask-position ставит УГОЛ фона маски, а не её центр — без сдвига на
+     половину размера круг света уезжает вправо-вниз от курсора (и на
+     обычном экране просто за край) */
+  -webkit-mask-position: calc(var(--mx) - 31vmax) calc(var(--my) - 31vmax);
+          mask-position: calc(var(--mx) - 31vmax) calc(var(--my) - 31vmax);
+  transition: -webkit-mask-size .6s var(--ease), mask-size .6s var(--ease);
+}
+/* каждая вторая строка сдвинута — поле читается сеткой, а не столбцом */
+.err__scan p:nth-child(even) { padding-left: 7vw; }
+
+/* на тач-устройствах курсора нет — луч ведёт себя сам, медленным дрейфом,
+   иначе слой просто никогда не проявится */
+.err-page.is-auto .err__scan {
+  animation: scan-drift 19s ease-in-out infinite alternate;
+}
+/* значения длинами, а не переменными: CSS-переменные без @property
+   ключевыми кадрами не интерполируются, а mask-position — вполне */
+@keyframes scan-drift {
+  0%   { -webkit-mask-position: calc(24vw - 31vmax) calc(28vh - 31vmax); mask-position: calc(24vw - 31vmax) calc(28vh - 31vmax); }
+  50%  { -webkit-mask-position: calc(76vw - 31vmax) calc(60vh - 31vmax); mask-position: calc(76vw - 31vmax) calc(60vh - 31vmax); }
+  100% { -webkit-mask-position: calc(36vw - 31vmax) calc(80vh - 31vmax); mask-position: calc(36vw - 31vmax) calc(80vh - 31vmax); }
+}
+
+.err {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ── КОД ОШИБКИ ──
+   Ноль намеренно не набирается шрифтом: его место занимает фирменный знак.
+   Смысл читается без подписи — страницы нет, семёрка на месте */
+.err__code {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .03em;
+  font-size: clamp(88px, 20vw, 300px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--paper);
+  will-change: transform;
+}
+
+/* эхо кода позади — тот же приём, что .hero__ghost в прологе:
+   контур крупнее набора, читается ореолом, а не промахом приводки */
+.err__ghost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.3);
+  color: transparent;
+  -webkit-text-stroke: 1px var(--paper);
+  opacity: .05;
+  pointer-events: none;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* знак на месте нуля: контурный круг + сплошная семёрка. Контур, а не
+   заливка — перекличка с контурной «07» на экране контактов, и на тёмном
+   фоне залитый тёмный круг знака просто исчез бы */
+.err__mark {
+  position: relative;
+  width: .74em;
+  height: .74em;
+  flex: none;
+  overflow: visible;
+  /* тёплое свечение за знаком — то же, что держит букву V логотипа
+     в прологе (.hero__mark::before). Здесь оно ещё и работает по смыслу:
+     единственный источник света на странице, где сигнал потерян */
+  filter: drop-shadow(0 0 clamp(30px, 4vw, 60px) rgba(255, 119, 0, .45));
+}
+.err__mark-ring {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 2;
+  opacity: .85;
+}
+.err__mark-seven { fill: var(--orange); }
+
+/* маячок: кольца уходят от знака в пустоту. Система сигнал потеряла —
+   но продолжает его посылать. Ритм тот же, что у пульсирующей точки HUD */
+.err__mark-pulse {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 1.5;
+  transform-origin: 50% 50%;
+  animation: mark-pulse 3.6s var(--ease) infinite;
+}
+.err__mark-pulse--b { animation-delay: 1.8s; }
+@keyframes mark-pulse {
+  0%   { transform: scale(1);    opacity: .5; }
+  70%  { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+.err__lead {
+  margin-top: clamp(20px, 4vh, 40px);
+  font-family: var(--ffd);
+  font-size: clamp(22px, 3.4vw, 40px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+.err__lead em { font-style: italic; color: var(--orange); }
+
+.err__sub {
+  margin-top: 14px;
+  max-width: 46ch;
+  font-size: clamp(13px, 1.15vw, 16px);
+  line-height: 1.6;
+  color: var(--dim);
+}
+
+/* кнопка повторяет .hero__cta (стиль подключён из sections.css) —
+   тут только положение: на главной она приколота к низу экрана,
+   здесь стоит в потоке под текстом */
+.err__cta {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  translate: none;
+  margin-top: clamp(26px, 5vh, 46px);
+}
+
+/* «луч» реагирует на наведение к выходу — маленькая награда за то,
+   что человек нашёл единственную рабочую ссылку на странице.
+   Только через :has(): кнопка лежит внутри .err, то есть ПОСЛЕ слоя
+   в DOM, и обычным соседним селектором до него не дотянуться */
+.err-page:has(.err__cta:hover) .err__scan {
+  -webkit-mask-size: 96vmax 96vmax;
+          mask-size: 96vmax 96vmax;
+}
+
+/* ── АДАПТИВ ── */
+@media (max-width: 640px) {
+  .err__scan { letter-spacing: .24em; line-height: 2.2; }
+  .err__sub { max-width: 34ch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* без движения луч бесполезен как эффект, но текст под ним не должен
+     пропасть совсем — снимаем маску и оставляем поле еле заметным фоном */
+  .err__scan {
+    -webkit-mask-image: none;
+            mask-image: none;
+    opacity: .05;
+    animation: none;
+  }
+  .err__mark-pulse { display: none; }
+}
