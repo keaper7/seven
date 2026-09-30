@@ -24,7 +24,11 @@ SEVEN.work = function initWork() {
   /* шаг = позиция карточки внутри ленты. Считаем по offsetLeft, а не по
      «ширина + gap»: ширина карточки задана через clamp/vw и на дробных
      значениях накопленная ошибка к третьему кейсу уводит скролл мимо снапа */
-  const posOf = (i) => cases[i].offsetLeft - track.offsetLeft;
+  /* отсчёт от первой карточки, а не от края ленты: у ленты есть свой
+     внутренний отступ слева (scroll-padding), и первая карточка на нуле
+     скролла уже стоит на месте — иначе проезд уводил бы на отступ дальше
+     снапа, и браузер тут же отдёргивал ленту назад */
+  const posOf = (i) => cases[i].offsetLeft - cases[0].offsetLeft;
 
   const maxScroll = () => track.scrollWidth - track.clientWidth;
 
