@@ -75,36 +75,6 @@
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
   document.querySelectorAll('[data-reveal]').forEach((el) => revealIO.observe(el));
 
-  /* ── живые телефоны: экран сам листает сайт, пока телефон на виду ──
-     сдвиг = высота картинки минус высота экрана; скорость постоянная,
-     поэтому длинный сайт листается дольше короткого, а не быстрее */
-  const phones = [...document.querySelectorAll('.phone')];
-  const measure = (phone) => {
-    const screen = phone.querySelector('.phone__screen');
-    const img = screen && screen.querySelector('img');
-    if (!img) return;
-    const apply = () => {
-      const shift = Math.max(0, img.offsetTop + img.getBoundingClientRect().height - screen.clientHeight);
-      phone.style.setProperty('--shift', shift + 'px');
-      phone.style.setProperty('--dur', Math.max(8, shift / 70) + 's');
-    };
-    if (img.complete && img.naturalHeight) apply();
-    else img.addEventListener('load', apply, { once: true });
-  };
-  phones.forEach(measure);
-  let resizeT = 0;
-  addEventListener('resize', () => {
-    clearTimeout(resizeT);
-    resizeT = setTimeout(() => phones.forEach(measure), 200);
-  });
-
-  /* живым считается телефон, который виден больше чем на 60% — в ленте
-     на телефоне это ровно одна карточка по центру, а не соседние краешки */
-  const liveIO = new IntersectionObserver((entries) => {
-    entries.forEach((en) => en.target.classList.toggle('is-live', en.intersectionRatio > 0.6));
-  }, { threshold: [0, 0.6, 1] });
-  phones.forEach((p) => liveIO.observe(p));
-
   /* ── маршрут процесса: линия заливается по мере прохода секции ── */
   const steps = document.querySelector('.steps');
   if (steps && !reduced) {

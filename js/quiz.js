@@ -30,14 +30,14 @@ SEVEN.quiz = function initQuiz(goal = () => {}) {
     const done = i >= qs.length;
     result.hidden = !done;
     back.hidden = i === 0 || done;
-    stepEl.textContent = done ? 'готово' : `вопрос ${i + 1} из ${qs.length}`;
+    stepEl.textContent = done ? 'Готово' : `Вопрос ${i + 1} из ${qs.length}`;
     bar.style.width = (Math.min(i, qs.length) / qs.length * 100) + '%';
   };
 
   const finish = () => {
     const plan = catalog
-      ? { name: 'Сайт с каталогом', meta: '14–18 дней · цена по задаче' }
-      : { name: 'Сайт-визитка',     meta: 'от 20 000 ₽ · 7–10 дней' };
+      ? { name: 'Сайт с каталогом', meta: 'запуск за 14–18 дней' }
+      : { name: 'Сайт-визитка',     meta: 'запуск за 7–10 дней' };
     planEl.textContent = plan.name;
     metaEl.textContent = plan.meta;
 

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>SEVEN — сайты для малого бизнеса под ключ</title>
-<meta name="description" content="SEVEN — делаю сайты для малого бизнеса под ключ: дизайн, разработка, домен и хостинг. От 20 000 ₽, 7–10 дней.">
-<meta name="theme-color" content="#1C1A17">
+<meta name="description" content="SEVEN — сайты для малого бизнеса под ключ. Не конструктор, ручная разработка: дизайн, сайт, домен и хостинг. Запуск за 7–10 дней.">
+<meta name="theme-color" content="#1C1B19">
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -24,15 +24,14 @@
 
 <script>
   /* Заставка 00 → 07 — только при самом первом заходе. Решается здесь, до
-     отрисовки: класс ставится раньше, чем браузер покажет страницу, иначе
-     вернувшийся посетитель на долю секунды увидел бы шторку. Без JS класса
-     нет — и заставки нет, контент виден сразу */
+     отрисовки: иначе вернувшийся посетитель на долю секунды увидел бы
+     шторку. Без JS класса нет — и заставки нет, контент виден сразу */
   try {
     if (!localStorage.getItem('seven-intro')) document.documentElement.classList.add('intro');
   } catch (e) {}
   document.documentElement.classList.add('js');
   /* страховка: если app.js не загрузился, ничего не должно остаться
-     спрятанным ради анимации появления — показываем всё как есть */
+     спрятанным ради анимации появления */
   setTimeout(function () {
     var h = document.documentElement;
     if (!h.classList.contains('app-ok')) h.classList.add('no-anim');
@@ -44,17 +43,17 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SEVEN">
 <meta property="og:title" content="SEVEN — сайты для малого бизнеса под ключ">
-<meta property="og:description" content="Дизайн, разработка, домен и хостинг. От 20 000 ₽, 7–10 дней.">
+<meta property="og:description" content="Не конструктор, ручная разработка. Дизайн, сайт, домен и хостинг — запуск за 7–10 дней.">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:url" content="https://sevensites.ru/">
 <meta property="og:image" content="https://sevensites.ru/img/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="SEVEN — сайты для малого бизнеса, регион 07">
+<meta property="og:image:alt" content="SEVEN — сайты для малого бизнеса">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SEVEN — сайты для малого бизнеса под ключ">
-<meta name="twitter:description" content="Дизайн, разработка, домен и хостинг. От 20 000 ₽, 7–10 дней.">
+<meta name="twitter:description" content="Не конструктор, ручная разработка. Дизайн, сайт, домен и хостинг — запуск за 7–10 дней.">
 <meta name="twitter:image" content="https://sevensites.ru/img/og-cover.png">
 
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
@@ -66,7 +65,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+<!-- те же шрифты, что в постах Instagram: жирный геометрический Unbounded
+     для заголовков и спокойный Onest для текста -->
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300..700&family=Unbounded:wght@400..700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/site.css">
 
@@ -75,12 +76,11 @@
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "SEVEN",
-  "description": "Разработка сайтов для малого бизнеса под ключ: дизайн, разработка, домен и хостинг.",
+  "description": "Сайты для малого бизнеса под ключ: дизайн, ручная разработка, домен и хостинг.",
   "url": "https://sevensites.ru/",
   "image": "https://sevensites.ru/img/og-cover.png",
   "email": "7devsites@gmail.com",
   "areaServed": "RU",
-  "priceRange": "от 20 000 ₽",
   "knowsLanguage": ["ru"],
   "sameAs": [
     "https://t.me/seven_sites",
@@ -108,22 +108,16 @@
 
 <!-- ══ ШАПКА ══ -->
 <header class="top" id="top">
-  <a class="top__logo" href="#hero" aria-label="SEVEN — наверх">
-    <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50"/><polygon points="24,26 78,26 54,82 36,82 58,40 24,40"/></svg>
-    <span>SEVEN</span>
-  </a>
+  <a class="logo" href="#hero" aria-label="SEVEN — наверх">seven<i>.</i></a>
 
   <nav class="top__nav" aria-label="Разделы">
-    <a href="#works"><i>01</i>Работы</a>
-    <a href="#price"><i>03</i>Цены</a>
-    <a href="#process"><i>04</i>Процесс</a>
-    <a href="#quiz"><i>05</i>Подбор</a>
-    <a href="#faq"><i>06</i>Вопросы</a>
+    <a href="#works">Работы</a>
+    <a href="#formats">Форматы</a>
+    <a href="#process">Процесс</a>
+    <a href="#faq">Вопросы</a>
   </nav>
 
-  <a class="top__cta" href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="tg_header">
-    Написать<span aria-hidden="true">↗</span>
-  </a>
+  <a class="top__cta" href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="tg_header">Написать</a>
 </header>
 
 
@@ -132,147 +126,135 @@
 <!-- ═════════════ ГЛАВНЫЙ ЭКРАН ═════════════ -->
 <section class="hero" id="hero">
   <div class="hero__body">
-    <p class="hero__kicker" data-in="1">
-      <span class="hero__live"><i></i>Нальчик · <time id="clock">--:--</time></span>
-      <span class="hero__region">регион 07 · работаю по всей России</span>
-    </p>
+    <p class="chip hero__status" data-in="1"><i class="dot-live"></i>На связи · <time id="clock">--:--</time> МСК</p>
 
-    <h1 class="hero__title" data-in="2">
-      Сайт, который <em>приводит клиентов,</em> а&nbsp;не просто висит в&nbsp;сети.
-    </h1>
+    <h1 class="hero__title" data-in="2">Сайты, которые приносят <span>клиентов</span></h1>
 
     <p class="hero__sub" data-in="3">
-      Делаю сайты для малого бизнеса под ключ: дизайн, разработка, домен и хостинг.
-      Вы занимаетесь делом — я делаю так, чтобы вас находили.
+      Не конструктор — ручная разработка под ваш бизнес.
+      Дизайн, сайт, домен и хостинг: всё под ключ, вам остаётся заниматься делом.
     </p>
 
-    <dl class="hero__facts" data-in="4">
-      <div><dt>стоимость</dt><dd>от 20 000 ₽</dd></div>
-      <div><dt>срок</dt><dd>7–10 дней</dd></div>
-      <div><dt>формат</dt><dd>под ключ</dd></div>
-    </dl>
+    <ul class="hero__facts" data-in="4">
+      <li>Запуск за 7–10 дней</li>
+      <li>Ручная разработка</li>
+      <li>Под ключ</li>
+    </ul>
 
     <div class="hero__actions" data-in="5">
       <a class="btn btn--main" href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="tg_hero" data-magnet>
-        Обсудить проект<span aria-hidden="true">↗</span>
+        Обсудить проект<span aria-hidden="true">→</span>
       </a>
-      <a class="btn btn--ghost" href="#works">Смотреть работы<span aria-hidden="true">↓</span></a>
+      <a class="btn btn--soft" href="#works">Смотреть работы</a>
     </div>
   </div>
 
-  <!-- витрина на широком экране: лучший кейс в телефоне справа, сразу
-       показывает, как выглядит результат. На телефоне прячется — там
-       этот же кейс первым встречает в ленте работ ниже -->
-  <div class="hero__device" data-in="4" aria-hidden="true">
-    <div class="phone phone--hero">
-      <div class="phone__screen"><img src="img/m-zarechye.jpg" alt="" width="640" height="5907" decoding="async"></div>
-    </div>
-    <p class="hero__device-cap">zarechye-boxing.ru — сделан в SEVEN</p>
-  </div>
+  <!-- лучший кейс сразу на первом экране: на телефоне он выглядывает
+       снизу и сам зовёт листать дальше, на компьютере стоит справа -->
+  <a class="hero__case" href="https://zarechye-boxing.ru" target="_blank" rel="noopener" data-in="4" data-goal="case_hero">
+    <span class="browser">
+      <span class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><em>zarechye-boxing.ru</em></span>
+      <img src="img/case-zarechye.jpg" alt="Сайт академии бокса Zarechye — сделан в SEVEN" width="1280" height="800" decoding="async" fetchpriority="high">
+    </span>
+    <span class="hero__case-cap">Свежий проект · академия бокса<span aria-hidden="true">→</span></span>
+  </a>
 
-  <div class="hero__mark" aria-hidden="true">SE<b>V</b>EN</div>
+  <!-- та же плавная оранжевая линия, что в постах Instagram -->
+  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 70 C 240 10, 420 10, 640 60 S 1040 120, 1200 60 S 1380 20, 1440 40" />
+  </svg>
 </section>
-
-<div class="ticker" aria-hidden="true">
-  <p class="ticker__track"><span>SEVEN · САЙТЫ ДЛЯ БИЗНЕСА · 07 · SEVEN · САЙТЫ ДЛЯ БИЗНЕСА · 07 · SEVEN · САЙТЫ ДЛЯ БИЗНЕСА · 07 · </span><span>SEVEN · САЙТЫ ДЛЯ БИЗНЕСА · 07 · SEVEN · САЙТЫ ДЛЯ БИЗНЕСА · 07 · SEVEN · САЙТЫ ДЛЯ БИЗНЕСА · 07 · </span></p>
-</div>
 
 
 <!-- ═════════════ 01 · РАБОТЫ ═════════════ -->
-<section class="sec sec--paper works" id="works">
+<section class="sec sec--light works" id="works">
   <header class="sec__head" data-reveal>
-    <p class="sec__tag"><b>01</b> работы</p>
-    <h2 class="sec__title">Живые сайты, <em>а не картинки.</em></h2>
-    <p class="sec__lead">Каждый экран ниже — настоящий сайт на телефоне. Листайте ленту вбок, нажмите на экран — сайт откроется целиком.</p>
+    <p class="sec__tag">01 · работы</p>
+    <h2 class="sec__title">Проекты, которые уже работают</h2>
+    <p class="sec__lead">Листайте вбок. Нажмите на карточку — сайт откроется целиком.</p>
   </header>
 
-  <!-- id и классы работ совпадают с js/work.js: стрелки, счётчик, драг
+  <!-- id и классы совпадают с js/work.js: стрелки, счётчик, драг
        мышью и докрутка до последней карточки уже отлажены там -->
   <div class="work__carousel" id="workCarousel" tabindex="0" role="group"
        aria-roledescription="карусель" aria-label="Работы">
 
     <article class="work__case">
-      <a class="phone" href="https://shanicosmo.ru" target="_blank" rel="noopener" aria-label="Открыть сайт «Косметология с 0»" data-goal="case_open">
-        <span class="phone__screen"><img src="img/m-liana.jpg" alt="Мобильная версия сайта курса «Косметология с 0»" width="640" height="5907" loading="lazy" decoding="async"></span>
+      <a class="case" href="https://shanicosmo.ru" target="_blank" rel="noopener" data-goal="case_open">
+        <span class="case__img"><img src="img/case-liana.jpg" alt="Сайт курса «Косметология с 0»" width="1280" height="800" loading="lazy" decoding="async"></span>
+        <span class="case__body">
+          <span class="case__tags"><b>Клиент</b><span>Онлайн-курс</span></span>
+          <span class="case__name">Косметология с 0</span>
+          <span class="case__desc">Лендинг курса для медсестёр и студентов-медиков: программа, форматы и запись.</span>
+          <span class="case__link">shanicosmo.ru<i aria-hidden="true">→</i></span>
+        </span>
       </a>
-      <div class="work__meta">
-        <p class="work__badge">клиент</p>
-        <h3 class="work__name">Косметология с 0</h3>
-        <p class="work__kind">Онлайн-курс · обучение косметологии</p>
-        <p class="work__desc">Лендинг курса для медсестёр и студентов-медиков: программа, цены и запись.</p>
-        <a class="work__link" href="https://shanicosmo.ru" target="_blank" rel="noopener" data-goal="case_open">shanicosmo.ru<span aria-hidden="true">↗</span></a>
-      </div>
     </article>
 
     <article class="work__case">
-      <a class="phone" href="https://lianashanibova.ru" target="_blank" rel="noopener" aria-label="Открыть сайт врача-косметолога Лианы Шанибовой" data-goal="case_open">
-        <span class="phone__screen"><img src="img/m-shanicosmo.jpg" alt="Мобильная версия сайта врача-косметолога" width="640" height="5907" loading="lazy" decoding="async"></span>
+      <a class="case" href="https://lianashanibova.ru" target="_blank" rel="noopener" data-goal="case_open">
+        <span class="case__img"><img src="img/case-shanicosmo.jpg" alt="Сайт врача-косметолога Лианы Шанибовой" width="1280" height="800" loading="lazy" decoding="async"></span>
+        <span class="case__body">
+          <span class="case__tags"><b>Клиент</b><span>Косметология</span></span>
+          <span class="case__name">Лиана Шанибова</span>
+          <span class="case__desc">Сайт врача-косметолога с акцентом на экспертность и удобную подачу услуг.</span>
+          <span class="case__link">lianashanibova.ru<i aria-hidden="true">→</i></span>
+        </span>
       </a>
-      <div class="work__meta">
-        <p class="work__badge">клиент</p>
-        <h3 class="work__name">Лиана Шанибова</h3>
-        <p class="work__kind">Косметология · Москва</p>
-        <p class="work__desc">Визитка врача с акцентом на экспертность и удобную подачу услуг.</p>
-        <a class="work__link" href="https://lianashanibova.ru" target="_blank" rel="noopener" data-goal="case_open">lianashanibova.ru<span aria-hidden="true">↗</span></a>
-      </div>
     </article>
 
     <article class="work__case">
-      <a class="phone" href="https://zarechye-boxing.ru" target="_blank" rel="noopener" aria-label="Открыть сайт Zarechye Boxing Academy" data-goal="case_open">
-        <span class="phone__screen"><img src="img/m-zarechye.jpg" alt="Мобильная версия сайта академии бокса" width="640" height="5907" loading="lazy" decoding="async"></span>
+      <a class="case" href="https://zarechye-boxing.ru" target="_blank" rel="noopener" data-goal="case_open">
+        <span class="case__img"><img src="img/case-zarechye.jpg" alt="Сайт академии бокса Zarechye" width="1280" height="800" loading="lazy" decoding="async"></span>
+        <span class="case__body">
+          <span class="case__tags"><b>Клиент</b><span>Спорт</span></span>
+          <span class="case__name">Zarechye Boxing</span>
+          <span class="case__desc">Сайт тренера — мастера спорта России. Запись на бесплатную первую тренировку.</span>
+          <span class="case__link">zarechye-boxing.ru<i aria-hidden="true">→</i></span>
+        </span>
       </a>
-      <div class="work__meta">
-        <p class="work__badge">клиент</p>
-        <h3 class="work__name">Zarechye Boxing</h3>
-        <p class="work__kind">Спорт · академия бокса</p>
-        <p class="work__desc">Сайт тренера — мастера спорта России. Запись на бесплатную первую тренировку.</p>
-        <a class="work__link" href="https://zarechye-boxing.ru" target="_blank" rel="noopener" data-goal="case_open">zarechye-boxing.ru<span aria-hidden="true">↗</span></a>
-      </div>
     </article>
 
     <article class="work__case">
-      <a class="phone" href="https://keaper7.github.io/publico/" target="_blank" rel="noopener" aria-label="Открыть демо Publico" data-goal="case_open">
-        <span class="phone__screen"><img src="img/m-publico.jpg" alt="Мобильная версия концепта кофейни Publico" width="640" height="5907" loading="lazy" decoding="async"></span>
+      <a class="case" href="https://keaper7.github.io/loft-park/" target="_blank" rel="noopener" data-goal="case_open">
+        <span class="case__img"><img src="img/case-loftpark.jpg" alt="Концепт сайта ресторана Loft Park" width="1280" height="800" loading="lazy" decoding="async"></span>
+        <span class="case__body">
+          <span class="case__tags"><b class="is-concept">Концепт</b><span>Ресторан</span></span>
+          <span class="case__name">Loft Park</span>
+          <span class="case__desc">Ресторан в сердце парка. Атмосферный сайт с вечерней подачей и бронью стола.</span>
+          <span class="case__link">смотреть демо<i aria-hidden="true">→</i></span>
+        </span>
       </a>
-      <div class="work__meta">
-        <p class="work__badge work__badge--alt">концепт</p>
-        <h3 class="work__name">Publico</h3>
-        <p class="work__kind">Кофейня · Нальчик</p>
-        <p class="work__desc">Кофе, завтраки и десерты. Меню, залы и дорога — в пару касаний.</p>
-        <a class="work__link" href="https://keaper7.github.io/publico/" target="_blank" rel="noopener" data-goal="case_open">смотреть демо<span aria-hidden="true">↗</span></a>
-      </div>
     </article>
 
     <article class="work__case">
-      <a class="phone" href="https://keaper7.github.io/kingstudio/" target="_blank" rel="noopener" aria-label="Открыть демо Kingstudio" data-goal="case_open">
-        <span class="phone__screen"><img src="img/m-kingstudio.jpg" alt="Мобильная версия концепта фотостудии Kingstudio" width="640" height="5907" loading="lazy" decoding="async"></span>
+      <a class="case" href="https://keaper7.github.io/publico/" target="_blank" rel="noopener" data-goal="case_open">
+        <span class="case__img"><img src="img/case-publico.jpg" alt="Концепт сайта кофейни Publico" width="1280" height="800" loading="lazy" decoding="async"></span>
+        <span class="case__body">
+          <span class="case__tags"><b class="is-concept">Концепт</b><span>Кофейня</span></span>
+          <span class="case__name">Publico</span>
+          <span class="case__desc">Кофе, завтраки и десерты. Меню, залы и дорога — в пару касаний.</span>
+          <span class="case__link">смотреть демо<i aria-hidden="true">→</i></span>
+        </span>
       </a>
-      <div class="work__meta">
-        <p class="work__badge work__badge--alt">концепт</p>
-        <h3 class="work__name">Kingstudio</h3>
-        <p class="work__kind">Фотостудия · аренда залов</p>
-        <p class="work__desc">Три зоны, цены и бронь. Пространство, созданное для вашей тёплой истории.</p>
-        <a class="work__link" href="https://keaper7.github.io/kingstudio/" target="_blank" rel="noopener" data-goal="case_open">смотреть демо<span aria-hidden="true">↗</span></a>
-      </div>
     </article>
 
     <article class="work__case">
-      <a class="phone" href="https://keaper7.github.io/loft-park/" target="_blank" rel="noopener" aria-label="Открыть демо Loft Park" data-goal="case_open">
-        <span class="phone__screen"><img src="img/m-loftpark.jpg" alt="Мобильная версия концепта ресторана Loft Park" width="640" height="1385" loading="lazy" decoding="async"></span>
+      <a class="case" href="https://keaper7.github.io/kingstudio/" target="_blank" rel="noopener" data-goal="case_open">
+        <span class="case__img"><img src="img/case-kingstudio.jpg" alt="Концепт сайта фотостудии Kingstudio" width="1280" height="800" loading="lazy" decoding="async"></span>
+        <span class="case__body">
+          <span class="case__tags"><b class="is-concept">Концепт</b><span>Фотостудия</span></span>
+          <span class="case__name">Kingstudio</span>
+          <span class="case__desc">Три зоны, аренда и бронь. Пространство для вашей тёплой истории.</span>
+          <span class="case__link">смотреть демо<i aria-hidden="true">→</i></span>
+        </span>
       </a>
-      <div class="work__meta">
-        <p class="work__badge work__badge--alt">концепт</p>
-        <h3 class="work__name">Loft Park</h3>
-        <p class="work__kind">Ресторан · центральный парк</p>
-        <p class="work__desc">Ресторан, который живёт в сердце парка. Атмосферный сайт с вечерней подачей.</p>
-        <a class="work__link" href="https://keaper7.github.io/loft-park/" target="_blank" rel="noopener" data-goal="case_open">смотреть демо<span aria-hidden="true">↗</span></a>
-      </div>
     </article>
   </div>
 
   <div class="work__nav">
+    <span class="work__count"><b id="workCur">01</b><i> / 06</i></span>
     <button class="work__arrow work__arrow--prev" type="button" aria-label="Предыдущая работа">←</button>
-    <span class="work__count"><b id="workCur">01</b><i>/06</i></span>
     <button class="work__arrow work__arrow--next" type="button" aria-label="Следующая работа">→</button>
   </div>
 </section>
@@ -283,46 +265,44 @@
   <div class="region__photo" aria-hidden="true"></div>
 
   <div class="region__body" data-reveal>
-    <p class="sec__tag"><b>02</b> координаты</p>
+    <p class="sec__tag">02 · код региона 07</p>
     <p class="region__lead">
       Здесь высоту меряют метрами. В вашем деле мерка другая:
-      <em>находят вас люди или проходят мимо.</em>
+      <span>находят вас люди или проходят мимо.</span>
     </p>
     <p class="region__sub">
       Разбираться в доменах, хостинге и вёрстке — не ваша работа. Ваша — делать своё дело.
       Остальное беру на себя.
     </p>
+    <ul class="region__facts">
+      <li><span>массив</span>Эльбрус</li>
+      <li><span>высота</span>5642 м</li>
+      <li><span>регион</span>RU-KB · 07</li>
+    </ul>
   </div>
-
-  <dl class="region__facts" data-reveal>
-    <div><dt>массив</dt><dd>Эльбрус</dd></div>
-    <div><dt>высота</dt><dd>5642 <i>м</i></dd></div>
-    <div><dt>регион</dt><dd>RU-KB · <i>07</i></dd></div>
-  </dl>
 </section>
 
 
-<!-- ═════════════ 03 · ЦЕНЫ ═════════════ -->
-<section class="sec sec--paper price" id="price">
+<!-- ═════════════ 03 · ФОРМАТЫ ═════════════ -->
+<section class="sec sec--light formats" id="formats">
   <header class="sec__head" data-reveal>
-    <p class="sec__tag"><b>03</b> цены и сроки</p>
-    <h2 class="sec__title">Понятно заранее: <em>сколько и когда.</em></h2>
+    <p class="sec__tag">03 · форматы</p>
+    <h2 class="sec__title">Что можно заказать</h2>
+    <p class="sec__lead">Стоимость считаю после короткого брифа — называю сумму до начала работы, без доплат по ходу.</p>
   </header>
 
   <div class="plans">
-    <article class="plan plan--main" data-reveal>
-      <p class="plan__tag">чаще всего выбирают</p>
+    <article class="plan plan--dark" data-reveal>
+      <p class="plan__tag">чаще всего</p>
       <h3 class="plan__name">Сайт-визитка</h3>
-      <p class="plan__for">Услуги, мастера, врачи, студии, тренеры</p>
-      <p class="plan__sum"><span>от</span> 20 000 <i>₽</i></p>
+      <p class="plan__for">Для услуг: салоны, клиники, мастера, тренеры, студии.</p>
       <p class="plan__time"><b>7–10</b> дней от заявки до запуска</p>
     </article>
 
     <article class="plan" data-reveal>
       <p class="plan__tag">для меню и товаров</p>
       <h3 class="plan__name">Сайт с каталогом</h3>
-      <p class="plan__for">Кафе, рестораны, магазины, прайс с позициями</p>
-      <p class="plan__sum plan__sum--sm">по задаче</p>
+      <p class="plan__for">Для кафе, ресторанов и магазинов: меню, позиции, прайс.</p>
       <p class="plan__time"><b>14–18</b> дней от заявки до запуска</p>
     </article>
   </div>
@@ -330,103 +310,46 @@
   <div class="included" data-reveal>
     <p class="included__title">В любой сайт входит</p>
     <ul class="included__list">
-      <li><b>Дизайн под ваш бизнес</b><span>не шаблон из конструктора</span></li>
-      <li><b>Адаптив</b><span>удобно с телефона, планшета и компьютера</span></li>
-      <li><b>Домен и хостинг</b><span>первый год — включён в стоимость</span></li>
-      <li><b>Аналитика</b><span>видно, сколько людей пришло и откуда</span></li>
+      <li><i aria-hidden="true">✦</i><b>Дизайн под ваш бизнес</b><span>не шаблон из конструктора</span></li>
+      <li><i aria-hidden="true">✦</i><b>Удобно с телефона</b><span>и с планшета, и с компьютера</span></li>
+      <li><i aria-hidden="true">✦</i><b>Домен и хостинг</b><span>первый год уже включён</span></li>
+      <li><i aria-hidden="true">✦</i><b>Аналитика</b><span>видно, сколько людей пришло и откуда</span></li>
     </ul>
   </div>
 
-  <blockquote class="price__quote" data-reveal>
-    <p>«У меня и так есть клиенты, зачем сайт?»</p>
-    <p>Часть новых клиентов ищет вас в Картах и поиске, а не по сарафану. Нет сайта — вас там просто нет.</p>
+  <blockquote class="quote" data-reveal>
+    <p class="quote__q">«У меня и так есть клиенты, зачем сайт?»</p>
+    <p class="quote__a">Часть новых клиентов ищет вас в Картах и поиске, а не по сарафану. Нет сайта — вас там просто нет.</p>
   </blockquote>
-
-  <div class="price__foot" data-reveal>
-    <a class="btn btn--main" href="#quiz">Подобрать формат<span aria-hidden="true">→</span></a>
-    <p class="price__note">Сроки актуальны сейчас. Если загрузка вырастет — скажу об этом сразу, до начала работы.</p>
-  </div>
 </section>
 
 
 <!-- ═════════════ 04 · ПРОЦЕСС ═════════════ -->
-<!-- семь шагов — семь отметок высоты: от подножия (0 м) до вершины Эльбруса.
-     Тот же приём «07», что тянется через весь сайт -->
+<!-- семь шагов — семь отметок высоты: от подножия (0 м) до вершины Эльбруса -->
 <section class="sec sec--dark process" id="process">
   <header class="sec__head" data-reveal>
-    <p class="sec__tag"><b>04</b> процесс</p>
-    <h2 class="sec__title">Семь шагов <em>от разговора до запуска.</em></h2>
+    <p class="sec__tag">04 · процесс</p>
+    <h2 class="sec__title">7 шагов от разговора до запуска</h2>
     <p class="sec__lead">От вас — рассказать о деле и согласовать концепцию. Всё техническое — на мне.</p>
   </header>
 
   <ol class="steps">
-    <li class="step" data-reveal><span class="step__alt">0 м</span><span class="step__n">01</span><h3>Бриф</h3><p>Слушаю: что за бизнес, кто клиент, чего не хватает сейчас.</p></li>
-    <li class="step" data-reveal><span class="step__alt">900 м</span><span class="step__n">02</span><h3>Исследование</h3><p>Рынок, конкуренты, аудитория. Решения из данных, а не из вкуса.</p></li>
-    <li class="step" data-reveal><span class="step__alt">1800 м</span><span class="step__n">03</span><h3>Структура</h3><p>Какие экраны нужны и в каком порядке, чтобы человек дошёл до заявки.</p></li>
-    <li class="step" data-reveal><span class="step__alt">2700 м</span><span class="step__n">04</span><h3>Концепция</h3><p>Одно визуальное направление — выбранное и обоснованное. Правим здесь, пока нет кода.</p></li>
-    <li class="step" data-reveal><span class="step__alt">3600 м</span><span class="step__n">05</span><h3>Дизайн</h3><p>Макеты всех экранов — для телефона и компьютера.</p></li>
-    <li class="step" data-reveal><span class="step__alt">4600 м</span><span class="step__n">06</span><h3>Разработка</h3><p>Чистый код, быстрая загрузка, удобство на любом устройстве.</p></li>
-    <li class="step step--peak" data-reveal><span class="step__alt">5642 м</span><span class="step__n">07</span><h3>Запуск</h3><p>Домен, аналитика, передача доступов. Дальше — сопровождение, если нужно.</p></li>
+    <li class="step" data-reveal><span class="step__n">01</span><div><h3>Бриф</h3><p>Слушаю: что за бизнес, кто клиент, чего не хватает сейчас.</p></div><span class="step__alt">0 м</span></li>
+    <li class="step" data-reveal><span class="step__n">02</span><div><h3>Исследование</h3><p>Рынок, конкуренты, аудитория. Решения из данных, а не из вкуса.</p></div><span class="step__alt">900 м</span></li>
+    <li class="step" data-reveal><span class="step__n">03</span><div><h3>Структура</h3><p>Какие экраны нужны и в каком порядке, чтобы человек дошёл до заявки.</p></div><span class="step__alt">1800 м</span></li>
+    <li class="step" data-reveal><span class="step__n">04</span><div><h3>Концепция</h3><p>Одно визуальное направление. Правим здесь, пока нет ни строчки кода.</p></div><span class="step__alt">2700 м</span></li>
+    <li class="step" data-reveal><span class="step__n">05</span><div><h3>Дизайн</h3><p>Макеты всех экранов — для телефона и компьютера.</p></div><span class="step__alt">3600 м</span></li>
+    <li class="step" data-reveal><span class="step__n">06</span><div><h3>Разработка</h3><p>Чистый код, быстрая загрузка, удобство на любом устройстве.</p></div><span class="step__alt">4600 м</span></li>
+    <li class="step step--peak" data-reveal><span class="step__n">07</span><div><h3>Запуск</h3><p>Домен, аналитика, передача доступов. Дальше — сопровождение, если нужно.</p></div><span class="step__alt">5642 м</span></li>
   </ol>
 </section>
 
 
-<!-- ═════════════ 05 · ПОДБОР ═════════════ -->
-<!-- три касания вместо пустого поля сообщения: человеку не нужно придумывать,
-     с чего начать разговор, а в Telegram приходит заявка уже с контекстом -->
-<section class="sec quiz" id="quiz">
+<!-- ═════════════ 05 · ВОПРОСЫ ═════════════ -->
+<section class="sec sec--light faq-sec" id="faq">
   <header class="sec__head" data-reveal>
-    <p class="sec__tag"><b>05</b> подбор</p>
-    <h2 class="sec__title">Подберу формат <em>за три вопроса.</em></h2>
-  </header>
-
-  <div class="qz" id="qz" data-reveal>
-    <div class="qz__progress" aria-hidden="true"><i id="qzBar"></i></div>
-    <p class="qz__step" id="qzStep">вопрос 1 из 3</p>
-
-    <fieldset class="qz__q is-current" data-key="biz">
-      <legend>Чем вы занимаетесь?</legend>
-      <button type="button" data-v="Услуги (салон, клиника, мастер, тренер)">Услуги<small>салон, клиника, мастер, тренер</small></button>
-      <button type="button" data-v="Кафе или ресторан" data-catalog>Кафе или ресторан<small>меню, бронь, как добраться</small></button>
-      <button type="button" data-v="Магазин / товары" data-catalog>Магазин<small>каталог товаров, прайс</small></button>
-      <button type="button" data-v="Другое">Другое<small>расскажу в сообщении</small></button>
-    </fieldset>
-
-    <fieldset class="qz__q" data-key="now">
-      <legend>Что у вас есть сейчас?</legend>
-      <button type="button" data-v="Ничего нет">Ничего<small>начинаем с нуля</small></button>
-      <button type="button" data-v="Только соцсети">Только соцсети<small>Instagram, Telegram, ВК</small></button>
-      <button type="button" data-v="Есть старый сайт">Старый сайт<small>устарел или не приносит заявок</small></button>
-    </fieldset>
-
-    <fieldset class="qz__q" data-key="when">
-      <legend>Когда нужен сайт?</legend>
-      <button type="button" data-v="Как можно скорее">Как можно скорее</button>
-      <button type="button" data-v="В течение месяца">В течение месяца</button>
-      <button type="button" data-v="Пока присматриваюсь">Пока присматриваюсь</button>
-    </fieldset>
-
-    <div class="qz__result" id="qzResult" hidden>
-      <p class="qz__label">Вам подойдёт</p>
-      <p class="qz__plan" id="qzPlan">Сайт-визитка</p>
-      <p class="qz__meta" id="qzMeta">от 20 000 ₽ · 7–10 дней</p>
-      <a class="btn btn--dark" id="qzSend" href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="quiz_send">
-        Отправить в Telegram<span aria-hidden="true">↗</span>
-      </a>
-      <p class="qz__hint" id="qzHint">Ответы уже в тексте сообщения — просто отправьте его.</p>
-      <button type="button" class="qz__again" id="qzAgain">пройти заново</button>
-    </div>
-
-    <button type="button" class="qz__back" id="qzBack" hidden>← назад</button>
-  </div>
-</section>
-
-
-<!-- ═════════════ 06 · ВОПРОСЫ ═════════════ -->
-<section class="sec sec--paper faq-sec" id="faq">
-  <header class="sec__head" data-reveal>
-    <p class="sec__tag"><b>06</b> вопросы</p>
-    <h2 class="sec__title">Что обычно <em>спрашивают.</em></h2>
+    <p class="sec__tag">05 · вопросы</p>
+    <h2 class="sec__title">Что обычно спрашивают</h2>
   </header>
 
   <!-- <details> нативный: работает без JS и с клавиатуры; js/faq.js
@@ -434,7 +357,7 @@
   <div class="faq" data-reveal>
     <details class="faq__item">
       <summary class="faq__q"><span class="faq__text">Сколько стоит сайт?</span><span class="faq__sign" aria-hidden="true"></span></summary>
-      <div class="faq__a"><p>Сайт-визитка — от 20 000 ₽. Точная сумма зависит от объёма: после короткого брифа назову её до начала работы, без доплат по ходу.</p></div>
+      <div class="faq__a"><p>Зависит от объёма: сколько страниц, нужен ли каталог, есть ли готовые тексты и фото. После короткого брифа назову точную сумму — до начала работы и без доплат по ходу.</p></div>
     </details>
     <details class="faq__item">
       <summary class="faq__q"><span class="faq__text">Что нужно от вас?</span><span class="faq__sign" aria-hidden="true"></span></summary>
@@ -456,46 +379,99 @@
 </section>
 
 
-<!-- ═════════════ 07 · КОНТАКТЫ ═════════════ -->
-<section class="sec sec--dark contact" id="contact">
-  <div class="contact__num" aria-hidden="true">07</div>
+<!-- ═════════════ 06 · ПОДБОР ═════════════ -->
+<!-- три касания вместо пустого поля сообщения: человеку не нужно придумывать,
+     с чего начать разговор, а в Telegram приходит заявка уже с контекстом -->
+<section class="sec sec--dark quiz" id="quiz">
+  <div class="qz-card" data-reveal>
+    <header class="qz-card__head">
+      <p class="sec__tag">06 · подбор</p>
+      <h2 class="sec__title">Подберу формат за 3 вопроса</h2>
+    </header>
 
+    <div class="qz" id="qz">
+      <div class="qz__top">
+        <p class="qz__step" id="qzStep">Вопрос 1 из 3</p>
+        <button type="button" class="qz__back" id="qzBack" hidden>← Назад</button>
+      </div>
+      <div class="qz__progress" aria-hidden="true"><i id="qzBar"></i></div>
+
+      <fieldset class="qz__q is-current" data-key="biz">
+        <legend>Чем вы занимаетесь?</legend>
+        <button type="button" data-v="Услуги (салон, клиника, мастер, тренер)">Услуги<small>салон, клиника, мастер, тренер</small></button>
+        <button type="button" data-v="Кафе или ресторан" data-catalog>Кафе или ресторан<small>меню, бронь, как добраться</small></button>
+        <button type="button" data-v="Магазин / товары" data-catalog>Магазин<small>каталог товаров, прайс</small></button>
+        <button type="button" data-v="Другое">Другое<small>расскажу в сообщении</small></button>
+      </fieldset>
+
+      <fieldset class="qz__q" data-key="now">
+        <legend>Что у вас есть сейчас?</legend>
+        <button type="button" data-v="Ничего нет">Ничего<small>начинаем с нуля</small></button>
+        <button type="button" data-v="Только соцсети">Только соцсети<small>Instagram, Telegram, ВК</small></button>
+        <button type="button" data-v="Есть старый сайт">Старый сайт<small>устарел или не приносит заявок</small></button>
+      </fieldset>
+
+      <fieldset class="qz__q" data-key="when">
+        <legend>Когда нужен сайт?</legend>
+        <button type="button" data-v="Как можно скорее">Как можно скорее</button>
+        <button type="button" data-v="В течение месяца">В течение месяца</button>
+        <button type="button" data-v="Пока присматриваюсь">Пока присматриваюсь</button>
+      </fieldset>
+
+      <div class="qz__result" id="qzResult" hidden>
+        <p class="qz__label">Вам подойдёт</p>
+        <p class="qz__plan" id="qzPlan">Сайт-визитка</p>
+        <p class="qz__meta" id="qzMeta">запуск за 7–10 дней</p>
+        <a class="btn btn--main" id="qzSend" href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="quiz_send">
+          Отправить в Telegram<span aria-hidden="true">→</span>
+        </a>
+        <p class="qz__hint" id="qzHint">Ответы уже в тексте сообщения — просто отправьте его.</p>
+        <button type="button" class="qz__again" id="qzAgain">Пройти заново</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════════════ 07 · КОНТАКТЫ ═════════════ -->
+<section class="sec sec--light contact" id="contact">
   <div class="contact__body" data-reveal>
-    <p class="sec__tag"><b>07</b> контакты</p>
-    <h2 class="contact__title">Твой следующий шаг <em>важнее пройденного пути.</em></h2>
-    <p class="contact__lead">Напишите — обсудим задачу, сроки и бюджет. Отвечаю лично.</p>
+    <p class="sec__tag">07 · контакты</p>
+    <h2 class="sec__title">Твой следующий шаг важнее пройденного <span>пути</span></h2>
+    <p class="sec__lead">Напишите — обсудим задачу, сроки и бюджет. Отвечаю лично.</p>
   </div>
 
   <div class="contact__links" data-reveal>
     <a class="contact__main" href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="tg_contact" data-magnet>
       <span class="contact__via">Telegram</span>
       <span class="contact__handle">@seven_sites</span>
-      <span class="contact__arrow" aria-hidden="true">↗</span>
+      <span class="contact__arrow" aria-hidden="true">→</span>
     </a>
-    <a class="contact__row" href="https://instagram.com/seven_sites" target="_blank" rel="noopener" data-goal="ig_contact">
-      <span class="contact__via">Instagram</span><span>@seven_sites</span><span aria-hidden="true">↗</span>
-    </a>
-    <a class="contact__row" href="mailto:7devsites@gmail.com" data-goal="mail_contact">
-      <span class="contact__via">Почта</span><span>7devsites@gmail.com</span><span aria-hidden="true">↗</span>
-    </a>
+    <div class="contact__rows">
+      <a class="contact__row" href="https://instagram.com/seven_sites" target="_blank" rel="noopener" data-goal="ig_contact">
+        <span class="contact__via">Instagram</span><span class="contact__val">@seven_sites</span>
+      </a>
+      <a class="contact__row" href="mailto:7devsites@gmail.com" data-goal="mail_contact">
+        <span class="contact__via">Почта</span><span class="contact__val">7devsites@gmail.com</span>
+      </a>
+    </div>
   </div>
-
-  <footer class="foot">
-    <span>© 2026 SEVEN</span>
-    <span>сайты для малого бизнеса · 07</span>
-  </footer>
 </section>
 
 </main>
 
+<footer class="foot">
+  <span class="logo">seven<i>.</i></span>
+  <span>Сайты для малого бизнеса · © 2026</span>
+</footer>
+
 <!-- ══ ЛИПКАЯ КНОПКА (телефон) ══
-     появляется, когда главный экран ушёл из вида, и прячется у контактов
-     и у квиза — там свои кнопки, две одинаковые рядом только спорили бы -->
+     появляется, когда главный экран ушёл из вида, и прячется у квиза и
+     контактов — там свои кнопки, две одинаковые рядом только спорили бы -->
 <div class="dock" id="dock">
   <a class="dock__btn" href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="tg_dock">
-    <span class="dock__dot" aria-hidden="true"></span>
     <span class="dock__text">Обсудить проект<small>ответ в Telegram</small></span>
-    <span class="dock__arrow" aria-hidden="true">↗</span>
+    <span class="dock__arrow" aria-hidden="true">→</span>
   </a>
 </div>
 
