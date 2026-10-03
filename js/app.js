@@ -19,10 +19,12 @@
   });
 
   SEVEN.clock();
+  SEVEN.motion();
   SEVEN.cursor();
-  SEVEN.work();
   SEVEN.faq();
-  SEVEN.fit(goal);
+  SEVEN.reel();
+  SEVEN.ticker();
+  SEVEN.menu();
 
   /* ── заставка 00 → 07: только первый заход, быстро ── */
   const intro = document.getElementById('intro');
@@ -39,10 +41,10 @@
       if (n === 7) {
         count.classList.add('is-final');
         setTimeout(() => {
-          intro.classList.add('is-done');
-          ready();
-          setTimeout(() => intro.remove(), 900);
-        }, 260);
+          intro.classList.add('is-done');          // шторка уезжает вверх
+          setTimeout(ready, 280);                  // слова выезжают следом
+          setTimeout(() => intro.remove(), 1200);
+        }, 320);
         return;
       }
       n += 1;
@@ -92,10 +94,10 @@
   }
 
   /* ── липкая кнопка: после главного экрана, но не поверх своих CTA ──
-     прячется у примерки и у контактов — там уже есть крупные кнопки */
+     прячется у контактов — там уже есть крупные кнопки */
   const dock = document.getElementById('dock');
   const hero = document.getElementById('hero');
-  const blockers = ['fit', 'contact'].map((id) => document.getElementById(id)).filter(Boolean);
+  const blockers = ['contact'].map((id) => document.getElementById(id)).filter(Boolean);
   const state = { heroOut: false, blocked: new Set() };
   const syncDock = () => dock.classList.toggle('is-on', state.heroOut && state.blocked.size === 0);
 

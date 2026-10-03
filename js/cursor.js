@@ -40,15 +40,21 @@ SEVEN.cursor = function initCursor() {
   document.addEventListener('mouseleave', () => el.classList.add('is-hidden'));
   document.addEventListener('mouseenter', () => el.classList.remove('is-hidden'));
 
-  // расширение кольца над интерактивным
-  const targets = document.querySelectorAll('a, button, .dir');
+  // расширение кольца над интерактивным; над работами кольцо становится
+  // круглой плашкой с подписью — как «play reel» на сайтах продакшенов
+  const label = document.getElementById('cursorLabel');
+  const targets = document.querySelectorAll('a, button, summary');
   targets.forEach((t) => {
-    t.addEventListener('mouseenter', () => el.classList.add('is-active'));
-    t.addEventListener('mouseleave', () => el.classList.remove('is-active'));
+    t.addEventListener('mouseenter', () => {
+      const txt = t.dataset.cursor;
+      el.classList.add(txt ? 'is-label' : 'is-active');
+      if (txt && label) label.textContent = txt;
+    });
+    t.addEventListener('mouseleave', () => el.classList.remove('is-active', 'is-label'));
   });
 
   // магнит: ссылки слегка тянутся к курсору
-  const magnets = document.querySelectorAll('[data-magnet], .rail a, .lab__c');
+  const magnets = document.querySelectorAll('[data-magnet]');
   magnets.forEach((m) => {
     m.addEventListener('mousemove', (e) => {
       const r = m.getBoundingClientRect();
