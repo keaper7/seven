@@ -22,7 +22,7 @@
   SEVEN.motion();
   SEVEN.cursor();
   SEVEN.faq();
-  SEVEN.reel();
+  SEVEN.show();
   SEVEN.ticker();
   SEVEN.menu();
 
@@ -94,10 +94,10 @@
   }
 
   /* ── липкая кнопка: после главного экрана, но не поверх своих CTA ──
-     прячется у контактов — там уже есть крупные кнопки */
+     прячется у витрины работ и у контактов — там свои кнопки */
   const dock = document.getElementById('dock');
   const hero = document.getElementById('hero');
-  const blockers = ['contact'].map((id) => document.getElementById(id)).filter(Boolean);
+  const blockers = ['show', 'contact'].map((id) => document.getElementById(id)).filter(Boolean);
   const state = { heroOut: false, blocked: new Set() };
   const syncDock = () => dock.classList.toggle('is-on', state.heroOut && state.blocked.size === 0);
 

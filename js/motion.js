@@ -110,8 +110,6 @@ SEVEN.motion = function initMotion() {
 
   /* ── прогресс секций ── */
   const scrubs = [...document.querySelectorAll('[data-scrub]')];
-  const stack = document.getElementById('stack');
-  const cards = stack ? [...stack.querySelectorAll('.card')] : [];
   const alt = document.getElementById('altNum');
   const region = document.getElementById('region');
   const ALT = 5642;
@@ -122,12 +120,7 @@ SEVEN.motion = function initMotion() {
   }
 
   let vh = innerHeight;
-  // липкий top карточек задан в CSS через calc — читаем один раз, а не
-  // в каждом кадре: getComputedStyle посреди записи --c пересчитал бы стили
-  let sticks = [];
-  const measure = () => { vh = innerHeight; sticks = cards.map((c) => parseFloat(getComputedStyle(c).top) || 0); };
-  measure();
-  addEventListener('resize', () => { measure(); queue(); });
+  addEventListener('resize', () => { vh = innerHeight; queue(); });
 
   const frame = () => {
     ticking = false;
@@ -148,14 +141,6 @@ SEVEN.motion = function initMotion() {
       alt.textContent = String(Math.round(eased * ALT));
     }
 
-    /* стопка работ: карточка уходит вглубь, пока следующая наезжает */
-    for (let i = 0; i < cards.length - 1; i++) {
-      const cur = cards[i], next = cards[i + 1];
-      const nr = next.getBoundingClientRect();
-      const stick = sticks[i + 1];
-      const c = clamp((vh - nr.top) / Math.max(1, vh - stick));
-      if (cur._c !== c) { cur._c = c; cur.style.setProperty('--c', c.toFixed(4)); }
-    }
   };
 
   let ticking = false;
@@ -165,40 +150,83 @@ SEVEN.motion = function initMotion() {
   if (document.fonts) document.fonts.ready.then(queue);
 };
 
-/* ── шоурил: проекты сменяют друг друга, пока окно на экране ── */
-SEVEN.reel = function initReel() {
-  const box = document.getElementById('reelSlides');
-  if (!box) return;
-  const slides = [...box.children];
-  const name = document.getElementById('reelName');
-  const kind = document.getElementById('reelKind');
-  const bar = document.getElementById('reelBar');
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const DUR = 2600;
-  let i = 0, timer = 0, inView = false;
+/* ── витрина работ ──
+   экран прилипает на n экранов прокрутки. Каждому проекту — свой отрезок:
+   в начале отрезка его сайт въезжает шторкой, дальше листается внутри окна
+   сверху вниз. Считается своим циклом, а не в общем motion: это навигация
+   по работам, и при «уменьшить движение» она тоже должна работать */
+SEVEN.show = function initShow() {
+  const show = document.getElementById('show');
+  if (!show) return;
+  const items = [...show.querySelectorAll('.show__item')];
+  const shots = [...show.querySelectorAll('.show__shot')];
+  const dots = [...show.querySelectorAll('.show__dots button')];
+  const screen = show.querySelector('.show__screen');
+  const cur = document.getElementById('showCur');
+  const url = document.getElementById('showUrl');
+  const win = document.getElementById('showWindow');
+  const open = document.getElementById('showOpen');
+  const openText = open.querySelector('.show__open-text');
+  const n = items.length;
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  let active = 0;
 
-  const show = (n) => {
-    slides[i].classList.remove('is-on');
-    i = n;
-    const s = slides[i];
-    s.classList.add('is-on');
-    name.textContent = s.dataset.name;
-    kind.textContent = s.dataset.kind;
-    if (bar) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
+  /* картинки длинные — грузим только текущую и соседнюю */
+  const load = (i) => {
+    const pic = shots[i];
+    if (!pic || pic.dataset.loaded) return;
+    pic.dataset.loaded = '1';
+    pic.querySelectorAll('[data-srcset]').forEach((s) => { s.srcset = s.dataset.srcset; });
+    pic.querySelectorAll('[data-src]').forEach((im) => { im.src = im.dataset.src; });
   };
 
-  const loop = () => {
-    clearTimeout(timer);
-    if (!inView) return;
-    timer = setTimeout(() => { show((i + 1) % slides.length); loop(); }, DUR);
+  const setActive = (i) => {
+    if (i === active) return;
+    shots.forEach((s, k) => s.classList.toggle('is-prev', k === active));
+    items.forEach((it, k) => { it.classList.toggle('is-on', k === i); it.classList.toggle('is-past', k < i); });
+    shots.forEach((s, k) => s.classList.toggle('is-on', k === i));
+    dots.forEach((d, k) => d.setAttribute('aria-current', String(k === i)));
+    active = i;
+    load(i); load(i + 1);
+    const it = items[i];
+    cur.textContent = String(i + 1).padStart(2, '0');
+    url.textContent = shots[i].dataset.dom;
+    win.href = open.href = it.dataset.url;
+    openText.textContent = it.dataset.cta;
   };
 
-  if (reduced || !('IntersectionObserver' in window)) return;
-  new IntersectionObserver(([en]) => {
-    inView = en.isIntersecting;
-    box.closest('.reel').classList.toggle('is-playing', inView);
-    if (inView) loop(); else clearTimeout(timer);
-  }, { threshold: 0.1 }).observe(box);
+  const frame = () => {
+    raf = 0;
+    const r = show.getBoundingClientRect();
+    const span = Math.max(1, r.height - innerHeight);
+    const seg = clamp(-r.top / span) * n;
+    const i = Math.min(n - 1, Math.floor(seg));
+    setActive(i);
+    /* внутри отрезка: короткая пауза на въезд, потом сайт листается */
+    const k = clamp((seg - i - 0.14) / 0.78);
+    const img = shots[i].querySelector('img');
+    const dist = Math.max(0, img.offsetHeight - screen.clientHeight);
+    const eased = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    img.style.transform = `translate3d(0, ${(-eased * dist).toFixed(1)}px, 0)`;
+  };
+
+  let raf = 0;
+  const queue = () => { if (!raf) raf = requestAnimationFrame(frame); };
+  addEventListener('scroll', queue, { passive: true });
+  addEventListener('resize', queue);
+  shots.forEach((s) => s.querySelector('img').addEventListener('load', queue));
+
+  /* точки — переход к началу отрезка нужного проекта */
+  dots.forEach((d, k) => d.addEventListener('click', () => {
+    const top = show.getBoundingClientRect().top + scrollY;
+    const span = show.offsetHeight - innerHeight;
+    const y = top + span * (k + 0.16) / n;
+    if (SEVEN.lenis) SEVEN.lenis.scrollTo(y, { duration: 1.2 });
+    else scrollTo({ top: y, behavior: 'smooth' });
+  }));
+
+  load(1);
+  frame();
 };
 
 /* ── бегущая лента ускоряется от скорости прокрутки ── */

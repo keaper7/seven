@@ -168,57 +168,16 @@
     </div>
   </div>
 
+  <!-- печать: вращается и зовёт к работам -->
+  <a class="seal hero__seal" href="#works" aria-label="Смотреть работы" data-in="4">
+    <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="sealPath" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs>
+      <text><textPath href="#sealPath">смотреть работы · seven · сайты под ключ · </textPath></text></svg>
+    <b aria-hidden="true">↓</b>
+  </a>
+
   <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0 70 C 240 10, 420 10, 640 60 S 1040 120, 1200 60 S 1380 20, 1440 40" />
   </svg>
-</section>
-
-
-<!-- ═════════════ ШОУРИЛ ═════════════ -->
-<!-- окно с работами раскрывается на весь экран, пока листаешь; слова
-     сверху и снизу расходятся. Внутри по кругу идут живые проекты -->
-<section class="reel" id="reel" data-scrub="sticky" aria-label="Проекты SEVEN">
-  <div class="reel__stage">
-    <p class="reel__word reel__word--top display" aria-hidden="true">Живые</p>
-
-    <div class="reel__frame">
-      <div class="reel__slides" id="reelSlides">
-        <figure class="reel__slide is-on" data-name="Zarechye Boxing" data-kind="Клиент · спорт">
-          <picture><source media="(max-width: 699px)" srcset="img/m-zarechye.jpg"><img src="img/case-zarechye.jpg" alt="" width="1280" height="800" decoding="async"></picture>
-        </figure>
-        <figure class="reel__slide" data-name="Косметология с 0" data-kind="Клиент · онлайн-курс">
-          <picture><source media="(max-width: 699px)" srcset="img/m-shanicosmo.jpg"><img src="img/case-liana.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async"></picture>
-        </figure>
-        <figure class="reel__slide" data-name="Loft Park" data-kind="Концепт · ресторан">
-          <picture><source media="(max-width: 699px)" srcset="img/m-loftpark.jpg"><img src="img/case-loftpark.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async"></picture>
-        </figure>
-        <figure class="reel__slide" data-name="Лиана Шанибова" data-kind="Клиент · косметология">
-          <picture><source media="(max-width: 699px)" srcset="img/m-liana.jpg"><img src="img/case-shanicosmo.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async"></picture>
-        </figure>
-        <figure class="reel__slide" data-name="Kingstudio" data-kind="Концепт · фотостудия">
-          <picture><source media="(max-width: 699px)" srcset="img/m-kingstudio.jpg"><img src="img/case-kingstudio.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async"></picture>
-        </figure>
-        <figure class="reel__slide" data-name="Publico" data-kind="Концепт · кофейня">
-          <picture><source media="(max-width: 699px)" srcset="img/m-publico.jpg"><img src="img/case-publico.jpg" alt="" width="1280" height="800" loading="lazy" decoding="async"></picture>
-        </figure>
-      </div>
-
-      <div class="reel__cap">
-        <p class="reel__kind" id="reelKind">Клиент · спорт</p>
-        <p class="reel__name" id="reelName">Zarechye Boxing</p>
-        <span class="reel__bar" aria-hidden="true"><i id="reelBar"></i></span>
-      </div>
-    </div>
-
-    <p class="reel__word reel__word--bot display" aria-hidden="true">проекты</p>
-
-    <!-- печать-бейдж: вращается, пока окно маленькое -->
-    <div class="seal reel__seal" aria-hidden="true">
-      <svg viewBox="0 0 120 120"><defs><path id="sealPath" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs>
-        <text><textPath href="#sealPath">листайте · seven · сайты под ключ · </textPath></text></svg>
-      <b>7</b>
-    </div>
-  </div>
 </section>
 
 
@@ -235,8 +194,9 @@
 
 
 <!-- ═════════════ 02 · РАБОТЫ ═════════════ -->
-<!-- карточки во весь экран ложатся стопкой: следующая наезжает на
-     предыдущую, а та отступает вглубь -->
+<!-- экран прилипает, и пока листаешь — внутри окна прокручивается
+     настоящий сайт клиента целиком, потом его сменяет следующий.
+     Текст и сайт разведены: подписи никогда не лежат поверх скриншота -->
 <section class="sec sec--dark works" id="works">
   <header class="works__head">
     <p class="sec__tag">02 · работы</p>
@@ -246,78 +206,61 @@
     </h2>
   </header>
 
-  <div class="stack" id="stack">
-    <a class="card" href="https://shanicosmo.ru" target="_blank" rel="noopener" data-goal="case_open" data-cursor="Открыть">
-      <picture class="card__img"><source media="(max-width: 699px)" srcset="img/m-shanicosmo.jpg"><img src="img/case-liana.jpg" alt="Сайт курса «Косметология с 0»" width="1280" height="800" loading="lazy" decoding="async"></picture>
-      <span class="card__shade" aria-hidden="true"></span>
-      <span class="card__top"><b>01</b><i>/ 06</i></span>
-      <span class="card__body">
-        <span class="card__tags"><b>Клиент</b><span>Онлайн-курс</span></span>
-        <span class="card__name">Косметология с 0</span>
-        <span class="card__desc">Лендинг курса для медсестёр и студентов-медиков: программа, форматы и запись.</span>
-        <span class="card__link">shanicosmo.ru<i aria-hidden="true">↗</i></span>
-      </span>
-    </a>
+  <div class="show" id="show" style="--n: 6">
+    <div class="show__stage">
+      <div class="show__info">
+        <p class="show__count"><b id="showCur">01</b><i> / 06</i></p>
+        <div class="show__items">
+        <div class="show__item is-on" data-url="https://shanicosmo.ru" data-cta="Открыть сайт">
+          <p class="show__tags"><b>Клиент</b><span>Онлайн-курс</span></p>
+          <h3 class="show__name">Косметология с&nbsp;0</h3>
+          <p class="show__desc">Лендинг курса для медсестёр и студентов-медиков: программа, форматы и запись.</p>
+        </div>
+        <div class="show__item" data-url="https://lianashanibova.ru" data-cta="Открыть сайт">
+          <p class="show__tags"><b>Клиент</b><span>Косметология</span></p>
+          <h3 class="show__name">Лиана Шанибова</h3>
+          <p class="show__desc">Сайт врача-косметолога с акцентом на экспертность и удобную подачу услуг.</p>
+        </div>
+        <div class="show__item" data-url="https://zarechye-boxing.ru" data-cta="Открыть сайт">
+          <p class="show__tags"><b>Клиент</b><span>Спорт</span></p>
+          <h3 class="show__name">Zarechye Boxing</h3>
+          <p class="show__desc">Сайт тренера — мастера спорта России. Запись на бесплатную первую тренировку.</p>
+        </div>
+        <div class="show__item" data-url="https://keaper7.github.io/loft-park/" data-cta="Смотреть демо">
+          <p class="show__tags"><b class="is-concept">Концепт</b><span>Ресторан</span></p>
+          <h3 class="show__name">Loft Park</h3>
+          <p class="show__desc">Ресторан в сердце парка. Атмосферный сайт с вечерней подачей и бронью стола.</p>
+        </div>
+        <div class="show__item" data-url="https://keaper7.github.io/publico/" data-cta="Смотреть демо">
+          <p class="show__tags"><b class="is-concept">Концепт</b><span>Кофейня</span></p>
+          <h3 class="show__name">Publico</h3>
+          <p class="show__desc">Кофе, завтраки и десерты. Меню, залы и дорога — в пару касаний.</p>
+        </div>
+        <div class="show__item" data-url="https://keaper7.github.io/kingstudio/" data-cta="Смотреть демо">
+          <p class="show__tags"><b class="is-concept">Концепт</b><span>Фотостудия</span></p>
+          <h3 class="show__name">Kingstudio</h3>
+          <p class="show__desc">Три зоны, аренда и бронь. Пространство для вашей тёплой истории.</p>
+        </div>
+        </div>
+      </div>
 
-    <a class="card" href="https://lianashanibova.ru" target="_blank" rel="noopener" data-goal="case_open" data-cursor="Открыть">
-      <picture class="card__img"><source media="(max-width: 699px)" srcset="img/m-liana.jpg"><img src="img/case-shanicosmo.jpg" alt="Сайт врача-косметолога Лианы Шанибовой" width="1280" height="800" loading="lazy" decoding="async"></picture>
-      <span class="card__shade" aria-hidden="true"></span>
-      <span class="card__top"><b>02</b><i>/ 06</i></span>
-      <span class="card__body">
-        <span class="card__tags"><b>Клиент</b><span>Косметология</span></span>
-        <span class="card__name">Лиана Шанибова</span>
-        <span class="card__desc">Сайт врача-косметолога с акцентом на экспертность и удобную подачу услуг.</span>
-        <span class="card__link">lianashanibova.ru<i aria-hidden="true">↗</i></span>
-      </span>
-    </a>
+      <a class="show__window" id="showWindow" href="https://shanicosmo.ru" target="_blank" rel="noopener" data-goal="case_open" data-cursor="Открыть" aria-label="Открыть сайт проекта">
+        <span class="show__bar" aria-hidden="true"><i></i><em id="showUrl">shanicosmo.ru</em></span>
+        <span class="show__screen">
+          <picture class="show__shot is-on" data-dom="shanicosmo.ru"><source media="(max-width: 699px)" srcset="img/w-m-shanicosmo.jpg"><img src="img/w-d-shanicosmo.jpg" alt="Сайт «Косметология с 0» — сделан в SEVEN" decoding="async"></picture>
+          <picture class="show__shot" data-dom="lianashanibova.ru"><source media="(max-width: 699px)" data-srcset="img/w-m-liana.jpg"><img data-src="img/w-d-liana.jpg" alt="Сайт «Лиана Шанибова» — сделан в SEVEN" decoding="async"></picture>
+          <picture class="show__shot" data-dom="zarechye-boxing.ru"><source media="(max-width: 699px)" data-srcset="img/w-m-zarechye.jpg"><img data-src="img/w-d-zarechye.jpg" alt="Сайт «Zarechye Boxing» — сделан в SEVEN" decoding="async"></picture>
+          <picture class="show__shot" data-dom="loft-park"><source media="(max-width: 699px)" data-srcset="img/w-m-loftpark.jpg"><img data-src="img/w-d-loftpark.jpg" alt="Сайт «Loft Park» — сделан в SEVEN" decoding="async"></picture>
+          <picture class="show__shot" data-dom="publico"><source media="(max-width: 699px)" data-srcset="img/w-m-publico.jpg"><img data-src="img/w-d-publico.jpg" alt="Сайт «Publico» — сделан в SEVEN" decoding="async"></picture>
+          <picture class="show__shot" data-dom="kingstudio"><source media="(max-width: 699px)" data-srcset="img/w-m-kingstudio.jpg"><img data-src="img/w-d-kingstudio.jpg" alt="Сайт «Kingstudio» — сделан в SEVEN" decoding="async"></picture>
+        </span>
+      </a>
 
-    <a class="card" href="https://zarechye-boxing.ru" target="_blank" rel="noopener" data-goal="case_open" data-cursor="Открыть">
-      <picture class="card__img"><source media="(max-width: 699px)" srcset="img/m-zarechye.jpg"><img src="img/case-zarechye.jpg" alt="Сайт академии бокса Zarechye" width="1280" height="800" loading="lazy" decoding="async"></picture>
-      <span class="card__shade" aria-hidden="true"></span>
-      <span class="card__top"><b>03</b><i>/ 06</i></span>
-      <span class="card__body">
-        <span class="card__tags"><b>Клиент</b><span>Спорт</span></span>
-        <span class="card__name">Zarechye Boxing</span>
-        <span class="card__desc">Сайт тренера — мастера спорта России. Запись на бесплатную первую тренировку.</span>
-        <span class="card__link">zarechye-boxing.ru<i aria-hidden="true">↗</i></span>
-      </span>
-    </a>
-
-    <a class="card" href="https://keaper7.github.io/loft-park/" target="_blank" rel="noopener" data-goal="case_open" data-cursor="Открыть">
-      <picture class="card__img"><source media="(max-width: 699px)" srcset="img/m-loftpark.jpg"><img src="img/case-loftpark.jpg" alt="Концепт сайта ресторана Loft Park" width="1280" height="800" loading="lazy" decoding="async"></picture>
-      <span class="card__shade" aria-hidden="true"></span>
-      <span class="card__top"><b>04</b><i>/ 06</i></span>
-      <span class="card__body">
-        <span class="card__tags"><b class="is-concept">Концепт</b><span>Ресторан</span></span>
-        <span class="card__name">Loft Park</span>
-        <span class="card__desc">Ресторан в сердце парка. Атмосферный сайт с вечерней подачей и бронью стола.</span>
-        <span class="card__link">смотреть демо<i aria-hidden="true">↗</i></span>
-      </span>
-    </a>
-
-    <a class="card" href="https://keaper7.github.io/publico/" target="_blank" rel="noopener" data-goal="case_open" data-cursor="Открыть">
-      <picture class="card__img"><source media="(max-width: 699px)" srcset="img/m-publico.jpg"><img src="img/case-publico.jpg" alt="Концепт сайта кофейни Publico" width="1280" height="800" loading="lazy" decoding="async"></picture>
-      <span class="card__shade" aria-hidden="true"></span>
-      <span class="card__top"><b>05</b><i>/ 06</i></span>
-      <span class="card__body">
-        <span class="card__tags"><b class="is-concept">Концепт</b><span>Кофейня</span></span>
-        <span class="card__name">Publico</span>
-        <span class="card__desc">Кофе, завтраки и десерты. Меню, залы и дорога — в пару касаний.</span>
-        <span class="card__link">смотреть демо<i aria-hidden="true">↗</i></span>
-      </span>
-    </a>
-
-    <a class="card" href="https://keaper7.github.io/kingstudio/" target="_blank" rel="noopener" data-goal="case_open" data-cursor="Открыть">
-      <picture class="card__img"><source media="(max-width: 699px)" srcset="img/m-kingstudio.jpg"><img src="img/case-kingstudio.jpg" alt="Концепт сайта фотостудии Kingstudio" width="1280" height="800" loading="lazy" decoding="async"></picture>
-      <span class="card__shade" aria-hidden="true"></span>
-      <span class="card__top"><b>06</b><i>/ 06</i></span>
-      <span class="card__body">
-        <span class="card__tags"><b class="is-concept">Концепт</b><span>Фотостудия</span></span>
-        <span class="card__name">Kingstudio</span>
-        <span class="card__desc">Три зоны, аренда и бронь. Пространство для вашей тёплой истории.</span>
-        <span class="card__link">смотреть демо<i aria-hidden="true">↗</i></span>
-      </span>
-    </a>
+      <div class="show__foot">
+        <a class="btn btn--main show__open" id="showOpen" href="https://shanicosmo.ru" target="_blank" rel="noopener" data-goal="case_open"><b class="show__open-text">Открыть сайт</b><span aria-hidden="true">↗</span></a>
+        <nav class="show__dots" id="showDots" aria-label="Проекты"><button type="button" aria-label="Косметология с 0" aria-current="true"><i></i></button><button type="button" aria-label="Лиана Шанибова"><i></i></button><button type="button" aria-label="Zarechye Boxing"><i></i></button><button type="button" aria-label="Loft Park"><i></i></button><button type="button" aria-label="Publico"><i></i></button><button type="button" aria-label="Kingstudio"><i></i></button></nav>
+      </div>
+    </div>
   </div>
 </section>
 
