@@ -9,7 +9,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ── Метрика: цели на кликах. В самой Метрике их нужно завести как
-     «JavaScript-событие» с тем же идентификатором (tg_hero, quiz_send…) ── */
+     «JavaScript-событие» с тем же идентификатором (tg_hero, fit_send…) ── */
   const goal = (name, params) => {
     try { if (window.ym) ym(112505772, 'reachGoal', name, params); } catch (e) {}
   };
@@ -22,7 +22,7 @@
   SEVEN.cursor();
   SEVEN.work();
   SEVEN.faq();
-  SEVEN.quiz(goal);
+  SEVEN.fit(goal);
 
   /* ── заставка 00 → 07: только первый заход, быстро ── */
   const intro = document.getElementById('intro');
@@ -92,10 +92,10 @@
   }
 
   /* ── липкая кнопка: после главного экрана, но не поверх своих CTA ──
-     прячется у квиза и у контактов — там уже есть крупные кнопки */
+     прячется у примерки и у контактов — там уже есть крупные кнопки */
   const dock = document.getElementById('dock');
   const hero = document.getElementById('hero');
-  const blockers = ['quiz', 'contact'].map((id) => document.getElementById(id)).filter(Boolean);
+  const blockers = ['fit', 'contact'].map((id) => document.getElementById(id)).filter(Boolean);
   const state = { heroOut: false, blocked: new Set() };
   const syncDock = () => dock.classList.toggle('is-on', state.heroOut && state.blocked.size === 0);
 

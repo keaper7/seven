@@ -112,6 +112,7 @@
 
   <nav class="top__nav" aria-label="Разделы">
     <a href="#works">Работы</a>
+    <a href="#fit">Примерка</a>
     <a href="#formats">Форматы</a>
     <a href="#process">Процесс</a>
     <a href="#faq">Вопросы</a>
@@ -260,12 +261,86 @@
 </section>
 
 
-<!-- ═════════════ 02 · РЕГИОН ═════════════ -->
+<!-- ═════════════ 02 · ПРИМЕРКА ═════════════ -->
+<!-- главная отличительная деталь сайта: человек вводит название своего
+     дела и тут же видит, как мог бы выглядеть его сайт. Пока он ничего
+     не ввёл, примеры печатаются сами. Кнопка уносит в Telegram заявку
+     уже с названием и сферой — разговор начинается не с пустого листа -->
+<section class="sec sec--dark fit" id="fit">
+  <header class="sec__head" data-reveal>
+    <p class="sec__tag">02 · примерка</p>
+    <h2 class="sec__title">Примерьте <span>свой</span> сайт</h2>
+    <p class="sec__lead">Впишите название вашего дела — и посмотрите, каким мог бы быть ваш сайт. Прямо сейчас, за пару секунд.</p>
+  </header>
+
+  <div class="fit__grid">
+    <div class="fit__controls" data-reveal>
+      <label class="fit__field">
+        <span>Название</span>
+        <input id="fitName" type="text" maxlength="28" autocomplete="off" enterkeyhint="done" placeholder="Например, Кофейня «Ромашка»">
+      </label>
+
+      <div class="fit__group">
+        <span class="fit__label">Сфера</span>
+        <div class="fit__chips" id="fitType" role="radiogroup" aria-label="Сфера бизнеса">
+          <button type="button" role="radio" data-v="cafe" aria-checked="true">Кафе</button>
+          <button type="button" role="radio" data-v="beauty" aria-checked="false">Красота</button>
+          <button type="button" role="radio" data-v="sport" aria-checked="false">Спорт</button>
+          <button type="button" role="radio" data-v="shop" aria-checked="false">Магазин</button>
+          <button type="button" role="radio" data-v="service" aria-checked="false">Услуги</button>
+        </div>
+      </div>
+
+      <div class="fit__group">
+        <span class="fit__label">Настроение</span>
+        <div class="fit__chips" id="fitMood" role="radiogroup" aria-label="Настроение сайта">
+          <button type="button" role="radio" data-v="dark" aria-checked="true">Вечерний</button>
+          <button type="button" role="radio" data-v="light" aria-checked="false">Светлый</button>
+          <button type="button" role="radio" data-v="bold" aria-checked="false">Яркий</button>
+        </div>
+      </div>
+
+      <a class="btn btn--main fit__cta" id="fitSend" href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="fit_send">
+        Хочу такой сайт<span aria-hidden="true">→</span>
+      </a>
+      <p class="fit__note">Это быстрый эскиз. Настоящий сайт делаю с нуля под ваш бизнес.</p>
+    </div>
+
+    <div class="fit__stage" data-reveal>
+      <div class="browser fit__browser">
+        <span class="browser__bar" aria-hidden="true"><i></i><i></i><i></i><em id="fitUrl">romashka.ru</em></span>
+        <div class="fit__view" id="fitView">
+          <!-- мини-сайт рисуется в фиксированной ширине и масштабируется
+               под экран целиком — на телефоне выглядит так же, как на ПК -->
+          <div class="mini" id="mini" data-type="cafe" data-mood="dark">
+            <div class="mini__nav">
+              <b class="mini__logo" id="miniLogo">Ромашка</b>
+              <span class="mini__links" id="miniLinks"><i>Меню</i><i>Бронь</i><i>Контакты</i></span>
+            </div>
+            <div class="mini__hero">
+              <div class="mini__copy">
+                <p class="mini__kicker" id="miniKicker">кофейня · с 8:00</p>
+                <p class="mini__title" id="miniTitle">Ромашка</p>
+                <p class="mini__tagline" id="miniTag">Завтраки весь день и кофе, ради которого возвращаются.</p>
+                <span class="mini__btn" id="miniBtn">Забронировать стол</span>
+              </div>
+              <div class="mini__art" aria-hidden="true"><i></i><i></i><i></i></div>
+            </div>
+            <div class="mini__tiles" id="miniTiles"><span>Завтраки</span><span>Десерты</span><span>Кофе</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════════════ 03 · РЕГИОН ═════════════ -->
 <section class="sec sec--dark region" id="region">
   <div class="region__photo" aria-hidden="true"></div>
 
   <div class="region__body" data-reveal>
-    <p class="sec__tag">02 · код региона 07</p>
+    <p class="sec__tag">03 · код региона 07</p>
     <p class="region__lead">
       Здесь высоту меряют метрами. В вашем деле мерка другая:
       <span>находят вас люди или проходят мимо.</span>
@@ -283,10 +358,10 @@
 </section>
 
 
-<!-- ═════════════ 03 · ФОРМАТЫ ═════════════ -->
+<!-- ═════════════ 04 · ФОРМАТЫ ═════════════ -->
 <section class="sec sec--light formats" id="formats">
   <header class="sec__head" data-reveal>
-    <p class="sec__tag">03 · форматы</p>
+    <p class="sec__tag">04 · форматы</p>
     <h2 class="sec__title">Что можно заказать</h2>
     <p class="sec__lead">Стоимость считаю после короткого брифа — называю сумму до начала работы, без доплат по ходу.</p>
   </header>
@@ -324,11 +399,11 @@
 </section>
 
 
-<!-- ═════════════ 04 · ПРОЦЕСС ═════════════ -->
+<!-- ═════════════ 05 · ПРОЦЕСС ═════════════ -->
 <!-- семь шагов — семь отметок высоты: от подножия (0 м) до вершины Эльбруса -->
 <section class="sec sec--dark process" id="process">
   <header class="sec__head" data-reveal>
-    <p class="sec__tag">04 · процесс</p>
+    <p class="sec__tag">05 · процесс</p>
     <h2 class="sec__title">7 шагов от разговора до запуска</h2>
     <p class="sec__lead">От вас — рассказать о деле и согласовать концепцию. Всё техническое — на мне.</p>
   </header>
@@ -345,10 +420,10 @@
 </section>
 
 
-<!-- ═════════════ 05 · ВОПРОСЫ ═════════════ -->
+<!-- ═════════════ 06 · ВОПРОСЫ ═════════════ -->
 <section class="sec sec--light faq-sec" id="faq">
   <header class="sec__head" data-reveal>
-    <p class="sec__tag">05 · вопросы</p>
+    <p class="sec__tag">06 · вопросы</p>
     <h2 class="sec__title">Что обычно спрашивают</h2>
   </header>
 
@@ -379,62 +454,9 @@
 </section>
 
 
-<!-- ═════════════ 06 · ПОДБОР ═════════════ -->
-<!-- три касания вместо пустого поля сообщения: человеку не нужно придумывать,
-     с чего начать разговор, а в Telegram приходит заявка уже с контекстом -->
-<section class="sec sec--dark quiz" id="quiz">
-  <div class="qz-card" data-reveal>
-    <header class="qz-card__head">
-      <p class="sec__tag">06 · подбор</p>
-      <h2 class="sec__title">Подберу формат за 3 вопроса</h2>
-    </header>
-
-    <div class="qz" id="qz">
-      <div class="qz__top">
-        <p class="qz__step" id="qzStep">Вопрос 1 из 3</p>
-        <button type="button" class="qz__back" id="qzBack" hidden>← Назад</button>
-      </div>
-      <div class="qz__progress" aria-hidden="true"><i id="qzBar"></i></div>
-
-      <fieldset class="qz__q is-current" data-key="biz">
-        <legend>Чем вы занимаетесь?</legend>
-        <button type="button" data-v="Услуги (салон, клиника, мастер, тренер)">Услуги<small>салон, клиника, мастер, тренер</small></button>
-        <button type="button" data-v="Кафе или ресторан" data-catalog>Кафе или ресторан<small>меню, бронь, как добраться</small></button>
-        <button type="button" data-v="Магазин / товары" data-catalog>Магазин<small>каталог товаров, прайс</small></button>
-        <button type="button" data-v="Другое">Другое<small>расскажу в сообщении</small></button>
-      </fieldset>
-
-      <fieldset class="qz__q" data-key="now">
-        <legend>Что у вас есть сейчас?</legend>
-        <button type="button" data-v="Ничего нет">Ничего<small>начинаем с нуля</small></button>
-        <button type="button" data-v="Только соцсети">Только соцсети<small>Instagram, Telegram, ВК</small></button>
-        <button type="button" data-v="Есть старый сайт">Старый сайт<small>устарел или не приносит заявок</small></button>
-      </fieldset>
-
-      <fieldset class="qz__q" data-key="when">
-        <legend>Когда нужен сайт?</legend>
-        <button type="button" data-v="Как можно скорее">Как можно скорее</button>
-        <button type="button" data-v="В течение месяца">В течение месяца</button>
-        <button type="button" data-v="Пока присматриваюсь">Пока присматриваюсь</button>
-      </fieldset>
-
-      <div class="qz__result" id="qzResult" hidden>
-        <p class="qz__label">Вам подойдёт</p>
-        <p class="qz__plan" id="qzPlan">Сайт-визитка</p>
-        <p class="qz__meta" id="qzMeta">запуск за 7–10 дней</p>
-        <a class="btn btn--main" id="qzSend" href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="quiz_send">
-          Отправить в Telegram<span aria-hidden="true">→</span>
-        </a>
-        <p class="qz__hint" id="qzHint">Ответы уже в тексте сообщения — просто отправьте его.</p>
-        <button type="button" class="qz__again" id="qzAgain">Пройти заново</button>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <!-- ═════════════ 07 · КОНТАКТЫ ═════════════ -->
-<section class="sec sec--light contact" id="contact">
+<section class="sec sec--dark contact" id="contact">
   <div class="contact__body" data-reveal>
     <p class="sec__tag">07 · контакты</p>
     <h2 class="sec__title">Твой следующий шаг важнее пройденного <span>пути</span></h2>
@@ -466,7 +488,7 @@
 </footer>
 
 <!-- ══ ЛИПКАЯ КНОПКА (телефон) ══
-     появляется, когда главный экран ушёл из вида, и прячется у квиза и
+     появляется, когда главный экран ушёл из вида, и прячется у примерки и
      контактов — там свои кнопки, две одинаковые рядом только спорили бы -->
 <div class="dock" id="dock">
   <a class="dock__btn" href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="tg_dock">
@@ -479,7 +501,7 @@
 <script src="js/cursor.js"></script>
 <script src="js/work.js"></script>
 <script src="js/faq.js"></script>
-<script src="js/quiz.js"></script>
+<script src="js/fit.js"></script>
 <script src="js/app.js"></script>
 
 </body>
