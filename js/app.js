@@ -1,66 +1,41 @@
-/* SEVEN v3 — точка входа. Без GSAP и плавного скролла: на телефоне
-   нативная прокрутка быстрее и привычнее, а всё движение здесь — CSS,
-   которому скрипт только ставит классы. */
+/* SEVEN — точка входа. Нативная прокрутка, никаких библиотек: скрипт
+   только ставит классы, всё движение — короткие CSS-переходы. */
 
 (function boot() {
   const root = document.documentElement;
   root.classList.add('app-ok');
 
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   /* ── Метрика: цели на кликах. В самой Метрике их нужно завести как
-     «JavaScript-событие» с тем же идентификатором (tg_hero, fit_send…) ── */
-  const goal = (name, params) => {
-    try { if (window.ym) ym(112505772, 'reachGoal', name, params); } catch (e) {}
-  };
+     «JavaScript-событие» с тем же идентификатором (tg_hero, case_open…) ── */
   document.addEventListener('click', (e) => {
     const a = e.target.closest('[data-goal]');
-    if (a) goal(a.dataset.goal);
+    if (!a) return;
+    try { if (window.ym) ym(112505772, 'reachGoal', a.dataset.goal); } catch (err) {}
   });
 
-  SEVEN.clock();
-  SEVEN.motion();
-  SEVEN.cursor();
   SEVEN.faq();
   SEVEN.show();
-  SEVEN.ticker();
-  SEVEN.menu();
 
-  /* ── заставка 00 → 07: только первый заход, быстро ── */
-  const intro = document.getElementById('intro');
-  const ready = () => root.classList.add('is-ready');
-
-  if (root.classList.contains('intro') && intro && !reduced) {
-    try { localStorage.setItem('seven-intro', '1'); } catch (e) {}
-    const count = document.getElementById('introCount');
-    const bar = document.getElementById('introBar');
-    let n = 0;
-    const tick = () => {
-      count.textContent = String(n).padStart(2, '0');
-      bar.style.width = (n / 7 * 100) + '%';
-      if (n === 7) {
-        count.classList.add('is-final');
-        setTimeout(() => {
-          intro.classList.add('is-done');          // шторка уезжает вверх
-          setTimeout(ready, 280);                  // слова выезжают следом
-          setTimeout(() => intro.remove(), 1200);
-        }, 320);
-        return;
-      }
-      n += 1;
-      setTimeout(tick, 72);
-    };
-    tick();
-  } else {
-    if (intro) intro.remove();
-    requestAnimationFrame(ready);
-  }
+  requestAnimationFrame(() => root.classList.add('is-ready'));
 
   /* ── шапка: фон появляется, как только ушли с самого верха ── */
   const top = document.getElementById('top');
-  const onScroll = () => top.classList.toggle('is-scrolled', scrollY > 24);
+  const onScroll = () => top.classList.toggle('is-scrolled', scrollY > 16);
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  /* ── меню на телефоне ── */
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('menu');
+  const setMenu = (open) => {
+    root.classList.toggle('menu-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Закрыть меню' : 'Меню');
+    menu.setAttribute('aria-hidden', String(!open));
+  };
+  btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
+  menu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
 
   if (!('IntersectionObserver' in window)) {
     document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-in'));
@@ -74,27 +49,10 @@
       en.target.classList.add('is-in');
       revealIO.unobserve(en.target);
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
   document.querySelectorAll('[data-reveal]').forEach((el) => revealIO.observe(el));
 
-  /* ── маршрут процесса: линия заливается по мере прохода секции ── */
-  const steps = document.querySelector('.steps');
-  if (steps && !reduced) {
-    let raf = 0;
-    const paint = () => {
-      raf = 0;
-      const r = steps.getBoundingClientRect();
-      const p = (innerHeight * 0.7 - r.top) / r.height;
-      steps.style.setProperty('--progress', Math.min(1, Math.max(0, p)).toFixed(3));
-    };
-    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(paint); }, { passive: true });
-    paint();
-  } else if (steps) {
-    steps.style.setProperty('--progress', 1);
-  }
-
-  /* ── липкая кнопка: после главного экрана, но не поверх своих CTA ──
-     прячется у витрины работ и у контактов — там свои кнопки */
+  /* ── липкая кнопка: после первого экрана, но не поверх своих CTA ── */
   const dock = document.getElementById('dock');
   const hero = document.getElementById('hero');
   const blockers = ['show', 'contact'].map((id) => document.getElementById(id)).filter(Boolean);
@@ -104,7 +62,7 @@
   new IntersectionObserver(([en]) => {
     state.heroOut = !en.isIntersecting;
     syncDock();
-  }, { rootMargin: '-45% 0px 0px 0px' }).observe(hero);
+  }, { rootMargin: '-60% 0px 0px 0px' }).observe(hero);
 
   const blockIO = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
@@ -114,7 +72,6 @@
     syncDock();
   }, { rootMargin: '0px 0px -30% 0px' });
   blockers.forEach((b) => blockIO.observe(b));
-  syncDock();
 
   /* ── текущий раздел в меню шапки ── */
   const navLinks = [...document.querySelectorAll('.top__nav a')];
