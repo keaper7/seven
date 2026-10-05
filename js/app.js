@@ -13,6 +13,7 @@
     try { if (window.ym) ym(112505772, 'reachGoal', a.dataset.goal); } catch (err) {}
   });
 
+  SEVEN.fit();
   SEVEN.faq();
 
   requestAnimationFrame(() => root.classList.add('is-ready'));

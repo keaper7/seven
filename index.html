@@ -59,9 +59,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- весь текст набран Onest; Unbounded остался только в логотипе,
-     поэтому из него грузятся ровно шесть знаков -->
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400..700&display=swap" rel="stylesheet">
+<!-- Sofia Sans Extra Condensed — крупные заголовки во всю ширину,
+     Cormorant курсивом — редкие акценты, Onest — основной текст.
+     Unbounded остался только в логотипе: из него грузятся шесть знаков -->
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800..900&family=Cormorant+Garamond:ital,wght@1,500&family=Onest:wght@400..700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600&text=seven.&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/site.css">
@@ -120,13 +121,27 @@
 
 <main>
 
+<!-- ═════════════ ПЕРВЫЙ ЭКРАН ═════════════
+     заголовок набран как афиша: каждая строка подогнана ровно под
+     ширину своей колонки (js/fit.js), между строками — курсивная вставка -->
 <section class="hero" id="hero">
-  <h1 class="hero__title" data-in>Делаем сайты для салонов, клиник, кафе и&nbsp;спортивных клубов</h1>
+  <div class="hero__mast" data-in>
+    <span>Студия сайтов</span>
+    <span>Кабардино-Балкария, работаем по всей России</span>
+  </div>
+
+  <h1 class="hero__title" aria-label="Сайты за 7–10 дней для салонов, клиник, кафе и спортивных клубов">
+    <span class="hero__top">
+      <span class="fit" data-in aria-hidden="true"><span>Сайты</span></span>
+      <span class="hero__tag" data-in aria-hidden="true">для салонов, клиник, кафе и&nbsp;спортивных клубов</span>
+    </span>
+    <span class="fit" data-in aria-hidden="true"><span>за <em>7–10</em> дней</span></span>
+  </h1>
 
   <div class="hero__row" data-in>
     <p class="hero__sub">
-      Продумываем структуру, рисуем дизайн и сами пишем код. Сайт-визитку
-      обычно запускаем через <span class="nobr">7–10 дней</span> после первого разговора.
+      Продумываем структуру, рисуем дизайн и сами пишем код. Домен
+      и хостинг на первый год уже включены.
     </p>
     <div class="hero__actions">
       <a class="btn btn--main" href="https://t.me/seven_sites?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D1%81%D0%B0%D0%B9%D1%82." target="_blank" rel="noopener" data-goal="tg_hero">Написать в Telegram</a>
@@ -141,104 +156,94 @@
 </section>
 
 
+<!-- ═════════════ РАБОТЫ ═════════════ -->
 <section class="sec works" id="works">
-  <div class="sec__head">
-    <h2 class="sec__title">Работы</h2>
-    <p class="sec__lead">Три сайта сделаны для клиентов. Ещё три мы нарисовали сами, чтобы показать, как видим сайты ресторанов, кофеен и студий.</p>
+  <div class="big">
+    <h2 class="fit" data-reveal><span>Работы<sup>06</sup></span></h2>
+    <p class="big__note"><em>Три сайта сделаны для клиентов,</em> ещё три мы нарисовали сами, чтобы показать, как видим сайты ресторанов, кофеен и студий.</p>
   </div>
 
   <div class="cases">
     <a class="case" href="https://shanicosmo.ru" target="_blank" rel="noopener" data-goal="case_open" data-reveal>
       <span class="case__img"><img src="img/cover-shanicosmo.jpg" alt="Сайт онлайн-курса «Косметология с 0» на компьютере и телефоне" width="1200" height="900" loading="lazy" decoding="async"></span>
-      <span class="case__meta">
-        <span class="case__name">Косметология с&nbsp;0</span>
-        <span class="case__kind">Клиент</span>
-      </span>
-      <span class="case__desc">Лендинг онлайн-курса для медсестёр и студентов-медиков</span>
+      <span class="case__head"><span class="case__n">01</span><span class="case__name">Косметология с&nbsp;0</span><span class="case__go" aria-hidden="true">↗</span></span>
+      <span class="case__meta"><b>Клиент</b> Лендинг онлайн-курса для медсестёр и студентов-медиков</span>
     </a>
 
     <a class="case" href="https://lianashanibova.ru" target="_blank" rel="noopener" data-goal="case_open" data-reveal>
       <span class="case__img"><img src="img/cover-liana.jpg" alt="Сайт врача-косметолога Лианы Шанибовой" width="1200" height="900" loading="lazy" decoding="async"></span>
-      <span class="case__meta">
-        <span class="case__name">Лиана Шанибова</span>
-        <span class="case__kind">Клиент</span>
-      </span>
-      <span class="case__desc">Сайт врача-косметолога с услугами и записью</span>
+      <span class="case__head"><span class="case__n">02</span><span class="case__name">Лиана Шанибова</span><span class="case__go" aria-hidden="true">↗</span></span>
+      <span class="case__meta"><b>Клиент</b> Сайт врача-косметолога с услугами и записью</span>
     </a>
 
     <a class="case" href="https://zarechye-boxing.ru" target="_blank" rel="noopener" data-goal="case_open" data-reveal>
       <span class="case__img"><img src="img/cover-zarechye.jpg" alt="Сайт академии бокса Zarechye" width="1200" height="900" loading="lazy" decoding="async"></span>
-      <span class="case__meta">
-        <span class="case__name">Zarechye Boxing</span>
-        <span class="case__kind">Клиент</span>
-      </span>
-      <span class="case__desc">Сайт тренера по боксу, мастера спорта России</span>
+      <span class="case__head"><span class="case__n">03</span><span class="case__name">Zarechye Boxing</span><span class="case__go" aria-hidden="true">↗</span></span>
+      <span class="case__meta"><b>Клиент</b> Сайт тренера по боксу, мастера спорта России</span>
     </a>
 
     <a class="case" href="https://keaper7.github.io/loft-park/" target="_blank" rel="noopener" data-goal="case_open" data-reveal>
       <span class="case__img"><img src="img/cover-loftpark.jpg" alt="Концепт сайта ресторана Loft Park" width="1200" height="900" loading="lazy" decoding="async"></span>
-      <span class="case__meta">
-        <span class="case__name">Loft Park</span>
-        <span class="case__kind">Концепт</span>
-      </span>
-      <span class="case__desc">Ресторан в парке, меню с ценами и бронь стола</span>
+      <span class="case__head"><span class="case__n">04</span><span class="case__name">Loft Park</span><span class="case__go" aria-hidden="true">↗</span></span>
+      <span class="case__meta"><b>Концепт</b> Ресторан в парке, меню с ценами и бронь стола</span>
     </a>
 
     <a class="case" href="https://keaper7.github.io/publico/" target="_blank" rel="noopener" data-goal="case_open" data-reveal>
       <span class="case__img"><img src="img/cover-publico.jpg" alt="Концепт сайта кофейни Publico" width="1200" height="900" loading="lazy" decoding="async"></span>
-      <span class="case__meta">
-        <span class="case__name">Publico</span>
-        <span class="case__kind">Концепт</span>
-      </span>
-      <span class="case__desc">Кофейня с двумя залами и меню на каждый день</span>
+      <span class="case__head"><span class="case__n">05</span><span class="case__name">Publico</span><span class="case__go" aria-hidden="true">↗</span></span>
+      <span class="case__meta"><b>Концепт</b> Кофейня с двумя залами и меню на каждый день</span>
     </a>
 
     <a class="case" href="https://keaper7.github.io/kingstudio/" target="_blank" rel="noopener" data-goal="case_open" data-reveal>
       <span class="case__img"><img src="img/cover-kingstudio.jpg" alt="Концепт сайта фотостудии Kingstudio" width="1200" height="900" loading="lazy" decoding="async"></span>
-      <span class="case__meta">
-        <span class="case__name">Kingstudio</span>
-        <span class="case__kind">Концепт</span>
-      </span>
-      <span class="case__desc">Фотостудия с тремя залами и почасовой арендой</span>
+      <span class="case__head"><span class="case__n">06</span><span class="case__name">Kingstudio</span><span class="case__go" aria-hidden="true">↗</span></span>
+      <span class="case__meta"><b>Концепт</b> Фотостудия с тремя залами и почасовой арендой</span>
     </a>
   </div>
 </section>
 
 
+<!-- ═════════════ УСЛУГИ ═════════════ -->
 <section class="sec sec--dark services" id="services">
-  <div class="sec__head">
-    <h2 class="sec__title">Услуги</h2>
-    <p class="sec__lead">Цену называем после разговора, когда понятен объём работы. Потом она не меняется.</p>
+  <div class="big">
+    <h2 class="fit" data-reveal><span>Услуги</span></h2>
+    <p class="big__note"><em>Цену называем после разговора,</em> когда понятен объём работы. Потом она не меняется.</p>
   </div>
 
-  <div class="rows">
-    <div class="row" data-reveal>
-      <h3 class="row__name">Сайт-визитка</h3>
-      <p class="row__text">Одна страница, где есть всё, что человек хочет узнать перед записью: услуги, цены, работы, адрес и как с вами связаться.</p>
-      <p class="row__time">7–10 дней</p>
-    </div>
-    <div class="row" data-reveal>
-      <h3 class="row__name">Сайт с каталогом</h3>
-      <p class="row__text">Для кафе, ресторанов и магазинов, где нужно показать меню или товары с ценами и фото.</p>
-      <p class="row__time">14–18 дней</p>
-    </div>
-    <div class="row" data-reveal>
-      <h3 class="row__name">Поддержка</h3>
-      <p class="row__text">Меняем цены и фото, добавляем новые услуги, следим, чтобы сайт открывался без ошибок.</p>
-      <p class="row__time">По договорённости</p>
-    </div>
+  <div class="offers">
+    <article class="offer" data-reveal>
+      <p class="offer__days"><b>7–10</b><span>дней</span></p>
+      <div class="offer__body">
+        <h3>Сайт-визитка</h3>
+        <p>Одна страница, где есть всё, что человек хочет узнать перед записью: услуги, цены, работы, адрес и как с вами связаться.</p>
+      </div>
+    </article>
+    <article class="offer" data-reveal>
+      <p class="offer__days"><b>14–18</b><span>дней</span></p>
+      <div class="offer__body">
+        <h3>Сайт с каталогом</h3>
+        <p>Для кафе, ресторанов и магазинов, где нужно показать меню или товары с ценами и фото.</p>
+      </div>
+    </article>
   </div>
 
-  <p class="services__note" data-reveal>
-    В любой проект входят версия для телефона, домен и хостинг на первый год
-    и подключённая Яндекс Метрика. После запуска передаём все доступы, сайт полностью ваш.
-  </p>
+  <div class="included" data-reveal>
+    <p>В любой проект входят</p>
+    <ul>
+      <li>версия для телефона</li>
+      <li>домен и хостинг на первый год</li>
+      <li>Яндекс Метрика</li>
+      <li>передача всех доступов</li>
+    </ul>
+    <p class="included__after">После запуска можем вести сайт: менять цены и фото, добавлять услуги, следить, чтобы всё открывалось без ошибок.</p>
+  </div>
 </section>
 
 
+<!-- ═════════════ КАК РАБОТАЕМ ═════════════ -->
 <section class="sec process" id="process">
-  <div class="sec__head">
-    <h2 class="sec__title">Как работаем</h2>
+  <div class="big">
+    <h2 class="fit" data-reveal><span>Как работаем</span></h2>
   </div>
 
   <ol class="steps">
@@ -266,69 +271,71 @@
 </section>
 
 
+<!-- ═════════════ О СТУДИИ ═════════════
+     07 — код региона на номерах; цифры набраны так же крупно, как
+     заголовки разделов, и это единственное «украшение» блока -->
 <section class="sec about" id="about">
   <div class="about__grid">
-    <div class="about__text">
-      <h2 class="sec__title">О студии</h2>
+    <p class="about__code fit" data-reveal aria-hidden="true"><span>07</span></p>
+    <div class="about__text" data-reveal>
+      <h2 class="about__title"><em>Почему seven</em></h2>
       <p>
-        Мы из Кабардино-Балкарии. Название seven пошло от 07, кода нашего
-        региона на автомобильных номерах.
+        07 — код Кабардино-Балкарии на автомобильных номерах. Мы отсюда,
+        поэтому и назвались seven.
       </p>
       <p>
         Работаем удалённо и с клиентами из других городов. С вами общается тот же
         человек, который делает сайт, так что вопросы не теряются по дороге.
       </p>
     </div>
-    <figure class="about__photo" data-reveal>
-      <img src="img/elbrus-duotone.jpg" alt="Эльбрус" width="1672" height="941" loading="lazy" decoding="async">
-      <figcaption>Эльбрус</figcaption>
-    </figure>
   </div>
 </section>
 
 
+<!-- ═════════════ ВОПРОСЫ ═════════════ -->
 <section class="sec faq-sec" id="faq">
-  <div class="faq-grid">
-    <h2 class="sec__title">Вопросы</h2>
+  <div class="big">
+    <h2 class="fit" data-reveal><span>Вопросы</span></h2>
+  </div>
 
-    <!-- <details> нативный: работает без JS и с клавиатуры; js/faq.js
-         добавляет только плавное раскрытие -->
-    <div class="faq">
-      <details class="faq__item">
-        <summary class="faq__q"><span class="faq__text">Сколько стоит сайт?</span><span class="faq__sign" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>Зависит от объёма. Визитка на одну страницу стоит меньше, сайт с меню на сотню позиций дороже. Точную сумму назовём после разговора и закрепим до начала работы.</p></div>
-      </details>
-      <details class="faq__item">
-        <summary class="faq__q"><span class="faq__text">Что от меня понадобится?</span><span class="faq__sign" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>Рассказать о бизнесе и прислать то, что уже есть: логотип, фото, прайс. С текстами поможем.</p></div>
-      </details>
-      <details class="faq__item">
-        <summary class="faq__q"><span class="faq__text">Сколько раз можно вносить правки?</span><span class="faq__sign" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>На этапе макета сколько угодно. Сборку начинаем только после того, как вы скажете, что всё нравится.</p></div>
-      </details>
-      <details class="faq__item">
-        <summary class="faq__q"><span class="faq__text">Сайт будет моим?</span><span class="faq__sign" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>Да. Передаём доступы к сайту, домену и хостингу. Если захотите, дальше будем вести его сами.</p></div>
-      </details>
-      <details class="faq__item">
-        <summary class="faq__q"><span class="faq__text">Вы работаете с другими городами?</span><span class="faq__sign" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>Да. Всё обсуждаем в переписке или по видео, макеты и готовый сайт показываем по ссылке.</p></div>
-      </details>
-    </div>
+  <!-- <details> нативный: работает без JS и с клавиатуры; js/faq.js
+       добавляет только плавное раскрытие -->
+  <div class="faq">
+    <details class="faq__item">
+      <summary class="faq__q"><span class="faq__text">Сколько стоит сайт?</span><span class="faq__sign" aria-hidden="true"></span></summary>
+      <div class="faq__a"><p>Зависит от объёма. Визитка на одну страницу стоит меньше, сайт с меню на сотню позиций дороже. Точную сумму назовём после разговора и закрепим до начала работы.</p></div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q"><span class="faq__text">Что от меня понадобится?</span><span class="faq__sign" aria-hidden="true"></span></summary>
+      <div class="faq__a"><p>Рассказать о бизнесе и прислать то, что уже есть: логотип, фото, прайс. С текстами поможем.</p></div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q"><span class="faq__text">Сколько раз можно вносить правки?</span><span class="faq__sign" aria-hidden="true"></span></summary>
+      <div class="faq__a"><p>На этапе макета сколько угодно. Сборку начинаем только после того, как вы скажете, что всё нравится.</p></div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q"><span class="faq__text">Сайт будет моим?</span><span class="faq__sign" aria-hidden="true"></span></summary>
+      <div class="faq__a"><p>Да. Передаём доступы к сайту, домену и хостингу. Если захотите, дальше будем вести его сами.</p></div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q"><span class="faq__text">Вы работаете с другими городами?</span><span class="faq__sign" aria-hidden="true"></span></summary>
+      <div class="faq__a"><p>Да. Всё обсуждаем в переписке или по видео, макеты и готовый сайт показываем по ссылке.</p></div>
+    </details>
   </div>
 </section>
 
 
+<!-- ═════════════ КОНТАКТЫ ═════════════ -->
 <section class="sec sec--dark contact" id="contact">
-  <h2 class="contact__title">Обсудим ваш сайт?</h2>
-  <p class="contact__lead">Напишите пару слов о бизнесе и есть ли у вас сайт сейчас. Ответим и предложим, с чего начать.</p>
+  <div class="big">
+    <h2 class="fit" data-reveal><span>Напишите нам</span></h2>
+    <p class="big__note"><em>Пара слов о бизнесе</em> и есть ли у вас сайт сейчас. Ответим и предложим, с чего начать.</p>
+  </div>
 
-  <a class="contact__tg" href="https://t.me/seven_sites?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D1%81%D0%B0%D0%B9%D1%82." target="_blank" rel="noopener" data-goal="tg_contact">
-    <span>Telegram</span>
-    <b>@seven_sites</b>
-  </a>
+  <a class="contact__tg fit" href="https://t.me/seven_sites?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D1%81%D0%B0%D0%B9%D1%82." target="_blank" rel="noopener" data-goal="tg_contact" aria-label="Написать в Telegram @seven_sites"><span>@seven_sites</span></a>
 
   <div class="contact__other">
+    <a href="https://t.me/seven_sites" target="_blank" rel="noopener" data-goal="tg_contact_row"><span>Telegram</span>@seven_sites</a>
     <a href="https://instagram.com/seven_sites" target="_blank" rel="noopener" data-goal="ig_contact"><span>Instagram</span>@seven_sites</a>
     <a href="mailto:7devsites@gmail.com" data-goal="mail_contact"><span>Почта</span>7devsites@gmail.com</a>
   </div>
@@ -348,6 +355,7 @@
   <a class="dock__btn" href="https://t.me/seven_sites?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D1%81%D0%B0%D0%B9%D1%82." target="_blank" rel="noopener" data-goal="tg_dock">Написать в Telegram</a>
 </div>
 
+<script src="js/fit.js"></script>
 <script src="js/faq.js"></script>
 <script src="js/app.js"></script>
 
