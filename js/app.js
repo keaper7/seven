@@ -14,7 +14,6 @@
   });
 
   SEVEN.faq();
-  SEVEN.show();
 
   requestAnimationFrame(() => root.classList.add('is-ready'));
 
@@ -30,7 +29,7 @@
   const setMenu = (open) => {
     root.classList.toggle('menu-open', open);
     btn.setAttribute('aria-expanded', String(open));
-    btn.setAttribute('aria-label', open ? 'Закрыть меню' : 'Меню');
+    btn.textContent = open ? 'Закрыть' : 'Меню';
     menu.setAttribute('aria-hidden', String(!open));
   };
   btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
@@ -55,7 +54,7 @@
   /* ── липкая кнопка: после первого экрана, но не поверх своих CTA ── */
   const dock = document.getElementById('dock');
   const hero = document.getElementById('hero');
-  const blockers = ['show', 'contact'].map((id) => document.getElementById(id)).filter(Boolean);
+  const blockers = ['contact'].map((id) => document.getElementById(id)).filter(Boolean);
   const state = { heroOut: false, blocked: new Set() };
   const syncDock = () => dock.classList.toggle('is-on', state.heroOut && state.blocked.size === 0);
 
