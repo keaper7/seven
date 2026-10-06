@@ -100,16 +100,20 @@
       const f = box($('#heroFacts'), hero);
       const word = box($('.hero__fact b'), hero);
       const base = word.t + (word.b - word.t) * .8;      // базовая линия слова
-      const left = g, right = f.l - 12;
-      let w7 = right - left;
-      let h7 = Math.min(base - (f.t + 22) - w, w7 * 1.38);
-      w7 = Math.min(w7, h7 / 1.2);
-      x0 = right - w7 - w * .1;
-      xR = right - w / 2;
+      let w7 = f.l - 12 - g;
+      let h7 = Math.min(base - (f.t + 22) - w, w7 * 1.3);
+      w7 = Math.min(w7, h7 / 1.15);
+      x0 = g;
+      xR = x0 + w7;
       yE = base + w * .1;           // нижний срез ленты садится на базовую линию слова
       y0 = yE - h7;
-      xE = x0 + w7 * .22;
+      xE = x0 + w7 * .2;
       r = w * .55;
+      /* слово встаёт вплотную к ножке цифры — читается «7 дней», а не «картинка + текст» */
+      const fact = $('.hero__fact');
+      const diagAt = (y) => xE + (yE - y) / (yE - y0) * (xR - xE);
+      const wordX = Math.max(xE + w * .6 + 14, diagAt(word.t) + w / 2 + 12);
+      fact.style.transform = 'translateX(' + Math.round(wordX - (word.l - (parseFloat(fact.style.transform.replace(/[^-\d.]/g, '')) || 0))) + 'px)';
     } else {
       /* компьютер: семёрка стоит справа от заголовка во всю высоту */
       x0 = Math.max(t.r + 64, W * .53);
