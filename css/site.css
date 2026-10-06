@@ -590,7 +590,8 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
 /* ── контакт ───────────────────────────────────────────────────── */
 
 /* финал: огромный вопрос по центру, под ним всё по одной оси.
-   Кегль подогнан под ширину: самое длинное слово «Обсудим» — 5,58 кегля */
+   Две строки «Обсудим» / «ваш сайт?»; кегль подогнан под ширину
+   второй, она длиннее — 6,3 кегля */
 .contact {
   container-type: inline-size;
   padding: var(--sec) var(--g) calc(var(--sec) * .55);
@@ -601,11 +602,11 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
   align-items: center;
 }
 .contact__title {
-  font: 700 calc((100vw - 2 * var(--g)) / 5.8)/.9 var(--fh);
-  font-size: calc(100cqw / 5.72);
+  font: 700 calc((100vw - 2 * var(--g)) / 6.55)/.92 var(--fh);
+  font-size: calc(100cqw / 6.45);
   letter-spacing: -.055em;
 }
-.contact__title span { display: block; }
+.contact__title span:first-child { display: block; }
 .contact__lead { margin-top: 30px; max-width: 21em; font-size: 17px; line-height: 1.5; color: var(--dim); text-wrap: balance; }
 .contact .btn--lg { width: 100%; max-width: 420px; margin-top: 34px; }
 .contact__links { margin-top: 18px; width: 100%; max-width: 420px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -720,9 +721,7 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
   .faq__q { padding: 30px 0; }
   .faq__a p { font-size: 17px; }
 
-  /* на компьютере вопрос в две строки: «Обсудим» / «ваш сайт?» (6,3 кегля) */
   .contact__title { font-size: min(calc(100cqw / 6.45), 30vh); }
-  .contact__title span:nth-child(2), .contact__title span:nth-child(3) { display: inline; }
   .contact__lead { margin-top: 40px; font-size: 19px; }
   .contact .btn--lg { width: auto; padding: 0 40px; margin-top: 40px; }
   .contact__links { margin-top: 22px; max-width: 520px; }
