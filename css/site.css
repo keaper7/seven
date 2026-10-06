@@ -238,6 +238,14 @@ html.is-in .hl--b { font-weight: 700; }
 }
 @media (hover: hover) { .hero__more:hover { background-size: 40% 1px; } }
 
+/* телефон: заголовок и строка сверху, семёрка в середине, широкая кнопка снизу */
+@media (max-width: 899px) {
+  .hero { padding-top: calc(var(--hd) + env(safe-area-inset-top) + 14px); padding-bottom: calc(22px + env(safe-area-inset-bottom)); }
+  .hero__lead { margin-top: 16px; max-width: 22em; font-size: 15.5px; }
+  .hero__cta { width: 100%; padding-top: 24px; gap: 0; }
+  .hero__cta .btn { width: 100%; }
+  .hero__more { display: none; }
+}
 .tape { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
 .tape canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
@@ -259,6 +267,7 @@ html.is-in .hl--b { font-weight: 700; }
 }
 .tape__hint b { display: block; font-weight: 600; color: var(--fg); }
 .tape__hint.is-flip { flex-direction: row-reverse; }
+.tape__hint[hidden] { display: none; }
 .tape__hint.is-flip svg { transform: scaleX(-1); }
 .tape__hint svg { flex: none; width: 46px; height: 30px; fill: none; stroke: var(--orange-d); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .tape.is-ready ~ .tape__hint { opacity: 1; transform: none; }

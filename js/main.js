@@ -90,23 +90,22 @@
     const t = box(title, hero);
     const wide = W >= 900 || W > H * 1.2;
     let x0, y0, xR, xE, yE;
+    let r = w * .95;
     if (!wide) {
-      /* телефон: перекладина ложится под заголовок и меряет его от края
-         текста — ноль ленты ровно на левом поле. Диагональ уходит вниз
-         и проходит правее текста и кнопки */
-      x0 = g - w * .42;
-      y0 = t.b + 14 + w / 2;
-      xR = W - g * .7 - w / 2;
-      yE = H - 26 - w / 2;
-      let k = -.36;
-      for (const el of [lead, cta]) {
-        const o = box(el, hero);
-        const yb = Math.min(o.b + w / 2 + 6, yE);
-        if (yb <= y0) continue;
-        k = Math.max(k, (o.r + 18 + w / 2 - xR) / (yb - y0));
-      }
-      k = Math.min(k, -.1);
-      xE = xR + k * (yE - y0);
+      /* телефон: семёрка — отдельная крупная цифра в середине экрана,
+         между заголовком и кнопкой. Пропорции настоящей «7»: высота
+         в полтора раза больше ширины, ножка уходит под наклоном */
+      const l = box(lead, hero), c = box(cta, hero);
+      const top = l.b + 28, bot = c.t - 26;
+      const h7 = Math.max(160, bot - top - w);
+      const w7 = Math.min(h7 * .7, W - 2 * g - w * .6);
+      const cx = W / 2 + w7 * .03;
+      x0 = cx - w7 / 2;
+      xR = cx + w7 / 2 - w / 2;
+      y0 = top + w / 2;
+      yE = y0 + h7;
+      xE = x0 + w7 * .26;
+      r = w * .55;
     } else {
       /* компьютер: семёрка стоит справа от заголовка во всю высоту */
       x0 = Math.max(t.r + 64, W * .53);
@@ -116,7 +115,7 @@
       xE = x0 + (xR - x0) * .3;
     }
     end = { x: xE, y: yE, w, wide, k: (xE - xR) / (yE - y0) };
-    return { pts: SEVEN.sevenPath(x0, y0, xR, xE, yE, w * .95), w };
+    return { pts: SEVEN.sevenPath(x0, y0, xR, xE, yE, r), w };
   };
 
   /* подсказка встаёт в пустое место между текстом и кнопкой, стрелкой к ленте */
@@ -133,9 +132,12 @@
       flip = true;
       if (x + hw > hero.clientWidth - 16) { x = end.x - end.w / 2 - 26 - hw; flip = false; }
     } else {
-      y = Math.max(l.b + 18, (l.b + c.t) / 2 - hh / 2);
-      const diag = end.x - end.k * (end.y - (y + hh / 2));
-      x = Math.max(l.l, Math.min(diag - end.w / 2 - 14 - hw, l.l + 40));
+      /* телефон: справа от ножки семёрки, у её нижнего конца, стрелкой к ленте */
+      y = end.y - hh - 4;
+      x = end.x + end.w / 2 + 18;
+      flip = true;
+      /* на совсем узком экране места нет — подсказку не показываем */
+      hint.hidden = x + hw > hero.clientWidth - 10;
     }
     hint.classList.toggle('is-flip', flip);
     hint.style.left = Math.round(x) + 'px';
