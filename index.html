@@ -280,7 +280,40 @@
   </div>
   </div>
   <div class="wk-more">
-    <a class="wk-all" href="works/" data-goal="works_page">Все работы на&nbsp;одной странице<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+    <a class="wk-all" href="works/" data-goal="works_page">Все работы на&nbsp;одной странице<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      <!-- кот из мастерской выглядывает из-за кнопки и следит за работами -->
+      <svg class="peek" viewBox="0 0 60 34" aria-hidden="true">
+        <defs><clipPath id="peekEdge"><rect x="-10" y="-10" width="80" height="39"/></clipPath></defs>
+        <g class="peek__cat" id="peekCat">
+          <g clip-path="url(#peekEdge)">
+            <g id="peekHead">
+              <g id="peekEarL"><path class="peek__b" d="M11.4 16.4 L13.6 3.8 L22.6 10.6 Z"/><path class="peek__in" d="M14 13.2 L15.2 7.4 L19.8 10.8 Z"/></g>
+              <g id="peekEarR"><path class="peek__b" d="M37.4 10.6 L46.4 3.8 L48.6 16.4 Z"/><path class="peek__in" d="M40.2 10.8 L44.8 7.4 L46 13.2 Z"/></g>
+              <ellipse class="peek__b" cx="30" cy="21.4" rx="18.2" ry="13.8"/>
+              <g id="peekEyes">
+                <ellipse class="peek__iris" cx="23.2" cy="19.6" rx="3.3" ry="3.7"/>
+                <ellipse class="peek__iris" cx="36.8" cy="19.6" rx="3.3" ry="3.7"/>
+                <g id="peekPupils">
+                  <ellipse class="peek__pupil" cx="23.2" cy="19.6" rx="1.15" ry="2.9"/>
+                  <ellipse class="peek__pupil" cx="36.8" cy="19.6" rx="1.15" ry="2.9"/>
+                  <circle class="peek__glint" cx="24.3" cy="18" r=".75"/>
+                  <circle class="peek__glint" cx="37.9" cy="18" r=".75"/>
+                </g>
+              </g>
+              <path class="peek__lid" id="peekLids" d="M19.6 19.6 Q23.2 21.6 26.8 19.6 M33.2 19.6 Q36.8 21.6 40.4 19.6"/>
+              <path class="peek__nose" d="M28.5 24.6 H31.5 L30 26.1 Z"/>
+              <path class="peek__mouth" d="M30 26.1 Q28.8 27.6 27.3 27 M30 26.1 Q31.2 27.6 32.7 27"/>
+              <path class="peek__wh" d="M15.6 24.4 L5.4 23 M15.8 26.4 L6.4 27.2 M44.4 24.4 L54.6 23 M44.2 26.4 L53.6 27.2"/>
+            </g>
+          </g>
+          <g class="peek__paws" id="peekPaws">
+            <ellipse class="peek__b" cx="18.4" cy="29.6" rx="6.6" ry="3.3"/>
+            <ellipse class="peek__b" cx="41.6" cy="29.6" rx="6.6" ry="3.3"/>
+            <path class="peek__toe" d="M16.2 31 V29.2 M20.4 31 V29.2 M39.6 31 V29.2 M43.8 31 V29.2"/>
+          </g>
+        </g>
+      </svg>
+    </a>
   </div>
 </section>
 
@@ -386,6 +419,337 @@
     <a href="https://instagram.com/seven_sites" target="_blank" rel="noopener" data-goal="ig_contact"><span>Instagram</span>@seven_sites</a>
     <a href="mailto:7devsites@gmail.com" data-goal="mail_contact"><span>Почта</span>7devsites@gmail.com</a>
   </p>
+
+  <!-- мастерская: семь раз отмеряем макет, один раз пишем сайт; на мониторе спит кот.
+       Сцена живёт сама по себе (js/studio.js), лампу можно выключить, кота — разбудить -->
+  <figure class="studio" id="studio" aria-hidden="true">
+    <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMax meet">
+      <defs>
+        <clipPath id="stScrClip"><rect x="210" y="56" width="116" height="62" rx="1.5"/></clipPath>
+        <clipPath id="stSiteClip"><rect id="stSiteWipe" x="210" y="56" width="116" height="0"/></clipPath>
+      </defs>
+
+      <g class="st-floor">
+        <ellipse cx="121" cy="213" rx="38" ry="2.4"/>
+        <ellipse cx="284" cy="213" rx="102" ry="2.4"/>
+        <ellipse cx="38" cy="213" rx="18" ry="2"/>
+      </g>
+
+      <!-- свет настольной лампы -->
+      <g class="st-light" id="stLight">
+        <path class="st-light__cone" d="M347.8 77 L367 84 L369 134 L296 134 Z"/>
+      </g>
+
+      <!-- доска с эскизами на стене -->
+      <g class="st-wall">
+        <rect class="st-wall__board" x="18" y="20" width="80" height="54" rx="2"/>
+        <g class="st-sheet" transform="rotate(-4 36 30)">
+          <rect class="st-sheet__p" x="26" y="27" width="20" height="31" rx=".6"/>
+          <path class="st-sketch" d="M29 32.4 H36 M29 36 H42 M29 39 H38.4 M29 42 H41.6"/>
+          <path class="st-sketch st-sketch--o" d="M30.4 46.2 H37.4 L34 54.4"/>
+          <rect class="st-sketch__btn" x="38.6" y="51.4" width="5" height="2.2" rx=".6"/>
+          <circle class="st-pinhead" cx="36" cy="29.4" r="1.3"/>
+        </g>
+        <g class="st-sheet st-sheet--sw" transform="rotate(3 61 30)">
+          <rect class="st-sheet__p" x="51" y="28" width="20" height="16" rx=".6"/>
+          <rect class="st-sw__k" x="53.6" y="32.4" width="4.4" height="4.4" rx=".4"/>
+          <rect class="st-sw__o" x="58.8" y="32.4" width="4.4" height="4.4" rx=".4"/>
+          <rect class="st-sw__p" x="64" y="32.4" width="4.4" height="4.4" rx=".4"/>
+          <path class="st-sketch" d="M53.6 39.6 H62 M53.6 41.4 H59"/>
+          <circle class="st-pinhead st-pinhead--p" cx="61" cy="29.6" r="1.3"/>
+        </g>
+        <g class="st-sheet" transform="rotate(5 84 29)">
+          <rect class="st-sheet__p" x="75" y="27" width="17" height="22" rx=".6"/>
+          <path class="st-sketch" d="M78 32 H89 M78 35 H86 M78 38 H88 M78 41 H84"/>
+          <path class="st-sketch st-sketch--o" d="M78.4 44.6 L80.2 46.2 L83.4 43"/>
+          <circle class="st-pinhead" cx="83.5" cy="28.6" r="1.3"/>
+        </g>
+        <g class="st-sheet st-sheet--flap">
+          <rect class="st-sheet__p st-sheet__p--d" x="34" y="60" width="24" height="10" rx=".6"/>
+          <path class="st-sketch" d="M37 64 H54 M37 66.6 H48"/>
+          <circle class="st-pinhead st-pinhead--p" cx="45.6" cy="61.4" r="1.2"/>
+        </g>
+      </g>
+
+      <!-- растение -->
+      <g class="st-plant">
+        <path class="st-leaf st-leaf--d" style="--dl:-1.3s" d="M31 184 C27.5 168 24.5 152 22.5 133 C29.5 148 34 166 35.5 184 Z"/>
+        <path class="st-leaf st-leaf--d" style="--dl:-2.1s" d="M40 184 C42.5 166 47 150 54 131 C52 151 47.5 168 44 184 Z"/>
+        <path class="st-leaf" style="--dl:-.4s" d="M34.5 184 C33 162 33 140 37 114 C40.5 140 41.5 162 40.5 184 Z"/>
+        <path class="st-leaf" style="--dl:-2.9s" d="M37.5 184 C38.5 170 40.5 157 44.5 144 C44.5 158 43 171 42 184 Z"/>
+        <path class="st-leaf st-leaf--d" style="--dl:-3.6s" d="M33 184 C31.5 174 29.8 165 30.5 152 C33.5 163 35.5 173 36.5 184 Z"/>
+        <path class="st-pot" d="M23.5 186 H52.5 L49.5 211.5 H26.5 Z"/>
+        <rect class="st-pot__rim" x="21.5" y="182" width="33" height="5.5" rx="1.6"/>
+      </g>
+
+      <!-- провода: от монитора и лампы к удлинителю на полу -->
+      <path class="st-cable" d="M270 139.6 C269 162 276 196 298 207.6 H318"/>
+      <path class="st-cable" d="M389.4 134 C392.6 146 392.4 170 389.6 190 C388 204 382 208.6 372 208.6 H344"/>
+      <rect class="st-strip" x="316" y="205.6" width="28" height="6" rx="1.4"/>
+      <circle class="st-strip__led" cx="340.6" cy="208.6" r=".8"/>
+
+      <!-- стол -->
+      <g class="st-desk">
+        <rect class="st-desk__leg" x="196" y="139" width="5" height="71"/>
+        <rect class="st-desk__leg" x="370" y="139" width="5" height="71"/>
+        <rect class="st-desk__leg" x="188" y="209" width="21" height="3.4" rx="1.7"/>
+        <rect class="st-desk__leg" x="362" y="209" width="21" height="3.4" rx="1.7"/>
+        <rect class="st-desk__top" x="154" y="134" width="238" height="6" rx="1.2"/>
+        <rect class="st-desk__edge" x="154.6" y="134" width="236.8" height="1.1" rx=".5"/>
+      </g>
+      <ellipse class="st-light__pool" id="stPool" cx="333" cy="134.4" rx="37" ry="1.6"/>
+
+      <!-- клавиатура и мышь -->
+      <path class="st-kb" d="M154.6 134 L156.6 130.4 L175.4 129.6 L177.2 134 Z"/>
+      <path class="st-kb__keys" d="M157.6 130.1 H174.8"/>
+      <path class="st-mouse" d="M179 134 C179 131.3 180.8 130.3 182.8 130.3 C184.8 130.3 186.6 131.3 186.6 134 Z"/>
+
+      <!-- телефон на подставке: в начале каждого заказа приходит сообщение -->
+      <g class="st-phone" id="stPhone">
+        <path class="st-phone__stand" d="M195.4 134 L198.6 127 L202.4 127.4 L204.6 134 Z"/>
+        <rect class="st-phone__body" x="193.4" y="117.6" width="10" height="15.6" rx="1.8" transform="rotate(-8 198.4 125.4)"/>
+        <g transform="rotate(-8 198.4 125.4)">
+          <rect class="st-phone__scr" x="194.3" y="118.6" width="8.2" height="13.6" rx="1.1"/>
+          <g class="st-phone__msg" id="stMsg">
+            <rect class="st-phone__lit" x="194.3" y="118.6" width="8.2" height="13.6" rx="1.1"/>
+            <circle class="st-phone__ava" cx="196.5" cy="122.2" r="1.25"/>
+            <rect class="st-phone__line" x="198.4" y="121.3" width="3.2" height=".8" rx=".4"/>
+            <rect class="st-phone__line st-phone__line--d" x="198.4" y="122.7" width="2.4" height=".6" rx=".3"/>
+            <rect class="st-phone__bub" x="195.2" y="125.4" width="6.4" height="3.4" rx="1.2"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- монитор -->
+      <g class="st-mon">
+        <path class="st-mon__foot" d="M252 134 L256.5 131 H279.5 L284 134 Z"/>
+        <rect class="st-mon__foot" x="264" y="125" width="8" height="7"/>
+        <rect class="st-mon__body" x="206" y="52" width="124" height="74" rx="4"/>
+        <path class="st-mon__hl" d="M209.5 52.7 H326.5"/>
+        <rect class="st-mon__scr" x="210" y="56" width="116" height="62" rx="1.5"/>
+        <circle class="st-mon__dot" cx="268" cy="122.1" r="1.05"/>
+
+        <g clip-path="url(#stScrClip)">
+          <!-- экран 1: макет в редакторе, на нём семь замеров -->
+          <g class="st-scr" id="stFig">
+            <rect class="st-ui0" x="210" y="56" width="116" height="62"/>
+            <rect class="st-ui1" x="210" y="56" width="116" height="4.6"/>
+            <g class="st-ui3"><circle cx="213.4" cy="58.3" r=".75"/><circle cx="216" cy="58.3" r=".75"/><circle cx="218.6" cy="58.3" r=".75"/></g>
+            <rect class="st-ui1" x="210" y="60.6" width="21" height="57.4"/>
+            <rect class="st-ui1" x="305" y="60.6" width="21" height="57.4"/>
+            <rect class="st-ui-act" x="211" y="70.4" width="19" height="3.6" rx=".6"/>
+            <g class="st-ui2">
+              <rect x="213" y="64.4" width="12" height="1.4" rx=".7"/>
+              <rect x="215" y="71.5" width="11" height="1.4" rx=".7"/>
+              <rect x="215" y="76.4" width="9" height="1.4" rx=".7"/>
+              <rect x="215" y="81.2" width="12" height="1.4" rx=".7"/>
+              <rect x="215" y="86" width="8" height="1.4" rx=".7"/>
+              <rect x="215" y="90.8" width="10" height="1.4" rx=".7"/>
+              <rect x="308" y="64.4" width="8" height="1.4" rx=".7"/>
+              <rect x="308" y="69.4" width="15" height="2.6" rx=".6"/>
+              <rect x="308" y="74.6" width="15" height="2.6" rx=".6"/>
+              <rect x="308" y="82.4" width="6" height="1.4" rx=".7"/>
+              <rect x="308" y="86.6" width="7" height="2.6" rx=".6"/>
+              <rect x="316" y="86.6" width="7" height="2.6" rx=".6"/>
+            </g>
+            <g id="stBoard">
+              <rect class="st-board" x="251" y="66" width="34" height="50" rx="2.2"/>
+              <g class="st-wire">
+                <rect x="254" y="68.2" width="7" height="1.5" rx=".75"/>
+                <rect x="277.5" y="68.2" width="4.5" height="1.5" rx=".75"/>
+                <rect x="254.5" y="73" width="16" height="2.4" rx=".5"/>
+                <rect x="254.5" y="76.4" width="21" height="2.4" rx=".5"/>
+                <rect x="254.5" y="79.8" width="15" height="2.4" rx=".5"/>
+                <rect x="254.5" y="83.2" width="22" height="2.4" rx=".5"/>
+                <rect x="254.5" y="88.4" width="19" height="1" rx=".5"/>
+                <rect x="254.5" y="90.4" width="14" height="1" rx=".5"/>
+                <rect x="272" y="103.4" width="8" height="2.4" rx=".5"/>
+                <rect x="254" y="109.6" width="28" height="3.6" rx="1.2"/>
+              </g>
+              <g class="st-wire__img">
+                <rect x="256" y="94.6" width="12" height="11.4" rx=".5"/>
+                <path d="M256 94.6 L268 106 M268 94.6 L256 106"/>
+              </g>
+            </g>
+            <g id="stMeasures"></g>
+          </g>
+
+          <!-- экран 2: код -->
+          <g class="st-scr" id="stCode">
+            <rect class="st-code0" x="210" y="56" width="116" height="62"/>
+            <rect class="st-code1" x="210" y="56" width="116" height="4.4"/>
+            <rect class="st-code0" x="210" y="56" width="27" height="4.4"/>
+            <circle class="st-code-tab" cx="213.6" cy="58.2" r=".8"/>
+            <rect class="st-code-name" x="216" y="57.6" width="17" height="1.2" rx=".6"/>
+            <rect class="st-code-gut" x="210" y="60.4" width="9" height="57.6"/>
+            <g id="stLines"></g>
+            <rect class="st-code-bar" x="210" y="115.6" width="116" height="2.4"/>
+            <rect class="st-caret" id="stCaret" x="222" y="61.6" width=".9" height="3.4"/>
+          </g>
+
+          <!-- экран 3: готовый сайт -->
+          <g class="st-scr" id="stSite" clip-path="url(#stSiteClip)">
+            <rect class="st-site0" x="210" y="56" width="116" height="62"/>
+            <rect class="st-site-ink" x="214" y="59.6" width="10" height="2" rx="1"/>
+            <circle class="st-site-dot" cx="225.6" cy="60.8" r=".9"/>
+            <g class="st-site-dim"><rect x="282" y="60" width="6" height="1.2" rx=".6"/><rect x="290" y="60" width="6" height="1.2" rx=".6"/><rect x="298" y="60" width="6" height="1.2" rx=".6"/></g>
+            <rect class="st-site-ink" x="310" y="58.8" width="12" height="3.6" rx="1.2"/>
+            <rect class="st-site-thin" x="214" y="67" width="30" height="4" rx=".6"/>
+            <rect class="st-site-ink" x="214" y="72.4" width="40" height="4.4" rx=".6"/>
+            <rect class="st-site-thin" x="214" y="78.2" width="28" height="4" rx=".6"/>
+            <rect class="st-site-ink" x="214" y="83.6" width="42" height="4.4" rx=".6"/>
+            <circle class="st-site-dot" cx="258.6" cy="86.8" r="1.2"/>
+            <g class="st-site-dim"><rect x="214" y="92.4" width="36" height="1.3" rx=".65"/><rect x="214" y="95.2" width="27" height="1.3" rx=".65"/></g>
+            <rect class="st-site-ink" x="214" y="103" width="26" height="6.4" rx="2"/>
+            <rect class="st-site-btn" x="218" y="105.6" width="12" height="1.2" rx=".6"/>
+            <path class="st-site-tape" d="M266 70 H298 L284 111"/>
+            <path class="st-site-ticks" d="M266 68.2 H297.2 M266 71.8 H296.8"/>
+            <rect class="st-site-ink" x="291" y="106" width="15" height="4.2" rx=".6"/>
+          </g>
+
+          <path class="st-cursor" id="stCursor" d="M0 0 V4.8 L1.2 3.7 L2.1 5.6 L2.9 5.2 L2 3.4 L3.6 3.3 Z"/>
+        </g>
+
+        <!-- стикер: сколько раз отмерили -->
+        <g class="st-note" transform="translate(198.5 58) rotate(-8)">
+          <rect class="st-note__p" width="15" height="14.5" rx=".8"/>
+          <path class="st-note__f" d="M15 11 L11.5 14.5 H15 Z"/>
+          <g class="st-tally" id="stTally">
+            <path d="M3 3.6 V9.4"/><path d="M4.8 3.6 V9.4"/><path d="M6.6 3.6 V9.4"/><path d="M8.4 3.6 V9.4"/>
+            <path d="M2.2 8.6 L9.4 4.2"/><path d="M11.2 3.6 V9.4"/><path d="M13 3.6 V9.4"/>
+          </g>
+        </g>
+
+        <!-- кот спит на мониторе -->
+        <g class="st-cat" id="stCat">
+          <path class="st-cat__tail" id="stTail"/>
+          <g id="stCatBody">
+            <path class="st-cat__b" d="M246 52.4 C244.5 42.5 253.5 35 267.5 35 C283.5 35 300.5 38 303.6 46.4 C304.6 49 304 51.2 303.2 52.4 Z"/>
+            <path class="st-cat__d" d="M251 52.4 C263 50.2 285 50 303.4 51.6 L303.2 52.4 Z"/>
+            <path class="st-cat__line" d="M285.5 51.6 C284.6 45.4 289.6 41 296.4 41.8"/>
+          </g>
+          <ellipse class="st-cat__b" cx="235.4" cy="51.3" rx="5.2" ry="2.3"/>
+          <ellipse class="st-cat__b" cx="244" cy="51.6" rx="5" ry="2.1"/>
+          <path class="st-cat__line" d="M233.2 52.4 V50.6 M236.6 52.4 V50.6 M242 52.4 V50.8 M245.4 52.4 V50.8"/>
+          <g id="stCatHead">
+            <g id="stEarL"><path class="st-cat__b" d="M230.6 38.4 L231.4 27.8 L239.2 33.6 Z"/><path class="st-cat__in" d="M232.5 35.2 L232.9 30.4 L236.7 33.2 Z"/></g>
+            <g id="stEarR"><path class="st-cat__b" d="M241.8 33.6 L249.6 27.8 L250.4 38.4 Z"/><path class="st-cat__in" d="M244.3 33.2 L248.1 30.4 L248.5 35.2 Z"/></g>
+            <ellipse class="st-cat__b" cx="240.5" cy="41.2" rx="10.8" ry="9.1"/>
+            <g class="st-cat__shut" id="stCatShut"><path d="M234.6 41.4 Q236.8 43.4 239 41.4 M242 41.4 Q244.2 43.4 246.4 41.4"/></g>
+            <g class="st-cat__open" id="stCatOpen">
+              <ellipse class="st-cat__iris" cx="236.8" cy="40.8" rx="2" ry="2.3"/>
+              <ellipse class="st-cat__iris" cx="244.2" cy="40.8" rx="2" ry="2.3"/>
+              <ellipse class="st-cat__pupil" id="stPupL" cx="236.8" cy="40.8" rx=".7" ry="1.8"/>
+              <ellipse class="st-cat__pupil" id="stPupR" cx="244.2" cy="40.8" rx=".7" ry="1.8"/>
+            </g>
+            <path class="st-cat__nose" d="M239.4 44.5 H241.6 L240.5 45.7 Z"/>
+            <path class="st-cat__mouth" d="M240.5 45.7 Q239.6 46.9 238.4 46.5 M240.5 45.7 Q241.4 46.9 242.6 46.5"/>
+            <path class="st-cat__wh" d="M231.4 44.2 L224 43 M231.4 45.8 L224.4 46.6 M249.6 44.2 L257 43 M249.6 45.8 L256.6 46.6"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- кружка, подушечка с булавками, лампа -->
+      <g class="st-mug">
+        <path class="st-mug__h" d="M347 123.6 C351.6 123.6 351.6 130.2 347 130.2"/>
+        <path class="st-mug__b" d="M334 121 H347 V131.6 C347 133 346 134 344.6 134 H336.4 C335 134 334 133 334 131.6 Z"/>
+        <rect class="st-mug__band" x="334" y="125" width="13" height="2.2"/>
+      </g>
+      <g class="st-steam">
+        <path d="M338.4 117.6 C336.4 114 340.4 111.4 338.4 107.8 C336.4 104.2 340.4 101.6 338.4 98"/>
+        <path style="--dl:-1.6s" d="M342.8 117.6 C340.8 114 344.8 111.4 342.8 107.8 C340.8 104.2 344.8 101.6 342.8 98"/>
+      </g>
+      <g class="st-pins">
+        <path class="st-pin" d="M357.6 129 L355 121.6"/>
+        <path class="st-pin" d="M360 128.6 L359.8 119.8"/>
+        <path class="st-pin" d="M362.4 129 L364.4 121.4"/>
+        <circle class="st-pin__h" cx="354.8" cy="121.1" r="1.25"/>
+        <circle class="st-pin__h st-pin__h--o" cx="359.8" cy="119.3" r="1.25"/>
+        <circle class="st-pin__h st-pin__h--k" cx="364.5" cy="120.9" r="1.25"/>
+        <ellipse class="st-cushion" cx="360" cy="130.8" rx="6.4" ry="3.6"/>
+        <path class="st-cushion__seam" d="M356.6 127.9 C356 130 356.4 132.6 357.1 134.1 M360 127.2 V134.4 M363.4 127.9 C364 130 363.6 132.6 362.9 134.1"/>
+      </g>
+      <g class="st-lamp" id="stLamp">
+        <path class="st-lamp__base" d="M372.5 134 C372.5 131.2 376.5 129.6 382 129.6 C387.5 129.6 391.5 131.2 391.5 134 Z"/>
+        <path class="st-lamp__rod" d="M381 130.4 L388 92.6 M383.6 130.6 L390.4 93"/>
+        <path class="st-lamp__spring" d="M384.6 118 L387.4 117.4 M384.9 116.4 L387.7 115.8 M385.2 114.8 L388 114.2 M385.5 113.2 L388.3 112.6"/>
+        <path class="st-lamp__rod" d="M389.2 92.2 L361.4 72.4"/>
+        <circle class="st-lamp__joint" cx="389.2" cy="92.4" r="2.2"/>
+        <g transform="translate(360.5 72) rotate(20)">
+          <path class="st-lamp__shade" d="M-3.6 -6.2 H3.6 L10.4 9 H-10.4 Z"/>
+          <path class="st-lamp__side" d="M3.6 -6.2 L10.4 9 H6.6 L1.4 -6.2 Z"/>
+          <ellipse class="st-lamp__bulb" cx="0" cy="9" rx="9" ry="2.2"/>
+          <circle class="st-lamp__joint" cx="0" cy="-6.4" r="2"/>
+        </g>
+      </g>
+
+      <!-- стул -->
+      <g class="st-chair">
+        <g id="stChairBack">
+          <path class="st-chair__bar" d="M106 152.6 L100.4 141"/>
+          <rect class="st-chair__back" x="88" y="94" width="13" height="50" rx="6.5" transform="rotate(-7 94.5 119)"/>
+        </g>
+        <rect class="st-chair__lift" x="119.5" y="157" width="5" height="40"/>
+        <path class="st-chair__base" d="M98 199.6 H145.6"/>
+        <circle class="st-chair__wheel" cx="99" cy="206.4" r="4.6"/>
+        <circle class="st-chair__wheel" cx="121.8" cy="206.4" r="4.6"/>
+        <circle class="st-chair__wheel" cx="144.6" cy="206.4" r="4.6"/>
+        <rect class="st-chair__seat" x="97" y="149.6" width="52" height="8.4" rx="4.2"/>
+      </g>
+
+      <!-- человек: дальняя нога и рука — за телом -->
+      <g class="st-legs st-legs--far">
+        <path class="st-thigh" d="M114 146 L157 147.4"/>
+        <path class="st-shin" d="M157 147.4 L153.4 199"/>
+        <path class="st-shoe" d="M147.8 196.6 C147.8 193.2 157.2 193 159.2 196 L168.2 200.4 C170.8 201.4 170.4 205.6 167.4 205.6 H148.8 C147.2 205.6 146.8 204 147.2 202 Z"/>
+      </g>
+      <path class="st-arm st-arm--far" id="stArmF"/>
+      <path class="st-cuff st-cuff--far" id="stCuffF"/>
+      <g class="st-hand st-hand--far" id="stHandF"><path d="M-1.2 -3 C2 -3.6 5.6 -3.4 7 -1.9 C8.1 -.7 7.9 1.3 6.5 2.1 C4.9 2.9 1.6 2.9 -1.2 2.7 Z"/></g>
+
+      <g id="stTorso" transform="translate(118 148) rotate(10)">
+        <path class="st-sw" d="M-13.5 3 C-16 -12 -16 -30 -12 -40.5 C-9 -48 -2.5 -51 4.5 -51 C11 -51 16 -47 17 -39 C18 -27 17.2 -11 16.2 3 Z"/>
+        <path class="st-sw-l" d="M9.4 -49.6 C13 -48.6 16.2 -45 17 -39 C18 -27 17.2 -11 16.2 3 H12.6 C13.6 -12 13.8 -28 12.6 -38 C12 -43.6 11 -47.4 9.4 -49.6 Z"/>
+        <path class="st-sw-d" d="M-13.6 -.4 H16.3 L16.2 3.4 H-13.4 Z"/>
+        <path class="st-neck" d="M1.6 -48.6 L2.8 -54.6 H11.8 L11.2 -48.6 Z"/>
+        <path class="st-collar" d="M.2 -49.6 C3.8 -46.8 9 -46.6 12.8 -49.6"/>
+        <path class="st-neck-tape" d="M-2.6 -51.4 C1.6 -47.6 8.6 -46.8 14.8 -48"/>
+        <path class="st-tape__ticks" d="M-1.7 -52.4 C2.4 -48.8 8.8 -48 14.8 -49.2 M-3.5 -50.4 C.8 -46.4 8.4 -45.6 14.8 -46.8"/>
+        <g id="stHead" transform="translate(6.8 -52.6)">
+          <path class="st-skin" d="M-6 -3 C-10 -6 -11.8 -9 -11.8 -13 C-11.8 -22 -5 -28.4 2.6 -28.4 C9.6 -28.4 14.6 -24.2 15.6 -19.4 C15.9 -18 16.4 -17.2 16.3 -16.4 C16.2 -15.8 15.8 -15.6 15.8 -15 C16.6 -13.8 18.2 -12.4 18.7 -11.2 C18.9 -10.4 18 -9.8 16.4 -9.6 C16.7 -9.1 16.8 -8.6 16.5 -8.2 C16.1 -7.8 15.9 -7.5 15.9 -7.2 C16.3 -6.8 16.4 -6.2 16.1 -5.6 C15.8 -4.8 15.6 -4.2 15.4 -3.6 C15 -2.2 13.8 -1.2 12.2 -1 C9.6 -.8 7 -1.6 5 -2.4 C2 -3.4 -2 -2.8 -6 -3 Z"/>
+          <path class="st-hair" d="M-7 -4.4 C-10.8 -7 -12.6 -10.4 -12.6 -14 C-12.6 -23.4 -5.4 -30.2 3 -30.2 C9.8 -30.2 14.8 -27 16.6 -22.4 C17 -21.4 16.4 -20.8 15.4 -21.2 C13.6 -21.8 11.4 -21.6 9.6 -20.6 C8 -19.6 7 -18.2 6.6 -16.4 L6.2 -13.6 C5.4 -13.8 4.8 -14.6 4.6 -15.8 C4 -17.4 2.6 -18 1.2 -17.6 C-.6 -17 -1.4 -15 -1.6 -12.8 C-1.8 -9.8 -3.2 -6.4 -7 -4.4 Z"/>
+          <path class="st-hair__hl" d="M-4.8 -27.6 C-.8 -29.6 4.6 -29.9 9.4 -28.6"/>
+          <ellipse class="st-skin-d" cx="2.5" cy="-12.3" rx="2.5" ry="3.5"/>
+          <path class="st-ear" d="M3.2 -14.2 C1.8 -13.6 1.8 -11 3.2 -10.4"/>
+          <path class="st-brow" d="M11 -18.8 Q13.6 -20 16 -19.1"/>
+          <ellipse class="st-eye" id="stEye" cx="13.5" cy="-14.4" rx=".9" ry="1.1"/>
+          <ellipse class="st-lens" id="stLens" cx="12.7" cy="-14.6" rx="3.5" ry="3.2"/>
+          <path class="st-frame" d="M9.2 -15 L4.2 -14.4"/>
+          <path class="st-glint" id="stGlint" d="M11.2 -16.2 L12.6 -17.1"/>
+          <path class="st-mouth" id="stMouth" d="M14 -7.3 Q15 -6.9 15.9 -7.3"/>
+        </g>
+      </g>
+
+      <path class="st-tape" id="stTapeN"/>
+      <path class="st-tape__ticks" id="stTicksN"/>
+      <path class="st-tape__tip" id="stTipN"/>
+
+      <g class="st-legs">
+        <path class="st-thigh" d="M118 148.4 L162.6 149.8"/>
+        <path class="st-thigh__hl" d="M122 141.8 L161.6 142.9"/>
+        <path class="st-shin" d="M162.6 149.8 L160.8 200"/>
+        <g id="stShoe">
+          <path class="st-shoe" d="M155.4 197.4 C155.4 193.8 165 193.6 167 196.6 L176.4 201 C179 202 178.6 206.2 175.6 206.2 H156.4 C154.8 206.2 154.4 204.6 154.8 202.6 Z"/>
+          <path class="st-sole" d="M155.4 205.4 H176.6"/>
+        </g>
+      </g>
+
+      <path class="st-arm" id="stArmN"/>
+      <path class="st-cuff" id="stCuffN"/>
+      <g class="st-hand" id="stHandN"><path d="M-1.2 -3 C2 -3.6 5.6 -3.4 7 -1.9 C8.1 -.7 7.9 1.3 6.5 2.1 C4.9 2.9 1.6 2.9 -1.2 2.7 Z"/><path class="st-knuckle" d="M3.6 -2.9 C4.6 -1.4 4.6 .9 3.8 2.3"/></g>
+    </svg>
+  </figure>
+
   <div class="sign" id="sign">
     <p class="sign__t"><span class="sign__l sign__l--1"><span>Семь раз</span> <b>отмерим,</b></span><span class="sign__l sign__l--2"><span>один раз</span> <b>сделаем</b><i class="dot">.</i></span></p>
     <div class="tape sign__tape" id="signTape" aria-hidden="true"><canvas class="tape__sh"></canvas><canvas class="tape__main"></canvas></div>
@@ -400,6 +764,7 @@
 <script src="js/faq.js" defer></script>
 <script src="js/tape.js" defer></script>
 <script src="js/sign.js" defer></script>
+<script src="js/studio.js" defer></script>
 <script src="js/main.js" defer></script>
 </body>
 </html>

@@ -398,6 +398,22 @@ window.SEVEN = window.SEVEN || {};
       cap(L - tip, L);
     }
 
+    /* сквозняк: свободный конец ленты на миг приподнимается и ложится
+       обратно. Так видно, что это настоящая лента, которую можно тянуть */
+    nudge(k = 1) {
+      if (!this.N || this.grab >= 0 || this.revealing || this.reduced) return;
+      const N = this.N, from = Math.floor(N * .6), span = N - 1 - from;
+      for (let i = from; i < N; i++) {
+        const f = Math.pow((i - from) / span, 1.7);
+        this.x[i] += this.nx[i] * this.w * .28 * k * f;
+        this.y[i] += this.ny[i] * this.w * .28 * k * f;
+        this.lift[i] = Math.max(this.lift[i], .75 * k * f);
+      }
+      this.wait = 0;
+      this.home = Math.max(this.home, .02);
+      this.start();
+    }
+
     /* ближайшая к точке узловая точка ленты, если касание попало на ленту */
     hit(px, py, pad) {
       let best = -1, bd = Infinity;

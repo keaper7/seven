@@ -165,6 +165,17 @@
     ? new SEVEN.Tape($('#heroTape'), { layout: heroLayout, area: hero, onPull: () => { goal('tape_pull'); root.classList.add('tape-touched'); } })
     : null;
 
+  /* пока ленту не трогали, её свободный конец иногда приподнимает
+     сквозняком — видно, что это настоящая лента и её можно потянуть */
+  if (heroTape && !reduced) {
+    const draft = () => {
+      setTimeout(draft, 5200 + Math.random() * 3800);
+      if (root.classList.contains('tape-touched') || document.hidden || scrollY > innerHeight * .5) return;
+      heroTape.nudge(.8 + Math.random() * .5);
+    };
+    setTimeout(draft, 4600);
+  }
+
   /* ── глава 1: лента у мерок разматывается при прокрутке ── */
   const mkBody = $('#mk');
   const mkTape = $('#mkTape');
@@ -315,6 +326,14 @@
       sx = e.clientX;
       kick();
     });
+    /* бирку время от времени чуть качает сквозняком, даже если страница стоит */
+    const breeze = () => {
+      setTimeout(breeze, 3800 + Math.random() * 3600);
+      if (!vis || document.hidden || Math.abs(om) > .002) return;
+      om += (Math.random() < .5 ? -1 : 1) * (.0024 + Math.random() * .0018);
+      kick();
+    };
+    setTimeout(breeze, 3000);
     const release = () => { sx = null; };
     tag.addEventListener('pointerup', release);
     tag.addEventListener('pointercancel', release);
@@ -369,6 +388,8 @@
       }
       wrap();
       wkTrack.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+      /* куда едут работы: за ними следит кот за кнопкой ниже */
+      SEVEN.wkDir = drag ? Math.max(-1, Math.min(1, vel / 500)) : mode === 'glide' ? Math.sign(to - from) * Math.sin(Math.PI * q) : 0;
       if (vis) requestAnimationFrame(frame); else { run = false; last = 0; }
     };
     const go = () => { if (!run && vis) { run = true; requestAnimationFrame(frame); } };
@@ -410,6 +431,59 @@
     if (fine) {
       wkList.addEventListener('mouseenter', () => { hover = true; });
       wkList.addEventListener('mouseleave', () => { hover = false; wait = Math.max(wait, 1.2); });
+    }
+  }
+
+  /* ── кот за кнопкой «Все работы»: поднимается из-за края, когда
+     до кнопки доходят, и следит глазами за проезжающими работами ── */
+  const peek = $('#peekCat');
+  if (peek && !reduced) {
+    const btn = peek.closest('a');
+    const head = $('#peekHead'), pupils = $('#peekPupils'), lids = $('#peekLids'), eyes = $('#peekEyes');
+    const earL = $('#peekEarL'), earR = $('#peekEarR'), paws = $('#peekPaws');
+    let vis = false, run = false, last = 0, t = 0, rise = -1;
+    let lx = 0, ly = 0, blinkAt = 2.4, earAt = 3.5, earSide = 0, hover = false;
+    const back = (q) => 1 + 2.4 * Math.pow(q - 1, 3) + 1.4 * Math.pow(q - 1, 2);
+    peek.style.transform = 'translateY(30px)';
+    paws.style.opacity = 0;
+    const tick = (now) => {
+      const dt = Math.min(.05, (now - (last || now)) / 1000);
+      last = now;
+      t += dt;
+      if (rise < 0) rise = t + .6;                       // поднимается чуть погодя
+      const q = Math.max(0, Math.min(1, (t - rise) / .7));
+      peek.style.transform = 'translateY(' + ((1 - back(q)) * 30).toFixed(2) + 'px)';
+      const pq = Math.max(0, Math.min(1, (t - rise - .5) / .25));
+      paws.style.opacity = pq > 0 ? 1 : 0;
+      paws.style.transform = 'translateY(' + ((1 - pq) * -3).toFixed(2) + 'px)';
+      /* взгляд: за работами, при наведении — на надпись кнопки */
+      const tx = hover ? -.85 : (SEVEN.wkDir || 0), ty = hover ? .9 : 0;
+      lx += (tx - lx) * Math.min(1, dt * 6);
+      ly += (ty - ly) * Math.min(1, dt * 6);
+      pupils.style.transform = 'translate(' + (lx * 1.4).toFixed(2) + 'px,' + (ly * 1.1).toFixed(2) + 'px)';
+      head.style.transform = 'rotate(' + (lx * 3.5).toFixed(2) + 'deg)';
+      /* моргает; уши иногда дёргаются */
+      const blink = t > blinkAt && t < blinkAt + .13;
+      if (t > blinkAt + .13) blinkAt = t + (Math.random() < .2 ? .3 : 2.4 + Math.random() * 3.6);
+      eyes.style.opacity = blink ? 0 : 1;
+      lids.style.opacity = blink ? 1 : 0;
+      let e = 0;
+      if (t > earAt) {
+        const k = (t - earAt) / .3;
+        e = k < 1 ? Math.sin(k * Math.PI) : 0;
+        if (k >= 1) { earAt = t + 2.5 + Math.random() * 5; earSide = Math.random() < .5 ? 0 : 1; }
+      }
+      earL.style.transform = 'rotate(' + (earSide === 0 ? -e * 14 : 0).toFixed(2) + 'deg)';
+      earR.style.transform = 'rotate(' + (earSide === 1 ? e * 14 : 0).toFixed(2) + 'deg)';
+      if (vis) requestAnimationFrame(tick); else { run = false; last = 0; }
+    };
+    new IntersectionObserver(([en]) => {
+      vis = en.isIntersecting;
+      if (vis && !run) { run = true; requestAnimationFrame(tick); }
+    }, { rootMargin: '-8% 0px' }).observe(btn);
+    if (fine) {
+      btn.addEventListener('mouseenter', () => { hover = true; });
+      btn.addEventListener('mouseleave', () => { hover = false; });
     }
   }
 
