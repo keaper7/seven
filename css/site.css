@@ -262,7 +262,7 @@ html.is-in .hl--b { font-weight: 700; }
   .hero__fact span { display: block; margin-top: 10px; font-size: 14px; line-height: 1.35; color: var(--dim); }
   .hero__pull { position: relative; padding-left: 40px; font: 400 13px/1.4 var(--fb); color: var(--dim); transition: opacity .5s; }
   .hero__pull b { display: block; font-weight: 600; color: var(--fg); }
-  .hero__pull svg { position: absolute; left: -12px; top: 2px; width: 46px; height: 30px; fill: none; stroke: var(--orange-d); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transform: scaleX(-1); }
+  .hero__pull svg { position: absolute; left: -16px; top: 10px; width: 46px; height: 30px; fill: none; stroke: var(--orange-d); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
   html.tape-touched .hero__pull { opacity: 0; }
   #tapeHint { display: none; }
 }
