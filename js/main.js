@@ -149,7 +149,7 @@
   };
 
   const heroTape = SEVEN.Tape && hero
-    ? new SEVEN.Tape($('#heroTape'), { layout: heroLayout, area: hero, onPull: () => goal('tape_pull') })
+    ? new SEVEN.Tape($('#heroTape'), { layout: heroLayout, area: hero, onPull: () => { goal('tape_pull'); root.classList.add('tape-touched'); } })
     : null;
 
   /* ── глава 1: лента у мерок разматывается при прокрутке ── */
