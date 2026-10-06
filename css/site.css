@@ -564,7 +564,7 @@ html.js .srv__item:not(.is-in) .srv__scale i { --k: 0; }
 .srv__days b { font: 600 clamp(15px, 4vw, 20px)/1 var(--fh); letter-spacing: -.04em; color: var(--orange-d); }
 .srv__text { grid-column: 1 / -1; margin-top: 10px; max-width: 28em; font-size: 15.5px; line-height: 1.5; color: var(--dim); }
 
-.tag-wrap { position: relative; height: 430px; margin-top: 20px; }
+.tag-wrap { position: relative; margin-top: 20px; padding: 37px 0 12px; }
 .tag__nail {
   position: absolute;
   z-index: 2;
@@ -578,11 +578,10 @@ html.js .srv__item:not(.is-in) .srv__scale i { --k: 0; }
   box-shadow: 0 2px 3px rgba(0, 0, 0, .3);
 }
 .tag {
-  position: absolute;
-  left: 50%;
-  top: 37px;
+  /* бирка в потоке: блок растёт вместе с ней, текст ниже не наезжает */
+  position: relative;
   width: 236px;
-  margin-left: -118px;
+  margin: 0 auto;
   transform-origin: 50% 0;
   touch-action: pan-y;
   will-change: transform;
@@ -804,8 +803,8 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
   .srv__text { font-size: 17px; }
   .srv__rule { margin-top: 26px; max-width: 640px; }
   .srv__days b { font-size: 24px; }
-  .tag-wrap { grid-column: 9 / -1; height: auto; min-height: 560px; margin: -90px 0 0; }
-  .tag { width: 260px; margin-left: -130px; }
+  .tag-wrap { grid-column: 9 / -1; margin: -90px 0 0; }
+  .tag { width: 260px; }
   .srv__after { margin-left: var(--g); font-size: 17px; }
 
   /* вопросы: заголовок слева и остаётся на месте, список справа — оба от одной верхней линии */
