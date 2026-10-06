@@ -634,8 +634,12 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
   .tag { width: 260px; margin-left: -130px; }
   .srv__after { margin-left: var(--g); font-size: 17px; }
 
-  .faq .ch__title { grid-column: 1 / span 5; }
-  .faq__list { margin: -1.1em var(--g) 0 calc(var(--g) + (100% - 2 * var(--g)) * 5 / 12 + 10px); }
+  /* вопросы: заголовок слева и остаётся на месте, список справа — оба от одной верхней линии */
+  .faq { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start; padding-left: var(--g); padding-right: var(--g); }
+  .faq .ch { grid-column: 1 / span 4; display: block; padding: 22px 0 0; border-top: 1px solid var(--rule); position: sticky; top: calc(var(--hd) + 40px); }
+  .faq .ch__title { font-size: clamp(44px, 5vw, 84px); max-width: none; }
+  .faq__list { grid-column: 6 / -1; margin: 0; }
+  .faq__item:first-child .faq__q { padding-top: 22px; }
   .faq__q { padding: 30px 0; }
   .faq__a p { font-size: 17px; }
 
