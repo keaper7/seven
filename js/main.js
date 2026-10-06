@@ -439,6 +439,26 @@
       });
     });
 
+    /* заголовок работ: буквы падают на место по одной, как литеры при наборе */
+    const wkTitle = $('#wkTitle');
+    if (wkTitle) {
+      wkTitle.setAttribute('aria-label', wkTitle.textContent.replace(/\s+/g, ' ').trim());
+      wkTitle.querySelectorAll(':scope > span').forEach((line) => {
+        line.setAttribute('aria-hidden', 'true');
+        line.innerHTML = Array.from(line.textContent).map((ch) => (ch === ' ' ? ' ' : '<span class="ch-l">' + ch + '</span>')).join('');
+      });
+      const letters = wkTitle.querySelectorAll('.ch-l');
+      gs.from(letters, {
+        yPercent: -140,
+        rotation: () => gs.utils.random(-28, 28),
+        autoAlpha: 0,
+        duration: .9,
+        ease: 'back.out(2.2)',
+        stagger: { each: .045, from: 'start' },
+        scrollTrigger: { trigger: wkTitle, start: 'top 82%', once: true },
+      });
+    }
+
     /* лента работ проявляется, когда до неё доходят */
     gs.from('#wkTrack .wk', { y: 60, autoAlpha: 0, duration: 1.2, stagger: .1, ease: 'expo.out',
       scrollTrigger: { trigger: '#wkList', start: 'top 85%', once: true } });
