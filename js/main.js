@@ -300,7 +300,7 @@
       c.querySelectorAll('a').forEach((a) => { a.tabIndex = -1; });
       wkTrack.appendChild(c);
     });
-    const speed = () => (innerWidth < 900 ? 38 : 52);   // пикселей в секунду
+    const speed = () => (innerWidth < 900 ? 72 : 96);   // пикселей в секунду: на телефоне карточка проходит экран примерно за 5 с
     let x = 0, v = -speed(), setW = 1, last = 0, run = false, vis = false;
     let drag = false, hover = false, sx = 0, x0 = 0, moved = 0, px = 0, pt = 0, fling = 0;
     const measure = () => { setW = wkTrack.children[orig.length].offsetLeft - wkTrack.children[0].offsetLeft || 1; };
