@@ -287,8 +287,9 @@
     tag.addEventListener('pointerleave', release);
   }
 
-  /* ── работы: бесконечная лента. Плывёт сама, под пальцем или мышью
-     останавливается, её можно протянуть; нажатие без протяжки открывает сайт ── */
+  /* ── работы: замкнутая лента, которая листается шагами. Плавно подвозит
+     следующую работу и даёт её прочитать; касание — пауза подольше,
+     протяжка пальцем или мышью — и лента встаёт ровно на работу ── */
   const wkList = $('#wkList');
   const wkTrack = $('#wkTrack');
   if (wkTrack && !reduced) {
@@ -300,21 +301,38 @@
       c.querySelectorAll('a').forEach((a) => { a.tabIndex = -1; });
       wkTrack.appendChild(c);
     });
-    const speed = () => (innerWidth < 900 ? 72 : 96);   // пикселей в секунду: на телефоне карточка проходит экран примерно за 5 с
-    let x = 0, v = -speed(), setW = 1, last = 0, run = false, vis = false;
-    let drag = false, hover = false, sx = 0, x0 = 0, moved = 0, px = 0, pt = 0, fling = 0;
-    const measure = () => { setW = wkTrack.children[orig.length].offsetLeft - wkTrack.children[0].offsetLeft || 1; };
+    const HOLD = () => (innerWidth < 900 ? 2.6 : 2.4);   // сколько стоит каждая работа, с
+    const GLIDE = .95;                                   // переезд к следующей, с
+    const AFTER_TOUCH = 5;                               // пауза после касания, с
+    const ease = (q) => (q < .5 ? 4 * q * q * q : 1 - Math.pow(-2 * q + 2, 3) / 2);
+    let step = 1, setW = 1, x = 0;
+    let mode = 'hold', wait = HOLD(), from = 0, to = 0, q = 0, dur = GLIDE;
+    let last = 0, run = false, vis = false, hover = false;
+    let drag = false, sx = 0, x0 = 0, moved = 0, px = 0, pt = 0, vel = 0;
+    const measure = () => {
+      step = wkTrack.children[1].offsetLeft - wkTrack.children[0].offsetLeft || 1;
+      setW = step * orig.length;
+      x = Math.round(x / step) * step;
+    };
+    const wrap = () => {
+      while (x <= -setW) { x += setW; from += setW; to += setW; x0 += setW; }
+      while (x > 0) { x -= setW; from -= setW; to -= setW; x0 -= setW; }
+    };
+    const glideTo = (target, d) => { mode = 'glide'; from = x; to = target; q = 0; dur = d; };
     const frame = (t) => {
       const dt = Math.min(.05, (t - (last || t)) / 1000);
       last = t;
       if (!drag) {
-        const target = hover ? 0 : -speed();
-        v += (target - v) * Math.min(1, dt * (fling > 0 ? 1.4 : 4));
-        fling = Math.max(0, fling - dt);
-        x += v * dt;
+        if (mode === 'hold') {
+          if (!hover) wait -= dt;
+          if (wait <= 0) glideTo(Math.round(x / step) * step - step, GLIDE);
+        } else {
+          q = Math.min(1, q + dt / dur);
+          x = from + (to - from) * ease(q);
+          if (q >= 1) { x = to; mode = 'hold'; wait = Math.max(wait, HOLD()); }
+        }
       }
-      while (x <= -setW) { x += setW; x0 += setW; }
-      while (x > 0) { x -= setW; x0 -= setW; }
+      wrap();
       wkTrack.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
       if (vis) requestAnimationFrame(frame); else { run = false; last = 0; }
     };
@@ -326,7 +344,7 @@
 
     wkList.addEventListener('pointerdown', (e) => {
       if (e.pointerType === 'mouse' && e.button !== 0) return;
-      drag = true; moved = 0; sx = px = e.clientX; x0 = x; pt = performance.now(); v = 0;
+      drag = true; moved = 0; sx = px = e.clientX; x0 = x; pt = performance.now(); vel = 0;
       wkList.classList.add('is-drag');
     });
     addEventListener('pointermove', (e) => {
@@ -335,22 +353,28 @@
       const dx = e.clientX - sx;
       moved = Math.max(moved, Math.abs(dx));
       x = x0 + dx;
-      if (now > pt) v = v * .6 + ((e.clientX - px) / ((now - pt) / 1000)) * .4;
+      if (now > pt) vel = vel * .5 + ((e.clientX - px) / ((now - pt) / 1000)) * .5;
       px = e.clientX; pt = now;
     });
     const release = () => {
       if (!drag) return;
       drag = false;
-      v = Math.max(-2400, Math.min(2400, v));
-      fling = .8;
       wkList.classList.remove('is-drag');
+      /* куда докатится по инерции — к ближайшей работе, но не дальше двух */
+      const aim = x + Math.max(-1600, Math.min(1600, vel)) * .22;
+      let k = Math.round(aim / step);
+      const k0 = Math.round(x0 / step);
+      k = Math.max(k0 - 2, Math.min(k0 + 2, k));
+      if (moved < 6) k = Math.round(x / step);
+      glideTo(k * step, moved < 6 ? .35 : .6);
+      wait = AFTER_TOUCH;
     };
     addEventListener('pointerup', release);
     addEventListener('pointercancel', release);   // палец повёл вверх-вниз — это прокрутка страницы
     wkList.addEventListener('click', (e) => { if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
     if (fine) {
       wkList.addEventListener('mouseenter', () => { hover = true; });
-      wkList.addEventListener('mouseleave', () => { hover = false; });
+      wkList.addEventListener('mouseleave', () => { hover = false; wait = Math.max(wait, 1.2); });
     }
   }
 
