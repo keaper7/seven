@@ -318,9 +318,7 @@ html.is-in .hl--b { font-weight: 700; }
 
 /* заголовок мерок: каждая строка ровно во всю ширину, вес чередуется,
    как в обложке. Делители — ширина строки в кеглях Unbounded */
-.mk .ch, .works .ch { container-type: inline-size; }
-.wk__t1 { font-weight: 300; font-size: calc(100cqw / 5.32); }
-.wk__t2 { font-weight: 700; font-size: calc(100cqw / 5.52); }
+.mk .ch { container-type: inline-size; }
 .mk__title { max-width: none; line-height: .9; letter-spacing: -.05em; }
 .mk__title span { display: block; white-space: nowrap; }
 .mk__t1 { font-weight: 300; font-size: calc(100cqw / 5.1); }
@@ -736,11 +734,7 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
   .ch__lead { grid-column: 9 / -1; margin: 0 0 .6em; font-size: 18px; }
 
   /* мерки: лента по левому полю, каждая мерка — строка «вопрос | ответ» */
-  .mk .ch, .works .ch { grid-template-columns: 1fr; }
-  .works .mk__title { grid-column: 1; max-width: 62%; }
-  .wk__t1 { font-size: calc(100cqw * .62 / 5.32); }
-  .wk__t2 { font-size: calc(100cqw * .62 / 5.52); }
-  .works .ch__lead { grid-column: 1; margin: 36px 0 0; max-width: 30em; }
+  .mk .ch { grid-template-columns: 1fr; }
   .mk__title { grid-column: 1; max-width: 62%; }
   .mk__t1 { font-size: calc(100cqw * .62 / 5.1); }
   .mk__t2 { font-size: calc(100cqw * .62 / 5.72); }
