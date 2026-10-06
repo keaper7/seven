@@ -296,6 +296,7 @@
   const wkTrack = $('#wkTrack');
   if (wkTrack && !reduced) {
     root.classList.add('mq-live');
+    wkList.scrollLeft = 0;          // до запуска ряд листался нативно и мог «прилипнуть» к краю карточки
     const orig = Array.from(wkTrack.children);
     orig.forEach((n) => {
       const c = n.cloneNode(true);

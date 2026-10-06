@@ -385,10 +385,11 @@ html.mk-live .mk__item:not(.is-on) { opacity: .28; transform: translateX(10px); 
 .wk-list {
   --card: min(80vw, 420px);
   --gap: 32px;
-  margin-top: 64px;
+  margin-top: 40px;
   padding: 28px 0 8px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--g);
   scrollbar-width: none;
   touch-action: pan-y;
   cursor: grab;
@@ -451,7 +452,8 @@ html.mq-live .wk-list { overflow: hidden; scroll-snap-type: none; }
 }
 
 /* ссылка на страницу всех работ */
-.wk-more { padding: 44px var(--g) 0; }
+.wk-more { padding: 36px var(--g) 0; }
+@media (max-width: 899px) { .wk-all { width: 100%; justify-content: center; } }
 .wk-all {
   display: inline-flex;
   align-items: center;
