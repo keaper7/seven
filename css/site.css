@@ -258,7 +258,6 @@ html.is-in .hl--b { font-weight: 700; }
     padding: 30px 0 4px;
   }
   .hero__fact b { display: block; font: 700 clamp(34px, 10.6vw, 46px)/1 var(--fh); letter-spacing: -.05em; }
-  .hero__fact b::after { content: ''; display: inline-block; width: .2em; height: .2em; margin-left: .08em; border-radius: 50%; background: var(--orange); }
   .hero__fact span { display: block; margin-top: 10px; font-size: 14px; line-height: 1.35; color: var(--dim); }
   .hero__pull { position: relative; padding-left: 40px; font: 400 13px/1.4 var(--fb); color: var(--dim); transition: opacity .5s; }
   .hero__pull b { display: block; font-weight: 600; color: var(--fg); }
