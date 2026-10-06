@@ -113,7 +113,16 @@
       const fact = $('.hero__fact');
       const diagAt = (y) => xE + (yE - y) / (yE - y0) * (xR - xE);
       const wordX = Math.max(xE + w * .6 + 14, diagAt(word.t) + w / 2 + 12);
-      fact.style.transform = 'translateX(' + Math.round(wordX - (word.l - (parseFloat(fact.style.transform.replace(/[^-\d.]/g, '')) || 0))) + 'px)';
+      /* вся связка «7 дней» встаёт по центру экрана */
+      const prev = parseFloat((fact.style.transform.match(/-?[\d.]+/) || [0])[0]) || 0;
+      const factLeft0 = word.l - prev;                       // где слово стоит без сдвига
+      const rng = document.createRange();
+      rng.selectNodeContents(fact);
+      const factW = Math.min(rng.getBoundingClientRect().width, W - 2 * g);
+      const groupL = x0, groupR = Math.max(xR + w / 2, wordX + factW);
+      const dx = Math.max(0, (W - (groupR - groupL)) / 2 - groupL);
+      x0 += dx; xR += dx; xE += dx;
+      fact.style.transform = 'translateX(' + Math.round(wordX + dx - factLeft0) + 'px)';
     } else {
       /* компьютер: семёрка стоит справа от заголовка во всю высоту */
       x0 = Math.max(t.r + 64, W * .53);
