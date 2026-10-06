@@ -95,16 +95,20 @@
       /* телефон: семёрка — отдельная крупная цифра в середине экрана,
          между заголовком и кнопкой. Пропорции настоящей «7»: высота
          в полтора раза больше ширины, ножка уходит под наклоном */
-      const l = box(lead, hero), c = box(cta, hero);
-      const top = l.b + 28, bot = c.t - 26;
-      const h7 = Math.max(160, bot - top - w);
-      const w7 = Math.min(h7 * .7, W - 2 * g - w * .6);
-      const cx = W / 2 + w7 * .03;
-      x0 = cx - w7 / 2;
-      xR = cx + w7 / 2 - w / 2;
-      y0 = top + w / 2;
+      /* телефон: цифра 7 справа, слева от неё три мерки. Пропорции
+         настоящей «7»: высота примерно в 1,35 раза больше ширины */
+      const f = box($('#heroFacts'), hero);
+      const top = f.t + 30, bot = f.b - 8;
+      const left = f.r + 6, right = W - g * .6;
+      let w7 = right - left;
+      let h7 = Math.min(bot - top - w, w7 * 1.38);
+      w7 = Math.min(w7, h7 / 1.2);
+      const cy = (top + bot) / 2;
+      x0 = right - w7 - w * .1;
+      xR = right - w / 2;
+      y0 = cy - h7 / 2;
       yE = y0 + h7;
-      xE = x0 + w7 * .26;
+      xE = x0 + w7 * .22;
       r = w * .55;
     } else {
       /* компьютер: семёрка стоит справа от заголовка во всю высоту */
