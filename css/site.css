@@ -715,7 +715,14 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
 
 /* подпись в конце страницы: девиз ровно во всю ширину и лента под ним.
    Делители — измеренная ширина строки в кеглях Unbounded */
-.sign { position: relative; padding: clamp(28px, 5vw, 56px) var(--g) calc(var(--tw) + clamp(28px, 4vw, 48px)); color: var(--fg); overflow: hidden; }
+.sign { position: relative; padding: clamp(56px, 9vw, 110px) var(--g) calc(var(--tw) + clamp(56px, 8vw, 110px)); color: var(--fg); overflow: hidden; }
+.sign__t { position: relative; z-index: 2; font-family: var(--fh); line-height: .98; letter-spacing: -.05em; }
+.sign__l { display: block; white-space: nowrap; }
+.sign__l span { font-weight: 300; color: var(--dim); }
+.sign__l b { font-weight: 700; }
+.sign__t { container-type: inline-size; }
+.sign__l--1 { font-size: calc((100vw - 2 * var(--g)) / 12.2); font-size: calc(100cqw / 12); }
+.sign__l--2 { font-size: calc((100vw - 2 * var(--g)) / 11.9); font-size: calc(100cqw / 11.7); }
 .sign__tape { z-index: 3; }
 .ft { padding: 0 0 calc(26px + env(safe-area-inset-bottom)); font-size: 14px; color: var(--dim); }
 .ft__row {
@@ -727,8 +734,6 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
   padding-top: 26px;
   border-top: 1px solid var(--rule);
 }
-.ft__row p { text-align: right; max-width: 62%; line-height: 1.4; }
-.ft__row p span { white-space: nowrap; }
 .ft .logo { color: var(--fg); font-size: 18px; }
 
 /* ── планшет и компьютер ──────────────────────────────────────── */
