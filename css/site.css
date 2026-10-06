@@ -683,13 +683,18 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
    второй, она длиннее — 6,3 кегля */
 .contact {
   container-type: inline-size;
-  padding: var(--sec) var(--g) calc(var(--sec) * .55);
+  /* финал — один тёмный экран: контакт по центру, слоган с лентой внизу */
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: calc(var(--hd) + env(safe-area-inset-top) + 32px) var(--g) 0;
   overflow: hidden;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+.contact__title { margin-top: auto; }
+.contact > .sign { align-self: stretch; margin: auto calc(-1 * var(--g)) 0; padding-top: clamp(48px, 9svh, 110px); text-align: left; }
 .contact__title {
   font: 700 calc((100vw - 2 * var(--g)) / 6.55)/.92 var(--fh);
   font-size: calc(100cqw / 6.45);
@@ -818,7 +823,7 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
   .faq__a p { padding-left: 26px; }
   .faq__a p { font-size: 17px; }
 
-  .contact__title { font-size: min(calc(100cqw / 6.45), 30vh); }
+  .contact__title { font-size: min(calc(100cqw / 6.45), 17vh); }
   .contact__lead { margin-top: 40px; font-size: 19px; }
   .contact .btn--lg { width: auto; padding: 0 40px; margin-top: 40px; }
   .contact__links { margin-top: 22px; max-width: 520px; }
