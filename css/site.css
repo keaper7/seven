@@ -589,33 +589,46 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
 
 /* ── контакт ───────────────────────────────────────────────────── */
 
-.contact { padding: var(--sec) var(--g) calc(var(--sec) * .7); overflow: hidden; }
-.contact__title {
-  font: 700 clamp(46px, 14vw, 190px)/.98 var(--fh);
-  letter-spacing: -.055em;
-  max-width: 7ch;
-}
-.contact__lead { margin-top: 28px; max-width: 22em; font-size: 16.5px; line-height: 1.5; color: var(--dim); }
-.btn--lg { margin-top: 34px; height: 62px; padding: 0 28px; font-size: 16.5px; border-radius: 16px; }
-.contact__links { margin-top: 56px; max-width: 560px; }
-.contact__links li {
+/* финал: огромный вопрос по центру, под ним всё по одной оси.
+   Кегль подогнан под ширину: самое длинное слово «Обсудим» — 5,58 кегля */
+.contact {
+  container-type: inline-size;
+  padding: var(--sec) var(--g) calc(var(--sec) * .55);
+  overflow: hidden;
+  text-align: center;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 16px;
-  padding: 16px 0;
-  border-top: 1px solid var(--rule);
-  font-size: 15.5px;
+  flex-direction: column;
+  align-items: center;
 }
-.contact__links span { color: var(--dim); }
-.contact__links a { font-weight: 500; }
+.contact__title {
+  font: 700 calc((100vw - 2 * var(--g)) / 5.8)/.9 var(--fh);
+  font-size: calc(100cqw / 5.72);
+  letter-spacing: -.055em;
+}
+.contact__title span { display: block; }
+.contact__lead { margin-top: 30px; max-width: 21em; font-size: 17px; line-height: 1.5; color: var(--dim); text-wrap: balance; }
+.contact .btn--lg { width: 100%; max-width: 420px; margin-top: 34px; }
+.contact__links { margin-top: 18px; width: 100%; max-width: 420px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.contact__links a {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px 10px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  font: 500 clamp(12px, 3.5vw, 13.5px)/1.2 var(--fb);
+  white-space: nowrap;
+  transition: border-color .3s;
+}
+.contact__links a span { font-size: 12px; color: var(--dim); }
+@media (hover: hover) { .contact__links a:hover { border-color: var(--orange); } }
 
 /* подпись в конце страницы: девиз ровно во всю ширину и лента под ним.
    Делители — измеренная ширина строки в кеглях Unbounded */
-.sign { position: relative; padding: clamp(64px, 12vw, 160px) var(--g) calc(var(--tw) + clamp(56px, 8vw, 110px)); color: var(--fg); overflow: hidden; }
+.sign { position: relative; padding: clamp(56px, 9vw, 110px) var(--g) calc(var(--tw) + clamp(56px, 8vw, 110px)); color: var(--fg); overflow: hidden; }
 .sign__t { position: relative; z-index: 2; font-family: var(--fh); line-height: .98; letter-spacing: -.05em; }
 .sign__l { display: block; white-space: nowrap; }
-.sign__l span { font-weight: 300; }
+.sign__l span { font-weight: 300; color: var(--dim); }
 .sign__l b { font-weight: 700; }
 .sign__t { container-type: inline-size; }
 .sign__l--1 { font-size: calc((100vw - 2 * var(--g)) / 12.2); font-size: calc(100cqw / 12); }
@@ -707,12 +720,13 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
   .faq__q { padding: 30px 0; }
   .faq__a p { font-size: 17px; }
 
-  .contact { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: end; }
-  .contact__title { grid-column: 1 / span 8; }
-  .contact__lead, .contact .btn, .contact__links { grid-column: 9 / -1; }
-  .contact__lead { margin: 0; font-size: 18px; }
-  .contact .btn { justify-self: start; }
-  .contact__links { margin-top: 48px; }
+  /* на компьютере вопрос в две строки: «Обсудим» / «ваш сайт?» (6,3 кегля) */
+  .contact__title { font-size: min(calc(100cqw / 6.45), 30vh); }
+  .contact__title span:nth-child(2), .contact__title span:nth-child(3) { display: inline; }
+  .contact__lead { margin-top: 40px; font-size: 19px; }
+  .contact .btn--lg { width: auto; padding: 0 40px; margin-top: 40px; }
+  .contact__links { margin-top: 22px; max-width: 520px; }
+  .contact__links a { font-size: 15px; }
 }
 
 @media (min-width: 1500px) {
