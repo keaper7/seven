@@ -412,7 +412,7 @@ html.mk-live .mk__item:not(.is-on) { opacity: .28; transform: translateX(10px); 
 .mk__pin.is-on, html:not(.mk-live) .mk__pin { transform: scale(1); }
 
 /* заголовок работ: крупный, одним жирным весом; буквы выкладываются по одной */
-.wk__title { max-width: none; font-weight: 700; font-size: calc((100vw - 2 * var(--g)) / 5.6); line-height: .95; }
+.wk__title { max-width: none; font-weight: 700; font-size: calc((100vw - 2 * var(--g)) / 7.5); line-height: .95; }
 .wk__title > span { display: block; white-space: nowrap; }
 .wk__title .ch-l { display: inline-block; will-change: transform; }
 
@@ -766,7 +766,7 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
 
   /* мерки: лента по левому полю, каждая мерка — строка «вопрос | ответ» */
   .mk .ch { grid-template-columns: 1fr; }
-  .wk__title { font-size: clamp(80px, 8.6vw, 150px); }
+  .wk__title { font-size: clamp(72px, 7.4vw, 130px); }
   .mk__title { grid-column: 1; max-width: 62%; }
   .mk__t1 { font-size: calc(100cqw * .62 / 5.1); }
   .mk__t2 { font-size: calc(100cqw * .62 / 5.72); }
