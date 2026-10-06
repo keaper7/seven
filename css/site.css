@@ -371,7 +371,27 @@ html.mk-live .mk__item:not(.is-on) { opacity: .28; transform: translateX(10px); 
 /* ── глава 2: работы ───────────────────────────────────────────── */
 
 .works { padding: var(--sec) 0; }
-.wk-list { margin-top: 72px; padding: 0 var(--g); display: grid; gap: 104px; }
+/* работы плывут лентой: сами по себе, касание останавливает, можно
+   протянуть пальцем. Без скриптов — обычная горизонтальная прокрутка */
+.wk-list {
+  --card: min(80vw, 420px);
+  --gap: 32px;
+  margin-top: 64px;
+  padding: 28px 0 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.wk-list::-webkit-scrollbar { display: none; }
+html.mq-live .wk-list { overflow: hidden; scroll-snap-type: none; }
+.wk-list.is-drag { cursor: grabbing; }
+.wk-track { display: flex; gap: var(--gap); width: max-content; padding: 0 var(--g); will-change: transform; }
+.wk { flex: 0 0 var(--card); scroll-snap-align: start; }
+.wk img { -webkit-user-drag: none; pointer-events: none; }
 .wk__a { display: block; }
 .wk__prints { position: relative; aspect-ratio: 1 / .86; }
 .wk__d, .wk__m {
@@ -402,7 +422,7 @@ html.mk-live .mk__item:not(.is-on) { opacity: .28; transform: translateX(10px); 
 }
 .wk:nth-child(even) .wk__label { left: auto; right: 22px; rotate: 3deg; }
 .wk__txt { margin-top: 26px; }
-.wk__txt h3 { font: 600 clamp(28px, 8vw, 52px)/1.04 var(--fh); letter-spacing: -.045em; }
+.wk__txt h3 { font: 600 clamp(24px, 6.6vw, 34px)/1.06 var(--fh); letter-spacing: -.045em; }
 .wk__txt p { margin-top: 10px; max-width: 22em; font-size: 15.5px; line-height: 1.45; color: var(--dim); }
 .wk__url {
   margin-top: 16px;
@@ -612,12 +632,7 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
   .mk__roll { width: 68px; height: 68px; margin: -34px 0 0 -34px; }
   .mk__roll i { inset: 22px; }
 
-  .wk-list { margin-top: 130px; gap: 180px; }
-  .wk__a { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: center; }
-  .wk__prints { grid-column: 1 / span 8; grid-row: 1; }
-  .wk__txt { grid-column: 9 / -1; grid-row: 1; margin: 0; }
-  .wk:nth-child(even) .wk__prints { grid-column: 5 / -1; }
-  .wk:nth-child(even) .wk__txt { grid-column: 1 / span 4; }
+  .wk-list { --card: clamp(400px, 34vw, 600px); --gap: 72px; margin-top: 100px; padding-top: 40px; }
   .wk__d { border-width: 8px; }
   .wk__m { border-width: 6px; }
   .wk__label { font-size: 12px; padding: 9px 14px 8px; top: -16px; left: 32px; }

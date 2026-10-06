@@ -287,6 +287,73 @@
     tag.addEventListener('pointerleave', release);
   }
 
+  /* ── работы: бесконечная лента. Плывёт сама, под пальцем или мышью
+     останавливается, её можно протянуть; нажатие без протяжки открывает сайт ── */
+  const wkList = $('#wkList');
+  const wkTrack = $('#wkTrack');
+  if (wkTrack && !reduced) {
+    root.classList.add('mq-live');
+    const orig = Array.from(wkTrack.children);
+    orig.forEach((n) => {
+      const c = n.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      c.querySelectorAll('a').forEach((a) => { a.tabIndex = -1; });
+      wkTrack.appendChild(c);
+    });
+    const speed = () => (innerWidth < 900 ? 38 : 52);   // пикселей в секунду
+    let x = 0, v = -speed(), setW = 1, last = 0, run = false, vis = false;
+    let drag = false, hover = false, sx = 0, x0 = 0, moved = 0, px = 0, pt = 0, fling = 0;
+    const measure = () => { setW = wkTrack.children[orig.length].offsetLeft - wkTrack.children[0].offsetLeft || 1; };
+    const frame = (t) => {
+      const dt = Math.min(.05, (t - (last || t)) / 1000);
+      last = t;
+      if (!drag) {
+        const target = hover ? 0 : -speed();
+        v += (target - v) * Math.min(1, dt * (fling > 0 ? 1.4 : 4));
+        fling = Math.max(0, fling - dt);
+        x += v * dt;
+      }
+      while (x <= -setW) { x += setW; x0 += setW; }
+      while (x > 0) { x -= setW; x0 -= setW; }
+      wkTrack.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+      if (vis) requestAnimationFrame(frame); else { run = false; last = 0; }
+    };
+    const go = () => { if (!run && vis) { run = true; requestAnimationFrame(frame); } };
+    new IntersectionObserver(([e]) => { vis = e.isIntersecting; go(); }).observe(wkList);
+    measure();
+    addEventListener('resize', measure);
+    addEventListener('load', measure);
+
+    wkList.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      drag = true; moved = 0; sx = px = e.clientX; x0 = x; pt = performance.now(); v = 0;
+      wkList.classList.add('is-drag');
+    });
+    addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const now = performance.now();
+      const dx = e.clientX - sx;
+      moved = Math.max(moved, Math.abs(dx));
+      x = x0 + dx;
+      if (now > pt) v = v * .6 + ((e.clientX - px) / ((now - pt) / 1000)) * .4;
+      px = e.clientX; pt = now;
+    });
+    const release = () => {
+      if (!drag) return;
+      drag = false;
+      v = Math.max(-2400, Math.min(2400, v));
+      fling = .8;
+      wkList.classList.remove('is-drag');
+    };
+    addEventListener('pointerup', release);
+    addEventListener('pointercancel', release);   // палец повёл вверх-вниз — это прокрутка страницы
+    wkList.addEventListener('click', (e) => { if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+    if (fine) {
+      wkList.addEventListener('mouseenter', () => { hover = true; });
+      wkList.addEventListener('mouseleave', () => { hover = false; });
+    }
+  }
+
   if (SEVEN.faq) SEVEN.faq();
 
   /* ── движение при прокрутке ── */
@@ -314,21 +381,9 @@
       });
     });
 
-    /* распечатки работ ложатся на стол: большая, потом телефон, потом ярлык */
-    $$('.wk').forEach((wk, i) => {
-      const d = $('.wk__d', wk), m = $('.wk__m', wk), lab = $('.wk__label', wk);
-      const side = i % 2 ? 1 : -1;
-      const tl = gs.timeline({ scrollTrigger: { trigger: wk, start: 'top 86%', once: true } });
-      tl.from(d, { y: 80, rotation: side * 4, autoAlpha: 0, duration: 1.25, ease: 'expo.out' })
-        .from(m, { y: 140, rotation: -side * 9, autoAlpha: 0, duration: 1.35, ease: 'expo.out' }, .14)
-        .from(lab, { scale: .3, rotation: side * 16, autoAlpha: 0, duration: .8, ease: 'back.out(2.4)' }, .55)
-        .from($$('.wk__txt > *', wk), { y: 24, autoAlpha: 0, duration: 1, stagger: .08, ease: 'expo.out' }, .3);
-      gs.to(m, {
-        yPercent: -9,
-        ease: 'none',
-        scrollTrigger: { trigger: wk, start: 'top bottom', end: 'bottom top', scrub: true },
-      });
-    });
+    /* лента работ проявляется, когда до неё доходят */
+    gs.from('#wkTrack .wk', { y: 60, autoAlpha: 0, duration: 1.2, stagger: .1, ease: 'expo.out',
+      scrollTrigger: { trigger: '#wkList', start: 'top 85%', once: true } });
 
     /* строки услуг и вопросов поднимаются по одной */
     gs.set('.srv__item, .faq__item, .srv__after', { y: 28, autoAlpha: 0 });
