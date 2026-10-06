@@ -241,6 +241,7 @@
         start();
       } else {
         items.forEach((it) => it.classList.add('is-on'));
+        $$('.srv__item').forEach((it) => it.classList.add('is-in'));
       }
     });
   });
@@ -468,7 +469,10 @@
     ST.batch('.srv__item, .faq__item, .srv__after', {
       start: 'top 92%',
       once: true,
-      onEnter: (els) => gs.to(els, { y: 0, autoAlpha: 1, duration: 1, stagger: .08, ease: 'expo.out' }),
+      onEnter: (els) => {
+        gs.to(els, { y: 0, autoAlpha: 1, duration: 1, stagger: .08, ease: 'expo.out' });
+        els.forEach((el, i) => setTimeout(() => el.classList.add('is-in'), i * 120));
+      },
     });
 
     /* плавная прокрутка — только с мышью; на телефоне листается нативно */

@@ -534,8 +534,34 @@ html.wg-live .wk-grid .wk.is-in { opacity: 1; transform: none; }
   border-bottom: 1px solid var(--rule);
 }
 .srv__item h3 { font: 600 clamp(24px, 6.6vw, 56px)/1.08 var(--fh); letter-spacing: -.045em; }
-.srv__days { font: 500 13px/1.2 var(--fb); color: var(--dim); text-align: right; white-space: nowrap; }
-.srv__days b { font: 600 clamp(15px, 4vw, 22px)/1 var(--fh); letter-spacing: -.04em; color: var(--orange-d); }
+/* срок отмерен линейкой: деление — день, оранжевая полоса — сколько дней */
+.srv__rule { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; margin-top: 20px; --max: 20; }
+.srv__scale {
+  position: relative;
+  flex: 1;
+  height: 18px;
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(90deg, rgba(26, 26, 26, .35) 0 1px, transparent 1px calc(100% / var(--max))) 0 100% / 100% 7px no-repeat,
+    repeating-linear-gradient(90deg, rgba(26, 26, 26, .55) 0 1px, transparent 1px calc(500% / var(--max))) 0 100% / 100% 12px no-repeat;
+  border-bottom: 1px solid rgba(26, 26, 26, .35);
+}
+.srv__scale i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 8px;
+  width: calc(100% * var(--to) / var(--max));
+  border-radius: 2px;
+  background: var(--orange);
+  transform-origin: left;
+  transform: scaleX(var(--k, 1));
+  transition: transform 1.4s var(--ease) .2s;
+}
+html.js .srv__item:not(.is-in) .srv__scale i { --k: 0; }
+.srv__rule.is-open .srv__scale i { background: repeating-linear-gradient(90deg, var(--orange) 0 10px, transparent 10px 16px); }
+.srv__days { flex: none; font: 500 13px/1.2 var(--fb); color: var(--dim); white-space: nowrap; }
+.srv__days b { font: 600 clamp(15px, 4vw, 20px)/1 var(--fh); letter-spacing: -.04em; color: var(--orange-d); }
 .srv__text { grid-column: 1 / -1; margin-top: 10px; max-width: 28em; font-size: 15.5px; line-height: 1.5; color: var(--dim); }
 
 .tag-wrap { position: relative; height: 430px; margin-top: 20px; }
@@ -774,11 +800,10 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
   .wk-grid .wk__txt h3 { font-size: clamp(30px, 2.8vw, 46px); }
   .srv__body { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding: 0 var(--g); margin-top: 110px; }
   .srv__list { grid-column: 1 / span 8; margin: 0; }
-  .srv__item { grid-template-columns: minmax(0, 1fr) 190px; padding: 40px 0 42px; }
-  .srv__item h3 { grid-column: 1; grid-row: 1; }
-  .srv__text { grid-column: 1; grid-row: 2; font-size: 17px; }
-  .srv__days { grid-column: 2; grid-row: 1 / span 2; align-self: start; padding-top: 8px; }
-  .srv__days b { display: block; margin-bottom: 8px; font-size: 30px; font-weight: 300; }
+  .srv__item { padding: 40px 0 42px; }
+  .srv__text { font-size: 17px; }
+  .srv__rule { margin-top: 26px; max-width: 640px; }
+  .srv__days b { font-size: 24px; }
   .tag-wrap { grid-column: 9 / -1; height: auto; min-height: 560px; margin: -90px 0 0; }
   .tag { width: 260px; margin-left: -130px; }
   .srv__after { margin-left: var(--g); font-size: 17px; }
