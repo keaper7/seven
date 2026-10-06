@@ -715,7 +715,7 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
 
 /* подпись в конце страницы: девиз ровно во всю ширину и лента под ним.
    Делители — измеренная ширина строки в кеглях Unbounded */
-.sign { position: relative; padding: clamp(56px, 9vw, 110px) var(--g) calc(var(--tw) + clamp(56px, 8vw, 110px)); color: var(--fg); overflow: hidden; }
+.sign { position: relative; padding: clamp(56px, 9vw, 110px) var(--g) calc(var(--tw) + clamp(36px, 6vw, 80px)); color: var(--fg); overflow: hidden; }
 .sign__t { position: relative; z-index: 2; font-family: var(--fh); line-height: .98; letter-spacing: -.05em; }
 .sign__l { display: block; white-space: nowrap; }
 .sign__l span { font-weight: 300; color: var(--dim); }
