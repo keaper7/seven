@@ -296,7 +296,7 @@
       </li>
       <li class="srv__item">
         <h3>Сайт с&nbsp;каталогом</h3>
-        <p class="srv__days"><b>14–18</b> дней</p>
+        <p class="srv__days"><b>10–14</b> дней</p>
         <p class="srv__text">Когда нужно показать много позиций: товары, услуги или меню с&nbsp;ценами и&nbsp;фото.</p>
       </li>
       <li class="srv__item">
@@ -376,14 +376,21 @@
 </main>
 
 <footer class="ft" data-theme="dark">
-  <a class="logo" href="#top" aria-label="seven — в начало">seven<i>.</i></a>
-  <p>Студия сайтов · © 2026</p>
+  <div class="sign" id="sign">
+    <p class="sign__t"><span class="sign__l sign__l--1"><span>Семь раз</span> <b>отмерим,</b></span><span class="sign__l sign__l--2"><span>один раз</span> <b>сделаем</b><i class="dot">.</i></span></p>
+    <div class="tape sign__tape" id="signTape" aria-hidden="true"><canvas class="tape__sh"></canvas><canvas class="tape__main"></canvas></div>
+  </div>
+  <div class="ft__row">
+    <a class="logo" href="#top" aria-label="seven — в начало">seven<i>.</i></a>
+    <p>Студия сайтов · © 2026</p>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="js/faq.js" defer></script>
 <script src="js/tape.js" defer></script>
+<script src="js/sign.js" defer></script>
 <script src="js/main.js" defer></script>
 </body>
 </html>
