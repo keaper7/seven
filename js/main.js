@@ -100,13 +100,13 @@
       const f = box($('#heroFacts'), hero);
       const word = box($('.hero__fact b'), hero);
       const base = word.t + (word.b - word.t) * .8;      // базовая линия слова
-      const left = g * .7, right = f.l - 12;
+      const left = g, right = f.l - 12;
       let w7 = right - left;
       let h7 = Math.min(base - (f.t + 22) - w, w7 * 1.38);
       w7 = Math.min(w7, h7 / 1.2);
       x0 = right - w7 - w * .1;
       xR = right - w / 2;
-      yE = base - w / 2;
+      yE = base + w * .1;           // нижний срез ленты садится на базовую линию слова
       y0 = yE - h7;
       xE = x0 + w7 * .22;
       r = w * .55;
@@ -148,7 +148,7 @@
     hint.style.top = Math.round(y) + 'px';
   };
 
-  const heroTape = SEVEN.Tape && hero
+  const heroTape = SEVEN.heroTape = SEVEN.Tape && hero
     ? new SEVEN.Tape($('#heroTape'), { layout: heroLayout, area: hero, onPull: () => { goal('tape_pull'); root.classList.add('tape-touched'); } })
     : null;
 
@@ -231,6 +231,20 @@
       }
     });
   });
+
+  /* семёрка привязана к слову «дней»: если текст сдвинулся (догрузился
+     шрифт, повернули экран), перекладываем ленту под него */
+  const anchor = $('.hero__fact b');
+  if (anchor && 'ResizeObserver' in window) {
+    let lastTop = null;
+    new ResizeObserver(() => {
+      const t = Math.round(anchor.getBoundingClientRect().top + scrollY);
+      if (lastTop !== null && t !== lastTop && heroTape && heroTape.N && !heroTape.revealing && heroTape.grab < 0) {
+        heroTape.build(false); placeHint();
+      }
+      lastTop = t;
+    }).observe(document.getElementById('heroFacts'));
+  }
 
   /* если шрифт догрузился уже после того, как лента легла, раскладываем заново */
   if (document.fonts && document.fonts.addEventListener) {
