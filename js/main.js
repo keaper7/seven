@@ -1,0 +1,357 @@
+/* seven — сценарий страницы.
+
+   Лента на обложке и у мерок — js/tape.js. Здесь: шапка, меню, размер
+   экрана в пятой мерке, разматывание ленты при прокрутке, распечатки
+   работ, бирка на гвоздике и плавная прокрутка с мышью.
+   GSAP 3.15 + ScrollTrigger, Lenis только для мыши. Если CDN не ответил,
+   страница остаётся целиком рабочей: всё видно сразу. */
+
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const root = document.documentElement;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const gs = window.gsap;
+  const ST = window.ScrollTrigger;
+  const live = !!(gs && ST) && !reduced;
+  window.SEVEN = window.SEVEN || {};
+
+  const goal = (name) => { try { if (window.ym) window.ym(112505772, 'reachGoal', name); } catch (e) { /* без метрики */ } };
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('[data-goal]');
+    if (a) goal(a.dataset.goal);
+  });
+
+  /* ── мерка 5: настоящий размер экрана того, кто читает ── */
+  const size = $('#screenSize');
+  const showSize = () => { if (size) size.textContent = innerWidth + ' × ' + innerHeight; };
+  showSize();
+  addEventListener('resize', showSize, { passive: true });
+
+  /* ── шапка: цвет раздела, который сейчас под ней ── */
+  const hd = $('#hd');
+  const themed = $$('main > section, .ft');
+  let headQueued = false;
+  const paintHead = () => {
+    headQueued = false;
+    const y = hd.offsetHeight / 2;
+    let theme = 'light';
+    for (const s of themed) {
+      const r = s.getBoundingClientRect();
+      if (r.top <= y && r.bottom > y) { theme = s.dataset.theme || 'light'; break; }
+    }
+    if (hd.dataset.theme !== theme) hd.dataset.theme = theme;
+    hd.classList.toggle('is-solid', scrollY > 8);
+    hd.classList.toggle('on-hero', scrollY < innerHeight * .55);
+  };
+  addEventListener('scroll', () => {
+    if (!headQueued) { headQueued = true; requestAnimationFrame(paintHead); }
+  }, { passive: true });
+  paintHead();
+
+  /* ── меню ── */
+  const burger = $('#burger');
+  const menu = $('#menu');
+  const setMenu = (open) => {
+    root.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    menu.setAttribute('aria-hidden', String(!open));
+    menu.inert = !open;
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (SEVEN.lenis) open ? SEVEN.lenis.stop() : SEVEN.lenis.start();
+  };
+  menu.inert = true;
+  burger.addEventListener('click', () => setMenu(!root.classList.contains('menu-open')));
+  menu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+  /* ── обложка: лента складывается в семёрку ── */
+  const hero = $('#top');
+  const title = $('#heroTitle');
+  const lead = $('#heroLead');
+  const cta = $('#heroCta');
+  const hint = $('#tapeHint');
+
+  /* ширина ленты — та же формула, что --tw в CSS */
+  const tapeW = () => {
+    const vw = innerWidth;
+    return vw < 900 ? Math.min(40, Math.max(30, vw * .086)) : Math.min(54, Math.max(40, vw * .033));
+  };
+  const box = (el, base) => {
+    const a = el.getBoundingClientRect(), b = base.getBoundingClientRect();
+    return { l: a.left - b.left, t: a.top - b.top, r: a.right - b.left, b: a.bottom - b.top };
+  };
+
+  let end = null;   // нижний конец семёрки: рядом с ним подсказка
+  const heroLayout = (W, H) => {
+    const w = tapeW();
+    const g = parseFloat(getComputedStyle(hero).paddingLeft) || 20;
+    const t = box(title, hero);
+    const wide = W >= 900 || W > H * 1.2;
+    let x0, y0, xR, xE, yE;
+    if (!wide) {
+      /* телефон: перекладина ложится под заголовок и меряет его от края
+         текста — ноль ленты ровно на левом поле. Диагональ уходит вниз
+         и проходит правее текста и кнопки */
+      x0 = g - w * .42;
+      y0 = t.b + 14 + w / 2;
+      xR = W - g * .7 - w / 2;
+      yE = H - 26 - w / 2;
+      let k = -.36;
+      for (const el of [lead, cta]) {
+        const o = box(el, hero);
+        const yb = Math.min(o.b + w / 2 + 6, yE);
+        if (yb <= y0) continue;
+        k = Math.max(k, (o.r + 18 + w / 2 - xR) / (yb - y0));
+      }
+      k = Math.min(k, -.1);
+      xE = xR + k * (yE - y0);
+    } else {
+      /* компьютер: семёрка стоит справа от заголовка во всю высоту */
+      x0 = Math.max(t.r + 64, W * .53);
+      xR = W - g - w / 2;
+      y0 = t.t + w * .2;
+      yE = H - 40 - w / 2;
+      xE = x0 + (xR - x0) * .3;
+    }
+    end = { x: xE, y: yE, w, wide, k: (xE - xR) / (yE - y0) };
+    return { pts: SEVEN.sevenPath(x0, y0, xR, xE, yE, w * .95), w };
+  };
+
+  /* подсказка встаёт в пустое место между текстом и кнопкой, стрелкой к ленте */
+  const placeHint = () => {
+    if (!end || !hint) return;
+    const l = box(lead, hero), c = box(cta, hero);
+    const hw = hint.offsetWidth || 150, hh = hint.offsetHeight || 40;
+    let y, x;
+    let flip = false;
+    if (end.wide) {
+      /* справа от нижнего конца ленты, стрелкой влево; если тесно — слева */
+      y = end.y - hh - 6;
+      x = end.x + end.w / 2 + 26;
+      flip = true;
+      if (x + hw > hero.clientWidth - 16) { x = end.x - end.w / 2 - 26 - hw; flip = false; }
+    } else {
+      y = Math.max(l.b + 18, (l.b + c.t) / 2 - hh / 2);
+      const diag = end.x - end.k * (end.y - (y + hh / 2));
+      x = Math.max(l.l, Math.min(diag - end.w / 2 - 14 - hw, l.l + 40));
+    }
+    hint.classList.toggle('is-flip', flip);
+    hint.style.left = Math.round(x) + 'px';
+    hint.style.top = Math.round(y) + 'px';
+  };
+
+  const heroTape = SEVEN.Tape && hero
+    ? new SEVEN.Tape($('#heroTape'), { layout: heroLayout, area: hero, onPull: () => goal('tape_pull') })
+    : null;
+
+  /* ── глава 1: лента у мерок разматывается при прокрутке ── */
+  const mkBody = $('#mk');
+  const mkTape = $('#mkTape');
+  const mkStrip = $('#mkStrip');
+  const roll = $('#mkRoll');
+  const items = $$('.mk__item');
+  const mkW = () => (innerWidth < 900 ? 28 : 36);
+  const strip = SEVEN.Tape && mkTape
+    ? new SEVEN.Tape($('#mkTapeHost'), {
+      still: true,
+      layout: (W, H) => {
+        const w = mkW(), x = 24 + w / 2;
+        return { pts: [[x, 24], [x, H - 24]], w };
+      },
+    })
+    : null;
+  let pins = [];
+  const buildPins = () => {
+    pins.forEach((p) => p.el.remove());
+    const top = mkTape.offsetTop;
+    pins = items.map((it) => {
+      const h = $('h3', it);
+      const y = it.offsetTop + h.offsetTop + h.offsetHeight / 2 - top;
+      const el = document.createElement('i');
+      el.className = 'mk__pin';
+      el.style.top = y + 'px';
+      mkTape.appendChild(el);
+      return { el, y, on: false };
+    });
+  };
+  const mkState = { p: 0 };
+  const renderMk = () => {
+    const H = mkTape.offsetHeight;
+    const y = mkState.p * H;
+    const R = roll.offsetWidth / 2 || 27;
+    mkStrip.style.setProperty('--p', y.toFixed(1) + 'px');
+    roll.style.transform = 'translateY(' + y.toFixed(1) + 'px) rotate(' + (y / R).toFixed(3) + 'rad)';
+    pins.forEach((pin, i) => {
+      const on = y >= pin.y - 2;
+      if (on === pin.on) return;
+      pin.on = on;
+      pin.el.classList.toggle('is-on', on);
+      items[i].classList.toggle('is-on', on);
+    });
+  };
+
+  /* ── первый кадр: ждём шрифты, чтобы лента легла по готовому тексту ── */
+  const fontsReady = document.fonts && document.fonts.load
+    ? Promise.all([
+      document.fonts.load('700 40px Unbounded'),
+      document.fonts.load('300 40px Unbounded'),
+      document.fonts.load('600 10px Onest'),
+      document.fonts.load('800 10px Onest'),
+    ]).catch(() => {})
+    : Promise.resolve();
+
+  let lastW = innerWidth;
+  const rebuild = () => {
+    if (heroTape) heroTape.build(false);
+    placeHint();
+    if (strip) strip.build(false);
+    if (mkTape) buildPins();
+    if (live) renderMk();
+  };
+
+  Promise.race([fontsReady, new Promise((r) => setTimeout(r, 1800))]).then(() => {
+    root.classList.add('is-in');
+    requestAnimationFrame(() => {
+      if (heroTape) heroTape.build(true);
+      placeHint();
+      if (strip) strip.build(false);
+      if (mkTape) buildPins();
+      if (live) {
+        start();
+      } else {
+        items.forEach((it) => it.classList.add('is-on'));
+      }
+    });
+  });
+
+  /* если шрифт догрузился уже после того, как лента легла, раскладываем заново */
+  if (document.fonts && document.fonts.addEventListener) {
+    document.fonts.addEventListener('loadingdone', () => {
+      if (heroTape && heroTape.N && !heroTape.revealing && heroTape.grab < 0) rebuild();
+    });
+  }
+
+  let rz;
+  addEventListener('resize', () => {
+    clearTimeout(rz);
+    rz = setTimeout(() => {
+      if (Math.abs(innerWidth - lastW) < 2 && !fine) return;   // на телефоне это прячется адресная строка
+      lastW = innerWidth;
+      rebuild();
+      if (live) ST.refresh();
+    }, 180);
+  });
+
+  /* ── бирка с составом: висит на гвоздике и качается от прокрутки ── */
+  const tag = $('#tag');
+  if (tag && !reduced) {
+    let th = 0, om = 0, yPrev = scrollY, vPrev = 0, run = false, vis = false;
+    const tick = () => {
+      const y = SEVEN.lenis ? SEVEN.lenis.scroll : scrollY;
+      const v = y - yPrev;
+      yPrev = y;
+      const a = v - vPrev;
+      vPrev = v;
+      om += a * .0009 - Math.sin(th) * .011;
+      om *= .975;
+      th += om;
+      tag.style.transform = 'rotate(' + th.toFixed(4) + 'rad)';
+      if (vis && (Math.abs(om) > 2e-5 || Math.abs(th) > 2e-4 || v !== 0)) requestAnimationFrame(tick);
+      else run = false;
+    };
+    const kick = () => {
+      if (run || !vis) return;
+      run = true;
+      yPrev = SEVEN.lenis ? SEVEN.lenis.scroll : scrollY;
+      vPrev = 0;
+      requestAnimationFrame(tick);
+    };
+    addEventListener('scroll', kick, { passive: true });
+    new IntersectionObserver(([e]) => {
+      vis = e.isIntersecting;
+      if (vis) { om += .012; kick(); }
+    }).observe(tag);
+    let sx = null;
+    tag.addEventListener('pointerdown', (e) => { sx = e.clientX; });
+    tag.addEventListener('pointermove', (e) => {
+      if (sx === null) return;
+      om += (e.clientX - sx) * .0016;
+      sx = e.clientX;
+      kick();
+    });
+    const release = () => { sx = null; };
+    tag.addEventListener('pointerup', release);
+    tag.addEventListener('pointercancel', release);
+    tag.addEventListener('pointerleave', release);
+  }
+
+  if (SEVEN.faq) SEVEN.faq();
+
+  /* ── движение при прокрутке ── */
+  function start() {
+    gs.registerPlugin(ST);
+    ST.config({ ignoreMobileResize: true });
+    root.classList.add('mk-live');
+
+    /* мерки: рулон катится вниз по ленте, мерки «прикалываются» булавками */
+    gs.to(mkState, {
+      p: 1,
+      ease: 'none',
+      onUpdate: renderMk,
+      scrollTrigger: { trigger: mkBody, start: 'top 62%', end: 'bottom 62%', scrub: .7 },
+    });
+    renderMk();
+
+    /* заголовки глав «набираются краской»: вес шрифта растёт при прокрутке */
+    $$('[data-ink]').forEach((el) => {
+      const w = parseFloat(getComputedStyle(el).fontWeight) || 600;
+      gs.fromTo(el, { fontWeight: 300 }, {
+        fontWeight: w,
+        ease: 'none',
+        scrollTrigger: { trigger: el, start: 'top 94%', end: 'top 46%', scrub: .5 },
+      });
+    });
+
+    /* распечатки работ ложатся на стол: большая, потом телефон, потом ярлык */
+    $$('.wk').forEach((wk, i) => {
+      const d = $('.wk__d', wk), m = $('.wk__m', wk), lab = $('.wk__label', wk);
+      const side = i % 2 ? 1 : -1;
+      const tl = gs.timeline({ scrollTrigger: { trigger: wk, start: 'top 86%', once: true } });
+      tl.from(d, { y: 80, rotation: side * 4, autoAlpha: 0, duration: 1.25, ease: 'expo.out' })
+        .from(m, { y: 140, rotation: -side * 9, autoAlpha: 0, duration: 1.35, ease: 'expo.out' }, .14)
+        .from(lab, { scale: .3, rotation: side * 16, autoAlpha: 0, duration: .8, ease: 'back.out(2.4)' }, .55)
+        .from($$('.wk__txt > *', wk), { y: 24, autoAlpha: 0, duration: 1, stagger: .08, ease: 'expo.out' }, .3);
+      gs.to(m, {
+        yPercent: -9,
+        ease: 'none',
+        scrollTrigger: { trigger: wk, start: 'top bottom', end: 'bottom top', scrub: true },
+      });
+    });
+
+    /* строки услуг и вопросов поднимаются по одной */
+    gs.set('.srv__item, .faq__item, .srv__after', { y: 28, autoAlpha: 0 });
+    ST.batch('.srv__item, .faq__item, .srv__after', {
+      start: 'top 92%',
+      once: true,
+      onEnter: (els) => gs.to(els, { y: 0, autoAlpha: 1, duration: 1, stagger: .08, ease: 'expo.out' }),
+    });
+
+    /* плавная прокрутка — только с мышью; на телефоне листается нативно */
+    if (fine) {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js';
+      s.onload = () => {
+        const lenis = new window.Lenis({ lerp: .1, anchors: { offset: -hd.offsetHeight + 1 } });
+        SEVEN.lenis = lenis;
+        lenis.on('scroll', ST.update);
+        gs.ticker.add((t) => lenis.raf(t * 1000));
+        gs.ticker.lagSmoothing(0);
+      };
+      document.head.appendChild(s);
+    }
+
+    addEventListener('load', () => ST.refresh());
+  }
+})();
