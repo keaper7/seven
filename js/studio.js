@@ -465,8 +465,8 @@
     catOpen.style.opacity = open ? 1 : 0;
     set(pupL, 'transform', `translate(${r2(cat.look[0] * .7)} ${r2(cat.look[1] * .6)})`);
     set(pupR, 'transform', `translate(${r2(cat.look[0] * .7)} ${r2(cat.look[1] * .6)})`);
-    set(earL, 'transform', `rotate(${r2(-cat.ear[0] * 14 + (1 - aw) * 4)} 235 36)`);
-    set(earR, 'transform', `rotate(${r2(cat.ear[1] * 14 - (1 - aw) * 4)} 246 36)`);
+    set(earL, 'transform', `rotate(${r2(-cat.ear[0] * 14 + (1 - aw) * 4)} 234.7 33)`);
+    set(earR, 'transform', `rotate(${r2(cat.ear[1] * 14 - (1 - aw) * 4)} 246.3 33)`);
   };
 
   show('site');

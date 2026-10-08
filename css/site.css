@@ -550,20 +550,11 @@ html.mq-live .wk-list { overflow: hidden; scroll-snap-type: none; }
 
 /* кот из мастерской выглядывает из-за кнопки: голова за краем, лапы на краю */
 .wk-all { position: relative; }
-.wk-all .peek { position: absolute; right: 22px; bottom: calc(100% - 5px); width: 60px; height: 34px; transform: none; stroke: none; overflow: visible; pointer-events: none; }
-#peekHead { transform-box: view-box; transform-origin: 30px 30px; }
-#peekEarL { transform-box: view-box; transform-origin: 17px 14px; }
-#peekEarR { transform-box: view-box; transform-origin: 43px 14px; }
-.peek__b { fill: var(--paper); }
-.peek__in { fill: var(--orange); opacity: .32; }
-.peek__iris { fill: var(--orange); }
-.peek__pupil { fill: var(--ink); }
-.peek__glint { fill: var(--paper); }
-.peek__lid { fill: none; stroke: var(--ink); stroke-width: 1.1; stroke-linecap: round; opacity: 0; }
-.peek__nose { fill: var(--orange-d); }
-.peek__mouth { fill: none; stroke: var(--ink); stroke-width: .7; stroke-linecap: round; }
-.peek__wh { fill: none; stroke: rgba(237, 235, 227, .5); stroke-width: .6; stroke-linecap: round; }
-.peek__toe { fill: none; stroke: #B9B4A9; stroke-width: .7; stroke-linecap: round; }
+.wk-all .peek { position: absolute; right: 22px; bottom: calc(100% - 5px); width: 60px; height: 42px; transform: none; stroke: none; overflow: visible; pointer-events: none; }
+#peekHead { transform-box: view-box; transform-origin: 30px 37px; }
+#peekEarL { transform-box: view-box; transform-origin: 20.9px 11.6px; }
+#peekEarR { transform-box: view-box; transform-origin: 39.1px 11.6px; }
+.peek__shut { opacity: 0; }
 
 /* ── страница работ: все распечатки сразу, без движения ── */
 .wpage { padding: calc(var(--hd) + env(safe-area-inset-top) + 36px) 0 var(--sec); }
@@ -906,13 +897,26 @@ html.faq-js .faq__item.is-open .faq__a { grid-template-rows: 1fr; }
 .st-cat__b, .st-cat__tail { fill: var(--paper); }
 .st-cat__d { fill: #D8D4CA; }
 .st-cat__line { fill: none; stroke: #B9B4A9; stroke-width: .6; stroke-linecap: round; }
-.st-cat__in { fill: var(--orange); opacity: .32; }
-.st-cat__shut path { fill: none; stroke: var(--ink); stroke-width: .85; stroke-linecap: round; }
-.st-cat__iris { fill: var(--orange); }
-.st-cat__pupil { fill: var(--ink); }
-.st-cat__nose { fill: var(--orange-d); }
-.st-cat__mouth { fill: none; stroke: var(--ink); stroke-width: .5; stroke-linecap: round; }
-.st-cat__wh { fill: none; stroke: rgba(237, 235, 227, .5); stroke-width: .45; stroke-linecap: round; }
+
+/* голова кота — общая для мастерской и кнопки «Все работы» (как в наборе seven-cat-v3);
+   толщины линий — в единицах головы, её масштаб задан в разметке */
+.st-cat__b, .peek__b { fill: var(--paper); }
+.st-cat__gap, .peek__gap { fill: none; stroke: var(--ink); stroke-width: 2.6; stroke-linejoin: round; }
+.st-cat__gap { stroke-width: 3.2; }
+.st-cat__in, .peek__in { fill: var(--orange); opacity: .3; }
+.st-cat__earfur, .peek__earfur { fill: none; stroke: #F7F5EF; stroke-width: .8; stroke-linecap: round; }
+.st-cat__det, .peek__det { fill: none; stroke: #B6B0A4; stroke-width: .75; stroke-linecap: round; }
+.st-cat__fur, .peek__fur { fill: #F7F5EF; }
+.st-cat__iris, .peek__iris { fill: var(--orange); }
+.st-cat__hl, .peek__hl { fill: #FFB36B; opacity: .6; }
+.st-cat__pupil, .peek__pupil { fill: var(--ink); }
+.st-cat__glint, .peek__glint { fill: #fff; }
+.st-cat__lid, .peek__lid { fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-linecap: round; }
+.st-cat__nose, .peek__nose { fill: var(--orange-d); }
+.st-cat__mouth, .peek__mouth { fill: none; stroke: var(--ink); stroke-width: .75; stroke-linecap: round; }
+.st-cat__wh, .peek__wh { fill: none; stroke: rgba(237, 235, 227, .62); stroke-width: .5; stroke-linecap: round; }
+.st-cat__toe, .peek__toe { fill: none; stroke: #B6B0A4; stroke-width: .4; stroke-linecap: round; }
+.peek__toe { stroke-width: .5; }
 
 .st-mug__b { fill: var(--paper); }
 .st-mug__h { fill: none; stroke: var(--paper); stroke-width: 1.9; }

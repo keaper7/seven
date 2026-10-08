@@ -449,7 +449,7 @@
     let vis = false, run = false, last = 0, t = 0, rise = -1;
     let lx = 0, ly = 0, blinkAt = 2.4, earAt = 3.5, earSide = 0, hover = false;
     const back = (q) => 1 + 2.4 * Math.pow(q - 1, 3) + 1.4 * Math.pow(q - 1, 2);
-    peek.style.transform = 'translateY(30px)';
+    peek.style.transform = 'translateY(40px)';
     paws.style.opacity = 0;
     const tick = (now) => {
       const dt = Math.min(.05, (now - (last || now)) / 1000);
@@ -457,7 +457,7 @@
       t += dt;
       if (rise < 0) rise = t + .6;                       // поднимается чуть погодя
       const q = Math.max(0, Math.min(1, (t - rise) / .7));
-      peek.style.transform = 'translateY(' + ((1 - back(q)) * 30).toFixed(2) + 'px)';
+      peek.style.transform = 'translateY(' + ((1 - back(q)) * 40).toFixed(2) + 'px)';
       const pq = Math.max(0, Math.min(1, (t - rise - .5) / .25));
       paws.style.opacity = pq > 0 ? 1 : 0;
       paws.style.transform = 'translateY(' + ((1 - pq) * -3).toFixed(2) + 'px)';
