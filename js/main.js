@@ -292,25 +292,30 @@
   /* ── бирка с составом: висит на гвоздике и качается от прокрутки ── */
   const tag = $('#tag');
   if (tag && !reduced) {
-    let th = 0, om = 0, yPrev = scrollY, vPrev = 0, run = false, vis = false;
+    let th = 0, om = 0, yPrev = scrollY, vPrev = 0, vs = 0, run = false, vis = false;
     const tick = () => {
       const y = SEVEN.lenis ? SEVEN.lenis.scroll : scrollY;
       const v = y - yPrev;
       yPrev = y;
-      const a = v - vPrev;
-      vPrev = v;
-      om += a * .0009 - Math.sin(th) * .011;
-      om *= .975;
+      /* бирку качает не сам рывок прокрутки, а сглаженное изменение её
+         скорости, и толчок ограничен: при быстрой прокрутке она мягко
+         отклоняется и возвращается, а не болтается по экрану */
+      vs += (Math.max(-60, Math.min(60, v)) - vs) * .12;
+      const a = Math.max(-1.6, Math.min(1.6, vs - vPrev));
+      vPrev = vs;
+      om += a * .0016 - Math.sin(th) * .012;
+      om *= .94;
       th += om;
-      tag.style.transform = 'rotate(' + th.toFixed(4) + 'rad)';
-      if (vis && (Math.abs(om) > 2e-5 || Math.abs(th) > 2e-4 || v !== 0)) requestAnimationFrame(tick);
+      const MAX = .13;                          // не больше ~7,5°
+      tag.style.transform = 'rotate(' + (MAX * Math.tanh(th / MAX)).toFixed(4) + 'rad)';
+      if (vis && (Math.abs(om) > 2e-5 || Math.abs(th) > 2e-4 || Math.abs(vs) > .05)) requestAnimationFrame(tick);
       else run = false;
     };
     const kick = () => {
       if (run || !vis) return;
       run = true;
       yPrev = SEVEN.lenis ? SEVEN.lenis.scroll : scrollY;
-      vPrev = 0;
+      vPrev = vs = 0;
       requestAnimationFrame(tick);
     };
     addEventListener('scroll', kick, { passive: true });
