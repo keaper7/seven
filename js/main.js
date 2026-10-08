@@ -465,7 +465,7 @@
       const tx = hover ? -.85 : (SEVEN.wkDir || 0), ty = hover ? .9 : 0;
       lx += (tx - lx) * Math.min(1, dt * 6);
       ly += (ty - ly) * Math.min(1, dt * 6);
-      pupils.style.transform = 'translate(' + (lx * 1.4).toFixed(2) + 'px,' + (ly * 1.1).toFixed(2) + 'px)';
+      pupils.style.transform = 'translate(' + (lx * 2.6).toFixed(2) + 'px,' + (ly * 1.6).toFixed(2) + 'px)';
       head.style.transform = 'rotate(' + (lx * 3.5).toFixed(2) + 'deg)';
       /* моргает; уши иногда дёргаются */
       const blink = t > blinkAt && t < blinkAt + .13;
